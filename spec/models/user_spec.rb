@@ -15,10 +15,21 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  name                   :string(255)
+#  surname                :string(255)
 #
 
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { User.new }
+  describe 'validation' do
+    it { is_expected.to validate_presence_of :email }
+
+    it { is_expected.to validate_presence_of :name }
+
+    it { is_expected.to validate_presence_of :surname }
+
+    it { is_expected.to validate_uniqueness_of :email }
+  end
 end

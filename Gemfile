@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.3'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
@@ -36,12 +38,21 @@ gem 'typescript-rails'
 gem 'thin'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.1.0'
   gem 'pry-rails'
 end
 
 group :development do
   gem 'guard-rspec'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-doc'
+  gem 'rack-mini-profiler', require: false
+  gem 'capybara', '~> 2.4'
+  gem 'capybara-webkit', '~> 1.3.0'
+  gem "factory_girl_rails", "~> 4.4.1"
+  gem 'fuubar', '~> 2.0.0'
+  gem 'shoulda-matchers'
 end
 
 gem 'unicorn'
