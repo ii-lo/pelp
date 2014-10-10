@@ -53,6 +53,7 @@ group :development do
   gem "factory_girl_rails", "~> 4.4.1"
   gem 'fuubar', '~> 2.0.0'
   gem 'shoulda-matchers'
+  gem 'annotate'
 end
 
 gem 'unicorn'

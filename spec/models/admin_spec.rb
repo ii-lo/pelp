@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: admins
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -15,14 +15,12 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#  name                   :string(255)
-#  surname                :string(255)
 #
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+require 'rails_helper'
 
-  validates :name, presence: true
-  validates :surname, presence: true
+RSpec.describe Admin, :type => :model do
+  describe 'validation' do
+    it { is_expected.to validate_presence_of :email }
+  end
 end

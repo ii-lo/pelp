@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: admins
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -15,14 +15,11 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#  name                   :string(255)
-#  surname                :string(255)
 #
 
-class User < ActiveRecord::Base
+class Admin < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  validates :name, presence: true
-  validates :surname, presence: true
 end
