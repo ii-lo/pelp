@@ -25,4 +25,9 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates :surname, presence: true
+
+  has_many :attendings, dependent: :destroy
+  has_many :courses, through: :attendings
+  has_many :ownerships, dependent: :destroy
+  has_many :owned_courses, through: :ownerships, source: :course
 end

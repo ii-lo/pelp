@@ -10,4 +10,10 @@
 
 class Course < ActiveRecord::Base
   validates :name, presence: true
+  has_many :ownerships, dependent: :destroy
+  has_many :owners, through: :ownerships, source: :user
+  has_many :attendings, dependent: :destroy
+  has_many :users, through: :attendings
+
+  alias_method :students, :users
 end
