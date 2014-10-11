@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010203624) do
+ActiveRecord::Schema.define(version: 20141011131403) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20141010203624) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+
+  create_table "answers", force: true do |t|
+    t.string   "name"
+    t.boolean  "correct",     default: false
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "attendings", force: true do |t|
     t.integer  "course_id"
@@ -65,6 +75,16 @@ ActiveRecord::Schema.define(version: 20141010203624) do
 
   add_index "ownerships", ["course_id"], name: "index_ownerships_on_course_id"
   add_index "ownerships", ["user_id"], name: "index_ownerships_on_user_id"
+
+  create_table "questions", force: true do |t|
+    t.integer  "exam_id"
+    t.string   "name"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
