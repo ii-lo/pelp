@@ -9,12 +9,25 @@ RSpec.describe UsersController, :type => :controller do
     #end
   #end
 
-  #describe "GET create" do
-    #it "returns http success" do
-      #get :create
-      #expect(response).to have_http_status(:success)
-    #end
-  #end
+  describe "POST create" do
+    context "valid user" do
+      it "creates user" do
+        expect do
+          post :create, user: FactoryGirl.attributes_for(:user)
+        end.to change{User.count}.by(1)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "invalid" do
+      it "does not create user" do
+        expect do
+          post :create, user: FactoryGirl.attributes_for(:user, email: "22")
+        end.not_to change{User.count}
+        expect(response).to render_template :new
+      end
+    end
+  end
 
   #describe "GET show" do
     #it "returns http success" do

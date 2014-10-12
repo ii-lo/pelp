@@ -11,24 +11,31 @@
     </p>
   </div>
   <div class="col-xs-12 col-md-4">
+    <%= form_for User.new do |f| %>
     <form action="register2.html" method="post" role="form">
       <div class="form-group">
-        <input type="text" class="form-control"
-        placeholder="Wybierz nazwę użytkownika"/>
+        <%= f.text_field :email, placeholder: "Email", class: "form-control", required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" placeholder="Twój email"/>
+        <%= f.text_field :name, placeholder: "Imię", class: "form-control", required: true %>
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Podaj hasło"/>
-        <span class="help-block">Minimum 8 znaków.</span>
+        <%= f.text_field :surname, placeholder: "Nazwisko", class: "form-control", required: true %>
       </div>
       <div class="form-group">
-        <input type="submit" value="Zarejestruj się w PELP"
-        class="btn btn-success btn-lg btn-block"/>
+        <div class="form-group">
+          <%= f.password_field :password, placeholder: "Hasło", class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password_confirmation, placeholder: "Potwierdzenie hasła", class: "form-control", required: true %>
+        </div>
+        <span class="help-block">Minimum 6 znaków.</span>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Zarejestruj się w PELP", class: "btn btn-success btn-lg btn-block" %>
         <span class="help-block">Rejestrując się w serwisie akceptujesz nasz <a
             href="#">regulamin</a> oraz <a href="#">politykę prywatności</a>.</span>
       </div>
-    </form>
+    <% end %>
   </div>
 </div>

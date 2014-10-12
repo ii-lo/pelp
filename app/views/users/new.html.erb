@@ -1,2 +1,11 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<%= simple_form_for @user do |f| %>
+  <%= f.input :email %>
+  <%= f.input :name, label: "Imię" %>
+  <%= f.input :surname, label: "Nazwisko" %>
+  <%= f.input :password, label: "Hasło" %>
+  <%= f.input :password_confirmation, label: "Potwierdzenie hasła" %>
+  <span class="help-block">Minimum 6 znaków.</span>
+  <span class="help-block">Rejestrując się w serwisie akceptujesz nasz <a
+      href="#">regulamin</a> oraz <a href="#">politykę prywatności</a>.</span>
+  <%= f.button :submit, "Zarejestruj" %>
+<% end %>
