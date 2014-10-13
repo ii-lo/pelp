@@ -1,7 +1,6 @@
 <%= simple_form_for @user do |f| %>
   <%= f.input :email %>
-  <%= f.input :name, label: "Imię" %>
-  <%= f.input :surname, label: "Nazwisko" %>
+  <%= f.input :name, label: "Imię i nazwisko" %>
   <%= f.input :password, label: "Hasło" %>
   <%= f.input :password_confirmation, label: "Potwierdzenie hasła" %>
   <span class="help-block">Minimum 6 znaków.</span>

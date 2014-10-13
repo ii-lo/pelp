@@ -1,3 +1,11 @@
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'users' %>
+  <%= javascript_include_tag 'bootstrap' %>
+  <%= javascript_include_tag 'jquery' %>
+<% end %>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag 'index' %>
+<% end %>
 <div class="row">
   <div class="col-xs-12 col-md-8">
     <h1>Public E-Learning Platform</h1>
@@ -12,15 +20,11 @@
   </div>
   <div class="col-xs-12 col-md-4">
     <%= form_for User.new do |f| %>
-    <form action="register2.html" method="post" role="form">
       <div class="form-group">
         <%= f.text_field :email, placeholder: "Email", class: "form-control", required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
       </div>
       <div class="form-group">
-        <%= f.text_field :name, placeholder: "Imię", class: "form-control", required: true %>
-      </div>
-      <div class="form-group">
-        <%= f.text_field :surname, placeholder: "Nazwisko", class: "form-control", required: true %>
+        <%= f.text_field :name, placeholder: "Imię i nazwisko", class: "form-control", required: true %>
       </div>
       <div class="form-group">
         <div class="form-group">

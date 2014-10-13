@@ -16,14 +16,12 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  surname                :string(255)
 #
 
 FactoryGirl.define do
   factory :user do
     email 'example@example.com'
     name "Robert"
-    surname "Bialas"
     password "haslo123"
     password_confirmation "haslo123"
     value 1

@@ -16,7 +16,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  surname                :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -24,7 +23,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true
-  validates :surname, presence: true
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings

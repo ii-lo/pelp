@@ -16,7 +16,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
-#  surname                :string(255)
 #
 
 require 'rails_helper'
@@ -27,8 +26,6 @@ RSpec.describe User, :type => :model do
     it { is_expected.to validate_presence_of :email }
 
     it { is_expected.to validate_presence_of :name }
-
-    it { is_expected.to validate_presence_of :surname }
 
     it { is_expected.to validate_uniqueness_of :email }
   end
