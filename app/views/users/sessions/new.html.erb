@@ -1,0 +1,22 @@
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'users' %>
+  <%= javascript_include_tag 'bootstrap' %>
+  <%= javascript_include_tag 'jquery' %>
+<% end %>
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag 'account' %>
+<% end %>
+<%#TODO: Other styles or something%>
+<div class="container-fluid form-container">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">Zaloguj się</div>
+        <%= simple_form_for(:user, url: session_path(:user)) do |f| %>
+          <%= f.input :email, required: true %>
+          <%= f.input :password, label: "Hasło", required: true %>
+          <%= f.submit "Zaloguj się", class: "btn btn-primary" %>
+          <%= link_to "Nie pamiętam hasła", edit_user_password_path, class: "btn btn-default"%>
+        <% end %>
+    </div>
+  </div>
+</div>
