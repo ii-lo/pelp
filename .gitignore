@@ -74,3 +74,9 @@ bower.json
 ### Vagrant ###
 .vagrant/
 
+
+### librarian-chef ###
+# librarian-chef - https://github.com/applicationsonline/librarian-chef
+.tmp/
+cookbooks/
+
