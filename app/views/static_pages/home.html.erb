@@ -12,7 +12,6 @@
   </div>
   <div class="col-xs-12 col-md-4">
     <%= form_for User.new do |f| %>
-    <form action="register2.html" method="post" role="form">
       <div class="form-group">
         <%= f.text_field :email, placeholder: "Email", class: "form-control", required: true, pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
       </div>
