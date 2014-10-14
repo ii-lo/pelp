@@ -1,10 +1,10 @@
 <%= content_for :scripts do %>
-<%= javascript_include_tag 'jquery' %>
-<%= javascript_include_tag 'bootstrap' %>
+<%= javascript_include_tag 'jquery', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'bootstrap', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= content_for :styles do %>
-<%= stylesheet_link_tag 'index' %>
+<%= stylesheet_link_tag 'index', 'data-turbolinks-track' => true %>
 <% end %>
 
 
