@@ -19,7 +19,7 @@
       <div class="panel-heading">Zaloguj się</div>
       <div class="panel-body">
         <%= simple_form_for(:user, url: session_path(:user)) do |f| %>
-        <%= f.input :email, required: true %>
+          <%= f.input :email, required: true %>
         <%= f.input :password, label: "Hasło", required: true %>
         <%= f.submit "Zaloguj się", class: "btn btn-primary" %>
         <%= link_to "Nie pamiętam hasła", edit_user_password_path, class: "btn btn-default"%>

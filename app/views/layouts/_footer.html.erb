@@ -1,4 +1,4 @@
-<footer class="row <%= if defined? classes; classes end =%>">
+<footer class="row <%= if defined? classes; classes end %>">
   <div class="col-xs-12 col-sm-5">
     <ul class="footer-links">
       <li>Made with <i class="glyphicon glyphicon-heart"></i> in Tarnów, Poland</li>
@@ -10,8 +10,8 @@
   <div class="col-xs-12 col-sm-5 text-right">
     <ul class="footer-links">
       <li><a href="#">Regulamin</a></li>
-      <li><a href="#">Prywatność</a></li>
-      <li><a href="#">Pomoc</a></li>
+      <li><%= link_to "Prywatność", privacy_path, data: { 'no-turbolink' => 'no-turbolink' }%></li>
+      <li><%= link_to "Pomoc", help_path, data: { 'no-turbolink' => 'no-turbolink' } %></li>
     </ul>
   </div>
 </footer>

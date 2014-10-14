@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
+  get '/help' => 'static_pages#help', as: :help
+  get '/privacy' => 'static_pages#privacy', as: :privacy
   devise_for :admins
   devise_for :users
 
