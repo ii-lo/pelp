@@ -26,6 +26,10 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def dashboard
+    
+  end
+
   private
 
   def user_params
