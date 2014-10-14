@@ -1,19 +1,28 @@
-pelp
-====
+# pelp (Public E-Learning Platform)
 
-**Public E-Learning Platform**
-
-Running server using Vagrant
-----------------------------
+## Running development server using Vagrant
 
 On host:
- -  `vagrant up`
- -  `vagrant ssh`
+```
+#!shell
+
+$ cd /local/project/copy/directory
+$ vagrant up
+$ vagrant ssh
+```
+
 
 Then on Vagrant machine:
- -  `$ bundle install`
- -  `$ rake db:create && rake db:migrate`
- -  `$ bin/rails server`
+
+```
+#!shell
+
+$ cd /vagrant/
+$ bundle install
+$ cd bin
+$ rake db:create && rake db:migrate
+$ rails server
+```
+
 
 voila!
-
