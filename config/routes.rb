@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :users
+  devise_for :users, path: ''
   authenticated :user do
     root 'users#dashboard', as: :dashboard
   end
