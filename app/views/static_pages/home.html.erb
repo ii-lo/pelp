@@ -37,7 +37,7 @@
     </nav>
   </header>
 
-  <%= bootstrap_flash %>
+  <div class="row"><%= bootstrap_flash %></div>
 
   <section class="row">
     <div class="jumbotron">
@@ -69,6 +69,6 @@
       </div>
     </div>
   </section>
-
-  <%= render 'layouts/footer', classes: 'row no-bg no-border' %>
 </div>
+
+<%= render 'layouts/footer', classes: 'no-bg no-border' %>
