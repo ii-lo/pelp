@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :users
-  devise_scope :user do
-    authenticated :user do
-      root 'users#dashboard', as: :dashboard
-    end
+  authenticated :user do
+    root 'users#dashboard', as: :dashboard
+  end
 
-    unauthenticated do
-      root 'static_pages#home'
-    end
+  unauthenticated do
+    root 'static_pages#home'
   end
   get '/help' => 'static_pages#help', as: :help
   get '/privacy' => 'static_pages#privacy', as: :privacy
