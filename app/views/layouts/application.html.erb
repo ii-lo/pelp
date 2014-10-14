@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title><%= content_for?(:title) ? "Pelp | #{yield(:title)}" : "Pelp" %></title>
+  <title><%= content_for?(:title) ? "#{yield(:title)} &bull; pelp.net".html_safe : "pelp.net" %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :styles %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
