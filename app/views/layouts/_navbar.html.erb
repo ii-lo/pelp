@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kursy <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Ostatnie</li>
+                        <li><a href="#">Kurs 1</a></li>
+                        <li><a href="#">Kurs 2</a></li>
+                        <li><a href="#">Kurs 3</a></li>
+                        <li><a href="#">Kurs 4</a></li>
+                        <li><a href="#">Kurs 5</a></li>
+                        <li><a href="#">Kurs 6</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Wszystkie</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-calendar hidden-xs"></i>
+                        <span class="visible-xs">Terminy</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="glyphicon glyphicon-inbox hidden-xs"></i>
+                        <span class="visible-xs">Powiadomienia</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="navbar-account dropdown-toggle" data-toggle="dropdown">Adam Nowak <span class="navbar-avatar"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Mój profil</a></li>
+                        <li><a href="#">Ustawienia</a></li>
+                        <li class="divider"></li>
+                        <li><%= link_to "Wyloguj się", destroy_user_session_path %></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
