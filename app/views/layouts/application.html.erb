@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title><%= content_for?(:title) ? "#{yield(:title)} &bull; pelp.net".html_safe : "pelp.net" %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= yield :styles %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= yield :scripts %>
-  <%= csrf_meta_tags %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><%= content_for?(:title) ? "#{yield(:title)} &bull; pelp.net".html_safe : "pelp.net" %></title>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= yield :styles %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= yield :scripts %>
+    
+    <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= yield %>
+    <%= yield %>
 </body>
 </html>
