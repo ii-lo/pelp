@@ -49,6 +49,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'fuubar', '~> 2.0.0'
   gem 'shoulda-matchers'
+  gem 'guard-livereload', require: false
 end
 
 group :development do
