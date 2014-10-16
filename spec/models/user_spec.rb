@@ -56,5 +56,21 @@ RSpec.describe User, :type => :model do
         )
       end
     end
+
+    context "param" do
+      before do
+        3.upto(5) do |n|
+          FactoryGirl.create :course
+          Attending.create(course_id: n, user_id: 1)
+        end
+      end
+
+      it "return n courses" do
+        expect(User.first.last_visited_courses(5).length).to eq 5
+        expect(User.first.last_visited_courses(5)).to(
+          eq User.first.last_visited_courses.first(5)
+        )
+      end
+    end
   end
 end
