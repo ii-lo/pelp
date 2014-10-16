@@ -20,6 +20,12 @@ class Attending < ActiveRecord::Base
 
   before_create :set_last_visited
 
+  scope :last_visited, -> { order(last_visited: :desc) }
+
+  def update_last_visited
+    self.update_attribute(:last_visited, Time.now)
+  end
+
   private
   def set_last_visited
     self.last_visited = Time.now

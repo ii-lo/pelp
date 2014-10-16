@@ -29,4 +29,32 @@ RSpec.describe User, :type => :model do
 
     it { is_expected.to validate_uniqueness_of :email }
   end
+
+  describe '#last_visited_courses' do
+    before do
+      FactoryGirl.create :user
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1)
+      FactoryGirl.create :course
+      Attending.create(course_id: 2, user_id: 1)
+    end
+
+    it "is equal to last visited courses" do
+      expect(User.first.last_visited_courses).to(
+        eq [Course.last, Course.first]
+      )
+    end
+
+    context "update last_visited" do
+      before do
+        Attending.first.update_last_visited
+      end
+
+      it "is equal to last visited courses" do
+        expect(User.first.last_visited_courses).to(
+          eq [Course.first, Course.last]
+        )
+      end
+    end
+  end
 end
