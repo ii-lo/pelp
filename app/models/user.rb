@@ -28,4 +28,10 @@ class User < ActiveRecord::Base
   has_many :courses, through: :attendings
   has_many :ownerships, dependent: :destroy
   has_many :owned_courses, through: :ownerships, source: :course
+
+  def last_visited_courses(number = nil)
+    return last_visited_courses.first(number) if number
+    courses.joins(:attendings).
+      order('"attendings"."last_visited" DESC').uniq
+  end
 end

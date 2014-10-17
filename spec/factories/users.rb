@@ -24,6 +24,5 @@ FactoryGirl.define do
     name "Robert"
     password "haslo123"
     password_confirmation "haslo123"
-    value 1
   end
 end
