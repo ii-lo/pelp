@@ -1,11 +1,10 @@
 module PastelHelper
   def string_to_pastel(str)
-    mkcolor(hash(str) % 0xFF, 240, 160).compact_hex
-  end
+    h = hash(str) % 360
+    s = 94
+    l = 62
 
-
-  private def mkcolor(h, s, l)
-    ColorMath::HSL.new(h.to_f / 0xFF, s.to_f / 0xFF, l.to_f / 0xFF)
+    Color::HSL.new(h, s, l).html
   end
 
   private def hash(str)

@@ -40,7 +40,7 @@ gem 'thin'
 # forms
 gem 'simple_form'
 
-gem 'colormath'
+gem 'color'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
