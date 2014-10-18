@@ -1,0 +1,8 @@
+<div>
+  <%= link_to course.name, course_path(course), data: { 'no-turbolink' => 'no-turbolink' } %>
+  <% if course.description %>
+    <br>
+    <span><%= course.description %></span>
+  <% end %>
+</div>
+

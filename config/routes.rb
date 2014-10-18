@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, path: ''
   authenticated :user do
     root 'users#dashboard', as: :dashboard
+    resources :users
+    resources :courses
   end
 
   unauthenticated do
@@ -11,8 +13,6 @@ Rails.application.routes.draw do
   get '/help' => 'static_pages#help', as: :help
   get '/privacy' => 'static_pages#privacy', as: :privacy
 
-  resources :users
-  resources :courses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

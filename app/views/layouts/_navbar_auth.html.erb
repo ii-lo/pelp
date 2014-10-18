@@ -19,10 +19,10 @@
                     <ul class="dropdown-menu dropdown-colors" role="menu">
                         <li class="dropdown-header">Ostatnie</li>
                         <% current_user.last_visited_courses(5).each do |c| %>
-                          <li class="colored" style="border-color: <%= string_to_pastel("#{c.name}#{c.id}") %>"><%= link_to "#{c.name}", course_path(c) %></li>
+                          <li class="colored" style="border-color: <%= string_to_pastel("#{c.name}#{c.id}") %>"><%= link_to "#{c.name}", course_path(c), data: { 'no-turbolink' => 'no-turbolink' } %></li>
                         <% end %>
                         <li class="divider"></li>
-                        <li><%= link_to "Wszystkie", courses_path %></li>
+                        <li><%= link_to "Wszystkie", courses_path , data: { 'no-turbolink' => 'no-turbolink' }%></li>
                     </ul>
                 </li>
             </ul>
