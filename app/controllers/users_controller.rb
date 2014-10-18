@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   end
 
   def create
+    # yeah...
+    params[:user][:password_confirmation] = params[:user][:password]
     @user = User.new user_params
     respond_to do |format|
       if @user.save

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admins
   devise_for :users, path: ''
+  resources :users
   authenticated :user do
     root 'users#dashboard', as: :dashboard
-    resources :users
     resources :courses
   end
 
