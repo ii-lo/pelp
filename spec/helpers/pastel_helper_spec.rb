@@ -15,6 +15,9 @@ RSpec.describe PastelHelper, :type => :helper do
     regexp = /\A#[0-9a-f]{3,6}\z/i
     expect(helper.string_to_pastel("asdf")).to match regexp
     expect(helper.string_to_pastel("")).to match regexp
+  end
+
+  it "does not return other color for other string" do
     expect(helper.string_to_pastel("asdf")).not_to eq helper.string_to_pastel("asdfr1")
   end
 end
