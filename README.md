@@ -19,7 +19,6 @@ Then on Vagrant machine:
 
 $ cd /vagrant/
 $ bundle install
-$ cd bin
 $ rake db:create && rake db:migrate
 $ rails server
 ```
