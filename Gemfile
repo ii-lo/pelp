@@ -40,7 +40,9 @@ gem 'thin'
 # forms
 gem 'simple_form'
 
+# view utils
 gem 'color'
+gem 'active_link_to'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
