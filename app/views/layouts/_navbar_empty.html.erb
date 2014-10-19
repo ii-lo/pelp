@@ -3,5 +3,8 @@
     <div class="navbar-header">
       <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+        <%= active_link_to "Zaloguj się", new_user_session_path, wrap_tag: :li %>
+    </ul>
   </div>
 </nav>
