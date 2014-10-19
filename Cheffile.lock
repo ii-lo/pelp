@@ -4,6 +4,7 @@ SITE
     apt (2.6.0)
     build-essential (2.0.6)
     cmake (0.3.0)
+    imagemagick (0.2.3)
     libqt4 (0.1.0)
       cmake (>= 0.0.0)
     ruby_build (0.8.0)
@@ -32,6 +33,7 @@ GIT
 DEPENDENCIES
   apt (>= 0)
   build-essential (>= 0)
+  imagemagick (>= 0)
   libqt4 (>= 0)
   nodejs (>= 0)
   rbenv (>= 0)
