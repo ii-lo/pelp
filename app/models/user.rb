@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, presence: true
+  validates :name, presence: true,
+                   length: { maximum: 240 }
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings

@@ -68,6 +68,8 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
 end
 
+gem 'simplecov', require: false, group: :test
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
