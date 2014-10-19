@@ -18,6 +18,7 @@ class Course < ActiveRecord::Base
   has_many :users, through: :attendings
 
   mount_uploader :header, HeaderUploader
+  mount_uploader :thumb, ThumbUploader
 
   validates :name, presence: true
   validates :description, length: {
