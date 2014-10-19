@@ -2,7 +2,6 @@
 
 <%= content_for :scripts do %>
 <%= javascript_include_tag 'bootstrap', 'data-turbolinks-track' => true %>
-<%# <%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= content_for :styles do %>
@@ -50,16 +49,15 @@
         <div class="col-xs-12 col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a href="#" class="btn btn-primary btn-xs pull-right">Wszystkie kursy</a>
+                      <%= link_to "Wszystkie kursy", courses_path, class: "btn btn-primary btn-xs pull-right", data: { 'no-turbolink' => 'no-turbolink' } %>
                         Moje kursy
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Kurs 2</a></li>
-                        <li class="list-group-item"><a href="#">Kurs 3</a></li>
-                        <li class="list-group-item"><a href="#">Kurs 4</a></li>
-                        <li class="list-group-item"><a href="#">Kurs 5</a></li>
-                        <li class="list-group-item"><a href="#">Kurs 6</a></li>
+                      <% @courses.each do |c| %>
+                        <li class="list-group-item"><%= link_to c.name, course_path(c) %></li>
+                      <% end %>
                     </ul>
+                    <%= will_paginate @courses %>
                 </div>
         </div>
     </div>
