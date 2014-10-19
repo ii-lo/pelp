@@ -1,8 +1,15 @@
 module PastelHelper
-  def string_to_pastel(str)
+  def string_to_pastel(str, type = :light)
     h = hash(str) % 360
-    s = 94
-    l = 62
+
+    case type
+    when :dark
+      s = 95
+      l = 40
+    else
+      s = 95
+      l = 60
+    end
 
     Color::HSL.new(h, s, l).html
   end
