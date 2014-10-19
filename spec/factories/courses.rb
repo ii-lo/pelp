@@ -8,6 +8,7 @@
 #  updated_at  :datetime
 #  description :string(255)
 #  private     :boolean          default(FALSE)
+#  header      :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

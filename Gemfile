@@ -51,6 +51,10 @@ gem 'pundit', '~> 0.3.0'
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
+# pictures
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
+gem 'rmagick'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"

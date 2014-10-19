@@ -8,6 +8,7 @@
 #  updated_at  :datetime
 #  description :string(255)
 #  private     :boolean          default(FALSE)
+#  header      :string(255)
 #
 
 class Course < ActiveRecord::Base
@@ -15,6 +16,8 @@ class Course < ActiveRecord::Base
   has_many :owners, through: :ownerships, source: :user
   has_many :attendings, dependent: :destroy
   has_many :users, through: :attendings
+
+  mount_uploader :header, HeaderUploader
 
   validates :name, presence: true
   validates :description, length: {
