@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019154143) do
+ActiveRecord::Schema.define(version: 20141019184846) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20141019154143) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "last_visited"
   end
 
   add_index "attendings", ["course_id"], name: "index_attendings_on_course_id"
@@ -70,6 +69,20 @@ ActiveRecord::Schema.define(version: 20141019154143) do
   end
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
+
+  create_table "last_visits", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "relation_id"
+    t.string   "relation_type"
+  end
+
+  add_index "last_visits", ["course_id"], name: "index_last_visits_on_course_id"
+  add_index "last_visits", ["relation_id", "relation_type"], name: "index_last_visits_on_relation_id_and_relation_type"
+  add_index "last_visits", ["user_id"], name: "index_last_visits_on_user_id"
 
   create_table "ownerships", force: true do |t|
     t.integer  "course_id"

@@ -13,7 +13,7 @@
 
 FactoryGirl.define do
   factory :ownership do
-    course nil
-    user nil
+    course_id 1
+    user_id 1
   end
 end

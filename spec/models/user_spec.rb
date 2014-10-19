@@ -45,9 +45,9 @@ RSpec.describe User, :type => :model do
       )
     end
 
-    context "update last_visited" do
+    context "update date" do
       before do
-        Attending.first.update_last_visited
+        LastVisit.first.update_date
       end
 
       it "is equal to last visited courses" do

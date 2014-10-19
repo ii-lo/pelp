@@ -25,9 +25,9 @@ RSpec.describe CoursesController, :type => :controller do
     end
 
     it "updates attending's last_visited" do
-      a = spy(Attending.new)
-      allow(Attending).to receive(:where) { a }
-      expect(a).to receive(:update_last_visited).once
+      a = spy(LastVisit.new)
+      allow(LastVisit).to receive(:where) { a }
+      expect(a).to receive(:update_date).once
       get :show, id: 1
     end
   end

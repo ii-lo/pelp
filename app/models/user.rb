@@ -29,10 +29,15 @@ class User < ActiveRecord::Base
   has_many :courses, through: :attendings
   has_many :ownerships, dependent: :destroy
   has_many :owned_courses, through: :ownerships, source: :course
+  has_many :last_visits, dependent: :destroy
+
+  def all_courses
+    Course.where(id: courses + owned_courses) #TODO: optimize
+  end
 
   def last_visited_courses(number = nil)
     return last_visited_courses.limit(number) if number
-    courses.joins(:attendings).
-      order('"attendings"."last_visited" DESC').uniq
+    all_courses.joins(:last_visits).
+      order('"last_visits"."date" DESC').uniq
   end
 end

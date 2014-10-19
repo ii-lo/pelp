@@ -19,4 +19,12 @@ RSpec.describe Ownership, :type => :model do
 
     it { is_expected.to validate_uniqueness_of(:course_id).scoped_to [:user_id] }
   end
+
+  describe 'after_create' do
+    it "creates last visit" do
+      expect do
+        FactoryGirl.create :ownership
+      end.to change{LastVisit.count}.by 1
+    end
+  end
 end

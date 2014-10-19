@@ -9,6 +9,7 @@
 #  description :string(255)
 #  private     :boolean          default(FALSE)
 #  header      :string(255)
+#  thumb       :string(255)
 #
 
 require 'rails_helper'

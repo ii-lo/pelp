@@ -2,32 +2,29 @@
 #
 # Table name: attendings
 #
-#  id           :integer          not null, primary key
-#  course_id    :integer
-#  user_id      :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  last_visited :datetime
+#  id         :integer          not null, primary key
+#  course_id  :integer
+#  user_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class Attending < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
+  has_one :last_visit, as: :relation, dependent: :destroy
+
   validates :course_id, presence: true
   validates :user_id, presence: true,
                       uniqueness: { scope: [:course_id] }
 
-  before_create :set_last_visited
-
-  scope :last_visited, -> { order(last_visited: :desc) }
-
-  def update_last_visited
-    self.update_attribute(:last_visited, Time.now)
-  end
+  after_create :create_last_visit
 
   private
-  def set_last_visited
-    self.last_visited = Time.now
+
+  def create_last_visit
+    LastVisit.create(user_id: self.user_id, course_id: self.course_id,
+                    relation_id: id, relation_type: 'Attending')
   end
 end

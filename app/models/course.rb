@@ -9,6 +9,7 @@
 #  description :string(255)
 #  private     :boolean          default(FALSE)
 #  header      :string(255)
+#  thumb       :string(255)
 #
 
 class Course < ActiveRecord::Base
@@ -16,6 +17,7 @@ class Course < ActiveRecord::Base
   has_many :owners, through: :ownerships, source: :user
   has_many :attendings, dependent: :destroy
   has_many :users, through: :attendings
+  has_many :last_visits, dependent: :destroy
 
   mount_uploader :header, HeaderUploader
   mount_uploader :thumb, ThumbUploader
