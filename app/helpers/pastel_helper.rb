@@ -1,13 +1,14 @@
 module PastelHelper
-  def string_to_pastel(str, type = :light)
+  def string_to_pastel(str, mode = :normal)
     h = hash(str) % 360
+    s = 95
 
-    case type
+    case mode
+    when :darker
+      l = 35
     when :dark
-      s = 95
-      l = 40
+      l = 45
     else
-      s = 95
       l = 60
     end
 
