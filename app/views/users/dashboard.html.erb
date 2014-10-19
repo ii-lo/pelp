@@ -57,7 +57,7 @@
                         <li class="list-group-item"><%= link_to c.name, course_path(c) %></li>
                       <% end %>
                     </ul>
-                    <%= will_paginate @courses %>
+                    <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
                 </div>
         </div>
     </div>
