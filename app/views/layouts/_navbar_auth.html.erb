@@ -18,14 +18,11 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kursy <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-colors" role="menu">
                         <li class="dropdown-header">Ostatnie</li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 1' %>"><a href="#">Lorem ipsum dolor sit amet lorem.</a></li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 2' %>"><a href="#">Kurs 2</a></li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 3' %>"><a href="#">Kurs 3</a></li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 4' %>"><a href="#">Kurs 4</a></li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 5' %>"><a href="#">Kurs 5</a></li>
-                        <li class="colored" style="border-color: <%= string_to_pastel 'Kurs 6' %>"><a href="#">Kurs 6</a></li>
+                        <% current_user.last_visited_courses(5).each do |c| %>
+                          <li class="colored" style="border-color: <%= string_to_pastel("#{c.name}#{c.id}") %>"><%= link_to "#{c.name}", course_path(c), data: { 'no-turbolink' => 'no-turbolink' } %></li>
+                        <% end %>
                         <li class="divider"></li>
-                        <li><a href="#">Wszystkie</a></li>
+                        <li><%= link_to "Wszystkie", courses_path , data: { 'no-turbolink' => 'no-turbolink' }%></li>
                     </ul>
                 </li>
             </ul>

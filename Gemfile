@@ -44,6 +44,13 @@ gem 'simple_form'
 gem 'color'
 gem 'active_link_to'
 
+# authorization
+gem 'pundit', '~> 0.3.0'
+
+# pagination
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"
@@ -54,6 +61,7 @@ group :development, :test do
   gem 'fuubar', '~> 2.0.0'
   gem 'shoulda-matchers'
   gem 'guard-livereload', require: false
+  gem 'database_cleaner', '~> 1.3.0'
 end
 
 group :development do

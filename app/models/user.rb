@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :owned_courses, through: :ownerships, source: :course
 
   def last_visited_courses(number = nil)
-    return last_visited_courses.first(number) if number
+    return last_visited_courses.limit(number) if number
     courses.joins(:attendings).
       order('"attendings"."last_visited" DESC').uniq
   end
