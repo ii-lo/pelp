@@ -52,9 +52,9 @@
                       <%= link_to "Wszystkie kursy", courses_path, class: "btn btn-primary btn-xs pull-right", data: { 'no-turbolink' => 'no-turbolink' } %>
                         Moje kursy
                     </div>
-                    <ul class="list-group">
+                    <ul class="media-list">
                       <% @courses.each do |c| %>
-                        <li class="list-group-item"><%= link_to c.name, course_path(c) %></li>
+                        <%= render 'courses/course', course: c, tag: 'li' %>
                       <% end %>
                     </ul>
                     <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
