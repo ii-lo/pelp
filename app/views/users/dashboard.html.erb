@@ -14,7 +14,41 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <div class="row"><h1>Hello World!</h1></div>
+    <ol class="breadcrumb">
+        <li class="active">Strona główna</li>
+    </ol>
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
+                        Ostatnia aktywność
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+        </div>
+        <div class="col-xs-12 col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="#" class="btn btn-primary btn-xs pull-right">Wszystkie kursy</a>
+                        Ostatnie kursy
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#">Kurs 2</a></li>
+                        <li class="list-group-item"><a href="#">Kurs 3</a></li>
+                        <li class="list-group-item"><a href="#">Kurs 4</a></li>
+                        <li class="list-group-item"><a href="#">Kurs 5</a></li>
+                        <li class="list-group-item"><a href="#">Kurs 6</a></li>
+                    </ul>
+                </div>
+        </div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>
