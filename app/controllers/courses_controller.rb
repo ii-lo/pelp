@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
 
   def index
-    @courses = Course.open.paginate(page: params[:page], per_page: 30)
+    @courses = Course.open.paginate(page: params[:page], per_page: 16)
   end
 
   def show
