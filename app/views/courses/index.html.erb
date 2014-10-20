@@ -1,18 +1,24 @@
-<%#TODO: Add styles%>
-<%= content_for :scripts do %>
-<%= javascript_include_tag 'bootstrap', 'data-turbolinks-track' => true %>
+<%= content_for :styles do %>
+<%= stylesheet_link_tag 'dashboard', 'data-turbolinks-track' => true %>
 <% end %>
 
-<%= content_for :styles do %>
-<%= stylesheet_link_tag 'common', 'data-turbolinks-track' => true %>
-<% end %>
-<div>
-  <ul>
-    <% @courses.each do |c| %>
-      <li>
-        <%= render 'course', course: c %>
-      </li>
-    <% end %>
-  </ul>
-  <%= will_paginate @courses %>
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <div class="col xs-12 col-md-3">
+        <%= render 'users/dashboard_nav' %>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">Publiczne kursy</div>
+            <ul class="media-list">
+                <% @courses.each do |c| %>
+                <%= render 'course', course: c, tag: :li %>
+                <% end %>
+            </ul>
+            <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: 'pagination-sm' %></div>
+        </div>
+    </div>
 </div>
+
+<%= render 'layouts/footer' %>

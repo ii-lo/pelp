@@ -1,3 +1,6 @@
 <ul class="nav nav-pills nav-stacked">
-    <%= active_link_to 'Strona główna', root_path, wrap_tag: :li %>
+    <%= active_link_to 'Strona główna', root_path, wrap_tag: :li, active: :exclusive %>
+    <li><a href="#">Aktywność</a></li>
+    <%= active_link_to 'Publiczne kursy', courses_path, wrap_tag: :li %>
 </ul>
+<div class="row-separator visible-xs"></div>
