@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019184846) do
+ActiveRecord::Schema.define(version: 20141020171345) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -46,9 +46,12 @@ ActiveRecord::Schema.define(version: 20141019184846) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_visit"
+    t.integer  "role_id"
   end
 
   add_index "attendings", ["course_id"], name: "index_attendings_on_course_id"
+  add_index "attendings", ["role_id"], name: "index_attendings_on_role_id"
   add_index "attendings", ["user_id"], name: "index_attendings_on_user_id"
 
   create_table "courses", force: true do |t|
@@ -70,30 +73,6 @@ ActiveRecord::Schema.define(version: 20141019184846) do
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
 
-  create_table "last_visits", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
-    t.datetime "date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "relation_id"
-    t.string   "relation_type"
-  end
-
-  add_index "last_visits", ["course_id"], name: "index_last_visits_on_course_id"
-  add_index "last_visits", ["relation_id", "relation_type"], name: "index_last_visits_on_relation_id_and_relation_type"
-  add_index "last_visits", ["user_id"], name: "index_last_visits_on_user_id"
-
-  create_table "ownerships", force: true do |t|
-    t.integer  "course_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ownerships", ["course_id"], name: "index_ownerships_on_course_id"
-  add_index "ownerships", ["user_id"], name: "index_ownerships_on_user_id"
-
   create_table "questions", force: true do |t|
     t.integer  "exam_id"
     t.string   "name"
@@ -103,6 +82,12 @@ ActiveRecord::Schema.define(version: 20141019184846) do
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

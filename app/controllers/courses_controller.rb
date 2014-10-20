@@ -6,8 +6,8 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find params[:id]
-    if lt = LastVisit.where(course_id: @course.id, user_id: current_user.id).first
-      lt.update_date
+    if at = Attending.where(course_id: @course.id, user_id: current_user.id).first
+      at.update_last_visit
     end
   end
 

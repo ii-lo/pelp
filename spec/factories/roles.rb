@@ -1,10 +1,9 @@
 # == Schema Information
 #
-# Table name: ownerships
+# Table name: roles
 #
 #  id         :integer          not null, primary key
-#  course_id  :integer
-#  user_id    :integer
+#  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -12,8 +11,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :ownership do
-    course_id 1
-    user_id 1
+  factory :role do
+    name "MyString"
   end
 end

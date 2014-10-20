@@ -7,6 +7,8 @@
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  last_visit :datetime
+#  role_id    :integer
 #
 
 require 'rails_helper'
@@ -21,10 +23,9 @@ RSpec.describe Attending, :type => :model do
   end
 
   describe 'after_create' do
-    it "creates last visit" do
-      expect do
-        FactoryGirl.create :attending
-      end.to change{LastVisit.count}.by 1
+    it "sets last visit" do
+      att = FactoryGirl.create :attending
+      expect(Time.now.all_day).to cover att.last_visit
     end
   end
 

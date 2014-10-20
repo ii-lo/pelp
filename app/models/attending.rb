@@ -7,24 +7,29 @@
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  last_visit :datetime
+#  role_id    :integer
 #
 
 class Attending < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
-
-  has_one :last_visit, as: :relation, dependent: :destroy
+  belongs_to :role
 
   validates :course_id, presence: true
   validates :user_id, presence: true,
                       uniqueness: { scope: [:course_id] }
+  validates :role_id, presence: true
 
-  after_create :create_last_visit
+  before_create :set_last_visit
+
+  def update_last_visit
+    update_attribute(:last_visit, Time.now.in_time_zone)
+  end
 
   private
 
-  def create_last_visit
-    LastVisit.create(user_id: self.user_id, course_id: self.course_id,
-                    relation_id: id, relation_type: 'Attending')
+  def set_last_visit
+    self.last_visit = Time.now.in_time_zone
   end
 end
