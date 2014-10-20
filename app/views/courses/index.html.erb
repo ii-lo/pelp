@@ -5,18 +5,20 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <div class="col xs-12 col-md-3">
-        <%= render 'users/dashboard_nav' %>
-    </div>
-    <div class="col-xs-12 col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">Publiczne kursy</div>
-            <ul class="media-list">
-                <% @courses.each do |c| %>
-                <%= render 'course', course: c, tag: :li %>
-                <% end %>
-            </ul>
-            <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: 'pagination-sm' %></div>
+    <div class="row">
+        <div class="col xs-12 col-md-3">
+            <%= render 'users/dashboard_nav' %>
+        </div>
+        <div class="col-xs-12 col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">Publiczne kursy</div>
+                <ul class="media-list">
+                    <% @courses.each do |c| %>
+                    <%= render 'course', course: c, tag: :li %>
+                    <% end %>
+                </ul>
+                <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: 'pagination-sm' %></div>
+            </div>
         </div>
     </div>
 </div>
