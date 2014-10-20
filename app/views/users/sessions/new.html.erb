@@ -1,15 +1,8 @@
 <% content_for :title, 'Zaloguj się' %>
 
-<%= content_for :scripts do %>
-<%= javascript_include_tag 'jquery', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'bootstrap', 'data-turbolinks-track' => true %>
-<%# <%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
-<% end %>
-
 <%= content_for :styles do %>
 <%= stylesheet_link_tag 'account', 'data-turbolinks-track' => true %>
 <% end %>
-
 
 <%= render 'layouts/navbar' %>
 
