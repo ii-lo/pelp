@@ -5,10 +5,24 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <%#<ol class="breadcrumb">
-        <li class="active">Strona główna</li>
-    </ol>%>
     <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <%= render 'dashboard_nav' %>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <%= link_to "Wszystkie kursy", courses_path, class: "btn btn-primary btn-xs pull-right", data: { 'no-turbolink' => 'no-turbolink' } %>
+                    Moje kursy
+                </div>
+                <ul class="media-list">
+                    <% @courses.each do |c| %>
+                    <%= render 'courses/course', course: c, tag: 'li' %>
+                    <% end %>
+                </ul>
+                <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
+            </div>
+        </div>
         <div class="col-xs-12 col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -39,21 +53,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-xs-12 col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                  <%= link_to "Wszystkie kursy", courses_path, class: "btn btn-primary btn-xs pull-right", data: { 'no-turbolink' => 'no-turbolink' } %>
-                  Moje kursy
-              </div>
-              <ul class="media-list">
-                  <% @courses.each do |c| %>
-                  <%= render 'courses/course', course: c, tag: 'li' %>
-                  <% end %>
-              </ul>
-              <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
-          </div>
-      </div>
-  </div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>
