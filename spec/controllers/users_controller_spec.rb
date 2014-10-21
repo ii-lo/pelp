@@ -32,6 +32,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "GET show" do
     before do
       @user = FactoryGirl.create :user
+      sign_in @user
     end
 
     it "returns http success and assigns user" do

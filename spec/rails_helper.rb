@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'shoulda/matchers'
 require 'factory_girl'
 require 'capybara/rspec'
+require "pundit/rspec"
 require 'simplecov'
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in

@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   def new
     @user ||= User.new
+    authorize(@user)
   end
 
   def create
     # yeah...
+    authorize(User.new)
     params[:user][:password_confirmation] = params[:user][:password]
     @user = User.new user_params
     respond_to do |format|
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    authorize(@user)
   end
 
   def edit
