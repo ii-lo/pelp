@@ -1,5 +1,12 @@
 # Based on https://gorails.com/guides/using-vagrant-for-rails-development
 
+$script = <<SCRIPT
+  cd /vagrant/
+  bundle install
+  rake db:create
+  rake db:migrate
+SCRIPT
+
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
@@ -37,4 +44,6 @@ Vagrant.configure("2") do |config|
       }
     }
   end
+
+  config.vm.provision :shell, run: :always, privileged: false, inline: $script
 end
