@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
-  has_many :owned_courses, through: :attendings, source: :course
+  #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)
     return last_visited_courses.limit(number) if number

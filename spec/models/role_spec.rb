@@ -14,4 +14,7 @@ RSpec.describe Role, :type => :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of :name }
   end
+  describe 'respondind' do
+    it { is_expected.to respond_to :attendings }
+  end
 end

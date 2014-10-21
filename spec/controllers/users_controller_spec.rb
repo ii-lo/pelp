@@ -29,12 +29,17 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  #describe "GET show" do
-    #it "returns http success" do
-      #get :show
-      #expect(response).to have_http_status(:success)
-    #end
-  #end
+  describe "GET show" do
+    before do
+      @user = FactoryGirl.create :user
+    end
+
+    it "returns http success and assigns user" do
+      get :show, id: 1
+      expect(response).to have_http_status(:success)
+      expect(assigns(:user)).to eq @user
+    end
+  end
 
   #describe "GET edit" do
     #it "returns http success" do
