@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 
   def create
     # yeah...
-    authorize(User.new)
-    params[:user][:password_confirmation] = params[:user][:password]
+    authorize(:user)
+    params[:user][:password_confirmation] ||= params[:user][:password]
     @user = User.new user_params
     respond_to do |format|
       if @user.save
