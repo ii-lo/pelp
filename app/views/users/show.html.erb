@@ -8,6 +8,20 @@
 
 <div class="container">
     <div class="row">
+        <div class="jumbotron text-center" style="background-color: <%= string_to_pastel current_user.name, :lighter %>">
+            <p><img src="/assets/noavatar.svg" class="img-circle user-profile-avatar" style="background-color: <%= string_to_pastel current_user.name, :darker %>"/></p>
+            <p><h1><%= current_user.name %></h1></p>
+            <p>Na Pelpie od <strong>69 lat</strong>.</p>
+        <p><a href="#" class="btn btn-primary btn-sm">Wyślij wiadomość</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <p><h2>O mnie</h2></p>
+            <p>TODO</p>
+    </div>
+    <div class="row">
+        <p><h2>Moje kursy</h2></p>
+            <p>TODO Wypluć kursy, których jestem twórcą, w ten sam sposób co we wszystkich kursach (karty).</p>
     </div>
 </div>
 

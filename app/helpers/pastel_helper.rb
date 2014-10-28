@@ -8,6 +8,10 @@ module PastelHelper
       l = 35
     when :dark
       l = 45
+    when :light
+      l = 80
+    when :lighter
+      l = 96
     else
       l = 60
     end
