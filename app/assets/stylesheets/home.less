@@ -17,11 +17,10 @@ html, body {
 }
 
 .jumbotron {
-    .background-image(linear-gradient(to top, rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%));
+    .background-image(linear-gradient(to bottom, @link-hover-color 0%, @link-color 100%));
 
-    border-top: 1px solid #888;
-    border-bottom: 1px solid #888;
-    // .box-shadow(0 0 2px #aaa);
+    border-top: 1px solid @gray;
+    border-bottom: 1px solid @gray;
 }
 
 #home-welcome-box {
