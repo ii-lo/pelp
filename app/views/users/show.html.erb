@@ -8,20 +8,57 @@
 
 <div class="container">
     <div class="row">
-        <div class="jumbotron text-center" style="background-color: <%= string_to_pastel current_user.name, :lighter %>">
-            <p><img src="/assets/noavatar.svg" class="img-circle user-profile-avatar" style="background-color: <%= string_to_pastel current_user.name, :darker %>"/></p>
-            <p><h1><%= current_user.name %></h1></p>
-            <p>Na Pelpie od <strong>69 lat</strong>.</p>
-        <p><a href="#" class="btn btn-primary btn-sm">Wyślij wiadomość</a></p>
+        <div class="col-xs-12 text-right">
+            <% if @user != current_user %>
+            <a href="#" class="btn btn-default btn-sm">Wyślij wiadomość</a>
+            <% end %>
+            <% if @user == current_user %>
+            <a href="#" class="btn btn-default btn-sm">Edytuj profil</a>
+            <% end %>
+        </div>
+    </div>
+    <div class="row-separator"></div>
+    <div class="row">
+        <div class="col-xs-12 col-md-7 col-lg-8">
+            <div class="jumbotron text-center" style="background-color: <%= string_to_pastel @user.name, :lighter %>">
+                <p><img src="/assets/noavatar.svg" class="img-circle user-profile-avatar" style="background-color: <%= string_to_pastel @user.name, :darker %>"/></p>
+                <p><h1><%= @user.name %></h1></p>
+                <p>Na Pelpie od <strong>69 lat</strong>.</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-5 col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">O mnie</div>
+                <table class="table table-condensed">
+                    <tr>
+                        <td>Lorem.</td>
+                        <td>Lorem ipsum.</td>
+                    </tr>
+                    <tr>
+                        <td>Aperiam!</td>
+                        <td>Perspiciatis, accusamus.</td>
+                    </tr>
+                    <tr>
+                        <td>Eius.</td>
+                        <td>Mollitia, eligendi.</td>
+                    </tr>
+                    <tr>
+                        <td>Officiis.</td>
+                        <td>Laborum, eum?</td>
+                    </tr>
+                    <tr>
+                        <td>Eum.</td>
+                        <td>Ullam, illum.</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row">
-        <p><h2>O mnie</h2></p>
-            <p>TODO</p>
-    </div>
-    <div class="row">
-        <p><h2>Moje kursy</h2></p>
+        <div class="col-xs-12">
+            <p><h2>Moje kursy</h2></p>
             <p>TODO Wypluć kursy, których jestem twórcą, w ten sam sposób co we wszystkich kursach (karty).</p>
+        </div>
     </div>
 </div>
 
