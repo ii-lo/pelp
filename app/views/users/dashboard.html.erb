@@ -14,7 +14,7 @@
                 </div>
                 <ul class="media-list">
                     <% @courses.each do |c| %>
-                    <%= render 'courses/course', course: c, tag: 'li' %>
+                    <%= render 'courses/course_link', course: c, tag: 'li' %>
                     <% end %>
                 </ul>
                 <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
