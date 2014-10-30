@@ -14,12 +14,15 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
-                <%= active_link_to "Strona główna", root_path, wrap_tag: :li, active: :exclusive %>
+                <%= active_link_to root_path, wrap_tag: :li, active: :exclusive do %>
+                <i class="glyphicon glyphicon-home hidden-xs"></i>
+                <span class="visible-xs">Strona główna</span>
+                <% end %>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kursy <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-colors" role="menu">
                         <li class="dropdown-header">Ostatnie</li>
-                        <% current_user.last_visited_courses(5).each do |c| %>
+                        <% current_user.last_visited_courses(4).each do |c| %>
                         <li class="colored" style="border-color: <%= string_to_pastel("#{c.name}#{c.id}") %>">
                             <%= link_to "#{c.name}", course_path(c), data: { 'no-turbolink' => 'no-turbolink' } %>
                         </li>
@@ -38,7 +41,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="glyphicon glyphicon-th-list hidden-xs"></i>
+                        <i class="glyphicon glyphicon-stats hidden-xs"></i>
                         <span class="visible-xs">Aktywność</span>
                     </a>
                 </li>
@@ -55,6 +58,16 @@
                     </ul>
                 </li>
             </ul>
+            <form class="navbar-form navbar-right" role="search">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="szukaj">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
 </nav>
