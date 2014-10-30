@@ -8,27 +8,23 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 text-right">
-            <% if @user != current_user %>
-            <a href="#" class="btn btn-default btn-sm">Wyślij wiadomość</a>
-            <% end %>
-            <% if @user == current_user %>
-            <a href="#" class="btn btn-default btn-sm">Edytuj profil</a>
-            <% end %>
-        </div>
-    </div>
-    <div class="row-separator"></div>
-    <div class="row">
         <div class="col-xs-12 col-md-7 col-lg-8">
-            <div class="jumbotron text-center" style="background-color: <%= string_to_pastel @user.name, :lighter %>">
-                <p><img src="/assets/noavatar.svg" class="img-circle user-profile-avatar" style="background-color: <%= string_to_pastel @user.name, :darker %>"/></p>
-                <p><h1><%= @user.name %></h1></p>
-                <p>Na Pelpie od <strong>69 lat</strong>.</p>
+            <div id="user-profile-jumbo" class="jumbotron text-center" style="border-color: <%= string_to_pastel @user.name, :darker %>">
+                <img src="/assets/noavatar.svg" class="img-circle user-profile-avatar" style="background-color: <%= string_to_pastel @user.name, :darker %>"/>
+                <h1><%= @user.name %></h1>
+                <p>Na Pelpie od <strong>69 lat</strong></p>
             </div>
         </div>
         <div class="col-xs-12 col-md-5 col-lg-4">
             <div class="panel panel-default">
-                <div class="panel-heading">O mnie</div>
+                <div class="panel-heading">
+                    <% if @user != current_user %>
+                    <a href="#" class="btn btn-primary btn-xs pull-right">Wyślij wiadomość</a>
+                    <% else %>
+                    <a href="#" class="btn btn-default btn-xs pull-right">Edytuj profil</a>
+                    <% end %>
+                    O mnie
+                </div>
                 <table class="table">
                     <tr>
                         <td>Lorem.</td>
@@ -56,9 +52,15 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <p><h2>Moje kursy</h2></p>
-            <p>TODO Wypluć kursy, których jestem twórcą, w ten sam sposób co we wszystkich kursach (karty).</p>
+            <h2>Moje kursy</h2>
+            <div class="row-separator"></div>
         </div>
+        <% @courses.each do |c| %>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <%= render 'courses/course_card', course: c %>
+        </div>
+        <% end %>
+        <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
     </div>
 </div>
 

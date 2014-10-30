@@ -14,7 +14,7 @@
                 </div>
                 <ul class="media-list">
                     <% @courses.each do |c| %>
-                    <%= render 'courses/course', course: c, tag: 'li' %>
+                    <%= render 'courses/course_link', course: c, tag: 'li' %>
                     <% end %>
                 </ul>
                 <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
@@ -30,11 +30,11 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <p class="list-group-item-heading">Hello World</p>
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / od <a href="#">Admin admin</a></p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 od <a href="#">Admin admin</a></p>
                     </li>
                     <li class="list-group-item">
                         <p class="list-group-item-heading">Hello World</p>
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / od <a href="#">Admin admin</a></p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 od <a href="#">Admin admin</a></p>
                     </li>
                 </ul>
             </div>
