@@ -9,10 +9,12 @@ html, body {
 }
 
 #home-navbar {
-    .navbar-brand.icon-pelp-logo {
-        font-size: 52pt;
-        position: relative;
-        top: 0px;
+    @media (min-width: @screen-sm-min) {
+        .navbar-brand.icon-pelp-logo {
+            font-size: 52pt;
+            position: relative;
+            top: -26px;
+        }
     }
 }
 

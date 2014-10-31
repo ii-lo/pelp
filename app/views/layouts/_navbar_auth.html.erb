@@ -28,7 +28,7 @@
                         </li>
                         <% end %>
                         <li class="divider"></li>
-                        <%= active_link_to "Wszystkie", courses_path, wrap_tag: :li, data: { 'no-turbolink' => 'no-turbolink' } %>
+                        <%= active_link_to "Wszystkie", courses_path, wrap_tag: :li, active: :exclusive, data: { 'no-turbolink' => 'no-turbolink' } %>
                     </ul>
                 </li>
             </ul>

@@ -1,2 +1,18 @@
-<h1><%= @course.name %></h1>
-<p><%= @course.description %></p>
+<% content_for :title, @course.name %>
+
+<% content_for :styles do %>
+<%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><%= @course.name %></h1>
+            <p><%= @course.description %></p>
+        </div>
+    </div>
+</div>
+
+<%= render 'layouts/footer' %>

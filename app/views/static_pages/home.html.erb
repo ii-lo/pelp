@@ -7,9 +7,9 @@
     <div class="row">
         <nav id="home-navbar" class="navbar navbar-default">
             <div class="container-fluid">
-                <ul class="nav navbar-nav navbar-left">
-                    <li><%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %></li>
-                </ul>
+                <div class="navbar-left">
+                    <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
+                </div>
                 <div class="navbar-right">
                     <%= link_to "Zaloguj się", new_user_session_path, class: "btn btn-primary btn-sm navbar-btn" %>
                 </div>
