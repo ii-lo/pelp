@@ -8,9 +8,165 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <h1><%= @course.name %></h1>
-            <p><%= @course.description %></p>
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div id="course-jumbo" class="jumbotron" style="border-color: <%= string_to_pastel "#{@course.name}#{@course.id}" %>">
+                <h1><%= @course.name %></h1>
+                <% if @course.description %>
+                <p><%= @course.description %></p>
+                <% end %>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Lorem ipsum dolor sit amet.</div>
+                <ul class="list-group">
+                    <%# Ikonkę pozycji można zmieniać %>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Minus ea itaque mollitia.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Dolorum quidem dolores, odio.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Accusantium itaque ipsa facilis.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Nemo distinctio ipsa dolores.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Facere, sapiente explicabo. Nam.</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Exercitationem eum, autem suscipit quidem.</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Laboriosam consequuntur perspiciatis at?</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Nam adipisci numquam harum aut.</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-primary"> <%# Ważne tematy można otagować %>
+                <div class="panel-heading">Voluptatibus quidem reprehenderit placeat numquam!</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Iste harum placeat eius!</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Molestias, ipsa, veritatis. Sint.</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Aperiam expedita facilis ullam, doloribus.</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Possimus quidem voluptatibus omnis.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Quia doloremque vel aliquam.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Vitae minus, aspernatur at.</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Consectetur distinctio officiis sunt dolore.</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Minus similique debitis id!</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Odio iure magnam error.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Aspernatur, fugiat voluptatum molestiae!</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Dolore tempora eaque veniam, ullam.</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Dolores alias fuga voluptates?</a></li>
+                </ul>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Nemo dignissimos dolores nesciunt. Veritatis!</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Amet consequuntur dignissimos magni.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Sequi molestias, soluta deleniti.</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Laborum dignissimos repellat iusto!</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Temporibus modi corporis dolores!</a></li>
+                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Velit, aliquid nisi voluptate.</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">Informacje</div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Nawigacja</div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
+                    Terminy
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Cras justo odio</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Dapibus ac facilisis in</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Morbi leo risus</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Porta ac consectetur ac</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Vestibulum at eros</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
+                    Ostatnia aktywność
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Lorem ipsum.</p>
+                        <p class="list-group-item-text text-muted">31 paź, 11:03</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Tenetur, a!</p>
+                        <p class="list-group-item-text text-muted">31 paź, 11:03</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Aut, quam.</p>
+                        <p class="list-group-item-text text-muted">31 paź, 11:03</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Cum, reiciendis!</p>
+                        <p class="list-group-item-text text-muted">31 paź, 11:03</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Cras justo odio</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Dapibus ac facilisis in</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Morbi leo risus</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Porta ac consectetur ac</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p class="list-group-item-heading">Vestibulum at eros</p>
+                        <p class="list-group-item-text text-muted">19 paź, 13:10</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
