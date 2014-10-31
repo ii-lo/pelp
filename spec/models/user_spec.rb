@@ -73,4 +73,66 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+
+  describe '#existing_since' do
+    before do
+      @user = FactoryGirl.create :user
+    end
+    context "years" do
+      context "many" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 4.years }
+          expect(@user.existing_since).to eq "4 lat"
+        end
+      end
+      context "one" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 1.year }
+          expect(@user.existing_since).to eq "1 roku"
+        end
+      end
+    end
+    context "months" do
+      context "many" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 4.month }
+          expect(@user.existing_since).to eq "4 miesięcy"
+        end
+      end
+      context "one" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 1.month }
+          expect(@user.existing_since).to eq "1 miesiąca"
+        end
+      end
+    end
+    context "days" do
+      context "many" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 4.days }
+          expect(@user.existing_since).to eq "4 dni"
+        end
+      end
+      context "one" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 1.day }
+          expect(@user.existing_since).to eq "1 dnia"
+        end
+      end
+    end
+    context "hours" do
+      context "many" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 4.hours }
+          expect(@user.existing_since).to eq "4 godzin"
+        end
+      end
+      context "one" do
+        it "returns correct string" do
+          allow(Time).to receive(:now) { Time.new + 1.hour }
+          expect(@user.existing_since).to eq "1 godziny"
+        end
+      end
+    end
+  end
 end
