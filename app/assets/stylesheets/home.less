@@ -31,6 +31,16 @@ html, body {
 }
 
 #new-user-form {
+    background: fade(@body-bg, 20%);
+    padding: @border-radius-large * 2;
+    .border-radius(@border-radius-large);
+
+    .form-group:last-child {
+        &, & .help-block {
+            margin-bottom: 0;
+        }
+    }
+
     .help-block {
         color: white;
         text-align: justify;

@@ -10,15 +10,17 @@
     }
 
     .course-link-circle {
-        width: 24px;
-        height: 24px;
-        border: 6px solid black;
-        .border-radius(24px / 2);
+        @circle-size: 24px;
+
+        width: @circle-size;
+        height: @circle-size;
+        border: @circle-size / 4 solid black;
+        .border-radius(@circle-size / 2);
     }
 }
 
 .course-card {
-    background: white;
+    background: @list-group-bg;
     height: 180px;
     overflow: auto;
 

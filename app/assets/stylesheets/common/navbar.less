@@ -5,7 +5,7 @@
 //
 
 body.with-navbar-fixed {
-    padding-top: 58px;
+    padding-top: @navbar-height + @grid-gutter-width / 2;
 }
 
 .navbar-brand.icon-pelp-logo {
@@ -17,16 +17,20 @@ body.with-navbar-fixed {
 }
 
 .navbar-avatar {
-    max-width: 48px;
-    max-height: 48px;
+    @avatar-size: 48px;
+    
+    max-width: @avatar-size;
+    max-height: @avatar-size;
     margin-bottom: 8px;
 }
 
 .dropdown-colors li.colored {
-    border-left: 6px solid black;
+    @border-size: 6px;
+
+    border-left: @border-size solid black;
 
     & a {
-        padding-left: 20px - 6px;
+        padding-left: 20px - @border-size;
     }
 }
 
