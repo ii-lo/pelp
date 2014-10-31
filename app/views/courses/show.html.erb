@@ -8,6 +8,19 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs nav-justified">
+                <%= active_link_to 'Przegląd', course_path(@course), wrap_tag: :li, active: :exclusive %>
+                <li><a href="#">Oceny</a></li>
+                <li><a href="#">Terminy</a></li>
+                <li><a href="#">Aktywność</a></li>
+                <li><a href="#">Informacje</a></li>
+                <li><a href="#">Ustawienia</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row row-separator"></div>
+    <div class="row">
         <div class="col-xs-12 col-md-9 col-md-push-3">
             <div id="course-jumbo" class="jumbotron" style="border-color: <%= string_to_pastel "#{@course.name}#{@course.id}" %>">
                 <h1><%= @course.name %></h1>
@@ -15,6 +28,7 @@
                 <p><%= @course.description %></p>
                 <% end %>
             </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">Lorem ipsum dolor sit amet.</div>
                 <ul class="list-group">
@@ -86,14 +100,6 @@
             </div>
         </div>
         <div class="col-xs-12 col-md-3 col-md-pull-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">Informacje</div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Nawigacja</div>
-            </div>
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
