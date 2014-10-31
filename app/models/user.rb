@@ -34,4 +34,32 @@ class User < ActiveRecord::Base
     courses.joins(:attendings).
       order('"attendings"."last_visit" DESC').uniq
   end
+
+  def existing_since
+    diff = Time.now - created_at
+    if (l = (diff / 1.year.round(3)).round(2).floor) >= 1
+      plural("roku", "lat", "lat", l)
+    elsif (l = (diff/1.month.to_f).floor) >= 1
+      plural("miesiąca", "miesięcy", "miesięcy", l)
+    elsif (l = (diff/1.day).floor) >= 1
+      plural("dnia", "dni", "dni", l)
+    else
+      l = (diff/1.hour).floor
+      plural("godziny", "godzin", "godzin", l)
+    end
+  end
+
+  private
+
+  def plural(one, few, many, count)
+    count = count.to_int
+    str = "#{count} "
+    str << if count == 1
+             one.to_str
+           elsif (2..4).cover? count
+             few.to_str
+           else
+             many.to_str
+           end
+  end
 end
