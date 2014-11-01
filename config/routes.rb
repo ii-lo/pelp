@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   resources :users
   authenticated :user do
     root 'users#dashboard', as: :dashboard
-    resources :courses
+    resources :courses do
+      member do
+        get 'messages'
+        get 'deadlines'
+        get 'bookmarks'
+      end
+    end
   end
 
   unauthenticated do
