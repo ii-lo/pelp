@@ -4,6 +4,9 @@
 <%= stylesheet_link_tag 'messages', 'data-turbolinks-track' => true %>
 <% end %>
 
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'messages', 'data-turbolinks-track' => true %>
+<% end %>
 <%= render 'layouts/navbar' %>
 
 <div class="container">
@@ -33,12 +36,7 @@
             <div class="panel panel-default">
                 <div class="tab-content">
                     <div class="tab-pane active" id="unread">
-                      <div class="panel-body">
-                        <% @unread.each do |m| %>
-                          <%= render 'message', message: m %>
-                        <% end %>
-                      </div>
-                        <div class="panel-footer text-center"><%= will_paginate @unread, param_name: 'received_page' %></div>
+                      <%= render 'messages', messages: @unread, param: 'received_page', id: 'received' %>
                     </div>
                     <div class="tab-pane" id="flagged">
                         <div class="panel-body">flagged</div>
@@ -49,12 +47,7 @@
                         <div class="panel-footer text-center"><i>paginacja</i></div>
                     </div>
                     <div class="tab-pane" id="sent">
-                      <div class="panel-body">
-                        <% @sent.each do |m| %>
-                          <%= render 'message', message: m %>
-                        <% end %>
-                      </div>
-                        <div class="panel-footer text-center"><%= will_paginate @sent, param_name: 'sent_page' %></div>
+                      <%= render 'messages', messages: @sent, param: 'sent_page', id: 'sent' %>
                     </div>
                     <div class="tab-pane" id="all">
                         <div class="panel-body">all</div>

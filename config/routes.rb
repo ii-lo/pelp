@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     get 'calendar' => 'calendar#show', as: :calendar
     get 'messages' => 'messages#index', as: :messages
+    post 'messages/paginate' => 'messages#page'
   end
 
   unauthenticated do

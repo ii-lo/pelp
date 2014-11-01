@@ -1,5 +1,5 @@
 <h4><%= message.topic %></h4>
 <div>
-  <p>Od: <%= message.sender.to_s %></p>
+  <p>Od: <%= message.sender.try :name %></p>
   <%= message.body %>
 </div>

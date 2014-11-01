@@ -1,0 +1,12 @@
+<div class="panel-body">
+  <% if present = messages.present? %>
+    <% messages.each do |m| %>
+      <%= render 'message', message: m %>
+    <% end %>
+  <% else %>
+      <p>Brak wiadomości</p>
+  <% end %>
+</div>
+<% if present %>
+  <div class="panel-footer text-center"><%= will_paginate messages, param_name: param, class: id %></div>
+<% end %>
