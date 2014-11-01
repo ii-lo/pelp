@@ -1,0 +1,84 @@
+<% content_for :title, 'Wiadomości' %>
+
+<% content_for :styles do %>
+<%= stylesheet_link_tag 'messages', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Wiadomości</h1>
+            <div class="row-separator"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-2">
+            <p><a href="#compose" class="btn btn-success btn-block" data-toggle="modal" data-target="#compose-modal">Utwórz</a></p>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Foldery</div>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#unread" data-toggle="tab">Nowe</a></li>
+                    <li><a href="#flagged" data-toggle="tab">Oflagowane</a></li>
+                    <li><a href="#read" data-toggle="tab">Przeczytane</a></li>
+                    <li><a href="#sent" data-toggle="tab">Wysłane</a></li>
+                    <li><a href="#all" data-toggle="tab">Wszystkie</a></li>
+                    <li><a href="#trash" data-toggle="tab">Kosz</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-10">
+            <div class="panel panel-default">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="unread">
+                        <div class="panel-body">unread</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                    <div class="tab-pane" id="flagged">
+                        <div class="panel-body">flagged</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                    <div class="tab-pane" id="read">
+                        <div class="panel-body">read</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                    <div class="tab-pane" id="sent">
+                        <div class="panel-body">sent</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                    <div class="tab-pane" id="all">
+                        <div class="panel-body">all</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                    <div class="tab-pane" id="trash">
+                        <div class="panel-body">trash</div>
+                        <div class="panel-footer text-center"><i>paginacja</i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="compose-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="compose-modal-title" class="modal-title">Utwórz wiadomość</h4>
+            </div>
+            <div class="modal-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor est voluptate nesciunt!</p>
+                <p>Cupiditate perferendis eos maxime quos non, ipsa inventore deleniti nulla quis culpa.</p>
+                <p>Voluptate excepturi facilis magni quisquam corrupti sed, vel repudiandae beatae reprehenderit dolore!</p>
+            </div>
+            <div class="modal-footer">
+                <button id="send-msg-button" type="button" class="btn btn-primary">Wyślij</button>
+                <button id="cancel-msg-button" type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= render 'layouts/footer' %>
