@@ -32,35 +32,46 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
-  describe 'GET messages' do
+  describe 'GET grades' do
     before do
       FactoryGirl.create :course
       Attending.create(course_id: 1, user_id: 1)
     end
     it "returns http success" do
-      get :messages, id: 1
+      get :grades, id: 1
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET bookmarks' do
+  describe 'GET activity' do
     before do
       FactoryGirl.create :course
       Attending.create(course_id: 1, user_id: 1)
     end
     it "returns http success" do
-      get :bookmarks, id: 1
+      get :activity, id: 1
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe 'GET deadlines' do
+  describe 'GET info' do
     before do
       FactoryGirl.create :course
       Attending.create(course_id: 1, user_id: 1)
     end
     it "returns http success" do
-      get :deadlines, id: 1
+      get :info, id: 1
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET settings' do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1)
+    end
+    it "returns http success" do
+      get :settings, id: 1
       expect(response).to have_http_status(:success)
     end
   end

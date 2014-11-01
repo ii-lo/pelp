@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
 
   before_action :load_course, except: [:index]
+
   def index
     @courses = Course.open.paginate(page: params[:page], per_page: 16)
   end
@@ -8,13 +9,16 @@ class CoursesController < ApplicationController
   def show
   end
 
-  def messages
+  def grades
   end
 
-  def bookmarks
+  def activity
   end
 
-  def deadlines
+  def info
+  end
+
+  def settings
   end
 
   private

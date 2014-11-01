@@ -6,11 +6,15 @@ Rails.application.routes.draw do
     root 'users#dashboard', as: :dashboard
     resources :courses do
       member do
-        get 'messages'
-        get 'deadlines'
-        get 'bookmarks'
+        get :grades
+        get :activity
+        get :info
+        get :settings
       end
     end
+
+    get 'calendar' => 'calendar#show', as: :calendar
+    get 'messages' => 'messages#index', as: :messages
   end
 
   unauthenticated do
