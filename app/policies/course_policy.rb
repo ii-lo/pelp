@@ -1,4 +1,4 @@
-class CoursePolicy < ApplicationPolicy
+class CoursePolicy
   #class Scope < Scope
     #def resolve
       #scope
