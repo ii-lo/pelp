@@ -5,8 +5,8 @@
 #  id          :integer          not null, primary key
 #  sender_id   :integer
 #  receiver_id :integer
-#  topic       :string(255)
-#  body        :string(255)
+#  title       :string(255)
+#  body        :text(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -19,9 +19,7 @@ RSpec.describe Message, :type => :model do
 
     it { is_expected.to validate_presence_of :receiver_id }
 
-    it { is_expected.to validate_presence_of :topic }
-
-    it { is_expected.to validate_presence_of :topic }
+    it { is_expected.to validate_presence_of :title }
   end
 
 end
