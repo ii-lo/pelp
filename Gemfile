@@ -55,6 +55,8 @@ gem 'will_paginate-bootstrap'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'
 
+gem 'jquery-turbolinks'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"

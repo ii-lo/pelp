@@ -7,15 +7,11 @@ function preparePagination(str) {
     });
 }
 
-function test() {
+$(document).ready(function() {
     $.each(['sent', 'received'], function(i, v) {
         preparePagination(v);
     });
-}
-
-$(document).ready(test);
-$(document).on('page:load', test);
-
+});
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
     var btn = $(this).button('loading');
