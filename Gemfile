@@ -55,6 +55,9 @@ gem 'will_paginate-bootstrap'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'
 
+# serialization
+gem 'active_model_serializers'
+
 gem 'jquery-turbolinks'
 
 group :development, :test do
