@@ -1,0 +1,11 @@
+@import (reference) 'common/common';
+
+//
+// Various animations
+//
+
+.rotate {
+    .animation(rotationAnimation 2s linear infinite);
+}
+
+.keyframes(~'rotationAnimation, 100% { transform: rotate(360deg); }');
