@@ -10,12 +10,12 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= yield :styles %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= yield :scripts %>
-    
     <%= csrf_meta_tags %>
 </head>
 <body<%= %( class="#{yield(:body_classes)}").html_safe if content_for? :body_classes%>>
     <%= yield %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= yield :scripts %>
 </body>
 </html>
