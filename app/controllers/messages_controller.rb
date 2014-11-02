@@ -25,6 +25,8 @@ class MessagesController < ApplicationController
   end
 
   def test
-    @messages = Message.all.includes :sender, :receiver
+    messages = Message.all.includes :sender, :receiver
+    json = ActiveModel::ArraySerializer.new(messages, each_serializer: MessageSerializer).to_json
+    render json: json
   end
 end
