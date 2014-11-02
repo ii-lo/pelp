@@ -6,11 +6,14 @@ function preparePagination(str) {
         $.post('messages/paginate', { page: found[1], type: str });
     });
 }
-
+function pagination()
+{
+  $.each(['sent', 'unread'], function(i, v) {
+      preparePagination(v);
+  });
+}
 $(document).ready(function() {
-    $.each(['sent', 'received'], function(i, v) {
-        preparePagination(v);
-    });
+    pagination();
 });
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();

@@ -66,18 +66,18 @@
                         <div class="panel-body">trash</div>
                         <div class="panel-footer text-center"><i>paginacja</i></div>
                     </div>
+                      <div class="tab-pane" id="sent">
+                        <%= render 'messages', messages: @sent, param: 'sent_page', id: 'sent' %>
+                    </div>
+                    <div class="tab-pane" id="all">
+                      <div class="panel-body">all</div>
+                      <div class="panel-footer text-center"><i>paginacja</i></div>
+                  </div>
+                  <div class="tab-pane" id="trash">
+                      <div class="panel-body">trash</div>
+                      <div class="panel-footer text-center"><i>paginacja</i></div>
+                  </div>
                 </div>
-                <div class="tab-pane" id="sent">
-                  <%= render 'messages', messages: @sent, param: 'sent_page', id: 'sent' %>
-              </div>
-              <div class="tab-pane" id="all">
-                <div class="panel-body">all</div>
-                <div class="panel-footer text-center"><i>paginacja</i></div>
-            </div>
-            <div class="tab-pane" id="trash">
-                <div class="panel-body">trash</div>
-                <div class="panel-footer text-center"><i>paginacja</i></div>
-            </div>
         </div>
     </div>
 </div>
