@@ -5,8 +5,8 @@
 #  id          :integer          not null, primary key
 #  sender_id   :integer
 #  receiver_id :integer
-#  topic       :string(255)
-#  body        :string(255)
+#  title       :string(255)
+#  body        :text(255)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -17,5 +17,5 @@ class Message < ActiveRecord::Base
 
   validates :sender_id, presence: true
   validates :receiver_id, presence: true
-  validates :topic, presence: true
+  validates :title, presence: true
 end
