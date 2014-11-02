@@ -15,9 +15,9 @@ class MessagesController < ApplicationController
                   @user.sent_messages.paginate(per_page: 30,
                   page: params[:sent_page])
                 else
-                  params[:received_page] = params[:page]
+                  params[:unread_page] = params[:page]
                   @user.received_messages.paginate(per_page: 30,
-                  page: params[:sent_page])
+                  page: params[:unread_page])
                 end
     respond_to do |format|
       format.js {  }
