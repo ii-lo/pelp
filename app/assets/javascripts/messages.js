@@ -17,7 +17,8 @@ $(document).ready(test);
 $(document).on('page:load', test);
 
 $(document).ready(function() {
-    $('#refresh-btn').on('click', function() {
+    $('#refresh-btn').on('click', function(e) {
+        e.preventDefault();
         var btn = $(this).button('loading');
 
         setTimeout(function() {
