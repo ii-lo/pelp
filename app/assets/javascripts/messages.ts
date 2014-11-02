@@ -1,5 +1,8 @@
 /// <reference path="tsd/tsd.d.ts" />
 
+//= require knockout
+//= require knockout.mapping
+
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
     var btn = $(this).button('loading');

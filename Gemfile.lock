@@ -124,6 +124,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     kgio (2.9.2)
+    knockoutjs-rails (3.2.0)
+      railties (>= 3.1, < 5)
     less (2.5.1)
       commonjs (~> 0.2.7)
     less-rails (2.5.0)
@@ -292,6 +294,7 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 2.0)
   jquery-rails
+  knockoutjs-rails
   less-rails
   pry-doc
   pry-rails
