@@ -44,44 +44,28 @@
         <div class="col-xs-12 col-sm-9 col-md-10">
             <div class="panel panel-default">
                 <div class="tab-content">
+                    <div class="tab-pane active" id="unread">
+                        <div class="panel-body">unread</div>
+                    </div>
                     <div class="tab-pane" id="flagged">
                         <div class="panel-body">flagged</div>
-                        <div class="panel-footer text-center"><i>paginacja</i></div>
-                    </div>
-                    <div class="tab-pane active" id="unread">
-                      <%= render 'messages', messages: @unread, param: 'unread_page', id: 'unread' %>
                     </div>
                     <div class="tab-pane" id="read">
                         <div class="panel-body">read</div>
-                        <div class="panel-footer text-center"><i>paginacja</i></div>
                     </div>
                     <div class="tab-pane" id="sent">
-                      <%= render 'messages', messages: @sent, param: 'sent_page', id: 'sent' %>
+                        <div class="panel-body">sent</div>
                     </div>
                     <div class="tab-pane" id="all">
                         <div class="panel-body">all</div>
-                        <div class="panel-footer text-center"><i>paginacja</i></div>
                     </div>
                     <div class="tab-pane" id="trash">
                         <div class="panel-body">trash</div>
-                        <div class="panel-footer text-center"><i>paginacja</i></div>
                     </div>
                 </div>
-                <div class="tab-pane" id="sent">
-                  <%= render 'messages', messages: @sent, param: 'sent_page', id: 'sent' %>
-              </div>
-              <div class="tab-pane" id="all">
-                <div class="panel-body">all</div>
-                <div class="panel-footer text-center"><i>paginacja</i></div>
-            </div>
-            <div class="tab-pane" id="trash">
-                <div class="panel-body">trash</div>
-                <div class="panel-footer text-center"><i>paginacja</i></div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <%= render 'layouts/footer' %>

@@ -1,17 +1,3 @@
-function preparePagination(str) {
-    $('.' + str).on('click', function(e) {
-        e.preventDefault();
-        var re = new RegExp(str + '_page' + "=([0-9]+)", "i");
-        var found = e.target.href.match(re);
-        $.post('messages/paginate', { page: found[1], type: str });
-    });
-}
-
-$(document).ready(function() {
-    $.each(['sent', 'received'], function(i, v) {
-        preparePagination(v);
-    });
-});
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
     var btn = $(this).button('loading');
