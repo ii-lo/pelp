@@ -11,7 +11,7 @@ function test() {
     $.each(['sent', 'received'], function(i, v) {
         preparePagination(v);
     });
-
+}
 $(document).ready(test);
 $(document).on('page:load', test);
 
