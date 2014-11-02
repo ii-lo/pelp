@@ -1,3 +1,5 @@
+/// <reference path="tsd/tsd.d.ts" />
+
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
     var btn = $(this).button('loading');

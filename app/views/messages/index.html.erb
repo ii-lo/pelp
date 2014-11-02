@@ -8,7 +8,7 @@
 <%= javascript_include_tag 'messages', 'data-turbolinks-track' => true %>
 <%= javascript_tag do %>
     <%# Optimize this if possible. %>
-    _m = $.parseJSON('<%= j @unread_json.html_safe %>')
+    _m = $.parseJSON("<%= j @unread_json.html_safe %>");
 <% end %>
 <% end %>
 <%= render 'layouts/navbar' %>
