@@ -56,7 +56,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'
 
 # serialization
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.9'
 
 gem 'jquery-turbolinks'
 

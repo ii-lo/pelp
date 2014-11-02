@@ -23,4 +23,8 @@ class MessagesController < ApplicationController
       format.js {  }
     end
   end
+
+  def test
+    @messages = Message.all.includes :sender, :receiver
+  end
 end

@@ -1,0 +1,2 @@
+class ReceiverSerializer < SenderSerializer
+end
