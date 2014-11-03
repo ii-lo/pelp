@@ -5,12 +5,10 @@
 <% end %>
 
 <% content_for :scripts do %>
+<script>var VIEW_DATA = <%= @unread_json.html_safe %></script>
 <%= javascript_include_tag 'messages', 'data-turbolinks-track' => true %>
-<%= javascript_tag do %>
-    <%# Optimize this if possible. %>
-    viewModel.initInbox($.parseJSON("<%= j @unread_json.html_safe %>"));
 <% end %>
-<% end %>
+
 <%= render 'layouts/navbar' %>
 
 <div class="container">
@@ -46,24 +44,34 @@
             </div>
         </div>
         <div class="col-xs-12 col-sm-9 col-md-10">
-            <div class="panel panel-default">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="unread">
-                        <div class="panel-body">unread</div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="unread">
+                    <div class="panel panel-default">
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: messages }"></div>
                     </div>
-                    <div class="tab-pane" id="flagged">
+                </div>
+                <div class="tab-pane" id="flagged">
+                    <div class="panel panel-default">
                         <div class="panel-body">flagged</div>
                     </div>
-                    <div class="tab-pane" id="read">
+                </div>
+                <div class="tab-pane" id="read">
+                    <div class="panel panel-default">
                         <div class="panel-body">read</div>
                     </div>
-                    <div class="tab-pane" id="sent">
+                </div>
+                <div class="tab-pane" id="sent">
+                    <div class="panel panel-default">
                         <div class="panel-body">sent</div>
                     </div>
-                    <div class="tab-pane" id="all">
+                </div>
+                <div class="tab-pane" id="all">
+                    <div class="panel panel-default">
                         <div class="panel-body">all</div>
                     </div>
-                    <div class="tab-pane" id="trash">
+                </div>
+                <div class="tab-pane" id="trash">
+                    <div class="panel panel-default">
                         <div class="panel-body">trash</div>
                     </div>
                 </div>
@@ -73,6 +81,13 @@
 </div>
 
 <%= render 'layouts/footer' %>
+
+<%= javascript_tag_no_cdata id: 'list-item-message-template', type: 'text/html' do %>
+<a href="#" class="list-group-item list-item-message">
+    <h4 class="list-group-item-heading" data-bind="text: title"></h4>
+    <p class="list-item-text" data-bind="text: body"></p>
+</a>
+<% end %>
 
 <div id="compose-modal" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">

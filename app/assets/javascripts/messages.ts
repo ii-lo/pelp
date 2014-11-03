@@ -3,7 +3,9 @@
 //= require knockout
 //= require knockout.mapping
 
-//------------------------------------------------------------------------------
+declare var VIEW_DATA: any;
+
+// Models ----------------------------------------------------------------------
 
 interface User {
     id: number;
@@ -21,6 +23,7 @@ class Message {
 
     isRead: boolean = false;
     isFlagged: boolean = false;
+    isInTrash: boolean = false;
 
     constructor(title: string, body: string, sender: User, receiver: User, sentDate: Date = new Date()) {
         this.title = title;
@@ -52,25 +55,25 @@ interface ServerMessage {
     receiver: User;
 }
 
-//------------------------------------------------------------------------------
+// ViewModels ------------------------------------------------------------------
 
 class MessagesViewModel {
     messages: KnockoutObservableArray<Message> = ko.observableArray<Message>();
 
-    initInbox(msgs: ServerMessage[]) {
-        this.messages.removeAll();
+    constructor(viewData?: any) {
+        this.loadMsgs(viewData);
+    }
+
+    loadMsgs(msgs: ServerMessage[] = []) {
         msgs.forEach((msg) => {
             this.messages.push(ko.mapping.fromJS(Message.fromServerMessage(msg)));
         });
     }
 }
 
-//------------------------------------------------------------------------------
+ko.applyBindings(new MessagesViewModel(VIEW_DATA));
 
-var viewModel = new MessagesViewModel();
-ko.applyBindings(viewModel);
-
-//------------------------------------------------------------------------------
+// DOM Manipulations ------------------------------------------------------
 
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
@@ -82,10 +85,12 @@ $('#refresh-btn').on('click', function(e) {
 });
 
 $('#send-msg-btn').on('click', function() {
-    var btn = $(this).button('loading');
+    var sendBtn = $(this).button('loading');
+    var cancelBtn = $('#cancel-msg-btn').prop('disabled', true);
 
     setTimeout(function() {
-        btn.button('reset');
+        sendBtn.button('reset');
+        cancelBtn.prop('disabled', false);
         $('#compose-modal').modal('hide');
     }, 5000);
 });
