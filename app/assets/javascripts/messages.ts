@@ -22,12 +22,12 @@ class Message {
     isRead: boolean = false;
     isFlagged: boolean = false;
 
-    constructor(title: string, body: string, sender: User, receiver: User, sentDate?: Date) {
+    constructor(title: string, body: string, sender: User, receiver: User, sentDate: Date = new Date()) {
         this.title = title;
         this.body = body;
         this.sender = sender;
         this.receiver = receiver;
-        this.sentDate = sentDate || new Date();
+        this.sentDate = sentDate;
     }
 
     isUserReceiver(user: User): boolean {
@@ -60,7 +60,7 @@ class MessagesViewModel {
     initInbox(msgs: ServerMessage[]) {
         this.messages.removeAll();
         msgs.forEach((msg) => {
-            this.messages.push(Message.fromServerMessage(msg));
+            this.messages.push(ko.mapping.fromJS(Message.fromServerMessage(msg)));
         });
     }
 }
