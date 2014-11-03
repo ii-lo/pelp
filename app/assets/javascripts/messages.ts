@@ -19,9 +19,9 @@ class Message {
     sender: User;
     receiver: User;
 
-    read: boolean = false;
-    flagged: boolean = false;
-    inTrash: boolean = false;
+    read = ko.observable(false);
+    flagged = ko.observable(false);
+    inTrash = ko.observable(false);
 
     constructor(title: string, body: string, sender: User, receiver: User, sentDate: Date = new Date()) {
         this.title = title;
@@ -64,23 +64,23 @@ class MessagesViewModel {
     currentUser = { id: 1, name: "Marek Kaput", "email": "jjkbtv@gmail.com" }
 
     receivedMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash);
+        return this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash());
     });
 
     flaggedMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.flagged && !msg.inTrash);
+        return this.messages().filter((msg) => msg.flagged() && !msg.inTrash());
     });
 
     sentMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.isSent(this.currentUser) && !msg.inTrash);
+        return this.messages().filter((msg) => msg.isSent(this.currentUser) && !msg.inTrash());
     });
 
     allMessages  = ko.pureComputed(() => {
-        return this.messages().filter((msg) => !msg.inTrash);
+        return this.messages().filter((msg) => !msg.inTrash());
     });
 
     trashMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.inTrash);
+        return this.messages().filter((msg) => msg.inTrash());
     });
 
     constructor(viewData?: any) {
