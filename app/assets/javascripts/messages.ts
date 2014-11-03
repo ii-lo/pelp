@@ -55,7 +55,9 @@ interface ServerMessage {
 
 // View data -------------------------------------------------------------------
 
-declare var VIEW_DATA: ServerMessage[];
+interface ViewData extends Array<ServerMessage> {}
+
+declare var VIEW_DATA: ViewData;
 
 // ViewModels ------------------------------------------------------------------
 
@@ -63,27 +65,13 @@ class MessagesViewModel {
     messages = ko.observableArray<Message>();
     currentUser = { id: 1, name: "Marek Kaput", "email": "jjkbtv@gmail.com" }
 
-    receivedMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash());
-    });
+    receivedMessages = ko.pureComputed(() => this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash()));
+    flaggedMessages  = ko.pureComputed(() => this.messages().filter((msg) => msg.flagged() && !msg.inTrash()));
+    sentMessages     = ko.pureComputed(() => this.messages().filter((msg) => msg.isSent(this.currentUser) && !msg.inTrash()));
+    allMessages      = ko.pureComputed(() => this.messages().filter((msg) => !msg.inTrash()));
+    trashMessages    = ko.pureComputed(() => this.messages().filter((msg) => msg.inTrash()));
 
-    flaggedMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.flagged() && !msg.inTrash());
-    });
-
-    sentMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.isSent(this.currentUser) && !msg.inTrash());
-    });
-
-    allMessages  = ko.pureComputed(() => {
-        return this.messages().filter((msg) => !msg.inTrash());
-    });
-
-    trashMessages = ko.pureComputed(() => {
-        return this.messages().filter((msg) => msg.inTrash());
-    });
-
-    constructor(viewData?: any) {
+    constructor(viewData?: ViewData) {
         this.loadMsgs(viewData);
     }
 
