@@ -5,7 +5,7 @@
 <% end %>
 
 <% content_for :scripts do %>
-<script>var VIEW_DATA = <%= @unread_json.html_safe %></script>
+<script>var VIEW_DATA = <%= @view_data_json.html_safe %></script>
 <%= javascript_include_tag 'messages', 'data-turbolinks-track' => true %>
 <% end %>
 
@@ -34,9 +34,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Foldery</div>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#unread" data-toggle="tab">Nowe</a></li>
+                    <li class="active"><a href="#received" data-toggle="tab">Odebrane</a></li>
                     <li><a href="#flagged" data-toggle="tab">Oflagowane</a></li>
-                    <li><a href="#read" data-toggle="tab">Przeczytane</a></li>
                     <li><a href="#sent" data-toggle="tab">Wysłane</a></li>
                     <li><a href="#all" data-toggle="tab">Wszystkie</a></li>
                     <li><a href="#trash" data-toggle="tab">Kosz</a></li>
@@ -45,34 +44,29 @@
         </div>
         <div class="col-xs-12 col-sm-9 col-md-10">
             <div class="tab-content">
-                <div class="tab-pane active" id="unread">
+                <div class="tab-pane active" id="received">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: messages }"></div>
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: receivedMessages() }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="flagged">
                     <div class="panel panel-default">
-                        <div class="panel-body">flagged</div>
-                    </div>
-                </div>
-                <div class="tab-pane" id="read">
-                    <div class="panel panel-default">
-                        <div class="panel-body">read</div>
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: flaggedMessages() }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="sent">
                     <div class="panel panel-default">
-                        <div class="panel-body">sent</div>
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: sentMessages() }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="all">
                     <div class="panel panel-default">
-                        <div class="panel-body">all</div>
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: allMessages() }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="trash">
                     <div class="panel panel-default">
-                        <div class="panel-body">trash</div>
+                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: trashMessages() }"></div>
                     </div>
                 </div>
             </div>

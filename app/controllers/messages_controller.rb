@@ -1,8 +1,8 @@
 class MessagesController < ApplicationController
   def index
     @user = current_user
-    @unread = @user.received_messages
-    @unread_json = ActiveModel::ArraySerializer.new(@unread, each_serializer: MessageSerializer).to_json
+    @view_data = @user.received_messages
+    @view_data_json = ActiveModel::ArraySerializer.new(@view_data, each_serializer: MessageSerializer).to_json
   end
 
   def page

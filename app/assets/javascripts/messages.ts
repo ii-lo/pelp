@@ -3,8 +3,6 @@
 //= require knockout
 //= require knockout.mapping
 
-declare var VIEW_DATA: any;
-
 // Models ----------------------------------------------------------------------
 
 interface User {
@@ -21,9 +19,9 @@ class Message {
     sender: User;
     receiver: User;
 
-    isRead: boolean = false;
-    isFlagged: boolean = false;
-    isInTrash: boolean = false;
+    read: boolean = false;
+    flagged: boolean = false;
+    inTrash: boolean = false;
 
     constructor(title: string, body: string, sender: User, receiver: User, sentDate: Date = new Date()) {
         this.title = title;
@@ -33,11 +31,11 @@ class Message {
         this.sentDate = sentDate;
     }
 
-    isUserReceiver(user: User): boolean {
+    isReceived(user: User): boolean {
         return this.receiver.id == user.id;
     }
 
-    isUserSender(user: User): boolean {
+    isSent(user: User): boolean {
         return this.sender.id == user.id;
     }
 
@@ -55,10 +53,35 @@ interface ServerMessage {
     receiver: User;
 }
 
+// View data -------------------------------------------------------------------
+
+declare var VIEW_DATA: ServerMessage[];
+
 // ViewModels ------------------------------------------------------------------
 
 class MessagesViewModel {
-    messages: KnockoutObservableArray<Message> = ko.observableArray<Message>();
+    messages = ko.observableArray<Message>();
+    currentUser = { id: 1, name: "Marek Kaput", "email": "jjkbtv@gmail.com" }
+
+    receivedMessages = ko.pureComputed(() => {
+        return this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash);
+    });
+
+    flaggedMessages = ko.pureComputed(() => {
+        return this.messages().filter((msg) => msg.flagged && !msg.inTrash);
+    });
+
+    sentMessages = ko.pureComputed(() => {
+        return this.messages().filter((msg) => msg.isSent(this.currentUser) && !msg.inTrash);
+    });
+
+    allMessages  = ko.pureComputed(() => {
+        return this.messages().filter((msg) => !msg.inTrash);
+    });
+
+    trashMessages = ko.pureComputed(() => {
+        return this.messages().filter((msg) => msg.inTrash);
+    });
 
     constructor(viewData?: any) {
         this.loadMsgs(viewData);
@@ -66,14 +89,14 @@ class MessagesViewModel {
 
     loadMsgs(msgs: ServerMessage[] = []) {
         msgs.forEach((msg) => {
-            this.messages.push(ko.mapping.fromJS(Message.fromServerMessage(msg)));
+            this.messages.push(Message.fromServerMessage(msg));
         });
     }
 }
 
 ko.applyBindings(new MessagesViewModel(VIEW_DATA));
 
-// DOM Manipulations ------------------------------------------------------
+// DOM Manipulations -----------------------------------------------------------
 
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();
