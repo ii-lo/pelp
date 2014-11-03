@@ -46,27 +46,27 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="received">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: receivedMessages() }"></div>
+                        <div class="list-group" data-bind="template: { name: 'message-list-tpl', data: { messages: receivedMessages() } }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="flagged">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: flaggedMessages() }"></div>
+                        <div class="list-group" data-bind="template: { name: 'message-list-tpl', data: { messages: flaggedMessages() } }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="sent">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: sentMessages() }"></div>
+                        <div class="list-group" data-bind="template: { name: 'message-list-tpl', data: { messages: sentMessages() } }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="all">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: allMessages() }"></div>
+                        <div class="list-group" data-bind="template: { name: 'message-list-tpl', data: { messages: allMessages() } }"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="trash">
                     <div class="panel panel-default">
-                        <div class="list-group" data-bind="template: { name: 'list-item-message-template', foreach: trashMessages() }"></div>
+                        <div class="list-group" data-bind="template: { name: 'message-list-tpl', data: { messages: trashMessages() } }"></div>
                     </div>
                 </div>
             </div>
@@ -76,11 +76,16 @@
 
 <%= render 'layouts/footer' %>
 
-<%= javascript_tag_no_cdata id: 'list-item-message-template', type: 'text/html' do %>
+<%= javascript_tag_no_cdata id: 'message-list-tpl', type: 'text/html' do %>
+<!-- ko foreach: messages --> <%# Jesus, it's amazing! %>
 <a href="#" class="list-group-item list-item-message">
     <h4 class="list-group-item-heading" data-bind="text: title"></h4>
     <p class="list-item-text" data-bind="text: body"></p>
 </a>
+<!-- /ko -->
+<!-- ko ifnot: messages.length -->
+<div class="panel-body text-center"><h4>Brak wiadomości.</h4></div>
+<!-- /ko -->
 <% end %>
 
 <div id="compose-modal" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
