@@ -9,6 +9,8 @@
 #  body        :text(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  flagged     :boolean          default(FALSE)
+#  in_trash    :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

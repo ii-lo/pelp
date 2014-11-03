@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102165546) do
+ActiveRecord::Schema.define(version: 20141103215242) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20141102165546) do
     t.text     "body",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flagged",                 default: false
+    t.boolean  "in_trash",                default: false
   end
 
   add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id"

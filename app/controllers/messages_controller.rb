@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   def index
     @user = current_user
     @view_data = @user.received_messages
-    @view_data_json = ActiveModel::ArraySerializer.new(@view_data, each_serializer: MessageSerializer).to_json
+    @view_data_json = [SenderSerializer.new(current_user, root: false), ActiveModel::ArraySerializer.new(@view_data, each_serializer: MessageSerializer)].to_json
   end
 
   def page
@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
     messages = Message.all.includes :sender, :receiver
 
     respond_to do |format|
-      format.json { render json: ActiveModel::ArraySerializer.new(messages, each_serializer: MessageSerializer) }
+      format.json { render json: [SenderSerializer.new(current_user, root: false), ActiveModel::ArraySerializer.new(messages, each_serializer: MessageSerializer)].to_json }
     end
   end
 end
