@@ -55,7 +55,7 @@ interface ServerMessage {
 
 // View data -------------------------------------------------------------------
 
-interface ViewData extends Array<ServerMessage> {}
+interface ViewData extends Array<any> {}
 
 declare var VIEW_DATA: ViewData;
 
@@ -63,7 +63,7 @@ declare var VIEW_DATA: ViewData;
 
 class MessagesViewModel {
     messages = ko.observableArray<Message>();
-    currentUser = { id: 1, name: "Marek Kaput", "email": "jjkbtv@gmail.com" }
+    currentUser: User;
 
     receivedMessages = ko.pureComputed(() => this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash()));
     flaggedMessages  = ko.pureComputed(() => this.messages().filter((msg) => msg.flagged() && !msg.inTrash()));
@@ -72,7 +72,8 @@ class MessagesViewModel {
     trashMessages    = ko.pureComputed(() => this.messages().filter((msg) => msg.inTrash()));
 
     constructor(viewData?: ViewData) {
-        this.loadMsgs(viewData);
+        this.currentUser = viewData[0];
+        this.loadMsgs(viewData[1]);
     }
 
     loadMsgs(msgs: ServerMessage[] = []) {
