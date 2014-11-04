@@ -1,6 +1,25 @@
 require 'json/ext'
 
 class MessagesController < ApplicationController
+  def create
+    @user = current_user
+    @message = @user.sent_messages.create(message_params)
+    if @message.save && params[:message][:receivers].present?
+      flag = false
+      params[:message][:receivers].split(';').map do |n|
+        user = User.find_by_name n.strip
+        next unless user
+        flag = true
+        @message.sendings.where(user_id: user.id).first_or_create
+      end
+      if flag
+        return redirect_to messages_path, notice: "Wysłano wiadomość"
+      end
+    end
+    @message.destroy
+    redirect_to messages_path, error: "Brak użytkownika"
+  end
+
   def index
     @user = current_user
     @messages = @user.received_messages
@@ -15,11 +34,11 @@ class MessagesController < ApplicationController
                when 'sent'
                  params[:sent_page] = params[:page]
                  user.sent_messages.paginate(per_page: 30,
-                 page: params[:sent_page])
+                                             page: params[:sent_page])
                else
                  params[:unread_page] = params[:page]
                  user.received_messages.paginate(per_page: 30,
-                 page: params[:unread_page])
+                                                 page: params[:unread_page])
                end
 
     respond_to do |format|
@@ -43,10 +62,14 @@ class MessagesController < ApplicationController
 
   def serialize_message(msg)
     # TODO Implement parent_id (second param)
-    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, [serialize_user(msg.receiver)], serialize_user(msg.sender)]
+    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, msg.receivers.map { |u| serialize_user(u) } , serialize_user(msg.sender)]
   end
 
   def make_view_data(current_user, msgs)
     [serialize_user(current_user), msgs.map { |m| serialize_message(m) }]
+  end
+
+  def message_params
+    params.require(:message).permit(:title, :body)
   end
 end

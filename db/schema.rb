@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103215242) do
+ActiveRecord::Schema.define(version: 20141104112719) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -75,16 +75,14 @@ ActiveRecord::Schema.define(version: 20141103215242) do
 
   create_table "messages", force: true do |t|
     t.integer  "sender_id"
-    t.integer  "receiver_id"
     t.string   "title"
-    t.text     "body",        limit: 255
+    t.text     "body",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flagged",                 default: false
-    t.boolean  "in_trash",                default: false
+    t.boolean  "flagged",                default: false
+    t.boolean  "in_trash",               default: false
   end
 
-  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id"
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
 
   create_table "questions", force: true do |t|
@@ -102,6 +100,16 @@ ActiveRecord::Schema.define(version: 20141103215242) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sendings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sendings", ["message_id"], name: "index_sendings_on_message_id"
+  add_index "sendings", ["user_id"], name: "index_sendings_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
