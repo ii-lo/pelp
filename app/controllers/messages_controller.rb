@@ -1,8 +1,11 @@
+require 'json/ext'
+
 class MessagesController < ApplicationController
   def index
     @user = current_user
-    @view_data = @user.received_messages
-    @view_data_json = [SenderSerializer.new(current_user, root: false), ActiveModel::ArraySerializer.new(@view_data, each_serializer: MessageSerializer)].to_json
+    @messages = @user.received_messages
+    @view_data = make_view_data(@user, @messages)
+    @view_data_json = @view_data.to_json
   end
 
   def page
@@ -30,5 +33,20 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.json { render json: [SenderSerializer.new(current_user, root: false), ActiveModel::ArraySerializer.new(messages, each_serializer: MessageSerializer)].to_json }
     end
+  end
+
+  private
+
+  def serialize_user(user)
+    [user.id, user.name]
+  end
+
+  def serialize_message(msg)
+    # TODO Implement parent_id (second param)
+    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, [serialize_user(msg.receiver)], serialize_user(msg.sender)]
+  end
+
+  def make_view_data(current_user, msgs)
+    [serialize_user(current_user), msgs.map { |m| serialize_message(m) }]
   end
 end
