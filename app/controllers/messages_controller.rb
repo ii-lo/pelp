@@ -56,20 +56,20 @@ class MessagesController < ApplicationController
 
   private
 
+  def message_params
+    params.require(:message).permit(:title, :body)
+  end
+
   def serialize_user(user)
     [user.id, user.name]
   end
 
   def serialize_message(msg)
     # TODO Implement parent_id (second param)
-    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, msg.receivers.map { |u| serialize_user(u) } , serialize_user(msg.sender)]
+    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, [serialize_user(msg.receiver)], serialize_user(msg.sender)]
   end
 
   def make_view_data(current_user, msgs)
     [serialize_user(current_user), msgs.map { |m| serialize_message(m) }]
-  end
-
-  def message_params
-    params.require(:message).permit(:title, :body)
   end
 end
