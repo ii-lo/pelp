@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
   def index
     @user = current_user
-    @messages = @user.received_messages
+    @messages = @user.received_messages.includes :receivers
     @view_data = make_view_data(@user, @messages)
     @view_data_json = @view_data.to_json
   end
