@@ -33,10 +33,10 @@ Vagrant.configure("2") do |config|
       rbenv: {
         user_installs: [{
           user: "vagrant",
-          rubies: ["2.1.3"],
-          global: "2.1.3",
+          rubies: ["2.1.4"],
+          global: "2.1.4",
           gems: {
-            "2.1.3" => [
+            "2.1.4" => [
               { name: "bundler" }
             ]
           }
