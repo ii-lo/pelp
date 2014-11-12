@@ -38,7 +38,7 @@ RSpec.describe UsersController, :type => :controller do
     it "returns http success and assigns user" do
       get :show, id: 1
       expect(response).to have_http_status(:success)
-      expect(assigns(:user)).to eq @user
+      expect(assigns(:user)).to eq User.find(1)
     end
   end
 

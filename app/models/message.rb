@@ -15,7 +15,7 @@
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
 
-  has_many :sendings
+  has_many :sendings, dependent: :destroy
   has_many :receivers, through: :sendings, source: :user
 
   validates :sender_id, presence: true

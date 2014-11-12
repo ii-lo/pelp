@@ -27,6 +27,17 @@ class MessagesController < ApplicationController
     @view_data_json = @view_data.to_json
   end
 
+  def destroy
+    @message = Message.find params[:id]
+    if @message.sender = current_user
+      @message.destroy
+      redirect_to :back, notice: "Usunięto wiadomość"
+    else
+      @message.sendings.fing_by_user_id( current_user.id).destroy
+      redirect_to :back, notice: "Usunięto wiadomość"
+    end
+  end
+
   def page
     user = current_user
     type = params[:type]
@@ -66,7 +77,7 @@ class MessagesController < ApplicationController
 
   def serialize_message(msg)
     # TODO Implement parent_id (second param)
-    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, [serialize_user(msg.receiver)], serialize_user(msg.sender)]
+    [msg.id, 0, msg.title, msg.body, msg.flagged, msg.in_trash, msg.created_at, msg.receivers.map { |u| serialize_user(u) }, serialize_user(msg.sender)]
   end
 
   def make_view_data(current_user, msgs)

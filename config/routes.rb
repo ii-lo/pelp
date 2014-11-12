@@ -14,8 +14,7 @@ Rails.application.routes.draw do
         get :settings
       end
     end
-    resources :messages do
-    end
+    resources :messages
 
     get 'calendar' => 'calendar#show', as: :calendar
     #get 'messages' => 'messages#index', as: :messages

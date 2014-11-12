@@ -12,6 +12,7 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
+    <div class="row"><%= bootstrap_flash %></div>
     <div class="row">
         <div class="col-xs-12">
             <h1>Wiadomości</h1>
@@ -78,10 +79,14 @@
 
 <%= javascript_tag_no_cdata id: 'message-list-tpl', type: 'text/html' do %>
 <!-- ko foreach: messages --> <%# Jesus, it's amazing! %>
-<a href="#" class="list-group-item list-item-message">
+<div href="#" class="list-group-item list-item-message"> 
+  <%#I made this div because knockout was pushing delete link out of rest of message%>
     <h4 class="list-group-item-heading" data-bind="text: title"></h4>
     <p class="list-item-text" data-bind="text: body"></p>
-</a>
+    <a data-bind="attr: { href: '/messages/' + id }" data-method="delete">
+      Usuń
+    </a>
+</div>
 <!-- /ko -->
 <!-- ko ifnot: messages.length -->
 <div class="panel-body text-center"><h4>Brak wiadomości.</h4></div>

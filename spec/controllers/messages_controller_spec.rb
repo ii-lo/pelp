@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe MessagesController, :type => :controller do
   before do
-    @user = FactoryGirl.create :user
+    @user = FactoryGirl.create :user, email: "wp@wp.pl"
     sign_in @user
   end
 
@@ -74,6 +74,33 @@ RSpec.describe MessagesController, :type => :controller do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'DELETE destroy' do
+    before do
+      request.env["HTTP_REFERER"] = "/"
+    end
+    context "current_user's message" do
+      it "removes message with sendings" do
+        FactoryGirl.create(:user, email: "as@example.com", name: "Murk Murk")
+        Message.create(sender_id: 1, title: "asd", body: "asdf")
+        Sending.create(user_id: 2, message_id: 1)
+        expect do
+          delete :destroy, id: 1
+        end.to change{Message.count}.by(-1).and change { Sending.count }.by(-1)
+      end
+    end
+
+    context "message sent to current_user" do
+      it "removes only sending" do
+        FactoryGirl.create(:user, email: "as@example.com", name: "Murk Murk")
+        Message.create(sender_id: 2, title: "asd", body: "asdf")
+        Sending.create(user_id: 1, message_id: 1)
+        expect do
+          delete :destroy, id: 1
+        end.to change { Sending.count }.by(-1)
+      end
     end
   end
 end
