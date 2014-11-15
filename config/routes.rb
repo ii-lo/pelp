@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users
   authenticated :user do
     root 'users#dashboard', as: :dashboard
+  end
+  authenticate :user do
     resources :courses do
       member do
         get :grades
@@ -12,9 +14,10 @@ Rails.application.routes.draw do
         get :settings
       end
     end
+    resources :messages
 
     get 'calendar' => 'calendar#show', as: :calendar
-    get 'messages' => 'messages#index', as: :messages
+    #get 'messages' => 'messages#index', as: :messages
     get 'messages/ajax/page' => 'messages#page'
     get 'messages/ajax/test' => 'messages#test'
   end

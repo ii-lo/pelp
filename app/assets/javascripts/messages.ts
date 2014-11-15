@@ -3,67 +3,79 @@
 //= require knockout
 //= require knockout.mapping
 
-// Models ----------------------------------------------------------------------
+/*
+ * Models
+ */
 
 interface User {
     id: number;
     name: string;
-    email: string;
 }
 
 class Message {
+    id: number;
+    parentId: number;
+
     title: string;
     body: string;
     sentDate: Date;
 
+    receivers: User[];
     sender: User;
-    receiver: User;
 
     read = ko.observable(false);
     flagged = ko.observable(false);
     inTrash = ko.observable(false);
 
-    constructor(title: string, body: string, sender: User, receiver: User, sentDate: Date = new Date()) {
+    constructor(id: number, parentId: number, title: string, body: string, receivers: User[], sender: User, sentDate: Date = new Date()) {
+        this.id = id;
+        this.parentId = parentId;
         this.title = title;
         this.body = body;
         this.sender = sender;
-        this.receiver = receiver;
+        this.receivers = receivers;
         this.sentDate = sentDate;
     }
 
     isReceived(user: User): boolean {
-        return this.receiver.id == user.id;
+        return this.receivers.some((u) => u.id == user.id);
     }
 
     isSent(user: User): boolean {
         return this.sender.id == user.id;
     }
-
-    static fromServerMessage(msg: ServerMessage): Message {
-        return new Message(msg.title, msg.body, msg.sender, msg.receiver, new Date(msg.created_at));
-    }
 }
 
-interface ServerMessage {
-    title: string;
-    body: string;
-    created_at: string;
-
-    sender: User;
-    receiver: User;
-}
-
-// View data -------------------------------------------------------------------
-
-interface ViewData extends Array<ServerMessage> {}
+/*
+ * View data
+ */
 
 declare var VIEW_DATA: ViewData;
 
-// ViewModels ------------------------------------------------------------------
+interface ViewData extends Array<any> {}
+interface ViewDataUser extends Array<any> {}
+interface ViewDataMessage extends Array<any> {}
+
+module ViewDataUtil {
+    export function readUser(data: ViewDataUser): User {
+        return { id: data[0], name: data[1] }
+    }
+
+    export function readMessage(data: ViewDataMessage): Message {
+        var msg = new Message(data[0], data[1], data[2], data[3], data[7].map(readUser), readUser(data[8]), data[6]);
+        msg.flagged(data[4]);
+        msg.inTrash(data[5]);
+        return msg;
+    }
+}
+
+/*
+ * ViewModels
+ */
 
 class MessagesViewModel {
     messages = ko.observableArray<Message>();
-    currentUser = { id: 1, name: "Marek Kaput", "email": "jjkbtv@gmail.com" }
+    currentUser: User;
 
     receivedMessages = ko.pureComputed(() => this.messages().filter((msg) => msg.isReceived(this.currentUser) && !msg.inTrash()));
     flaggedMessages  = ko.pureComputed(() => this.messages().filter((msg) => msg.flagged() && !msg.inTrash()));
@@ -72,19 +84,18 @@ class MessagesViewModel {
     trashMessages    = ko.pureComputed(() => this.messages().filter((msg) => msg.inTrash()));
 
     constructor(viewData?: ViewData) {
-        this.loadMsgs(viewData);
-    }
-
-    loadMsgs(msgs: ServerMessage[] = []) {
-        msgs.forEach((msg) => {
-            this.messages.push(Message.fromServerMessage(msg));
+        this.currentUser = ViewDataUtil.readUser(viewData[0]);
+        viewData[1].forEach((msg: ViewDataMessage) => {
+            this.messages.push(ViewDataUtil.readMessage(msg));
         });
     }
 }
 
 ko.applyBindings(new MessagesViewModel(VIEW_DATA));
 
-// DOM Manipulations -----------------------------------------------------------
+/*
+ * DOM Manipulations
+ */
 
 $('#refresh-btn').on('click', function(e) {
     e.preventDefault();

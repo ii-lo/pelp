@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   has_many :courses, through: :attendings
   has_many :sent_messages, class_name: "Message",
     foreign_key: :sender_id
-  has_many :received_messages, class_name: "Message",
-    foreign_key: :receiver_id
+  has_many :sendings
+  has_many :received_messages, through: :sendings, source: :message
   #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)

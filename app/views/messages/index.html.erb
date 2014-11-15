@@ -12,6 +12,7 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
+    <div class="row"><%= bootstrap_flash %></div>
     <div class="row">
         <div class="col-xs-12">
             <h1>Wiadomości</h1>
@@ -78,10 +79,14 @@
 
 <%= javascript_tag_no_cdata id: 'message-list-tpl', type: 'text/html' do %>
 <!-- ko foreach: messages --> <%# Jesus, it's amazing! %>
-<a href="#" class="list-group-item list-item-message">
+<div href="#" class="list-group-item list-item-message"> 
+  <%#I made this div because knockout was pushing delete link out of rest of message%>
     <h4 class="list-group-item-heading" data-bind="text: title"></h4>
     <p class="list-item-text" data-bind="text: body"></p>
-</a>
+    <a data-bind="attr: { href: '/messages/' + id }" data-method="delete">
+      Usuń
+    </a>
+</div>
 <!-- /ko -->
 <!-- ko ifnot: messages.length -->
 <div class="panel-body text-center"><h4>Brak wiadomości.</h4></div>
@@ -95,31 +100,31 @@
                 <h4 id="compose-modal-title" class="modal-title">Utwórz wiadomość</h4>
             </div>
             <div class="modal-body">
-                <form id="compose-form" class="form-horizontal">
+              <%= form_for Message.new, html: { id: 'compose-form', class: 'form-horizontal' }  do |f| %>
                     <div class="form-group">
                         <label for="receiver-input" class="col-sm-2 control-label">Adresaci</label>
                         <div class="col-sm-10">
-                            <input type="text" id="receiver-input" class="form-control"/>
+                            <%= f.text_field :receivers, id: 'receiver-input', value: '', class: 'form-control'%>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="title-input" class="col-sm-2 control-label">Tytuł</label>
                         <div class="col-sm-10">
-                            <input type="text" id="title-input" class="form-control"/>
+                          <%= f.text_field :title, id: 'title-input', class: 'form-control' %>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message-input" class="col-sm-2 control-label">Wiadomość</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="6" id="message-input"></textarea>
+                            <%= f.text_area :body, id: 'message-input', rows: '6', class: 'form-control' %>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button id="send-msg-btn" type="button" data-loading-text="Wysyłanie <i class='glyphicon glyphicon-refresh rotate'></i>" class="btn btn-primary">Wyślij</button>
+                <button id="send-msg-btn" type="submit" data-loading-text="Wysyłanie <i class='glyphicon glyphicon-refresh rotate'></i>" class="btn btn-primary" name="commit">Wyślij</button>
                 <button id="cancel-msg-btn" type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
             </div>
+            <% end %>
         </div>
     </div>
 </div>
