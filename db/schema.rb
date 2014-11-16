@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115205651) do
+ActiveRecord::Schema.define(version: 20141116164627) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -73,14 +73,24 @@ ActiveRecord::Schema.define(version: 20141115205651) do
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
 
-  create_table "lessons", force: true do |t|
+  create_table "lesson_categories", force: true do |t|
     t.string   "name"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flagged",    default: false
   end
 
-  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
+  add_index "lesson_categories", ["course_id"], name: "index_lesson_categories_on_course_id"
+
+  create_table "lessons", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lesson_category_id"
+  end
+
+  add_index "lessons", ["lesson_category_id"], name: "index_lessons_on_lesson_category_id"
 
   create_table "messages", force: true do |t|
     t.integer  "sender_id"

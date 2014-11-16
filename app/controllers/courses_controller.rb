@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @lesson_categories = @course.lesson_categories.includes :lessons
   end
 
   def grades
@@ -24,7 +25,7 @@ class CoursesController < ApplicationController
   private
 
   def load_course
-    @course = Course.find params[:id]
+    @course = Course.find(params[:id])
     if at = Attending.where(course_id: @course.id, user_id: current_user.id).first
       at.update_last_visit
     end

@@ -29,18 +29,21 @@
                 <% end %>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Lorem ipsum dolor sit amet.</div>
-                <ul class="list-group">
-                    <%# Ikonkę pozycji można zmieniać %>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Lorem ipsum dolor sit.</a></li>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Minus ea itaque mollitia.</a></li>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Dolorum quidem dolores, odio.</a></li>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Accusantium itaque ipsa facilis.</a></li>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Nemo distinctio ipsa dolores.</a></li>
-                    <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> Facere, sapiente explicabo. Nam.</a></li>
-                </ul>
-            </div>
+            <% @lesson_categories.each do |lc| %>
+              <% if lc.flagged %>
+              <div class="panel panel-primary">
+              <% else %>
+              <div class="panel panel-default">
+              <% end %>
+                  <div class="panel-heading"><%= lc.name %></div>
+                  <ul class="list-group">
+                      <%# Ikonkę pozycji można zmieniać %>
+                      <% lc.lessons.each do |l| %>
+                        <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> <%= l.name %></a></li>
+                      <% end %>
+                  </ul>
+              </div>
+            <% end %>
             <div class="panel panel-default">
                 <div class="panel-heading">Exercitationem eum, autem suscipit quidem.</div>
                 <ul class="list-group">
