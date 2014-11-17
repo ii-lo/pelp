@@ -12,9 +12,9 @@ namespace :db do
                  password_confirmation: "robert")
     puts "Tworzenie wiadomości"
     40.times do |n|
-      m = Message.create!(title: "Hej ##{n + 1}", sender_id: 2)
+      m = Message.create!(title: "Hej ##{n + 1}", sender_id: 2, body: "Treść")
       m.sendings.create!(user_id: 1)
-      m = Message.create!(title: "Cześć ##{n+1}", sender_id: 1)
+      m = Message.create!(title: "Cześć ##{n+1}", sender_id: 1, body: "Treść")
       m.sendings.create!(user_id: 2)
     end
     puts "Tworzenie kursów"
