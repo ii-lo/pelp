@@ -7,23 +7,23 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container-fluid form-container">
-
-  <div class="row"><%= bootstrap_flash %></div>
-
+  <%= bootstrap_flash %>
   <div class="row">
-    <div class="panel panel-default">
-      <div class="panel-heading">Zarejestruj się</div>
-      <div class="panel-body">
-        <%= simple_form_for @user do |f| %>
-            <%= f.input :email %>
-            <%= f.input :name, label: "Imię i nazwisko" %>
-            <%= f.input :password, label: "Hasło" %>
-            <span class="help-block">Minimum 6 znaków.</span>
-            <%= f.input :password_confirmation, label: "Powtórz hasło" %>
-            <%= f.button :submit, "Wyślij", class: "btn btn-success btn-block btn-lg" %>
-            <span class="help-block text-justify">Rejestrując się w serwisie akceptujesz nasz <a href="#">regulamin</a> oraz <a href="#">politykę
-              prywatności</a>.</span>
-        <% end %>
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Zarejestruj się</div>
+        <div class="panel-body">
+          <%= simple_form_for @user do |f| %>
+              <%= f.input :email %>
+              <%= f.input :name, label: "Imię i nazwisko" %>
+              <%= f.input :password, label: "Hasło" %>
+              <span class="help-block">Minimum 6 znaków.</span>
+              <%= f.input :password_confirmation, label: "Powtórz hasło" %>
+              <%= f.button :submit, "Wyślij", class: "btn btn-success btn-block btn-lg" %>
+              <span class="help-block text-justify">Rejestrując się w serwisie akceptujesz nasz <a href="#">regulamin</a> oraz <a href="#">politykę
+                prywatności</a>.</span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

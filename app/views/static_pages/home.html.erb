@@ -3,21 +3,22 @@
 <% end %>
 
 <div class="container">
-  <div class="row row-separator hidden-xs"></div>
+  <div class="row row-separator"></div>
   <div class="row">
-    <nav id="home-navbar" class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-left">
-          <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
+    <div class="col-xs-12">
+      <nav id="home-navbar" class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-left">
+            <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
+          </div>
+          <div class="navbar-right">
+            <%= link_to "Zaloguj się", new_user_session_path, class: "btn btn-primary btn-sm navbar-btn" %>
+          </div>
         </div>
-        <div class="navbar-right">
-          <%= link_to "Zaloguj się", new_user_session_path, class: "btn btn-primary btn-sm navbar-btn" %>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   </div>
-
-  <div class="row"><%= bootstrap_flash %></div>
+  <%= bootstrap_flash %>
 </div>
 
 <div class="jumbotron">

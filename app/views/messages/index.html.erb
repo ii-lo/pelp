@@ -5,14 +5,14 @@
 <% end %>
 
 <% content_for :scripts do %>
-    <script>var VIEW_DATA = <%= @view_data_json.html_safe %></script>
+    <script>var VIEW_DATA = <%= @view_data_json.html_safe %>;</script>
     <%= javascript_include_tag 'messages', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-  <div class="row"><%= bootstrap_flash %></div>
+  <%= bootstrap_flash %>
   <div class="row">
     <div class="col-xs-12">
       <h1>Wiadomości</h1>
