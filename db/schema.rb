@@ -14,16 +14,16 @@
 ActiveRecord::Schema.define(version: 20141116164627) do
 
   create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "answers", force: true do |t|
-    t.string   "name"
-    t.boolean  "correct",     default: false
-    t.integer  "question_id"
+    t.string "name"
+    t.boolean "correct", default: false
+    t.integer "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,12 +42,12 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "attendings", force: true do |t|
-    t.integer  "course_id"
-    t.integer  "user_id"
+    t.integer "course_id"
+    t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_visit"
-    t.integer  "role_id"
+    t.integer "role_id"
   end
 
   add_index "attendings", ["course_id"], name: "index_attendings_on_course_id"
@@ -55,18 +55,18 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "attendings", ["user_id"], name: "index_attendings_on_user_id"
 
   create_table "courses", force: true do |t|
-    t.string   "name"
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description"
-    t.boolean  "private",     default: false
-    t.string   "header"
-    t.string   "thumb"
+    t.string "description"
+    t.boolean "private", default: false
+    t.string "header"
+    t.string "thumb"
   end
 
   create_table "exams", force: true do |t|
-    t.string   "name"
-    t.integer  "course_id"
+    t.string "name"
+    t.integer "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,40 +74,40 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
 
   create_table "lesson_categories", force: true do |t|
-    t.string   "name"
-    t.integer  "course_id"
+    t.string "name"
+    t.integer "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flagged",    default: false
+    t.boolean "flagged", default: false
   end
 
   add_index "lesson_categories", ["course_id"], name: "index_lesson_categories_on_course_id"
 
   create_table "lessons", force: true do |t|
-    t.string   "name"
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lesson_category_id"
+    t.integer "lesson_category_id"
   end
 
   add_index "lessons", ["lesson_category_id"], name: "index_lessons_on_lesson_category_id"
 
   create_table "messages", force: true do |t|
-    t.integer  "sender_id"
-    t.string   "title"
-    t.text     "body",       limit: 255
+    t.integer "sender_id"
+    t.string "title"
+    t.text "body", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flagged",                default: false
-    t.boolean  "in_trash",               default: false
+    t.boolean "flagged", default: false
+    t.boolean "in_trash", default: false
   end
 
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
 
   create_table "questions", force: true do |t|
-    t.integer  "exam_id"
-    t.string   "name"
-    t.integer  "value"
+    t.integer "exam_id"
+    t.string "name"
+    t.integer "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,14 +115,14 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
 
   create_table "roles", force: true do |t|
-    t.string   "name"
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "sendings", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "message_id"
+    t.integer "user_id"
+    t.integer "message_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,19 +131,19 @@ ActiveRecord::Schema.define(version: 20141116164627) do
   add_index "sendings", ["user_id"], name: "index_sendings_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

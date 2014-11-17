@@ -14,8 +14,8 @@ RSpec.describe MessagesController, :type => :controller do
       context "one receiver" do
         it "creates message" do
           expect do
-            post :create, message: { title: "To pan tik tak", body:
-                                     "a to jego znak", receivers: User.last.name.to_s }
+            post :create, message: {title: "To pan tik tak", body:
+                            "a to jego znak", receivers: User.last.name.to_s}
           end.to change { Message.count }.by(1).and change { Sending.count }.by(1)
         end
       end
@@ -25,9 +25,9 @@ RSpec.describe MessagesController, :type => :controller do
         end
         it "creates message" do
           expect do
-            post :create, message: { title: "To pan tik tak", body:
-                                     "a to jego znak", receivers:
-                                     "#{User.last.name}; #{User.second.name}" }
+            post :create, message: {title: "To pan tik tak", body:
+                            "a to jego znak", receivers:
+                                        "#{User.last.name}; #{User.second.name}"}
           end.to change { Message.count }.by(1).and change { Sending.count }.by(2)
         end
       end
@@ -35,8 +35,8 @@ RSpec.describe MessagesController, :type => :controller do
         context "one receiver" do
           it "does not create message" do
             expect do
-              post :create, message: { title: "To pan tik tak", body:
-                                       "a to jego znak", receivers: "a" * 16 }
+              post :create, message: {title: "To pan tik tak", body:
+                              "a to jego znak", receivers: "a" * 16}
             end.to change { Message.count }.by(0).and change { Sending.count }.by(0)
           end
         end
@@ -49,9 +49,9 @@ RSpec.describe MessagesController, :type => :controller do
 
             it "creates message but doesn't create all sendings" do
               expect do
-                post :create, message: { title: "To pan tik tak", body:
-                                         "a to jego znak",
-                                         receivers: "#{User.second.name}; #{'ab' * 16}" }
+                post :create, message: {title: "To pan tik tak", body:
+                                "a to jego znak",
+                                        receivers: "#{User.second.name}; #{'ab' * 16}"}
               end.to change { Message.count }.by(1).and change { Sending.count }.by(1)
             end
           end
@@ -59,9 +59,9 @@ RSpec.describe MessagesController, :type => :controller do
           context "all invalid" do
             it "does not create message and does not create sendings" do
               expect do
-                post :create, message: { title: "To pan tik tak", body:
-                                         "a to jego znak",
-                                         receivers: "#{'cd' * 5}; #{'ab' * 16}" }
+                post :create, message: {title: "To pan tik tak", body:
+                                "a to jego znak",
+                                        receivers: "#{'cd' * 5}; #{'ab' * 16}"}
               end.to change { Message.count }.by(0).and change { Sending.count }.by(0)
             end
           end
@@ -88,7 +88,7 @@ RSpec.describe MessagesController, :type => :controller do
         Sending.create(user_id: 2, message_id: 1)
         expect do
           delete :destroy, id: 1
-        end.to change{Message.count}.by(-1).and change { Sending.count }.by(-1)
+        end.to change { Message.count }.by(-1).and change { Sending.count }.by(-1)
       end
     end
 

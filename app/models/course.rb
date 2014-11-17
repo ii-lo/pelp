@@ -24,9 +24,9 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true
   validates :description, length: {
-    maximum: 240,
-    allow_blank: true
-  }
+                            maximum: 240,
+                            allow_blank: true
+                        }
 
   scope :open, -> { where(private: false) }
 

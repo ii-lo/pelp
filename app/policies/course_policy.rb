@@ -1,7 +1,7 @@
 class CoursePolicy
   #class Scope < Scope
-    #def resolve
-      #scope
-    #end
+  #def resolve
+  #scope
+  #end
   #end
 end

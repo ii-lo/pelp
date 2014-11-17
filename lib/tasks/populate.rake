@@ -7,9 +7,9 @@ namespace :db do
     Rake::Task["db:schema:load"].execute
     puts "Tworzenie użytkowników"
     User.create!(name: user_name, email: user_email,
-               password: user_password, password_confirmation: user_password)
+                 password: user_password, password_confirmation: user_password)
     User.create!(name: "Robert Białas", email: "r@r.com", password: "robert",
-               password_confirmation: "robert")
+                 password_confirmation: "robert")
     puts "Tworzenie wiadomości"
     40.times do |n|
       m = Message.create!(title: "Hej ##{n + 1}", sender_id: 2)
@@ -22,7 +22,7 @@ namespace :db do
       c = Course.create!(name: "Kurs #{n+1}", description: "Lerom ipsum")
       30.times do |i|
         lc = c.lesson_categories.create!(name: "Kategoria #{i + 1}",
-                                  flagged: i % 15 == 0 ? true : false)
+                                         flagged: i % 15 == 0 ? true : false)
         5.times do |x|
           lc.lessons.create!(name: "Lekcja ##{x}")
         end

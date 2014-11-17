@@ -18,7 +18,7 @@ class Attending < ActiveRecord::Base
 
   validates :course_id, presence: true
   validates :user_id, presence: true,
-                      uniqueness: { scope: [:course_id] }
+            uniqueness: {scope: [:course_id]}
   validates :role_id, presence: true
 
   before_create :set_last_visit

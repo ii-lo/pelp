@@ -30,18 +30,18 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "imagemagick::devel"
 
     chef.json = {
-      rbenv: {
-        user_installs: [{
-          user: "vagrant",
-          rubies: ["2.1.4"],
-          global: "2.1.4",
-          gems: {
-            "2.1.4" => [
-              { name: "bundler" }
-            ]
-          }
-        }]
-      }
+        rbenv: {
+            user_installs: [{
+                                user: "vagrant",
+                                rubies: ["2.1.4"],
+                                global: "2.1.4",
+                                gems: {
+                                    "2.1.4" => [
+                                        {name: "bundler"}
+                                    ]
+                                }
+                            }]
+        }
     }
   end
 

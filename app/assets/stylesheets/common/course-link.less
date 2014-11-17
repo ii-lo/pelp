@@ -5,40 +5,40 @@
 //
 
 .course-link {
-    .media-heading {
-        margin-top: 1px;
-    }
+  .media-heading {
+    margin-top: 1px;
+  }
 
-    .course-link-circle {
-        @circle-size: 24px;
+  .course-link-circle {
+    @circle-size: 24px;
 
-        width: @circle-size;
-        height: @circle-size;
-        border: @circle-size / 4 solid black;
-        .border-radius(@circle-size / 2);
-    }
+    width: @circle-size;
+    height: @circle-size;
+    border: @circle-size / 4 solid black;
+    .border-radius(@circle-size / 2);
+  }
 }
 
 .course-card {
-    background: @list-group-bg;
-    height: 180px;
-    overflow: auto;
+  background: @list-group-bg;
+  height: 180px;
+  overflow: auto;
 
-    &:hover, &:active, &:focus {
-        text-decoration: none;
-
-        h3 {
-            text-decoration: underline;
-            color: @link-hover-color;
-        }
-    }
+  &:hover, &:active, &:focus {
+    text-decoration: none;
 
     h3 {
-        margin-top: 8px;
-        color: @link-color;
+      text-decoration: underline;
+      color: @link-hover-color;
     }
+  }
 
-    .course-banner {
-        height: 8px;
-    }
+  h3 {
+    margin-top: 8px;
+    color: @link-color;
+  }
+
+  .course-banner {
+    height: 8px;
+  }
 }

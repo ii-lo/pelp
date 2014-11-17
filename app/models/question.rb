@@ -21,5 +21,5 @@ class Question < ActiveRecord::Base
   validates :exam_id, presence: true
   validates :name, presence: true
   validates :value, presence: true,
-    inclusion: 0..200
+            inclusion: 0..200
 end

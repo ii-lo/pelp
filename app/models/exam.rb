@@ -14,5 +14,5 @@ class Exam < ActiveRecord::Base
 
   validates :name, presence: true
   validates :course_id, presence: true,
-                        uniqueness: { scope: [:name] }
+            uniqueness: {scope: [:name]}
 end

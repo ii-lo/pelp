@@ -23,12 +23,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true,
-                   length: { maximum: 240 }
+            length: {maximum: 240}
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
   has_many :sent_messages, class_name: "Message",
-    foreign_key: :sender_id
+           foreign_key: :sender_id
   has_many :sendings
   has_many :received_messages, through: :sendings, source: :message
   #has_many :owned_courses, through: :attendings, source: :course
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   def last_visited_courses(number = nil)
     return last_visited_courses.limit(number) if number
     courses.joins(:attendings).
-      order('"attendings"."last_visit" DESC').uniq
+        order('"attendings"."last_visit" DESC').uniq
   end
 
   def existing_since

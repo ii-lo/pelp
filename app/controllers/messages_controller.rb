@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
       @message.destroy
       redirect_to :back, notice: "Usunięto wiadomość"
     else
-      @message.sendings.fing_by_user_id( current_user.id).destroy
+      @message.sendings.fing_by_user_id(current_user.id).destroy
       redirect_to :back, notice: "Usunięto wiadomość"
     end
   end
@@ -42,14 +42,14 @@ class MessagesController < ApplicationController
     user = current_user
     type = params[:type]
     messages = case type
-               when 'sent'
-                 params[:sent_page] = params[:page]
-                 user.sent_messages.paginate(per_page: 30,
-                                             page: params[:sent_page])
-               else
-                 params[:unread_page] = params[:page]
-                 user.received_messages.paginate(per_page: 30,
-                                                 page: params[:unread_page])
+                 when 'sent'
+                   params[:sent_page] = params[:page]
+                   user.sent_messages.paginate(per_page: 30,
+                                               page: params[:sent_page])
+                 else
+                   params[:unread_page] = params[:page]
+                   user.received_messages.paginate(per_page: 30,
+                                                   page: params[:unread_page])
                end
 
     respond_to do |format|

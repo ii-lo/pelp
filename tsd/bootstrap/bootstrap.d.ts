@@ -48,7 +48,7 @@ interface PopoverOptions {
 }
 
 interface CollapseOptions {
-    parent?: any;    
+    parent?: any;
     toggle?: boolean;
 }
 
@@ -61,10 +61,10 @@ interface TypeaheadOptions {
     source?: any;
     items?: number;
     minLength?: number;
-    matcher?: (item: any) => boolean;
-    sorter?: (items: any[]) => any[];
-    updater?: (item: any) => any;
-    highlighter?: (item: any) => string;
+    matcher?: (item:any) => boolean;
+    sorter?: (items:any[]) => any[];
+    updater?: (item:any) => any;
+    highlighter?: (item:any) => string;
 }
 
 interface AffixOptions {
@@ -72,40 +72,40 @@ interface AffixOptions {
 }
 
 interface JQuery {
-    modal(options?: ModalOptions): JQuery;
-    modal(options?: ModalOptionsBackdropString): JQuery;
-    modal(command: string): JQuery;
+    modal(options?:ModalOptions): JQuery;
+    modal(options?:ModalOptionsBackdropString): JQuery;
+    modal(command:string): JQuery;
 
     dropdown(): JQuery;
-    dropdown(command: string): JQuery;
+    dropdown(command:string): JQuery;
 
-    scrollspy(command: string): JQuery;
-    scrollspy(options?: ScrollSpyOptions): JQuery;
+    scrollspy(command:string): JQuery;
+    scrollspy(options?:ScrollSpyOptions): JQuery;
 
     tab(): JQuery;
-    tab(command: string): JQuery;
+    tab(command:string): JQuery;
 
-    tooltip(options?: TooltipOptions): JQuery;
-    tooltip(command: string): JQuery;
+    tooltip(options?:TooltipOptions): JQuery;
+    tooltip(command:string): JQuery;
 
-    popover(options?: PopoverOptions): JQuery;
-    popover(command: string): JQuery;
+    popover(options?:PopoverOptions): JQuery;
+    popover(command:string): JQuery;
 
     alert(): JQuery;
-    alert(command: string): JQuery;
+    alert(command:string): JQuery;
 
     button(): JQuery;
-    button(command: string): JQuery;
+    button(command:string): JQuery;
 
-    collapse(options?: CollapseOptions): JQuery;
-    collapse(command: string): JQuery;
+    collapse(options?:CollapseOptions): JQuery;
+    collapse(command:string): JQuery;
 
-    carousel(options?: CarouselOptions): JQuery;
-    carousel(command: string): JQuery;
+    carousel(options?:CarouselOptions): JQuery;
+    carousel(command:string): JQuery;
 
-    typeahead(options?: TypeaheadOptions): JQuery;
+    typeahead(options?:TypeaheadOptions): JQuery;
 
-    affix(options?: AffixOptions): JQuery;
+    affix(options?:AffixOptions): JQuery;
 }
 
 declare module "bootstrap" {

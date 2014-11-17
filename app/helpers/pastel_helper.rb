@@ -4,16 +4,16 @@ module PastelHelper
     s = 95
 
     case mode
-    when :darker
-      l = 35
-    when :dark
-      l = 45
-    when :light
-      l = 80
-    when :lighter
-      l = 96
-    else
-      l = 60
+      when :darker
+        l = 35
+      when :dark
+        l = 45
+      when :light
+        l = 80
+      when :lighter
+        l = 96
+      else
+        l = 60
     end
 
     Color::HSL.new(h, s, l).html

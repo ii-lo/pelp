@@ -5,38 +5,38 @@
 //
 
 footer {
-    border-top: 1px solid @gray-lighter;
+  border-top: 1px solid @gray-lighter;
+  color: @gray-light;
+  padding-top: 8px;
+
+  &.no-border {
+    border: none;
+    padding-top: 0;
+  }
+
+  a {
     color: @gray-light;
-    padding-top: 8px;
+  }
 
-    &.no-border {
-        border: none;
-        padding-top: 0;
+  a:hover, a:active {
+    text-decoration: none;
+  }
+
+  .icon-pelp-logo {
+    font-size: 14pt;
+  }
+
+  .footer-links {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-left: 8px;
+
+      &:first-child {
+        margin: 0;
+      }
     }
-
-    a {
-        color: @gray-light;
-    }
-
-    a:hover, a:active {
-        text-decoration: none;
-    }
-
-    .icon-pelp-logo {
-        font-size: 14pt;
-    }
-
-    .footer-links {
-        list-style-type: none;
-        padding: 0;
-
-        li {
-            display: inline-block;
-            margin-left: 8px;
-
-            &:first-child {
-                margin: 0;
-            }
-        }
-    }
+  }
 }

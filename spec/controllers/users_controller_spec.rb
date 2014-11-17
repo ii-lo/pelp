@@ -14,7 +14,7 @@ RSpec.describe UsersController, :type => :controller do
       it "creates user" do
         expect do
           post :create, user: FactoryGirl.attributes_for(:user)
-        end.to change{User.count}.by(1)
+        end.to change { User.count }.by(1)
         expect(response).to redirect_to root_path
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe UsersController, :type => :controller do
       it "does not create user" do
         expect do
           post :create, user: FactoryGirl.attributes_for(:user, email: "22")
-        end.not_to change{User.count}
+        end.not_to change { User.count }
         expect(response).to render_template :new
       end
     end
@@ -43,24 +43,24 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   #describe "GET edit" do
-    #it "returns http success" do
-      #get :edit
-      #expect(response).to have_http_status(:success)
-    #end
+  #it "returns http success" do
+  #get :edit
+  #expect(response).to have_http_status(:success)
+  #end
   #end
 
   #describe "GET update" do
-    #it "returns http success" do
-      #get :update
-      #expect(response).to have_http_status(:success)
-    #end
+  #it "returns http success" do
+  #get :update
+  #expect(response).to have_http_status(:success)
+  #end
   #end
 
   #describe "GET destroy" do
-    #it "returns http success" do
-      #get :destroy
-      #expect(response).to have_http_status(:success)
-    #end
+  #it "returns http success" do
+  #get :destroy
+  #expect(response).to have_http_status(:success)
+  #end
   #end
 
 end

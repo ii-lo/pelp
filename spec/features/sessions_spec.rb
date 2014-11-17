@@ -9,7 +9,7 @@ feature "Sessions", :type => :feature do
     fill_in :user_password, with: "asdf1234"
     expect do
       click_button "Zarejestruj się"
-    end.to change{User.count}.by(1)
+    end.to change { User.count }.by(1)
     click_link "Zaloguj"
     fill_in :user_email, with: "robert@robert.com"
     fill_in :user_password, with: "asdf1234"

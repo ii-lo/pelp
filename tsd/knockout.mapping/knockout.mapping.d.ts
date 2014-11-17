@@ -22,25 +22,25 @@ interface KnockoutMappingOptions {
     copy?: string[];
     mappedProperties?: string[];
     deferEvaluation?: boolean;
-    create?: (options: KnockoutMappingCreateOptions) => void;
-    update?: (options: KnockoutMappingUpdateOptions) => void;
-    key?: (data: any) => any;
+    create?: (options:KnockoutMappingCreateOptions) => void;
+    update?: (options:KnockoutMappingUpdateOptions) => void;
+    key?: (data:any) => any;
 }
 
 interface KnockoutMapping {
-    isMapped(viewModel: any): boolean;
-    fromJS(jsObject: any): any;
-    fromJS(jsObject: any, targetOrOptions: any): any;
-    fromJS(jsObject: any, inputOptions: any, target: any): any;
-    fromJSON(jsonString: string): any;
-    fromJSON(jsonString: string, targetOrOptions: any): any;
-    fromJSON(jsonString: string, inputOptions: any, target: any): any;
-    toJS(rootObject: any, options?: KnockoutMappingOptions): any;
-    toJSON(rootObject: any, options?: KnockoutMappingOptions): any;
+    isMapped(viewModel:any): boolean;
+    fromJS(jsObject:any): any;
+    fromJS(jsObject:any, targetOrOptions:any): any;
+    fromJS(jsObject:any, inputOptions:any, target:any): any;
+    fromJSON(jsonString:string): any;
+    fromJSON(jsonString:string, targetOrOptions:any): any;
+    fromJSON(jsonString:string, inputOptions:any, target:any): any;
+    toJS(rootObject:any, options?:KnockoutMappingOptions): any;
+    toJSON(rootObject:any, options?:KnockoutMappingOptions): any;
     defaultOptions(): KnockoutMappingOptions;
     resetDefaultOptions(): void;
-    getType(x: any): any;
-    visitModel(rootObject: any, callback: Function, options?: { visitedObjects?: any; parentName?: any; ignore?: any; copy?: any; include?: any; }): any;
+    getType(x:any): any;
+    visitModel(rootObject:any, callback:Function, options?:{ visitedObjects?: any; parentName?: any; ignore?: any; copy?: any; include?: any; }): any;
 }
 
 interface KnockoutStatic {
@@ -50,4 +50,4 @@ interface KnockoutStatic {
 declare module "knockout.mapping" {
     export = mapping;
 }
-declare var mapping: KnockoutMapping;
+declare var mapping:KnockoutMapping;

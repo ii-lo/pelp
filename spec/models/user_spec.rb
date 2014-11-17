@@ -41,7 +41,7 @@ RSpec.describe User, :type => :model do
 
     it "is equal to last visited courses" do
       expect(User.first.last_visited_courses).to(
-        eq [Course.last, Course.first]
+          eq [Course.last, Course.first]
       )
     end
 
@@ -52,7 +52,7 @@ RSpec.describe User, :type => :model do
 
       it "is equal to last visited courses" do
         expect(User.first.last_visited_courses).to(
-          eq [Course.first, Course.last]
+            eq [Course.first, Course.last]
         )
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe User, :type => :model do
       it "return n courses" do
         expect(User.first.last_visited_courses(5).length).to eq 5
         expect(User.first.last_visited_courses(5)).to(
-          eq User.first.last_visited_courses.first(5)
+            eq User.first.last_visited_courses.first(5)
         )
       end
     end
