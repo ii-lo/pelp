@@ -1,27 +1,29 @@
 <% content_for :title, 'Wszystkie kursy' %>
 
 <% content_for :styles do %>
-<%= stylesheet_link_tag 'dashboard', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'dashboard', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>Wszystkie kursy</h1>
-            <div class="row-separator"></div>
-        </div>
+  <div class="row"><%= bootstrap_flash %></div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Wszystkie kursy</h1>
+
+      <div class="row-separator"></div>
     </div>
-    <div class="row">
-        <% @courses.each do |c| %>
+  </div>
+  <div class="row">
+    <% @courses.each do |c| %>
         <%#= render 'course', course: c %>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <%= render 'course_card', course: c %>
+          <%= render 'course_card', course: c %>
         </div>
-        <% end %>
-        <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
-    </div>
+    <% end %>
+    <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>

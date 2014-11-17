@@ -1,11 +1,11 @@
 <% classes ||= '' %>
 
 <%= link_to course_path(course), class: "thumbnail course-card #{classes}" do %>
-<div class="course-banner" style="background-color: <%= string_to_pastel "#{course.name}#{course.id}" %>"></div>
-<div class="caption">
-    <h3><%= course.name %></h3>
-    <% if course.description %>
-    <p><%= course.description %></p>
-    <% end %>
-</div>
+    <div class="course-banner" style="background-color: <%= string_to_pastel "#{course.name}#{course.id}" %>"></div>
+    <div class="caption">
+      <h3><%= course.name %></h3>
+      <% if course.description %>
+          <p><%= course.description %></p>
+      <% end %>
+    </div>
 <% end %>

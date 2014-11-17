@@ -1,6 +1,6 @@
 <div class="panel-body">
   <% @unread.each do |m| %>
-    <%= render 'message', message: m %>
+      <%= render 'message', message: m %>
   <% end %>
-  </div>
+</div>
 <div class="panel-footer text-center"><%= will_paginate @unread, param_name: 'received_page' %></div>
