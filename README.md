@@ -34,7 +34,7 @@ voila!
 > - search `SDK` in options,
 > - click `Add SDK` / `new remote`
 > - click `Fill from Vagrant config` and select the folder where your Vagrantfile is located
-> - **Very important**: In the field `Ruby interpreter path`, put `/home/vagrant/.rbenv/versions/2.1.4/bin/ruby` (your ruby version may change, check your versions with `ls /home/> vagrant/.rbenv/versions` in your guest machine)
+> - **Very important**: In the field `Ruby interpreter path`, put `/home/vagrant/.rbenv/versions/2.1.4/bin/ruby` (your ruby version may change, check your versions with `ls /home/vagrant/.rbenv/versions` in your guest machine)
 > - Click OK, grab a cofee
 > - Your're done
 
