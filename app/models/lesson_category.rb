@@ -14,6 +14,7 @@ class LessonCategory < ActiveRecord::Base
   belongs_to :course
 
   has_many :lessons
+  has_many :exams
 
   validates :course_id, presence: true
 end

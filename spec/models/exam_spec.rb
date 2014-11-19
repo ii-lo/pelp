@@ -2,11 +2,12 @@
 #
 # Table name: exams
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  course_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  course_id          :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  lesson_category_id :integer
 #
 
 require 'rails_helper'
@@ -16,6 +17,8 @@ RSpec.describe Exam, :type => :model do
     it { is_expected.to validate_presence_of :name }
 
     it { is_expected.to validate_presence_of :course_id }
+
+    it { is_expected.to validate_presence_of :lesson_category_id }
 
     it { is_expected.to validate_uniqueness_of(:course_id).scoped_to [:name] }
   end

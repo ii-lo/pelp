@@ -1,0 +1,16 @@
+<% content_for :title, @exam.name %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <%= bootstrap_flash %>
+  <div class="row">
+    <div class="col-xs-12">
+      Liczba pytań: <%= @exam.questions.size %>
+      Czas na examin: "JAKAŚ WARTOŚĆ"
+    </div>
+</div>

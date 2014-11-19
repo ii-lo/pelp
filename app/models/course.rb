@@ -18,6 +18,7 @@ class Course < ActiveRecord::Base
   has_many :users, through: :attendings
   has_many :lesson_categories, dependent: :destroy
   has_many :lessons, through: :lesson_categories, dependent: :destroy
+  has_many :exams, through: :lesson_categories, dependent: :destroy
 
   mount_uploader :header, HeaderUploader
   mount_uploader :thumb, ThumbUploader

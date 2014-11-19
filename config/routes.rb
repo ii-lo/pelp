@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         get :activity
         get :info
         get :settings
+        get '/exams/:exam_id' => :exam, as: :exam
       end
     end
     resources :messages
