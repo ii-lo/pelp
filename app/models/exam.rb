@@ -8,24 +8,26 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  lesson_category_id :integer
+#  duration           :integer
 #
 
 class Exam < ActiveRecord::Base
-  before_save :course_id
+  before_validation :set_course_id
 
   belongs_to :course
   belongs_to :lesson_category
 
   has_many :questions
+  has_many :user_exams, dependent: :destroy
 
   validates :name, presence: true
-  validates :lesson_category_id, presence: true
-  validates :course_id, presence: true,
+  validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
+  validates :duration, presence: true
 
   private
 
-  def course_id
-    self.course_id = lesson_category.try(:exam_id)
+  def set_course_id
+    self.course_id = lesson_category.try(:course_id)
   end
 end

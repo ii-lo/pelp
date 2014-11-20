@@ -8,19 +8,30 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  lesson_category_id :integer
+#  duration           :integer
 #
 
 require 'rails_helper'
 
 RSpec.describe Exam, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :name }
 
-    it { is_expected.to validate_presence_of :course_id }
+    before do
+      FactoryGirl.create :lesson_category
+    end
+
+    subject { FactoryGirl.build :exam }
+
+    it { is_expected.to validate_presence_of :name }
 
     it { is_expected.to validate_presence_of :lesson_category_id }
 
-    it { is_expected.to validate_uniqueness_of(:course_id).scoped_to [:name] }
+    it { is_expected.to validate_presence_of :duration }
+
+    it do
+      is_expected.to validate_uniqueness_of(:lesson_category_id).
+        scoped_to :name
+    end
   end
 end
 

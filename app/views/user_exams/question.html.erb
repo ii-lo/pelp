@@ -1,0 +1,10 @@
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+<h1><%= @question.name %></h1>
+<h4>Liczba punktów: <%= session[:result] %> / <%= session[:max_point] %></h4>
+<%= simple_form_for :answer , url: answer_user_exam_path, class: 'form-control' do |f| %>
+  <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name %>
+  <br>
+  <%= f.button :submit, "Odpowiedz" %>
+<% end %>

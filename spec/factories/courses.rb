@@ -17,5 +17,6 @@
 FactoryGirl.define do
   factory :course do
     name "MyString"
+    description "asdf"
   end
 end

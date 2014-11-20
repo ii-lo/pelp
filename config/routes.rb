@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       end
     end
     resources :messages
+    get '/user_exams/new/:id' => 'user_exams#new', as: :new_user_exam
+    get '/user_exams/question' => 'user_exams#question', as: :question_user_exam
+    post '/user_exams/answer' => 'user_exams#answer', as: :answer_user_exam
 
     get 'calendar' => 'calendar#show', as: :calendar
     #get 'messages' => 'messages#index', as: :messages

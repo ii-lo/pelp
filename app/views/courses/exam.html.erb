@@ -11,6 +11,10 @@
   <div class="row">
     <div class="col-xs-12">
       Liczba pytań: <%= @exam.questions.size %>
-      Czas na examin: "JAKAŚ WARTOŚĆ"
+      Czas na examin: <%= @exam.duration %> sekund.
+      <%#TODO: Ładniejszy output czasu()%>
+      <br>
+      <%= link_to "Rozpocznij", new_user_exam_path(@exam)%>
     </div>
+  </div>
 </div>

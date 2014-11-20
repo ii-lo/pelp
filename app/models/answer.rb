@@ -14,7 +14,8 @@ class Answer < ActiveRecord::Base
   belongs_to :question
 
   validates :question_id, presence: true
-  validates :name, presence: true
+  validates :name, presence: true,
+    uniqueness:  { scope: [:question_id] }
 
   scope :correct, -> { where(correct: true) }
   scope :wrong, -> { where(correct: false) }
