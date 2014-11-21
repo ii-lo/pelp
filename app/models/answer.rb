@@ -13,6 +13,8 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
 
+  has_many :user_answers
+
   validates :question_id, presence: true
   validates :name, presence: true,
     uniqueness:  { scope: [:question_id] }

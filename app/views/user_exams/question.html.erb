@@ -2,9 +2,16 @@
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
 <% end %>
 <h1><%= @question.name %></h1>
-<h4>Liczba punktów: <%= session[:result] %> / <%= session[:max_point] %></h4>
+<h4>Liczba punktów: <%= session[:result] %> / <%= @exam.max_points %></h4>
 <%= simple_form_for :answer , url: answer_user_exam_path, class: 'form-control' do |f| %>
-  <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name %>
+  <% case @question.form %>
+  <% when 'single' %>
+    <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name %>
+  <% when 'multiple' %>
+    <%= f.collection_check_boxes :id, @question.answers.to_a.shuffle, :id, :name %>
+  <% else %>
+    <%= f.input :id, label: false %>
+  <% end %>
   <br>
   <%= f.button :submit, "Odpowiedz" %>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120150509) do
+ActiveRecord::Schema.define(version: 20141121183653) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20141120150509) do
     t.datetime "updated_at"
     t.integer  "lesson_category_id"
     t.integer  "duration"
+    t.integer  "max_points",         default: 0
   end
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 20141120150509) do
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "form",       default: 0
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
@@ -133,11 +135,23 @@ ActiveRecord::Schema.define(version: 20141120150509) do
   add_index "sendings", ["message_id"], name: "index_sendings_on_message_id"
   add_index "sendings", ["user_id"], name: "index_sendings_on_user_id"
 
+  create_table "user_answers", force: true do |t|
+    t.integer  "answer_id"
+    t.integer  "user_exam_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id"
+  add_index "user_answers", ["user_exam_id"], name: "index_user_answers_on_user_exam_id"
+
   create_table "user_exams", force: true do |t|
     t.integer  "user_id"
     t.integer  "exam_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "result",     default: 0.0
   end
 
   add_index "user_exams", ["exam_id"], name: "index_user_exams_on_exam_id"

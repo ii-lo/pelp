@@ -7,9 +7,33 @@
 #  exam_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  result     :decimal(, )      default(0.0)
 #
 
 class UserExam < ActiveRecord::Base
   belongs_to :user
   belongs_to :exam
+
+  has_many :user_answers
+
+  def update_result
+    sum = 0
+    user_answers.includes(:question).
+    group_by(&:question).each do |k, v|
+      case k.form
+      when 'single'
+        sum += k.value if v.first.correct
+      when 'multiple'
+        correct, wrong = 0, 0
+        v.each do |i|
+          i.correct ? correct += 1 : wrong += 1
+        end
+        diff = correct > wrong ? correct - wrong : 0
+        sum += (diff.to_f) * k.value / k.correct_answers.size
+      else
+        raise NotImplementedError
+      end
+    end
+    update_attribute(:result, sum)
+  end
 end

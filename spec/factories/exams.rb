@@ -9,6 +9,7 @@
 #  updated_at         :datetime
 #  lesson_category_id :integer
 #  duration           :integer
+#  max_points         :integer          default(0)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

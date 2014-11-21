@@ -9,6 +9,7 @@
 #  updated_at         :datetime
 #  lesson_category_id :integer
 #  duration           :integer
+#  max_points         :integer          default(0)
 #
 
 class Exam < ActiveRecord::Base
@@ -24,6 +25,10 @@ class Exam < ActiveRecord::Base
   validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
   validates :duration, presence: true
+
+  def update_max_points
+    update_attribute(:max_points, questions.sum(:value))
+  end
 
   private
 

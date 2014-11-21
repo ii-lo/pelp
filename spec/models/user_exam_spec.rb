@@ -7,6 +7,7 @@
 #  exam_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  result     :decimal(, )      default(0.0)
 #
 
 require 'rails_helper'
