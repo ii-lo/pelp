@@ -3,6 +3,7 @@
 <% end %>
 <h1><%= @question.name %></h1>
 <h4>Liczba punktów: <%= session[:result] %> / <%= @exam.max_points %></h4>
+<h4>Pytanie <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %> / <%= session[:user_exam_questions_count] %></h4>
 <%= simple_form_for :answer , url: answer_user_exam_path, class: 'form-control' do |f| %>
   <% case @question.form %>
   <% when 'single' %>
@@ -10,7 +11,7 @@
   <% when 'multiple' %>
     <%= f.collection_check_boxes :id, @question.answers.to_a.shuffle, :id, :name %>
   <% else %>
-    <%= f.input :id, label: false %>
+    <%= f.input :text, label: false, required: true %>
   <% end %>
   <br>
   <%= f.button :submit, "Odpowiedz" %>

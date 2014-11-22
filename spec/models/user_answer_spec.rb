@@ -8,10 +8,16 @@
 #  correct      :boolean
 #  created_at   :datetime
 #  updated_at   :datetime
+#  text         :string(255)
+#  question_id  :integer
 #
 
 require 'rails_helper'
 
 RSpec.describe UserAnswer, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validation' do
+    it { is_expected.to validate_presence_of :user_exam_id }
+
+    it { is_expected.to validate_presence_of :question_id }
+  end
 end

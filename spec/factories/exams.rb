@@ -19,5 +19,6 @@ FactoryGirl.define do
     name "MyString"
     lesson_category_id 1
     duration 7200
+    course_id 1
   end
 end

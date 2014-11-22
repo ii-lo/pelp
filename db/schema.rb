@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121183653) do
+ActiveRecord::Schema.define(version: 20141122165018) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -141,9 +141,12 @@ ActiveRecord::Schema.define(version: 20141121183653) do
     t.boolean  "correct"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "text"
+    t.integer  "question_id"
   end
 
   add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id"
+  add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id"
   add_index "user_answers", ["user_exam_id"], name: "index_user_answers_on_user_exam_id"
 
   create_table "user_exams", force: true do |t|

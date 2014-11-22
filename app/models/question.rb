@@ -23,7 +23,7 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :correct_answers, -> { correct }, class_name: 'Answer'
   has_many :wrong_answers, -> { wrong }, class_name: 'Answer'
-  has_many :user_answers, through: :answers
+  has_many :user_answers
 
   validates :exam_id, presence: true
   validates :name, presence: true

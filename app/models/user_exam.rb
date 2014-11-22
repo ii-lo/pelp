@@ -16,13 +16,14 @@ class UserExam < ActiveRecord::Base
 
   has_many :user_answers
 
+  validates :user_id, presence: true
+  validates :exam_id, presence: true
+
   def update_result
     sum = 0
     user_answers.includes(:question).
     group_by(&:question).each do |k, v|
       case k.form
-      when 'single'
-        sum += k.value if v.first.correct
       when 'multiple'
         correct, wrong = 0, 0
         v.each do |i|
@@ -31,7 +32,7 @@ class UserExam < ActiveRecord::Base
         diff = correct > wrong ? correct - wrong : 0
         sum += (diff.to_f) * k.value / k.correct_answers.size
       else
-        raise NotImplementedError
+        sum += k.value if v.first.correct
       end
     end
     update_attribute(:result, sum)

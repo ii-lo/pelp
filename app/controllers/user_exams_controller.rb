@@ -39,7 +39,7 @@ class UserExamsController < ApplicationController
   def single_answer
     id = params[:answer][:id].to_i
     u = UserAnswer.create(user_exam_id: session[:user_exam_id],
-                         answer_id: id)
+                          answer_id: id, question_id: @question.id)
     session[:result] += @question.value if u.correct
   end
 
@@ -48,7 +48,7 @@ class UserExamsController < ApplicationController
     correct, wrong = 0, 0
     ids.select(&:present?).each do |i|
       u = UserAnswer.create(user_exam_id: session[:user_exam_id],
-                           answer_id: i)
+                            answer_id: i, question_id: @question.id)
       u.correct ? correct += 1 : wrong += 1
     end
     diff = correct > wrong ? correct - wrong : 0
@@ -56,7 +56,10 @@ class UserExamsController < ApplicationController
   end
 
   def open_answer
-    raise NotImplementedError
+    text = params[:answer][:text]
+    u = UserAnswer.create(user_exam_id: session[:user_exam_id],
+                          text: text, question_id: @question.id)
+    session[:result] += @question.value if u.correct
   end
 
   def prepare_session

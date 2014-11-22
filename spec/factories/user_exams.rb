@@ -14,7 +14,7 @@
 
 FactoryGirl.define do
   factory :user_exam do
-    user_id nil
-    exam_id nil
+    user_id 1
+    exam_id 1
   end
 end
