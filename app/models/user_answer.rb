@@ -19,16 +19,17 @@ class UserAnswer < ActiveRecord::Base
   belongs_to :user_exam
   belongs_to :question
 
-  validates :user_exam_id, presence: true,
-            uniqueness: { scope: [:answer_id] }
+  validates :user_exam_id, presence: true
   validates :question_id, presence: true
+  validates :answer_id, uniqueness: { allow_blank: true,
+                                       scope: [:user_exam_id] }
 
 
   private
 
   def check_if_correct
     unless question.open?
-      self.correct = answer.correct
+      self.correct = answer.try :correct
     else
       self.correct = !!question.answers.where('lower(name) = ?', text.downcase).first
     end

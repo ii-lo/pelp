@@ -37,7 +37,7 @@ class UserExamsController < ApplicationController
   private
 
   def single_answer
-    id = params[:answer][:id].to_i
+    id = params[:answer][:id]
     u = UserAnswer.create(user_exam_id: session[:user_exam_id],
                           answer_id: id, question_id: @question.id)
     session[:result] += @question.value if u.correct
@@ -46,7 +46,7 @@ class UserExamsController < ApplicationController
   def multiple_answer
     ids = params[:answer][:id]
     correct, wrong = 0, 0
-    ids.select(&:present?).each do |i|
+    ids.each do |i|
       u = UserAnswer.create(user_exam_id: session[:user_exam_id],
                             answer_id: i, question_id: @question.id)
       u.correct ? correct += 1 : wrong += 1
@@ -56,7 +56,7 @@ class UserExamsController < ApplicationController
   end
 
   def open_answer
-    text = params[:answer][:text]
+    text = params[:answer][:text] || ''
     u = UserAnswer.create(user_exam_id: session[:user_exam_id],
                           text: text, question_id: @question.id)
     session[:result] += @question.value if u.correct
