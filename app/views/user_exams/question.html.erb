@@ -1,18 +1,46 @@
+<% content_for :title, @exam.name %>
+
 <% content_for :styles do %>
-    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
 <% end %>
-<h1><%= @question.name %></h1>
-<h4>Liczba punktów: <%= session[:result] %> / <%= @exam.max_points %></h4>
-<h4>Pytanie <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %> / <%= session[:user_exam_questions_count] %></h4>
-<%= simple_form_for :answer , url: answer_user_exam_path, class: 'form-control' do |f| %>
-  <% case @question.form %>
-  <% when 'single' %>
-    <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name %>
-  <% when 'multiple' %>
-    <%= f.collection_check_boxes :id, @question.answers.to_a.shuffle, :id, :name %>
-  <% else %>
-    <%= f.input :text, label: false, required: true %>
-  <% end %>
-  <br>
-  <%= f.button :submit, "Odpowiedz" %>
-<% end %>
+
+<div class="exam-question-text">
+    <p><%= @question.name %></p>
+</div>
+
+<div class="exam-answer-wrapper">
+    <%= simple_form_for :answer, url: answer_user_exam_path, html: {class: 'panel panel-default exam-answer-panel'} do |f| %>
+        <div class="panel-heading">Twoja odpowiedź <span class="label label-info pull-right">2 pkt.</span></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <% case @question.form %>
+                <% when 'single' %>
+                    <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name, item_wrapper_tag: :div, item_wrapper_class: 'radio' %>
+                <% when 'multiple' %>
+                    <%= f.collection_check_boxes :id, @question.answers.to_a.shuffle, :id, :name, item_wrapper_tag: :div, item_wrapper_class: 'checkbox' %>
+                <% else %>
+                    <%= f.input :text, label: false, required: true %>
+                <% end %>
+            </div>
+
+            <div class="text-center">
+                <%= f.button :submit, 'Wyślij' %>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom exam-question-navbar">
+    <div class="container-fluid">
+        <p class="navbar-text"><%= @exam.name %></p>
+
+        <p class="navbar-text navbar-right">
+            <i class="glyphicon glyphicon-time"></i> 12:34
+            <span class="sep"></span>
+            <i class="glyphicon glyphicon-question-sign"></i> <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %>
+            / <%= session[:user_exam_questions_count] %>
+            <span class="sep"></span>
+            <i class="glyphicon glyphicon-ok"></i> <%= session[:result] %> / <%= @exam.max_points %> pkt.
+        </p>
+    </div>
+</nav>

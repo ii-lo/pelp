@@ -1,20 +1,36 @@
 <% content_for :title, @exam.name %>
 
 <% content_for :styles do %>
-    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
 <% end %>
 
-<%= render 'layouts/navbar' %>
-
-<div class="container">
-  <%= bootstrap_flash %>
-  <div class="row">
-    <div class="col-xs-12">
-      Liczba pytań: <%= @exam.questions.size %>
-      Czas na examin: <%= @exam.duration %> sekund.
-      <%#TODO: Ładniejszy output czasu()%>
-      <br>
-      <%= link_to "Rozpocznij", new_user_exam_path(@exam)%>
+<div class="container-fluid exam-container">
+    <div class="row row-separator"></div>
+    <%= bootstrap_flash %>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><%= @exam.name %></h1>
+        </div>
     </div>
-  </div>
+    <div class="row row-separator"></div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Szczegóły</div>
+                <table class="table table-responsive exam-details">
+                    <tr>
+                        <td>Czas trwania egzaminu</td>
+                        <td><%= @exam.duration %> sekund<%#TODO: Ładniejszy output czasu()%></td>
+                    </tr>
+                    <tr>
+                        <td>Liczba pytań</td>
+                        <td><%= @exam.questions.size %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <%= link_to "Rozpocznij", new_user_exam_path(@exam), class: 'btn btn-primary btn-lg btn-block' %>
+        </div>
+    </div>
 </div>
