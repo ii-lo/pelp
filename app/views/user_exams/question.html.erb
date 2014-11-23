@@ -35,12 +35,19 @@
         <p class="navbar-text"><%= @exam.name %></p>
 
         <p class="navbar-text navbar-right">
-            <i class="glyphicon glyphicon-time"></i> 12:34
+            <i class="glyphicon glyphicon-time"></i>
+            <span class="counter-clock" data-counter-clock-on-exhausted="window.location.reload()">5:00</span>
+
             <span class="sep"></span>
-            <i class="glyphicon glyphicon-question-sign"></i> <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %>
+
+            <i class="glyphicon glyphicon-question-sign"></i>
+            <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %>
             / <%= session[:user_exam_questions_count] %>
+
             <span class="sep"></span>
-            <i class="glyphicon glyphicon-ok"></i> <%= session[:result] %> / <%= @exam.max_points %> pkt.
+
+            <i class="glyphicon glyphicon-ok"></i>
+            <%= session[:result] %> / <%= @exam.max_points %> pkt.
         </p>
     </div>
 </nav>
