@@ -72,7 +72,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'guard-livereload', require: false
   gem 'database_cleaner', '~> 1.3.0'
-  gem 'did_you_mean'
+  # gem 'did_you_mean'
 end
 
 gem 'simplecov', require: false, group: :test
