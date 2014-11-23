@@ -31,6 +31,7 @@ gem 'devise', '~> 3.4.0'
 
 # stylesheets
 gem 'less-rails'
+gem 'font-awesome-rails'
 
 # tp
 gem 'typescript-rails'
