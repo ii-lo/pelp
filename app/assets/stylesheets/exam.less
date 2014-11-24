@@ -12,6 +12,11 @@
 
 // Details page
 
+.exam-description {
+  font-style: italic;
+  padding-top: @padding-base-vertical;
+}
+
 .exam-details {
   td {
     white-space: nowrap;
@@ -30,15 +35,16 @@
 
   @media (min-width: @screen-md-min) {
     margin-right: @container-md * (4 / @grid-columns);
+    margin-bottom: @navbar-height;
   }
 }
 
 .exam-question-navbar {
-    .glyphicon {
-      margin-right: 6px;
-      position: relative;
-      top: 2px;
-    }
+  .glyphicon {
+    margin-right: 6px;
+    position: relative;
+    top: 2px;
+  }
 
   .sep {
     width: 16px;
@@ -48,12 +54,12 @@
 
 .exam-answer-wrapper {
   @media (max-width: @screen-sm-max) {
-    margin-bottom: @navbar-height;
+    margin-bottom: @navbar-height*2;
   }
 
   @media (min-width: @screen-md-min) {
     position: fixed;
-    top:0;
+    top: 0;
     right: 0;
     bottom: @navbar-height;
     width: @container-md * (4 / @grid-columns);
