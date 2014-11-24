@@ -15,6 +15,7 @@ class UserExamsController < ApplicationController
 
   def answer
     @question = Question.find session[:current_question_id]
+    params[:answer] ||= {}
     case @question.form
     when 'single'
       single_answer
@@ -44,7 +45,7 @@ class UserExamsController < ApplicationController
   end
 
   def multiple_answer
-    ids = params[:answer][:id]
+    ids = params[:answer][:id] || [nil]
     correct, wrong = 0, 0
     ids.each do |i|
       u = UserAnswer.create(user_exam_id: session[:user_exam_id],
