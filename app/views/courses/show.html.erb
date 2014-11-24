@@ -31,7 +31,7 @@
             </div>
 
             <% @lesson_categories.each do |lc| %>
-                <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %>">
+                <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
                     <div class="panel-heading"><%= lc.name %></div>
                     <ul class="list-group">
                         <% lc.lessons.each do |l| %>
