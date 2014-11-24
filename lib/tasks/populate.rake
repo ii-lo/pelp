@@ -20,10 +20,10 @@ namespace :db do
     puts "Tworzenie kursów"
     40.times do |n|
       c = Course.create!(name: "Kurs #{n+1}", description: "Lerom ipsum")
-      30.times do |i|
+      (rand(9) + 1).times do |i|
         lc = c.lesson_categories.create!(name: "Kategoria #{i + 1}",
                                          flagged: i % 15 == 0 ? true : false)
-        5.times do |x|
+        (rand(5) + 1).times do |x|
           lc.lessons.create!(name: "Lekcja ##{x}")
         end
       end
