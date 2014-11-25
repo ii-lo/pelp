@@ -4,67 +4,73 @@
 //= require jquery_ujs
 //= require bootstrap
 
-// Counter clocks
+/*
+ * Counting clock
+ */
 
-class CounterClockTime {
-    minutes:number = 0;
-    seconds:number = 0;
-    exhausted:boolean = false;
-    onExhausted:()=>void;
+interface CClockTime {
+    min:number;
+    sec:number;
+}
 
-    constructor(str:string, onExhausted?:()=>void) {
+interface JQuery {
+    cclock:(onExhausted?:()=>void)=>JQuery;
+}
+
+(function ($:JQueryStatic) {
+    var cclockData = 'cclock',
+        cclockInternalData = 'cclock-internal';
+
+    function parseTimeStr(str:string):CClockTime {
         var arr = str.split(':');
         if (arr.length != 2) throw new Error('invalid format');
-        this.minutes = parseInt(arr[0]);
-        this.seconds = parseInt(arr[1]);
-        this.onExhausted = onExhausted;
-    }
-
-    tick() {
-        if (!this.exhausted) {
-            this.seconds--;
-            if (this.seconds < 0) {
-                this.seconds = 59;
-                this.minutes--;
-                if (this.minutes < 0) {
-                    this.minutes = 0;
-                    this.seconds = 0;
-                    this.exhausted = true;
-                    if (this.onExhausted) {
-                        this.onExhausted();
-                    }
-                }
-            }
+        return {
+            min: parseInt(arr[0]),
+            sec: parseInt(arr[1])
         }
     }
 
-    toString():string {
-        return this.minutes + ':' + (this.seconds < 10 ? '0' + this.seconds : this.seconds + '');
+    function mkTimeStr(time:CClockTime):string {
+        return time.min + ':' + (time.sec < 10 ? '0' + time.sec : time.sec + '');
     }
-}
 
-class CounterClock {
-    obj:any;
-    time:CounterClockTime;
-    interv:number;
+    $.fn.cclock = function (onExhausted?:()=>void):JQuery {
+        return this.each(function () {
+            var elem = $(this);
 
-    constructor(obj:any) {
-        this.obj = obj;
-        this.time = new CounterClockTime(obj.text(), () => {
-            if (this.obj.data('counter-clock-on-exhausted')) {
-                eval(this.obj.data('counter-clock-on-exhausted'));
-            }
-            clearInterval(this.interv);
+            elem.data(cclockInternalData, $.extend(parseTimeStr(elem.text()), {
+                exhausted: false,
+                fn: onExhausted || (elem.data(cclockData) ? () => eval(elem.data(cclockData)) : $.noop), // Need to test this somehow ^.^
+                interv: setInterval(function () {
+                    var data = elem.data(cclockInternalData);
+
+                    // TODO This nasty if should be rewritten.
+                    if (!data.exhausted) {
+                        data.sec--;
+
+                        if (data.sec < 0) {
+                            data.sec = 59;
+                            data.min--;
+
+                            if (data.min < 0) {
+                                data.min = data.sec = 0;
+                                data.exhausted = true;
+
+                                data.fn();
+
+                                clearInterval(data.interv);
+                                elem.removeData(cclockInternalData);
+                            }
+                        }
+                    }
+
+                    elem.text(mkTimeStr(data));
+                }, 1000)
+            }));
         });
-        this.interv = setInterval(() => {
-            this.time.tick();
-            this.obj.text(this.time.toString());
-        }, 1000);
-    }
-}
+    };
 
-$(function () {
-    $('.counter-clock').each(function () {
-        new CounterClock($(this));
+    $(function () {
+        $('[data-cclock]').cclock();
     });
-});
+})(jQuery);
