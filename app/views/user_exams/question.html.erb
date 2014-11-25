@@ -4,6 +4,10 @@
     <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
 <% end %>
 
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam', 'data-turbolinks-track' => true %>
+<% end %>
+
 <div class="exam-question-text text-justify">
     <p><%= @question.name %></p>
 
@@ -86,7 +90,7 @@
             <div class="text-center">
                 <div class="btn-group">
                     <%= f.button :submit, 'Odpowiedz', class: 'btn-primary' %>
-                    <a class="btn btn-default" href="">Zakończ test</a>
+                    <a id="end-exam-btn" class="btn btn-default" href="">Zakończ test</a>
                 </div>
             </div>
         </div>
