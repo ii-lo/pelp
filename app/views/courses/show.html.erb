@@ -41,11 +41,11 @@
                         <% end %>
                         <% if lc.exams.any? %>
                             <% lc.exams.each do |e| %>
-                                <%= link_to exam_course_path(@course, e) do %>
-                                    <li class="list-group-item"><i class="glyphicon glyphicon-check"></i>
-                                        <%= link_to e.name, exam_course_path(@course, e) %>
-                                    </li>
-                                <% end %>
+                                <li class="list-group-item">
+                                    <%= link_to exam_course_path(@course, e) do %>
+                                        <i class="glyphicon glyphicon-check"></i> <%= e.name %>
+                                    <% end %>
+                                </li>
                             <% end %>
                         <% end %>
                     </ul>
