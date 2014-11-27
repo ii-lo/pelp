@@ -1,13 +1,5 @@
 /// <reference path="../../../tsd/tsd.d.ts" />
 
-//= require jquery
-//= require jquery_ujs
-//= require bootstrap
-
-/*
- * Counting clock
- */
-
 interface CClockTime {
     min:number;
     sec:number;
