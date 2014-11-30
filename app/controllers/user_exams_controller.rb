@@ -20,7 +20,7 @@ class UserExamsController < ApplicationController
     @user_exam = UserExam.find session[:user_exam_id]
     @user_exam.update_attribute(:result, session[:result])
     clear_session
-    redirect_to course_path(@question.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
+    redirect_to course_path(@user_exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
   end
 
   def question
