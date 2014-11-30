@@ -16,6 +16,7 @@ class UserExam < ActiveRecord::Base
   belongs_to :exam
 
   has_many :user_answers
+  has_one :course, through: :exam
 
   validates :user_id, presence: true
   validates :exam_id, presence: true
@@ -39,10 +40,18 @@ class UserExam < ActiveRecord::Base
     update_attribute(:result, sum)
   end
 
+  def open?
+    !closed
+  end
+
+  def close!
+    update_attribute(:closed, true)
+    update_result
+  end
+
   def wait_for_close!
     unless closed
-      update_attribute(:closed, true)
-      update_result
+      close!
     end
   end
   handle_asynchronously :wait_for_close!, run_at: Proc.new { |ue| ue.exam.duration.seconds.from_now },

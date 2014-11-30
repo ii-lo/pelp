@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get '/exam/new/:id' => 'user_exams#new', as: :new_user_exam
     get '/exam/exit' => 'user_exams#exit', as: :exit_user_exam
     get '/exam/question' => 'user_exams#question', as: :question_user_exam
+    get '/exam/closed/:id' => 'user_exams#show', as: :user_exam
     post '/exam/answer' => 'user_exams#answer', as: :answer_user_exam
 
     get 'calendar' => 'calendar#show', as: :calendar

@@ -8,6 +8,7 @@ RSpec.describe UserExamsController, :type => :controller do
     FactoryGirl.create :lesson_category
     FactoryGirl.create :exam
     FactoryGirl.create :question
+    Attending.create(user_id: 1, course_id: 1, role_id: 0)
   end
 
   describe "GET new" do

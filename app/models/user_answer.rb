@@ -23,6 +23,7 @@ class UserAnswer < ActiveRecord::Base
   validates :question_id, presence: true
   validates :answer_id, uniqueness: { allow_blank: true,
                                        scope: [:user_exam_id] }
+  validate :open_user_exam
 
 
   private
@@ -34,5 +35,11 @@ class UserAnswer < ActiveRecord::Base
       self.correct = !!question.answers.where('lower(name) = ?', text.downcase).first
     end
     true
+  end
+
+  def open_user_exam
+    if user_exam.try :closed
+      errors[:base] << "Sprawdzian zakończony"
+    end
   end
 end

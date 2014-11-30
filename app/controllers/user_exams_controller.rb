@@ -1,8 +1,16 @@
 class UserExamsController < ApplicationController
   before_action :check_if_closed, only: [:answer, :question]
+
+  def show
+    @user_exam = UserExam.find params[:id]
+    authorize @user_exam
+    @answers = @user_exam.user_answers.includes(:question)
+  end
+
   def new
     @exam = Exam.find params[:id]
     @user_exam = @exam.user_exams.create!(user_id: current_user.id)
+    authorize @user_exam
     prepare_session
     redirect_to question_user_exam_path
     @user_exam.wait_for_close!
@@ -87,9 +95,13 @@ class UserExamsController < ApplicationController
   def check_if_closed
     @user_exam = UserExam.find_by_id session[:user_exam_id]
     return redirect_to root_path unless @user_exam
+    @exam = @user_exam.exam
+    if Time.now > @user_exam.created_at + @exam.duration
+      @user_exam.close!
+    end
     if @user_exam.closed
       clear_session
-      return redirect_to course_path(@user_exam.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
+      return redirect_to course_path(@user_exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
     end
   end
 end
