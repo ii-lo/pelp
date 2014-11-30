@@ -19,16 +19,28 @@
   }
 }
 
+//
+// Course card styles
+//
+
 .course-card {
-  background: @list-group-bg;
-  height: 180px;
-  overflow: auto;
+  .background-image(linear-gradient(to bottom, @list-group-bg 85%, fade(@list-group-bg, 0%) 100%));
+  .box-shadow(0 0 20px 5px @list-group-bg inset);
+
+  width: 100%;
+  height: @screen-xs / 4 + @grid-gutter-width * 2;
+  display: table;
+
+  .caption {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
 
   &:hover, &:active, &:focus {
     text-decoration: none;
 
     h3 {
-      text-decoration: underline;
       color: @link-hover-color;
     }
   }
@@ -36,9 +48,5 @@
   h3 {
     margin-top: 8px;
     color: @link-color;
-  }
-
-  .course-banner {
-    height: 8px;
   }
 }
