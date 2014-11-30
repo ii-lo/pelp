@@ -6,6 +6,14 @@ class UserExamsController < ApplicationController
     redirect_to question_user_exam_path
   end
 
+  def exit
+    # TODO Implement this
+    @user_exam = UserExam.find session[:user_exam_id]
+    @exam = @user_exam.exam
+    @course = @exam.course
+    redirect_to course_path(@course)
+  end
+
   def question
     @user_exam = UserExam.find session[:user_exam_id]
     @question = Question.find session[:user_exam_questions].first
@@ -17,12 +25,12 @@ class UserExamsController < ApplicationController
     @question = Question.find session[:current_question_id]
     params[:answer] ||= {}
     case @question.form
-    when 'single'
-      single_answer
-    when 'multiple'
-      multiple_answer
-    when 'open'
-      open_answer
+      when 'single'
+        single_answer
+      when 'multiple'
+        multiple_answer
+      when 'open'
+        open_answer
     end
     session[:user_exam_questions].shift
     if session[:user_exam_questions].any?
@@ -67,7 +75,7 @@ class UserExamsController < ApplicationController
     session[:result] ||= 0.0
     session[:user_exam_id] ||= @user_exam.id
     session[:user_exam_questions] ||= @exam.questions.pluck(:id).
-      shuffle
+        shuffle
     session[:user_exam_questions_count] ||= @exam.questions.size
   end
 

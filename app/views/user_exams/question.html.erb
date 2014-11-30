@@ -115,7 +115,9 @@
 
             <span class="sep"></span>
 
-            <a id="end-exam-btn" href="" class="navbar-link"><i class="glyphicon glyphicon-log-out"></i></a>
+            <%= link_to exit_user_exam_path, class: 'navbar-link' do %>
+                <i class="glyphicon glyphicon-log-out"></i>
+            <% end %>
         </p>
     </div>
 </nav>
