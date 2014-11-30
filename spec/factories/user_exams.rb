@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  result     :decimal(, )      default(0.0)
+#  closed     :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

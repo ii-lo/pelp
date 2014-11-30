@@ -64,6 +64,10 @@ gem 'knockoutjs-rails'
 # time
 gem 'time_diff'
 
+# delayed_jobs
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"

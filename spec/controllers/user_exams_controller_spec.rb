@@ -52,29 +52,29 @@ RSpec.describe UserExamsController, :type => :controller do
       get :new, id: 1
     end
 
-    #context "valid answers" do
-      #before do
-        #3.times do
-          #get :question
-          #case session[:current_question_id].to_i
-          #when 2
-            #post :answer, answer: { id: '2' }
-          #when 3
-            #post :answer, answer: { id: %w(3 4) }
-          #else
-            #post :answer, answer: { text: 'czerwony' }
-          #end
-        #end
-      #end
+    context "valid answers" do
+      before do
+        3.times do
+          get :question
+          case session[:current_question_id].to_i
+          when 2
+            post :answer, answer: { id: '2' }
+          when 3
+            post :answer, answer: { id: %w(3 4) }
+          else
+            post :answer, answer: { text: 'czerwony' }
+          end
+        end
+      end
 
-      #it "makes correct result" do
-        #@ue = UserExam.first
-        #res = @ue.result
-        #@ue.update_result
-        #expect(@ue.result).to eq res
-        #expect(res).to eq 4
-      #end
-    #end
+      it "makes correct result" do
+        @ue = UserExam.first
+        res = @ue.result
+        @ue.update_result
+        expect(@ue.result).to eq res
+        expect(res).to eq 4
+      end
+    end
 
 
     context "blank_answers" do
@@ -92,6 +92,26 @@ RSpec.describe UserExamsController, :type => :controller do
             end
           end
         end.to change{UserAnswer.count}.by(3)
+      end
+    end
+
+    context "end of time" do
+      it "redirects from exam" do
+        expect do
+          3.times do |n|
+            get :question
+            UserExam.first.update_attribute(:closed, true) if n == 2
+            case session[:current_question_id].to_i
+            when 2
+              post :answer, answer: { id: '' }
+            when 3
+              post :answer, answer: { id: ['']}
+            else
+              post :answer, answer: { text: '' }
+            end
+          end
+        end.to change{UserAnswer.count}.by(2)
+        expect(:response).to redirect_to course_path(Course.first)
       end
     end
   end

@@ -1,21 +1,21 @@
 class UserExamsController < ApplicationController
+  before_action :check_if_closed, only: [:answer, :question]
   def new
     @exam = Exam.find params[:id]
     @user_exam = @exam.user_exams.create!(user_id: current_user.id)
     prepare_session
     redirect_to question_user_exam_path
+    @user_exam.wait_for_close!
   end
 
   def exit
-    # TODO Implement this
     @user_exam = UserExam.find session[:user_exam_id]
-    @exam = @user_exam.exam
-    @course = @exam.course
-    redirect_to course_path(@course)
+    @user_exam.update_attribute(:result, session[:result])
+    clear_session
+    redirect_to course_path(@question.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
   end
 
   def question
-    @user_exam = UserExam.find session[:user_exam_id]
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
     session[:current_question_id] = @question.id
@@ -36,7 +36,6 @@ class UserExamsController < ApplicationController
     if session[:user_exam_questions].any?
       redirect_to question_user_exam_path
     else
-      @user_exam = UserExam.find session[:user_exam_id]
       @user_exam.update_attribute(:result, session[:result])
       clear_session
       redirect_to course_path(@question.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
@@ -80,8 +79,17 @@ class UserExamsController < ApplicationController
   end
 
   def clear_session
-    [:user_exam_id, :user_exam_questions, :user_exam_questions_count, :result].each do |s|
+    [:user_exam_id, :user_exam_questions, :user_exam_questions_count, :result, :current_question_id].each do |s|
       session.delete s
+    end
+  end
+
+  def check_if_closed
+    @user_exam = UserExam.find_by_id session[:user_exam_id]
+    return redirect_to root_path unless @user_exam
+    if @user_exam.closed
+      clear_session
+      return redirect_to course_path(@user_exam.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
     end
   end
 end

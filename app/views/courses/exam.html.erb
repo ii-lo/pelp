@@ -24,7 +24,7 @@
                 <table class="table table-responsive exam-details">
                     <tr>
                         <td>Czas trwania egzaminu</td>
-                        <td><%= @exam.duration %> sekund<%#TODO: Ładniejszy output czasu()%></td>
+                        <td><%= Time.diff(Time.now, Time.now + @exam.duration, '%hh %mm')[:diff] %><%#TODO: Ładniejszy output czasu()%></td>
                     </tr>
                     <tr>
                         <td>Liczba pytań</td>

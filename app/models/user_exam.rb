@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  result     :decimal(, )      default(0.0)
+#  closed     :boolean          default(FALSE)
 #
 
 class UserExam < ActiveRecord::Base
@@ -37,4 +38,14 @@ class UserExam < ActiveRecord::Base
     end
     update_attribute(:result, sum)
   end
+
+  def wait_for_close!
+    unless closed
+      update_attribute(:closed, true)
+      update_result
+    end
+  end
+  handle_asynchronously :wait_for_close!, run_at: Proc.new { |ue| ue.exam.duration.seconds.from_now },
+    priority: 20
+
 end

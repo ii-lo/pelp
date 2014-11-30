@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122165018) do
+ActiveRecord::Schema.define(version: 20141130142615) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -63,6 +63,22 @@ ActiveRecord::Schema.define(version: 20141122165018) do
     t.string   "header"
     t.string   "thumb"
   end
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "exams", force: true do |t|
     t.string   "name"
@@ -155,6 +171,7 @@ ActiveRecord::Schema.define(version: 20141122165018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "result",     default: 0.0
+    t.boolean  "closed",     default: false
   end
 
   add_index "user_exams", ["exam_id"], name: "index_user_exams_on_exam_id"

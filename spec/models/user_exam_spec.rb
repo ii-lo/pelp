@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  result     :decimal(, )      default(0.0)
+#  closed     :boolean          default(FALSE)
 #
 
 require 'rails_helper'
