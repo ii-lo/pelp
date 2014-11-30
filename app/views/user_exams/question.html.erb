@@ -88,10 +88,7 @@
             </div>
             <div class="row-separator"></div>
             <div class="text-center">
-                <div class="btn-group">
-                    <%= f.button :submit, 'Odpowiedz', class: 'btn-primary' %>
-                    <a id="end-exam-btn" class="btn btn-default" href="">Zakończ test</a>
-                </div>
+                <%= f.button :submit, 'Odpowiedz', class: 'btn-primary' %>
             </div>
         </div>
     <% end %>
@@ -115,6 +112,10 @@
 
             <i class="glyphicon glyphicon-ok"></i>
             <%= session[:result] %> / <%= @exam.max_points %> pkt.
+
+            <span class="sep"></span>
+
+            <a id="end-exam-btn" href="" class="navbar-link"><i class="glyphicon glyphicon-log-out"></i></a>
         </p>
     </div>
 </nav>
