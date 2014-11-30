@@ -81,13 +81,13 @@ RSpec.describe User, :type => :model do
     context "years" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.years }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 4.years }
           expect(@user.existing_since).to eq "4 lat"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.year }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.year }
           expect(@user.existing_since).to eq "1 roku"
         end
       end
@@ -95,13 +95,13 @@ RSpec.describe User, :type => :model do
     context "months" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.month }
+          allow(Time).to receive(:now) { Time.new + 4.1 * 1.month }
           expect(@user.existing_since).to eq "4 miesięcy"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.month }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.month }
           expect(@user.existing_since).to eq "1 miesiąca"
         end
       end
@@ -109,13 +109,13 @@ RSpec.describe User, :type => :model do
     context "days" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.days }
+          allow(Time).to receive(:now) { Time.new +  1.1 * 4.days }
           expect(@user.existing_since).to eq "4 dni"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.day }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.day }
           expect(@user.existing_since).to eq "1 dnia"
         end
       end
