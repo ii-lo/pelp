@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title><%= content_for?(:title) ? "#{yield(:title)} &bull; pelp.net".html_safe : "pelp.net" %></title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} - pelp.net".html_safe : "pelp.net" %></title>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :styles %>

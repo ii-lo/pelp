@@ -1,0 +1,19 @@
+<% content_for :title, "#{@course.name}: Ustawienia" %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <div class="row">
+        <div class="col-xs-12">
+            <%= render 'course_nav' %>
+        </div>
+    </div>
+    <div class="row row-separator"></div>
+</div>
+
+<%= render 'layouts/footer' %>
