@@ -39,23 +39,28 @@
         <p class="navbar-text"><%= @exam.name %></p>
 
         <p class="navbar-text navbar-right">
-            <i class="glyphicon glyphicon-time"></i>
-            <span data-cclock="window.location.reload()">5:00</span>
+            <span data-toggle="tooltip" title="Pozostały czas">
+                <i class="glyphicon glyphicon-time"></i>
+                <span data-cclock="window.location.reload()">5:00</span>
+            </span>
 
             <span class="sep"></span>
 
-            <i class="glyphicon glyphicon-question-sign"></i>
-            <%= session[:user_exam_questions_count] - session[:user_exam_questions].size + 1 %>
-            / <%= session[:user_exam_questions_count] %>
+            <span data-toggle="tooltip" title="Pozostało pytań">
+                <i class="glyphicon glyphicon-question-sign"></i>
+                <%= "#{session[:user_exam_questions_count] - session[:user_exam_questions].size + 1} / #{session[:user_exam_questions_count]}" %>
+            </span>
 
             <span class="sep"></span>
 
-            <i class="glyphicon glyphicon-ok"></i>
-            <%= session[:result] %> / <%= @exam.max_points %> pkt.
+            <span data-toggle="tooltip" title="Ilość punktów">
+                <i class="glyphicon glyphicon-ok"></i>
+                <%= session[:result] %> / <%= @exam.max_points %> pkt.
+            </span>
 
             <span class="sep"></span>
 
-            <%= link_to exit_user_exam_path, class: 'navbar-link' do %>
+            <%= link_to exit_user_exam_path, class: 'navbar-link', data: {toggle: :tooltip}, title: 'Zakończ egzamin' do %>
                 <i class="glyphicon glyphicon-log-out"></i>
             <% end %>
         </p>
