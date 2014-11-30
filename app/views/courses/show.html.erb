@@ -10,14 +10,7 @@
     <%= bootstrap_flash %>
     <div class="row">
         <div class="col-xs-12">
-            <ul class="nav nav-tabs nav-justified">
-                <%= active_link_to 'Przegląd', course_path(@course), wrap_tag: :li, active: :exclusive %>
-                <li><a href="#">Oceny</a></li>
-                <li><a href="#">Terminy</a></li>
-                <li><a href="#">Aktywność</a></li>
-                <li><a href="#">Informacje</a></li>
-                <li><a href="#">Ustawienia</a></li>
-            </ul>
+            <%= render 'course_nav' %>
         </div>
     </div>
     <div class="row row-separator"></div>
@@ -142,7 +135,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <%= render 'layouts/footer' %>
