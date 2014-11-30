@@ -14,6 +14,54 @@
         </div>
     </div>
     <div class="row row-separator"></div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><%= @course.name %>: Oceny</div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Zadanie</th>
+                            <th colspan="2">Ocena</th>
+                            <th>Data wpisu</th>
+                            <th>Komentarz</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><a href="#">Zadanie punktowane</a></td>
+                            <td>20 / 100</td>
+                            <td>20%</td>
+                            <td><%= DateTime.now.to_s :short %></td>
+                            <td>Lorem ipsum dolor.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Bez komentarza</a></td>
+                            <td>100 / 100</td>
+                            <td>100%</td>
+                            <td><%= DateTime.now.to_s :short %></td>
+                            <td></td> <%# Ta pusta komórka jest niezbędna jeżeli nie ma komentarza! %>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Długi komentarz</a></td>
+                            <td>100 / 100</td>
+                            <td>100%</td>
+                            <td><%= DateTime.now.to_s :short %></td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est illo nemo voluptate.</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Zadanie oceniane</a></td>
+                            <td colspan="2">4</td>
+                            <td><%= DateTime.now.to_s :short %></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>
