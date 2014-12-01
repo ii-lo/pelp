@@ -2,27 +2,59 @@ crumb :root do
   link 'Strona główna', root_path
 end
 
-# crumb :projects do
-#   link "Projects", projects_path
-# end
+#
+# Courses
+#
 
-# crumb :project do |project|
-#   link project.name, project_path(project)
-#   parent :projects
-# end
+crumb :courses do
+  link 'Kursy', courses_path
+end
 
-# crumb :project_issues do |project|
-#   link "Issues", project_issues_path(project)
-#   parent :project, project
-# end
+crumb :course do |course|
+  link course.name, course_path(course)
+  parent :courses
+end
 
-# crumb :issue do |issue|
-#   link issue.title, issue_path(issue)
-#   parent :project_issues, issue.project
-# end
+crumb :course_grades do |course|
+  link 'Oceny', grades_course_path(course)
+  parent course
+end
 
-# If you want to split your breadcrumbs configuration over multiple files, you
-# can create a folder named `config/breadcrumbs` and put your configuration
-# files there. All *.rb files (e.g. `frontend.rb` or `products.rb`) in that
-# folder are loaded and reloaded automatically when you change them, just like
-# this file (`config/breadcrumbs.rb`).
+crumb :course_activity do |course|
+  link 'Aktywność', activity_course_path(course)
+  parent course
+end
+
+crumb :course_info do |course|
+  link 'Informacje', info_course_path(course)
+  parent course
+end
+
+crumb :course_settings do |course|
+  link 'Ustawienia', settings_course_path(course)
+  parent course
+end
+
+#
+# Users
+#
+
+crumb :user do |user|
+  link user.name, user_path(user)
+end
+
+#
+# Miscellaneous
+#
+
+crumb :help do
+  link 'Pomoc', help_path
+end
+
+crumb :privacy do
+  link 'Polityka prywatności', privacy_path
+end
+
+crumb :rules do
+  link 'Regulamin', rules_path
+end

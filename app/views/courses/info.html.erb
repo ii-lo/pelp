@@ -1,4 +1,5 @@
 <% content_for :title, "#{@course.name}: Informacje" %>
+<% breadcrumb :course_info, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
@@ -8,6 +9,7 @@
 
 <div class="container">
     <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
     <div class="row">
         <div class="col-xs-12">
             <%= render 'course_nav' %>
