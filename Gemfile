@@ -51,6 +51,9 @@ gem 'pundit', '~> 0.3.0'
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
 
+# breadcrumbs
+gem 'gretel'
+
 # pictures
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'

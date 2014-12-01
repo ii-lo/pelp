@@ -1,7 +1,10 @@
-<ul class="nav nav-tabs nav-justified">
-    <%= active_link_to 'Przegląd', course_path(@course), wrap_tag: :li, active: :exclusive %>
-    <%= active_link_to 'Oceny', grades_course_path(@course), wrap_tag: :li %>
-    <%= active_link_to 'Aktywność', activity_course_path(@course), wrap_tag: :li %>
-    <%= active_link_to 'Informacje', info_course_path(@course), wrap_tag: :li %>
-    <%= active_link_to 'Ustawienia', settings_course_path(@course), wrap_tag: :li %>
-</ul>
+<div class="panel panel-default">
+    <div class="panel-heading">Nawigacja</div>
+    <ul class="nav nav-pills nav-stacked">
+        <%= active_link_to 'Przegląd', course_path(@course), wrap_tag: :li, active: :exclusive %>
+        <%= active_link_to 'Oceny', grades_course_path(@course), wrap_tag: :li %>
+        <%= active_link_to 'Aktywność', activity_course_path(@course), wrap_tag: :li %>
+        <%= active_link_to 'Informacje', info_course_path(@course), wrap_tag: :li %>
+        <%= active_link_to 'Ustawienia', settings_course_path(@course), wrap_tag: :li %>
+    </ul>
+</div>
