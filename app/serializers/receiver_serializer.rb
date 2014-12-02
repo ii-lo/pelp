@@ -1,2 +1,0 @@
-class ReceiverSerializer < SenderSerializer
-end
