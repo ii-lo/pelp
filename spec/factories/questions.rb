@@ -8,6 +8,7 @@
 #  value      :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  form       :integer          default(0)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

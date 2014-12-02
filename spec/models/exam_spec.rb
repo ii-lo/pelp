@@ -2,11 +2,14 @@
 #
 # Table name: exams
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  course_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  course_id          :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  lesson_category_id :integer
+#  duration           :integer
+#  max_points         :integer          default(0)
 #
 
 require 'rails_helper'

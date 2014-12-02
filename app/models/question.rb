@@ -8,6 +8,7 @@
 #  value      :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  form       :integer          default(0)
 #
 
 class Question < ActiveRecord::Base
