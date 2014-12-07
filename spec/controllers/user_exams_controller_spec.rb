@@ -14,7 +14,7 @@ RSpec.describe UserExamsController, :type => :controller do
   describe "GET new" do
     it "returns http success" do
       expect do
-        get :new, id: 1
+        get :start, id: 1
       end.to change{UserExam.count}.by 1
       expect(assigns(:exam)).to eq Exam.first
       expect(response).to redirect_to question_user_exam_path
@@ -23,7 +23,7 @@ RSpec.describe UserExamsController, :type => :controller do
 
   describe "GET question" do
     before do
-      get :new, id: 1
+      get :start, id: 1
     end
     it "returns http success" do
       get :question
@@ -50,7 +50,7 @@ RSpec.describe UserExamsController, :type => :controller do
                          name: "Jakiego koloru jest krew ludzka?", form: 2, value: 2)
       Answer.create(name: "Czerwonego", question_id: 4)
       Answer.create(name: "Czerwony", question_id: 4)
-      get :new, id: 1
+      get :start, id: 1
     end
 
     context "valid answers" do
@@ -112,7 +112,7 @@ RSpec.describe UserExamsController, :type => :controller do
             end
           end
         end.to change{UserAnswer.count}.by(2)
-        expect(:response).to redirect_to course_path(Course.first)
+        expect(:response).to redirect_to user_exam_path(1)
       end
     end
   end

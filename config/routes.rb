@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'messages/ajax/page' => 'messages#page'
     get 'messages/ajax/test' => 'messages#test'
 
+    get '/exam/start/:id' => 'user_exams#start', as: :start_user_exam
     get '/exam/new/:id' => 'user_exams#new', as: :new_user_exam
     get '/exam/exit' => 'user_exams#exit', as: :exit_user_exam
     get '/exam/question' => 'user_exams#question', as: :question_user_exam

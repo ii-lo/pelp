@@ -9,6 +9,10 @@ class UserExamsController < ApplicationController
 
   def new
     @exam = Exam.find params[:id]
+  end
+
+  def start
+    @exam = Exam.find params[:id]
     @user_exam = @exam.user_exams.create!(user_id: current_user.id)
     authorize @user_exam
     prepare_session
@@ -45,12 +49,17 @@ class UserExamsController < ApplicationController
       redirect_to question_user_exam_path
     else
       @user_exam.update_attribute(:result, session[:result])
+      @user_exam.update_attribute(:closed, true)
       clear_session
-      redirect_to course_path(@question.exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
+      show_result
     end
   end
 
   private
+
+  def show_result
+    redirect_to user_exam_path(@user_exam)
+  end
 
   def single_answer
     id = params[:answer][:id]
@@ -101,7 +110,7 @@ class UserExamsController < ApplicationController
     end
     if @user_exam.closed
       clear_session
-      return redirect_to course_path(@user_exam.course.id), notice: "Twój wynik to #{@user_exam.result} pkt."
+      return show_result
     end
   end
 end

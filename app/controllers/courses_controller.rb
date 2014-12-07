@@ -22,12 +22,6 @@ class CoursesController < ApplicationController
   def settings
   end
 
-  def exam
-    @course = Course.find params[:id]
-    @exam = @course.exams.find_by_id params[:exam_id]
-    return redirect_to course_path(@course.id) unless @exam
-  end
-
   private
 
   def load_course
