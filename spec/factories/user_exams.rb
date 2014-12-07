@@ -1,20 +1,21 @@
 # == Schema Information
 #
-# Table name: lesson_categories
+# Table name: user_exams
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
-#  course_id  :integer
+#  user_id    :integer
+#  exam_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  flagged    :boolean          default(FALSE)
+#  result     :decimal(, )      default(0.0)
+#  closed     :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :lesson_category do
-    name "MyString"
-    course_id 1
+  factory :user_exam do
+    user_id 1
+    exam_id 1
   end
 end

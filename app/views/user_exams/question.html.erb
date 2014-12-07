@@ -1,0 +1,68 @@
+<% content_for :title, @exam.name %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="exam-question-text text-justify">
+    <p><%= @question.name %></p>
+</div>
+
+<div class="exam-answer-wrapper">
+    <%= simple_form_for :answer, url: answer_user_exam_path, html: {class: 'panel panel-default exam-answer-panel'} do |f| %>
+        <div class="panel-heading">Twoja odpowiedź <span class="label label-info pull-right">2 pkt.</span></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <% case @question.form %>
+                <% when 'single' %>
+                    <%= f.collection_radio_buttons :id, @question.answers.to_a.shuffle, :id, :name, item_wrapper_tag: :div, item_wrapper_class: 'radio' %>
+                <% when 'multiple' %>
+                    <%= f.collection_check_boxes :id, @question.answers.to_a.shuffle, :id, :name, item_wrapper_tag: :div, item_wrapper_class: 'checkbox' %>
+                <% else %>
+                    <%= f.input :text, label: false, required: true %>
+                <% end %>
+            </div>
+            <div class="row-separator"></div>
+            <div class="text-center">
+                <%= f.button :submit, 'Odpowiedz', class: 'btn-primary' %>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom exam-question-navbar">
+    <div class="container-fluid">
+        <p class="navbar-text"><%= @exam.name %></p>
+
+        <p class="navbar-text navbar-right">
+            <span data-toggle="tooltip" title="Pozostały czas">
+                <i class="glyphicon glyphicon-time"></i>
+                <span data-cclock="window.location.reload()">5:00</span>
+            </span>
+
+            <span class="sep"></span>
+
+            <span data-toggle="tooltip" title="Pozostało pytań">
+                <i class="glyphicon glyphicon-question-sign"></i>
+                <%= "#{session[:user_exam_questions_count] - session[:user_exam_questions].size + 1} / #{session[:user_exam_questions_count]}" %>
+            </span>
+
+            <span class="sep"></span>
+
+            <span data-toggle="tooltip" title="Ilość punktów">
+                <i class="glyphicon glyphicon-ok"></i>
+                <%= session[:result] %> / <%= @exam.max_points %> pkt.
+            </span>
+
+            <span class="sep"></span>
+
+            <%= link_to exit_user_exam_path, class: 'navbar-link', data: {toggle: :tooltip}, title: 'Zakończ egzamin' do %>
+                <i class="glyphicon glyphicon-log-out"></i>
+            <% end %>
+        </p>
+    </div>
+</nav>

@@ -5,6 +5,7 @@ $script = <<SCRIPT
   bundle install
   rake db:create
   rake db:migrate
+  rake db:populate
 SCRIPT
 
 Vagrant.configure("2") do |config|

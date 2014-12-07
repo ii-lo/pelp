@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202112645) do
+ActiveRecord::Schema.define(version: 20141207174034) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -112,6 +112,12 @@ ActiveRecord::Schema.define(version: 20141202112645) do
 
   add_index "lessons", ["lesson_category_id"], name: "index_lessons_on_lesson_category_id"
 
+  create_table "question_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "questions", force: true do |t|
     t.integer  "exam_id"
     t.string   "name"
@@ -119,9 +125,11 @@ ActiveRecord::Schema.define(version: 20141202112645) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "form", default: 0
+    t.integer  "question_category_id"
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
+  add_index "questions", ["question_category_id"], name: "index_questions_on_question_category_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -176,6 +184,8 @@ ActiveRecord::Schema.define(version: 20141202112645) do
     t.datetime "updated_at"
     t.decimal "result", default: 0.0
     t.boolean "closed", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "user_exams", ["exam_id"], name: "index_user_exams_on_exam_id"

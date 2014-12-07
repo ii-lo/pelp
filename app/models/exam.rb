@@ -13,9 +13,27 @@
 #
 
 class Exam < ActiveRecord::Base
+  before_validation :set_course_id
+
   belongs_to :course
+  belongs_to :lesson_category
+
+  has_many :questions
+  has_many :user_exams, dependent: :destroy
 
   validates :name, presence: true
-  validates :course_id, presence: true,
+  validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
+  validates :duration, presence: true
+  validates :course_id, presence: true
+
+  def update_max_points
+    update_attribute(:max_points, questions.sum(:value))
+  end
+
+  private
+
+  def set_course_id
+    self.course_id = lesson_category.try(:course_id)
+  end
 end
