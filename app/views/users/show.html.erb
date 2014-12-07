@@ -23,9 +23,7 @@
     <div class="col-xs-12 col-md-5 col-lg-4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <% if @user != current_user %>
-              <a href="#" class="btn btn-primary btn-xs pull-right">Wyślij wiadomość</a>
-          <% else %>
+            <% if @user == current_user %>
               <a href="#" class="btn btn-default btn-xs pull-right">Edytuj profil</a>
           <% end %>
           O mnie
