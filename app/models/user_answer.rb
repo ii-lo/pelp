@@ -19,6 +19,8 @@ class UserAnswer < ActiveRecord::Base
   belongs_to :user_exam
   belongs_to :question
 
+  has_one :question_category, through: :question
+
   validates :user_exam_id, presence: true
   validates :question_id, presence: true
   validates :answer_id, uniqueness: { allow_blank: true,

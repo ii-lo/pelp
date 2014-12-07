@@ -2,13 +2,14 @@
 #
 # Table name: questions
 #
-#  id         :integer          not null, primary key
-#  exam_id    :integer
-#  name       :string(255)
-#  value      :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  form       :integer          default(0)
+#  id                   :integer          not null, primary key
+#  exam_id              :integer
+#  name                 :string(255)
+#  value                :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  form                 :integer          default(0)
+#  question_category_id :integer
 #
 
 class Question < ActiveRecord::Base
@@ -19,6 +20,7 @@ class Question < ActiveRecord::Base
 
 
   belongs_to :exam
+  belongs_to :question_category
 
   has_many :answers
   has_many :correct_answers, -> { correct }, class_name: 'Answer'
@@ -29,6 +31,7 @@ class Question < ActiveRecord::Base
   validates :name, presence: true
   validates :value, presence: true,
             inclusion: 0..200
+  validates :question_category_id, presence: true
 
   private
 

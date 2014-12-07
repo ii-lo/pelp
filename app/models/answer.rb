@@ -14,6 +14,7 @@ class Answer < ActiveRecord::Base
   belongs_to :question
 
   has_many :user_answers
+  has_one :question_category, through: :question
 
   validates :question_id, presence: true
   validates :name, presence: true,

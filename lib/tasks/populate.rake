@@ -32,8 +32,9 @@ namespace :db do
     end
     puts "Tworzę egzamin"
     Exam.create(lesson_category_id: 1, duration: 2700, name: "Przykładowy sprawdzian")
+    QuestionCategory.create(name: "Ogólne")
     Question.create(name: "Czy ziemia jest płaska?",
-                    value: 2, exam_id: 1)
+                    value: 2, exam_id: 1, question_category_id: 1)
     Answer.create(name: "Tak", correct: false, question_id: 1)
     Answer.create(name: "Nie", correct: true, question_id: 1)
     Question.create(name: "Jakie programy domyślnie ma Łubuntu?",
