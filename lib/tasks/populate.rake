@@ -31,12 +31,13 @@ namespace :db do
     Answer.create(name: "Tak", correct: false, question_id: 1)
     Answer.create(name: "Nie", correct: true, question_id: 1)
     Question.create(name: "Jakie programy domyślnie ma Łubuntu?",
-                     value: 2, form: 1, exam_id: 1)
+                    value: 2, form: 1, exam_id: 1, question_category_id: 1)
     Answer.create(name: "Firefox", correct: true, question_id: 2)
     Answer.create(name: "Google Chrome", correct: false, question_id: 2)
     Answer.create(name: "LibreOffice Writer", correct: true, question_id: 2)
     Answer.create(name: "Microsoft Office Word", correct: false, question_id: 2)
-    Question.create(name: "Jakiego koloru jest krew ludzka?", form: 2, value: 2, exam_id: 1)
+    Question.create(name: "Jakiego koloru jest krew ludzka?",
+                    form: 2, value: 2, exam_id: 1, question_category_id: 1)
     Answer.create(name: "Czerwonego", question_id: 3)
     Answer.create(name: "Czerwony", question_id: 3)
 

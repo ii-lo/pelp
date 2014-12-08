@@ -14,16 +14,17 @@ Rails.application.routes.draw do
         get :activity
         get :info
         get :settings
-        get '/exams/:exam_id' => :exam, as: :exam
       end
     end
 
-    get '/exam/start/:id' => 'user_exams#start', as: :start_user_exam
-    get '/exam/new/:id' => 'user_exams#new', as: :new_user_exam
-    get '/exam/exit' => 'user_exams#exit', as: :exit_user_exam
-    get '/exam/question' => 'user_exams#question', as: :question_user_exam
-    get '/exam/closed/:id' => 'user_exams#show', as: :user_exam
-    post '/exam/answer' => 'user_exams#answer', as: :answer_user_exam
+    scope '/exam' do
+      get '/start/:id' => 'user_exams#start', as: :start_user_exam
+      get '/new/:id' => 'user_exams#new', as: :new_user_exam
+      get '/exit' => 'user_exams#exit', as: :exit_user_exam
+      get '/question' => 'user_exams#question', as: :question_user_exam
+      get '/summary/:id' => 'user_exams#show', as: :user_exam
+      post '/answer' => 'user_exams#answer', as: :answer_user_exam
+    end
 
     get 'calendar' => 'calendar#show', as: :calendar
   end
