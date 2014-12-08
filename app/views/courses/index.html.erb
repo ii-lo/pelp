@@ -8,24 +8,24 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-  <%= bootstrap_flash %>
+    <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
-  <div class="row">
-    <div class="col-xs-12">
-      <h1>Wszystkie kursy</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Wszystkie kursy</h1>
 
-      <div class="row-separator"></div>
-    </div>
-  </div>
-  <div class="row">
-    <% @courses.each do |c| %>
-        <%#= render 'course', course: c %>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-          <%= render 'course_card', course: c %>
+            <div class="row-separator"></div>
         </div>
-    <% end %>
-    <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
-  </div>
+    </div>
+    <div class="row">
+        <% @courses.each do |c| %>
+            <%#= render 'course', course: c %>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <%= render 'course_card', course: c %>
+            </div>
+        <% end %>
+        <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>

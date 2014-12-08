@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><%= content_for?(:title) ? "#{yield(:title)} - pelp.net".html_safe : "pelp.net" %></title>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= yield :styles %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= yield :styles %>
 
-  <%= csrf_meta_tags %>
+    <%= csrf_meta_tags %>
 </head>
 <body<%= %( class="#{yield(:body_classes)}").html_safe if content_for? :body_classes %>>
 <%= yield %>

@@ -7,6 +7,7 @@ class UserExamPolicy < Struct.new(:user, :user_exam)
     user_exam.course.users.include? user
 
   end
+
   def start?
     new?
   end

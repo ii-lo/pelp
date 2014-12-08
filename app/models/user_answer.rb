@@ -23,8 +23,8 @@ class UserAnswer < ActiveRecord::Base
 
   validates :user_exam_id, presence: true
   validates :question_id, presence: true
-  validates :answer_id, uniqueness: { allow_blank: true,
-                                       scope: [:user_exam_id] }
+  validates :answer_id, uniqueness: {allow_blank: true,
+                                     scope: [:user_exam_id]}
   validate :open_user_exam
 
 

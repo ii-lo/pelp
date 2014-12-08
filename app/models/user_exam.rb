@@ -24,17 +24,17 @@ class UserExam < ActiveRecord::Base
   def update_result
     sum = 0
     user_answers.includes(:question).
-    group_by(&:question).each do |k, v|
+        group_by(&:question).each do |k, v|
       case k.form
-      when 'multiple'
-        correct, wrong = 0, 0
-        v.each do |i|
-          i.correct ? correct += 1 : wrong += 1
-        end
-        diff = correct > wrong ? correct - wrong : 0
-        sum += (diff.to_f) * k.value / k.correct_answers.size
-      else
-        sum += k.value if v.first.correct
+        when 'multiple'
+          correct, wrong = 0, 0
+          v.each do |i|
+            i.correct ? correct += 1 : wrong += 1
+          end
+          diff = correct > wrong ? correct - wrong : 0
+          sum += (diff.to_f) * k.value / k.correct_answers.size
+        else
+          sum += k.value if v.first.correct
       end
     end
     update_attribute(:result, sum)
@@ -54,7 +54,8 @@ class UserExam < ActiveRecord::Base
       close!
     end
   end
+
   handle_asynchronously :wait_for_close!, run_at: Proc.new { |ue| ue.exam.duration.seconds.from_now },
-    priority: 20
+                        priority: 20
 
 end

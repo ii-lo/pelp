@@ -4,14 +4,14 @@
                                            classes
                                          end %>">
 <div class="pull-left">
-  <%= link_to course_path(course) do %>
-      <div class="course-link-circle" style="border-color: <%= string_to_pastel "#{course.name}#{course.id}" %>"></div>
-  <% end %>
+    <%= link_to course_path(course) do %>
+        <div class="course-link-circle" style="border-color: <%= string_to_pastel "#{course.name}#{course.id}" %>"></div>
+    <% end %>
 </div>
 <div class="media-body">
-  <h4 class="media-heading"><%= link_to course.name, course_path(course) %></h4>
-  <% if course.description %>
-      <div class="course-link-description"><%= course.description %></div>
-  <% end %>
+    <h4 class="media-heading"><%= link_to course.name, course_path(course) %></h4>
+    <% if course.description %>
+        <div class="course-link-description"><%= course.description %></div>
+    <% end %>
 </div>
 </<%= tag %>>
