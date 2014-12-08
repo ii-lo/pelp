@@ -4,6 +4,7 @@ class UserExamsController < ApplicationController
   def show
     @user_exam = UserExam.find params[:id]
     authorize @user_exam
+    @exam = @user_exam.exam
     @answers = @user_exam.user_answers.includes(:question)
   end
 
@@ -43,6 +44,8 @@ class UserExamsController < ApplicationController
         multiple_answer
       when 'open'
         open_answer
+      else
+        raise ArgumentError, 'invalid question type'
     end
     session[:user_exam_questions].shift
     if session[:user_exam_questions].any?
