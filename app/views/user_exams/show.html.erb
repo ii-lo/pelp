@@ -9,23 +9,73 @@
     <%= bootstrap_flash %>
     <div class="row">
         <div class="col-xs-12">
-            <h1><%= @exam.name %>
-                <small>Podsumowanie</small>
-            </h1>
+            <h1><%= @exam.name %></h1>
         </div>
     </div>
     <div class="row row-separator"></div>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6 col-sm-8">
             <div class="panel panel-default">
-                <div class="panel-body"><code><%= @user_exam.inspect %></code></div>
+                <div class="panel-heading">Podsumowanie</div>
+                <table class="table exam-summary-table">
+                    <tr>
+                        <td>Zdobyte punkty:</td>
+                        <td><%= @user_exam.result %></td>
+                    </tr>
+                    <tr>
+                        <td>Maksymalna ilość punktów:</td>
+                        <td><%= @exam.max_points %></td>
+                    </tr>
+                    <tr>
+                        <td>Średni wynik:</td>
+                        <td>12.3</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="panel panel-info exam-grade">
+                <div class="panel-heading">Ocena</div>
+                <div class="panel-body"><%= @user_exam.result %> <%# Ocena jeżeli jest w ustawieniach egzaminu, inaczej zyskane punkty %></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
+            <% @exam_stats = [
+                    {category: 'Kategoria A', total: 10, correct: 6},
+                    {category: 'Kategoria B', total: 5, correct: 5},
+                    {category: 'Inna kategoria', total: 12, correct: 4},
+                    {category: 'Trudne sprawy', total: 10, correct: 0},
+                    {category: 'Duperele', total: 3, correct: 2},
+            ] %>
+
             <div class="panel panel-default">
-                <div class="panel-body"><code><%= @answers.inspect %></code></div>
+                <div class="panel-heading">Statystyki</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Kategoria</th>
+                        <th style="width: 0">Odp.</th>
+                        <th colspan="2">% poprawnych</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @exam_stats.each do |s| %>
+                        <tr>
+                            <% procent = "#{(100 * s[:correct] / s[:total]).round}%" %>
+                            <td><%= s[:category] %></td>
+                            <td><%= s[:correct] %>&nbsp;/&nbsp;<%= s[:total] %></td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: <%= procent %>;"></div>
+                                </div>
+                            </td>
+                            <td style="width: 0"><%= procent %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

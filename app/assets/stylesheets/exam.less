@@ -20,6 +20,10 @@
   max-width: none;
 }
 
+table .progress {
+  margin: 0;
+}
+
 // Details page
 
 .exam-description {
@@ -99,5 +103,20 @@
 
   .checkbox:first-child, .radio:first-child {
     margin-top: 0;
+  }
+}
+
+// Summary page
+
+.exam-summary-table {
+  td + td {
+    text-align: right;
+  }
+}
+
+.exam-grade {
+  .panel-body {
+    text-align: center;
+    font-size: @font-size-h1 * 2;
   }
 }
