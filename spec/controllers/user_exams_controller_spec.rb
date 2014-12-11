@@ -76,6 +76,11 @@ RSpec.describe UserExamsController, :type => :controller do
         expect(@ue.result).to eq res
         expect(res).to eq 4
       end
+
+      it "renders show page" do
+        get :show, id: 1
+        expect(response).to be_ok
+      end
     end
 
 
