@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td>Średni wynik:</td>
-                        <td>12.3</td>
+                        <td><%= @exam.user_exams.average(:result).round(2) %></td>
                     </tr>
                 </table>
             </div>
@@ -42,13 +42,6 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <% @exam_stats = [
-                    {category: 'Kategoria A', total: 10, correct: 6},
-                    {category: 'Kategoria B', total: 5, correct: 5},
-                    {category: 'Inna kategoria', total: 12, correct: 4},
-                    {category: 'Trudne sprawy', total: 10, correct: 0},
-                    {category: 'Duperele', total: 3, correct: 2},
-            ] %>
 
             <div class="panel panel-default">
                 <div class="panel-heading">Statystyki</div>
@@ -61,11 +54,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% @exam_stats.each do |s| %>
+                    <% @category_results.each do |s| %>
                         <tr>
-                            <% procent = "#{(100 * s[:correct] / s[:total]).round}%" %>
-                            <td><%= s[:category] %></td>
-                            <td><%= s[:correct] %>&nbsp;/&nbsp;<%= s[:total] %></td>
+                            <% procent = "#{(100 * s.value.to_f / s.question_category.questions.sum(:value)).round}%" %>
+                            <td><%= s.question_category.name %></td>
+                            <td><%= s.value %>&nbsp;/&nbsp;<%= s.question_category.questions.sum(:value) %></td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: <%= procent %>;"></div>

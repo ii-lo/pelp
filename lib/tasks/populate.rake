@@ -25,13 +25,14 @@ namespace :db do
     end
     puts "Tworzę egzamin"
     Exam.create(lesson_category_id: 1, duration: 2700, name: "Przykładowy sprawdzian")
-    QuestionCategory.create(name: "Ogólne")
+    QuestionCategory.create(name: "Ogólne", exam_id: 1)
+    QuestionCategory.create(name: "Szczegółowe", exam_id: 1)
     Question.create(name: "Czy ziemia jest płaska?",
                     value: 2, exam_id: 1, question_category_id: 1)
     Answer.create(name: "Tak", correct: false, question_id: 1)
     Answer.create(name: "Nie", correct: true, question_id: 1)
     Question.create(name: "Jakie programy domyślnie ma Łubuntu?",
-                    value: 2, form: 1, exam_id: 1, question_category_id: 1)
+                    value: 2, form: 1, exam_id: 1, question_category_id: 2)
     Answer.create(name: "Firefox", correct: true, question_id: 2)
     Answer.create(name: "Google Chrome", correct: false, question_id: 2)
     Answer.create(name: "LibreOffice Writer", correct: true, question_id: 2)
@@ -40,6 +41,7 @@ namespace :db do
                     form: 2, value: 2, exam_id: 1, question_category_id: 1)
     Answer.create(name: "Czerwonego", question_id: 3)
     Answer.create(name: "Czerwony", question_id: 3)
+    Exam.first.update_max_points
 
     Attending.first.update_last_visit
 

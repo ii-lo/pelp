@@ -20,6 +20,7 @@ class Exam < ActiveRecord::Base
 
   has_many :questions
   has_many :user_exams, dependent: :destroy
+  has_many :question_categories
 
   validates :name, presence: true
   validates :lesson_category_id, presence: true,

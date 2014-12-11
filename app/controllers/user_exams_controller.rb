@@ -6,6 +6,7 @@ class UserExamsController < ApplicationController
     authorize @user_exam
     @exam = @user_exam.exam
     @answers = @user_exam.user_answers.includes(:question)
+    @category_results = @user_exam.category_results.includes :question_category
   end
 
   def new
@@ -23,7 +24,7 @@ class UserExamsController < ApplicationController
 
   def exit
     @user_exam = UserExam.find session[:user_exam_id]
-    @user_exam.update_attribute(:result, session[:result])
+    @user_exam.close!
     clear_session
     show_result
   end
@@ -51,8 +52,7 @@ class UserExamsController < ApplicationController
     if session[:user_exam_questions].any?
       redirect_to question_user_exam_path
     else
-      @user_exam.update_attribute(:result, session[:result])
-      @user_exam.update_attribute(:closed, true)
+      @user_exam.close!
       clear_session
       show_result
     end

@@ -21,6 +21,10 @@ RSpec.describe UserExam, :type => :model do
   end
 
   describe '#update_result' do
+    before do
+      QuestionCategory.create(name: 'a', exam_id: 1)
+      QuestionCategory.create(name: 'b', exam_id: 1)
+    end
     context "no user_answers" do
       before do
         @ue = FactoryGirl.create :user_exam
@@ -39,7 +43,8 @@ RSpec.describe UserExam, :type => :model do
         @ue = FactoryGirl.create :user_exam
         FactoryGirl.create(:question,
                           name: "Czy ziemia jest płaska?",
-                          value: 2)
+                          value: 2,
+                          question_category_id: 2)
         Answer.create(name: "Tak", correct: false, question_id: 1)
         Answer.create(name: "Nie", correct: true, question_id: 1)
         FactoryGirl.create(:question,
@@ -62,7 +67,10 @@ RSpec.describe UserExam, :type => :model do
         Answer.create(name: "Kazimierz Wielki", correct: true, question_id: 4)
         Answer.create(name: "Donald Tusk", correct: false, question_id: 4)
         FactoryGirl.create(:question,
-                          name: "Jakiego koloru jest krew ludzka?", form: 2, value: 2)
+                          name: "Jakiego koloru jest krew ludzka?",
+                          form: 2,
+                          value: 2,
+                          question_category_id: 2)
         Answer.create(name: "Czerwonego", question_id: 5)
         Answer.create(name: "Czerwony", question_id: 5)
         UserAnswer.create!(user_exam_id: 1, question_id: 1, answer_id: 1)
@@ -80,6 +88,8 @@ RSpec.describe UserExam, :type => :model do
       it "has correct result" do
         @ue.update_result
         expect(@ue.result).to eq 5.0
+        expect(CategoryResult.first.value).to eq 3.0
+        expect(CategoryResult.second.value).to eq 2.0
       end
     end
   end

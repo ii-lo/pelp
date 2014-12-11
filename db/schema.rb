@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207174034) do
+ActiveRecord::Schema.define(version: 20141211194430) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20141207174034) do
   add_index "attendings", ["role_id"], name: "index_attendings_on_role_id"
   add_index "attendings", ["user_id"], name: "index_attendings_on_user_id"
 
+  create_table "category_results", force: true do |t|
+    t.integer  "user_exam_id"
+    t.integer  "question_category_id"
+    t.decimal  "value",                default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_results", ["question_category_id"], name: "index_category_results_on_question_category_id"
+  add_index "category_results", ["user_exam_id"], name: "index_category_results_on_user_exam_id"
+
   create_table "courses", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -85,9 +96,9 @@ ActiveRecord::Schema.define(version: 20141207174034) do
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "lesson_category_id"
-    t.integer "duration"
-    t.integer "max_points", default: 0
+    t.integer  "lesson_category_id"
+    t.integer  "duration"
+    t.integer  "max_points",         default: 0
   end
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
@@ -116,7 +127,10 @@ ActiveRecord::Schema.define(version: 20141207174034) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "exam_id"
   end
+
+  add_index "question_categories", ["exam_id"], name: "index_question_categories_on_exam_id"
 
   create_table "questions", force: true do |t|
     t.integer  "exam_id"
@@ -124,7 +138,7 @@ ActiveRecord::Schema.define(version: 20141207174034) do
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer "form", default: 0
+    t.integer  "form",                 default: 0
     t.integer  "question_category_id"
   end
 
