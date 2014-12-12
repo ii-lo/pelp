@@ -15,8 +15,8 @@ class UserExam < ActiveRecord::Base
   belongs_to :user
   belongs_to :exam
 
-  has_many :user_answers
-  has_many :category_results
+  has_many :user_answers, dependent: :destroy
+  has_many :category_results, dependent: :destroy
   has_one :course, through: :exam
 
   validates :user_id, presence: true
@@ -24,7 +24,8 @@ class UserExam < ActiveRecord::Base
 
   def update_result
     sum = 0
-    q_c = exam.question_categories.pluck(:id).each_with_object({}) { |q, m| m[q] = 0 }
+    q_c = exam.question_categories.pluck(:id).
+      each_with_object({}) { |q, m| m[q] = 0 }
     user_answers.includes(:question).
       group_by(&:question).each do |k, v|
       case k.form
@@ -72,12 +73,8 @@ class UserExam < ActiveRecord::Base
   def update_category_results(categories)
     categories = categories.to_hash
     categories.each do |c, v|
-      if cr = CategoryResult.where(user_exam_id: id, question_category_id: c).first
-        cr.update_attribute(:value, v)
-      else
-        CategoryResult.create(user_exam_id: id, question_category_id: c,
-                             value: v)
-      end
+      CategoryResult.create(user_exam_id: id, question_category_id: c,
+                           value: v)
     end
   end
 

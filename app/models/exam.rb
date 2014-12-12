@@ -18,9 +18,9 @@ class Exam < ActiveRecord::Base
   belongs_to :course
   belongs_to :lesson_category
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
   has_many :user_exams, dependent: :destroy
-  has_many :question_categories
+  has_many :question_categories, dependent: :destroy
 
   validates :name, presence: true
   validates :lesson_category_id, presence: true,

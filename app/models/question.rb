@@ -22,10 +22,10 @@ class Question < ActiveRecord::Base
   belongs_to :exam
   belongs_to :question_category
 
-  has_many :answers
+  has_many :answers, dependent: :destroy
   has_many :correct_answers, -> { correct }, class_name: 'Answer'
   has_many :wrong_answers, -> { wrong }, class_name: 'Answer'
-  has_many :user_answers
+  has_many :user_answers, dependent: :destroy
 
   validates :exam_id, presence: true
   validates :name, presence: true

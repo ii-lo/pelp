@@ -14,7 +14,7 @@
 
 <div class="exam-answer-wrapper">
     <%= simple_form_for :answer, url: answer_user_exam_path, html: {class: 'panel panel-default exam-answer-panel'} do |f| %>
-        <div class="panel-heading">Twoja odpowiedź <span class="label label-info pull-right">2 pkt.</span></div>
+        <div class="panel-heading">Twoja odpowiedź <span class="label label-info pull-right"><%= @question.value %> pkt.</span></div>
         <div class="panel-body">
             <div class="form-group">
                 <% case @question.form %>
