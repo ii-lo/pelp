@@ -62,12 +62,13 @@ class UserExam < ActiveRecord::Base
   private
 
   def mark_multiple(question, user_answers)
+    return 0 if question.correct_answers_count == 0
     correct, wrong = 0, 0
     user_answers.each do |i|
       i.correct ? correct += 1 : wrong += 1
     end
     diff = correct > wrong ? correct - wrong : 0
-    (diff.to_f) * question.value / question.correct_answers.size
+    (diff.to_f) * question.value / question.correct_answers_count
   end
 
   def update_category_results(categories)

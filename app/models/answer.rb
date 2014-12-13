@@ -11,6 +11,9 @@
 #
 
 class Answer < ActiveRecord::Base
+  after_save :update_correct_answers_count
+  before_destroy :update_correct_answers_count
+
   belongs_to :question
 
   has_many :user_answers
@@ -22,4 +25,13 @@ class Answer < ActiveRecord::Base
 
   scope :correct, -> { where(correct: true) }
   scope :wrong, -> { where(correct: false) }
+
+  private
+
+  def update_correct_answers_count
+    if question.multiple?
+      question.update_attribute(:correct_answers_count,
+                                question.correct_answers.count)
+    end
+  end
 end

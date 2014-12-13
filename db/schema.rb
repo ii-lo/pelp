@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211194430) do
+ActiveRecord::Schema.define(version: 20141213134958) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -138,8 +138,9 @@ ActiveRecord::Schema.define(version: 20141211194430) do
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "form",                 default: 0
+    t.integer  "form",                  default: 0
     t.integer  "question_category_id"
+    t.integer  "correct_answers_count", default: 0
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"

@@ -2,14 +2,15 @@
 #
 # Table name: questions
 #
-#  id                   :integer          not null, primary key
-#  exam_id              :integer
-#  name                 :string(255)
-#  value                :integer
-#  created_at           :datetime
-#  updated_at           :datetime
-#  form                 :integer          default(0)
-#  question_category_id :integer
+#  id                    :integer          not null, primary key
+#  exam_id               :integer
+#  name                  :string(255)
+#  value                 :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  form                  :integer          default(0)
+#  question_category_id  :integer
+#  correct_answers_count :integer          default(0)
 #
 
 require 'rails_helper'
