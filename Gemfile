@@ -71,6 +71,9 @@ gem 'time_diff'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+# faster string blank? method
+gem 'fast_blank'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"
