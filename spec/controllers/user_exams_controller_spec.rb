@@ -62,7 +62,7 @@ RSpec.describe UserExamsController, :type => :controller do
           when 2
             post :answer, answer: { id: '2' }
           when 3
-            post :answer, answer: { id: %w(3 4) }
+            post :answer, answer: { id: ['3', '', '', ''] }
           else
             post :answer, answer: { text: 'czerwony' }
           end
@@ -74,7 +74,7 @@ RSpec.describe UserExamsController, :type => :controller do
         res = @ue.result
         @ue.update_result
         expect(@ue.result).to eq res
-        expect(res).to eq 4
+        expect(res).to eq 5
       end
 
       it "renders show page" do

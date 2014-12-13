@@ -65,6 +65,7 @@ class UserExam < ActiveRecord::Base
     return 0 if question.correct_answers_count == 0
     correct, wrong = 0, 0
     user_answers.each do |i|
+      next if i.answer_id.blank?
       i.correct ? correct += 1 : wrong += 1
     end
     diff = correct > wrong ? correct - wrong : 0

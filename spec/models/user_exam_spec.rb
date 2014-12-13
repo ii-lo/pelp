@@ -79,7 +79,7 @@ RSpec.describe UserExam, :type => :model do
         UserAnswer.create!(user_exam_id: 1, answer_id: 6, question_id: 3)
         UserAnswer.create!(user_exam_id: 1, answer_id: 7, question_id: 3)
         UserAnswer.create!(user_exam_id: 1, answer_id: 9, question_id: 4)
-        UserAnswer.create!(user_exam_id: 1, answer_id: 10, question_id: 4)
+        UserAnswer.create!(user_exam_id: 1, answer_id: nil, question_id: 4)
         UserAnswer.create!(user_exam_id: 1, answer_id: 11, question_id: 4)
         UserAnswer.create!(user_exam_id: 1, answer_id: 12, question_id: 4)
         UserAnswer.create!(user_exam_id: 1, question_id: 5, text: 'czerwony')
@@ -87,8 +87,8 @@ RSpec.describe UserExam, :type => :model do
 
       it "has correct result" do
         @ue.update_result
-        expect(@ue.result).to eq 5.0
-        expect(CategoryResult.first.value).to eq 3.0
+        expect(@ue.result).to eq 6.0
+        expect(CategoryResult.first.value).to eq 4.0
         expect(CategoryResult.second.value).to eq 2.0
       end
     end
