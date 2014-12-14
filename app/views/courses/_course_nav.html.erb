@@ -6,5 +6,6 @@
         <%= active_link_to 'Aktywność', activity_course_path(@course), wrap_tag: :li %>
         <%= active_link_to 'Informacje', info_course_path(@course), wrap_tag: :li %>
         <%= active_link_to 'Ustawienia', settings_course_path(@course), wrap_tag: :li %>
+        <%= active_link_to 'Nowy egzamin', new_course_exam_path(@course), wrap_tag: :li %>
     </ul>
 </div>

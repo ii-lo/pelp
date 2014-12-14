@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         get :info
         get :settings
       end
+      resources :exams
     end
 
     scope '/exam' do
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
       get '/summary/:id' => 'user_exams#show', as: :user_exam
       post '/answer' => 'user_exams#answer', as: :answer_user_exam
     end
+
+    get 'course/:id/exams/new' => 'exams#new', as: :new_exam_course_path
 
     get 'calendar' => 'calendar#show', as: :calendar
   end

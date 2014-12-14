@@ -1,0 +1,20 @@
+<% content_for :title, @course.name %>
+<% breadcrumb :course, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
+    <%= simple_form_for([@course, Exam.new]) do |f| %>
+      <%= f.input :name, label: "Nazwa" %>
+      <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
+      <%= f.button :submit, "Utwórz" %>
+    <% end %>
+</div>
+
+

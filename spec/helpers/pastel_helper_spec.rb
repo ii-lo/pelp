@@ -17,7 +17,7 @@ RSpec.describe PastelHelper, :type => :helper do
     expect(helper.string_to_pastel("")).to match regexp
   end
 
-  it "does not return other color for other string" do
+  it "does not return the same color for other string" do
     expect(helper.string_to_pastel("asdf")).not_to eq helper.string_to_pastel("asdfr1")
   end
 end

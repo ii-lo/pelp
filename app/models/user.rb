@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true,
-            length: {maximum: 240}
+            length: { maximum: 240 }
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
