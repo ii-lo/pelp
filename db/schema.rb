@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213134958) do
+ActiveRecord::Schema.define(version: 20141216162048) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20141213134958) do
     t.integer  "lesson_category_id"
     t.integer  "duration"
     t.integer  "max_points",         default: 0
+    t.boolean  "published",          default: false
   end
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"

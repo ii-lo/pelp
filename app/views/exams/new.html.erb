@@ -10,9 +10,10 @@
 <div class="container">
     <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
-    <%= simple_form_for([@course, Exam.new]) do |f| %>
+    <%= simple_form_for([@course, @exam]) do |f| %>
       <%= f.input :name, label: "Nazwa" %>
       <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
+      <%= f.input :duration, label: "Czas trwania w sekundach" %>
       <%= f.button :submit, "Utwórz" %>
     <% end %>
 </div>

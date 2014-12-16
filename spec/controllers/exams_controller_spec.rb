@@ -17,4 +17,28 @@ RSpec.describe ExamsController, :type => :controller do
     end
   end
 
+  describe "POST create" do
+    context "valid exam" do
+      it "creates exam" do
+        expect do
+          post :create, course_id: 1, exam: {
+            name: "Nazwa", lesson_category_id: 1, duration: 4444
+          }
+        end.to change(Exam, :count).by(1)
+        expect(response).to redirect_to edit_course_exam_path(1, 1)
+      end
+    end
+
+    context "invalid exam" do
+      it "does not create exam" do
+        expect do
+          post :create, course_id: 1, exam: {
+            name: "Nazwa", lesson_category_id: 1
+          }
+        end.not_to change(Exam, :count)
+        expect(response).to render_template :new
+      end
+    end
+  end
+
 end
