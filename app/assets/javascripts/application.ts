@@ -8,6 +8,6 @@ $(function () {
     var SHRINK_ON = 10;
 
     $(window).on('load scroll touchmove', function () {
-        $('.navbar').toggleClass('tiny', $(document).scrollTop() > SHRINK_ON);
+        $('.navbar-shrinkable').toggleClass('tiny', $(document).scrollTop() > SHRINK_ON);
     });
 });

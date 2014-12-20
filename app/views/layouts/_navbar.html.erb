@@ -1,1 +1,19 @@
+<%= content_for :body_classes, 'with-navbar-fixed' %>
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrinkable" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Pokaż menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <%= link_to "", root_path, class: "navbar-brand icon icon-pelp-logo" %>
+        </div>
+
+        <div id="navbar-collapse" class="collapse navbar-collapse">
 <%= render user_signed_in? ? 'layouts/navbar_auth' : 'layouts/navbar_unauth' %>
+        </div>
+    </div>
+</nav>
