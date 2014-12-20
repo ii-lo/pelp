@@ -8,46 +8,44 @@ html, body {
   height: 100%;
 }
 
-#home-navbar {
-  @media (min-width: @screen-sm-min) {
-    .navbar-brand.icon-pelp-logo {
-      font-size: 52pt;
-      position: relative;
-      top: -26px;
-    }
-  }
-}
-
 .jumbotron {
-  .background-image(linear-gradient(to bottom, @link-hover-color 0%, @link-color 100%));
-
-  border-top: 1px solid @gray;
-  border-bottom: 1px solid @gray;
+  background: transparent;
+  text-align: justify;
+  margin: 0;
 }
 
-#home-welcome-box {
-  color: white;
-  text-shadow: 0 1px 3px black;
-}
+.logo-jumbotron {
+  background: url(homebg.png) center center;
+  .background-size(cover);
+  color: #fff;
+  text-align: center;
 
-#new-user-form {
-  background: fade(@body-bg, 20%);
-  padding: @border-radius-large * 2;
-  .border-radius(@border-radius-large);
-
-  .form-group:last-child {
-    &, & .help-block {
-      margin-bottom: 0;
-    }
+  h1 {
+    font-size: 96pt;
   }
 
-  .help-block {
-    color: white;
-    text-align: justify;
+  @media (max-width: @screen-xs-max) {
+    padding: @jumbotron-padding / 2;
 
-    a {
-      color: white;
-      font-style: italic;
+    h1 {
+      font-size: 48pt;
     }
+  }
+}
+
+.home-buttons {
+  background: lighten(@gray-lighter, 3.5%);
+  border-top: 1px solid @gray-lighter;
+  border-bottom: 1px solid @gray-lighter;
+  padding-top: @jumbotron-padding / 2;
+  padding-bottom: @jumbotron-padding / 2;
+  margin-bottom: @jumbotron-padding;
+
+  .container-fluid {
+    max-width: @screen-xs;
+  }
+
+  .btn {
+    .transition(all 0.3s);
   }
 }
