@@ -58,8 +58,10 @@ end
 
 crumb :privacy do
   link 'Polityka prywatności', privacy_path
+  parent :help
 end
 
 crumb :rules do
   link 'Regulamin', rules_path
+  parent :help
 end
