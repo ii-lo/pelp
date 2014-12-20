@@ -41,4 +41,15 @@ RSpec.describe ExamsController, :type => :controller do
     end
   end
 
+  describe "GET edit" do
+    before do
+      FactoryGirl.create :exam
+    end
+
+    it "returns http success" do
+      get :edit, course_id: 1, id: 1
+      expect(response).to have_http_status(:success)
+    end
+  end
+
 end

@@ -1,0 +1,18 @@
+<div style="border: 2px solid green">
+  <strong><%= question.name %></strong>
+  <p><%= link_to "Usuń pytanie", exam_question_category_question_path(@exam, question.question_category_id, question), method: :delete %></p>
+  <p><%= question.string_form %></p>
+  <ul>
+    Odpowiedzi:
+    <% question.answers.each do |a| %>
+      <%= render 'answer', answer: a %>
+    <% end %>
+  </ul>
+  <strong>Nowa odpowiedź</strong>
+  <% case question.form %>
+  <% when 'open' %>
+    <%= render 'open_answer_form', question: question %>
+  <% else %>
+    <%= render 'single_answer_form', question: question %>
+  <% end %>
+</div>

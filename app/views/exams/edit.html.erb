@@ -1,0 +1,33 @@
+<% content_for :title, @exam.name %>
+<% breadcrumb :course, @exam %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <h3>Nowa kategoria</h3>
+  <%= simple_form_for [@exam, QuestionCategory.new] do |f| %>
+    <%= f.input :name, label: "Nazwa" %>
+  <% end %>
+  <% @q_cs.each do |qc| %>
+    <div style="border: 4px solid orange">
+      <h4><%= qc.name %></h4>
+      <p><%= link_to "Usuń kategorię", exam_question_category_path(@exam, qc), method: :delete %></p>
+      <% qc.questions.each do |q| %>
+        <%= render 'question', question: q %>
+      <% end %>
+      <div>
+        <b>Nowe pytanie</b>
+        <%= simple_form_for [@exam, qc, Question.new] do |f| %>
+          <%= f.input :name, label: "Treść" %>
+          <%= f.input :value, as: :integer, label: "Wartość" %>
+          <%= f.input :form, collection: { "Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open' }, label: "Forma" %>
+          <%= f.button :submit, "Stwórz" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -96,7 +96,6 @@ group :development do
   gem 'pry-doc'
   gem 'rack-mini-profiler', require: false
   gem 'annotate'
-  gem 'foreman'
 end
 
 gem 'unicorn'

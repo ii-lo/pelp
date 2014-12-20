@@ -7,7 +7,7 @@ class ExamsController < ApplicationController
 
   def create
     @course = Course.find params[:course_id]
-    @exam = Exam.new(exam_params.merge(course: @course))
+    @exam = @course.exams.build(exam_params)
     if @exam.save
       redirect_to edit_course_exam_path(@course, @exam)
     else
@@ -16,6 +16,9 @@ class ExamsController < ApplicationController
   end
 
   def edit
+    @course = Course.find params[:course_id]
+    @exam = Exam.find params[:id]
+    @q_cs = @exam.question_categories.includes :questions, :answers
   end
 
   def update
