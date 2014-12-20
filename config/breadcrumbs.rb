@@ -39,8 +39,13 @@ end
 # Users
 #
 
+crumb :users do
+  link 'Użytkownicy', root_path # TODO point to users search page here
+end
+
 crumb :user do |user|
   link user.name, user_path(user)
+  parent :users
 end
 
 #
