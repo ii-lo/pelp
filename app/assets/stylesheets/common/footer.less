@@ -7,7 +7,8 @@
 footer {
   border-top: 1px solid @gray-lighter;
   color: @gray-light;
-  padding-top: 8px;
+  padding-top: @padding-base-vertical;
+  font-size: @font-size-small;
 
   &.no-border {
     border: none;
@@ -22,17 +23,22 @@ footer {
     text-decoration: none;
   }
 
+  p {
+    margin-bottom: @padding-base-vertical;
+  }
+
   .icon-pelp-logo {
-    font-size: 14pt;
+    font-size: @font-size-base;
   }
 
   .footer-links {
     list-style-type: none;
     padding: 0;
+    margin-bottom: @padding-base-vertical;
 
     li {
       display: inline-block;
-      margin-left: 8px;
+      margin-left: @padding-base-horizontal;
 
       &:first-child {
         margin: 0;
