@@ -12,7 +12,7 @@
 
 class Answer < ActiveRecord::Base
   after_save :update_correct_answers_count
-  before_destroy :update_correct_answers_count
+  after_destroy :update_correct_answers_count
 
   belongs_to :question
 

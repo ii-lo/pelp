@@ -18,7 +18,7 @@ class Question < ActiveRecord::Base
   enum form: FORMS
 
   before_save :update_exam_max
-  before_destroy :update_exam_max
+  after_destroy :update_exam_max
 
 
   belongs_to :exam
