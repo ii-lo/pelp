@@ -14,7 +14,8 @@
 
 <div class="exam-answer-wrapper">
     <%= simple_form_for :answer, url: answer_user_exam_path, html: {class: 'panel panel-default exam-answer-panel'} do |f| %>
-        <div class="panel-heading">Twoja odpowiedź <span class="label label-info pull-right"><%= @question.value %> pkt.</span></div>
+        <div class="panel-heading">Twoja odpowiedź
+            <span class="label label-info pull-right"><%= @question.value %> pkt.</span></div>
         <div class="panel-body">
             <div class="form-group">
                 <% case @question.form %>
@@ -38,31 +39,33 @@
     <div class="container-fluid">
         <p class="navbar-text"><%= @exam.name %></p>
 
-        <p class="navbar-text navbar-right">
-            <span data-toggle="tooltip" title="Pozostały czas">
-                <i class="glyphicon glyphicon-time"></i>
-                <span data-cclock="window.location.reload()">5:00</span>
-            </span>
+        <ul class="nav navbar-nav navbar-right">
+            <li data-toggle="tooltip" title="Pozostały czas">
+                <a>
+                    <i class="glyphicon glyphicon-time"></i>
+                    <span data-cclock="window.location.reload()">5:00</span> <%# TODO Ekhmmm %>
+                </a>
+            </li>
 
-            <span class="sep"></span>
+            <li data-toggle="tooltip" title="Pozostało pytań">
+                <a>
+                    <i class="glyphicon glyphicon-question-sign"></i>
+                    <%= "#{session[:user_exam_questions_count] - session[:user_exam_questions].size + 1} / #{session[:user_exam_questions_count]}" %>
+                </a>
+            </li>
 
-            <span data-toggle="tooltip" title="Pozostało pytań">
-                <i class="glyphicon glyphicon-question-sign"></i>
-                <%= "#{session[:user_exam_questions_count] - session[:user_exam_questions].size + 1} / #{session[:user_exam_questions_count]}" %>
-            </span>
+            <li data-toggle="tooltip" title="Ilość punktów">
+                <a>
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <%= session[:result] %> / <%= @exam.max_points %> pkt.
+                </a>
+            </li>
 
-            <span class="sep"></span>
-
-            <span data-toggle="tooltip" title="Ilość punktów">
-                <i class="glyphicon glyphicon-ok"></i>
-                <%= session[:result] %> / <%= @exam.max_points %> pkt.
-            </span>
-
-            <span class="sep"></span>
-
-            <%= link_to exit_user_exam_path, class: 'navbar-link', data: {toggle: :tooltip}, title: 'Zakończ egzamin' do %>
-                <i class="glyphicon glyphicon-log-out"></i>
-            <% end %>
-        </p>
+            <li data-toggle="tooltip" title="Zakończ egzamin">
+                <%= link_to exit_user_exam_path do %>
+                    <i class="glyphicon glyphicon-log-out"></i>
+                <% end %>
+            </li>
+        </ul>
     </div>
 </nav>

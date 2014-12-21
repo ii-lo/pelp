@@ -35,8 +35,8 @@
         </div>
         <div class="col-xs-12 col-sm-4">
             <div class="panel panel-info exam-grade">
-                <div class="panel-heading">Ocena</div>
-                <div class="panel-body"><%= @user_exam.result %> <%# Ocena jeżeli jest w ustawieniach egzaminu, inaczej zyskane punkty %></div>
+                <div class="panel-heading">Wynik</div>
+                <div class="panel-body"><%= number_to_percentage @user_exam.result / @exam.max_points * 100, precision: 0 %></div>
             </div>
         </div>
     </div>
