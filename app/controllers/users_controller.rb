@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = current_user
-    @courses = @user.last_visited_courses.paginate(page: params[:page], per_page: 10)
+    @courses = @user.last_visited_courses.paginate(page: params[:page], per_page: 12)
   end
 
   private
