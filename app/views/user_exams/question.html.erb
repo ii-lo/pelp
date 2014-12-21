@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="exam-question-text text-justify">
-    <p><%= @question.name %></p>
+    <%= @markdown.render(@question.name).html_safe %>
 </div>
 
 <div class="exam-answer-wrapper">

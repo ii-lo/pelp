@@ -23,7 +23,7 @@ class Exam < ActiveRecord::Base
   has_many :user_exams, dependent: :destroy
   has_many :question_categories, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 250 }
   validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
   validates :duration, presence: true

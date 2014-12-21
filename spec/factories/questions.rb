@@ -4,7 +4,7 @@
 #
 #  id                    :integer          not null, primary key
 #  exam_id               :integer
-#  name                  :string(255)
+#  name                  :text(255)
 #  value                 :integer
 #  created_at            :datetime
 #  updated_at            :datetime

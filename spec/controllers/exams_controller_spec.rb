@@ -52,4 +52,30 @@ RSpec.describe ExamsController, :type => :controller do
     end
   end
 
+  describe "PATCH update" do
+    before do
+      FactoryGirl.create :exam
+    end
+
+    context "valid params" do
+      it "updates exam" do
+        patch :update, course_id: 1, id: 1, exam: { name: "N",
+       duration: 444, published: '1' }
+        expect(Exam.first.name).to eq "N"
+        expect(Exam.first.duration).to eq 444
+        expect(Exam.first.published).to eq true
+        expect(response).to redirect_to edit_course_exam_path(1, 1)
+      end
+    end
+
+    context "invalid params" do
+      it "does not update exam" do
+        patch :update, course_id: 1, id: 1, exam: { name: "N" * 400,
+       duration: 444, published: 0 }
+        expect(Exam.first.name).not_to eq "N" * 400
+        expect(response).to render_template 'edit'
+      end
+    end
+  end
+
 end

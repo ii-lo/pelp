@@ -5,9 +5,26 @@
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
 <% end %>
 
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'bootstrap-markdown' %>
+  <%= javascript_include_tag 'markdown' %>
+  <%= javascript_include_tag 'to-markdown' %>
+  <%= javascript_include_tag 'exams' %>
+<% end %>
+
 <%= render 'layouts/navbar' %>
 
 <div class="container">
+  <%= bootstrap_flash %>
+  <div>
+    <h3>Edytuj</h3>
+    <%= simple_form_for [@course, @exam] do |f| %>
+      <%= f.input :name, label: "Nazwa" %>
+      <%= f.input :duration, as: :integer, label: "Długość w sekundach" %>
+      <%= f.input :published, as: :boolean, label: "Dostępny" %>
+      <%= f.button :submit, "Zaaktualizuj" %>
+    <% end %>
+  </div>
   <h3>Nowa kategoria</h3>
   <%= simple_form_for [@exam, QuestionCategory.new] do |f| %>
     <%= f.input :name, label: "Nazwa" %>
@@ -22,7 +39,7 @@
       <div>
         <b>Nowe pytanie</b>
         <%= simple_form_for [@exam, qc, Question.new] do |f| %>
-          <%= f.input :name, label: "Treść" %>
+          <%= f.input :name, label: "Treść", as: :text, input_html: { rows: "10", class: "question_name" } %>
           <%= f.input :value, as: :integer, label: "Wartość" %>
           <%= f.input :form, collection: { "Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open' }, label: "Forma" %>
           <%= f.button :submit, "Stwórz" %>
