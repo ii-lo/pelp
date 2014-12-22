@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221144452) do
+ActiveRecord::Schema.define(version: 20141222202634) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -47,11 +47,9 @@ ActiveRecord::Schema.define(version: 20141221144452) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_visit"
-    t.integer  "role_id"
   end
 
   add_index "attendings", ["course_id"], name: "index_attendings_on_course_id"
-  add_index "attendings", ["role_id"], name: "index_attendings_on_role_id"
   add_index "attendings", ["user_id"], name: "index_attendings_on_user_id"
 
   create_table "category_results", force: true do |t|
@@ -146,12 +144,6 @@ ActiveRecord::Schema.define(version: 20141221144452) do
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
   add_index "questions", ["question_category_id"], name: "index_questions_on_question_category_id"
-
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "user_answers", force: true do |t|
     t.integer  "answer_id"

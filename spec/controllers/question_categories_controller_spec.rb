@@ -7,7 +7,7 @@ RSpec.describe QuestionCategoriesController, :type => :controller do
     FactoryGirl.create :course
     FactoryGirl.create :lesson_category
     QuestionCategory.create(name: 'a', exam_id: 1)
-    Attending.create(user_id: 1, course_id: 1, role_id: 0)
+    FactoryGirl.create :attending
     FactoryGirl.create :exam
   end
   describe "POST create" do

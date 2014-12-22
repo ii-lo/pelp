@@ -8,7 +8,6 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  last_visit :datetime
-#  role_id    :integer
 #
 
 require 'rails_helper'
