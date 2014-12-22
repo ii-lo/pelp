@@ -15,13 +15,13 @@
                 <div class="panel-body">
                     <%= simple_form_for @user do |f| %>
                         <%= f.input :email %>
-                        <%= f.input :name, label: "Imię i nazwisko" %>
+                        <%= f.input :name, label: "Imię i nazwisko", required: false %>
                         <%= f.input :password, label: "Hasło" %>
                         <span class="help-block">Minimum 6 znaków.</span>
                         <%= f.input :password_confirmation, label: "Powtórz hasło" %>
-                        <%= f.button :submit, "Wyślij", class: "btn btn-success btn-block btn-lg" %>
-                        <span class="help-block text-justify">Rejestrując się w serwisie akceptujesz nasz <a href="#">regulamin</a> oraz <a href="#">politykę
-                            prywatności</a>.</span>
+                        <%= f.button :submit, "Zarejestruj się", class: "btn btn-success btn-block btn-lg" %>
+                        <span class="help-block text-justify">Rejestrując się w serwisie akceptujesz nasz <%= link_to 'regulamin', rules_path %>
+                            oraz <%= link_to 'politykę prywatności', privacy_path %>.</span>
                     <% end %>
                 </div>
             </div>

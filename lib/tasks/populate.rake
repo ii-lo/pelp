@@ -1,9 +1,9 @@
 namespace :db do
   desc "Erase and fill database"
   task :populate => :environment do
-    user_name = "jajakobyly"
-    user_password = "jajakobyly"
-    user_email = "jajakobyly@jajakobyly.com"
+    user_name = "Jan Kowalski"
+    user_password = "password"
+    user_email = "adam@example.com"
     Rake::Task["db:schema:load"].execute
     puts "Tworzenie użytkowników"
     User.create!(name: user_name, email: user_email,

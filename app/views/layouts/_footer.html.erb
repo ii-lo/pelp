@@ -1,6 +1,9 @@
-<footer class="container<%= if defined? classes;
-                              " #{classes}"
-                            end %>">
+<%
+   fluid ||= false
+   classes ||= ''
+   classes = "#{fluid ? 'container-fluid' : 'container'} #{classes}"
+%>
+<footer class="<%= classes %>">
     <div class="row">
         <div class="col-xs-6 col-sm-5">
             <ul class="footer-links">

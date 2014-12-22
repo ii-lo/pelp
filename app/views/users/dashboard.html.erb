@@ -8,55 +8,20 @@
     <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
     <div class="row">
-        <div class="col-xs-12 col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <%= link_to "Wszystkie kursy", courses_path, class: "btn btn-primary btn-xs pull-right" %>
-                    Moje kursy
-                </div>
-                <ul class="media-list">
-                    <% @courses.each do |c| %>
-                        <%= render 'courses/course_link', course: c, tag: 'li' %>
-                    <% end %>
-                </ul>
-                <div class="panel-footer panel-footer-pagination"><%= will_paginate @courses, class: "pagination-sm" %></div>
-            </div>
+        <div class="col-xs-12">
+            <h1>Moje kursy</h1>
+
+            <div class="row-separator"></div>
         </div>
-        <div class="col-xs-12 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
-                    Terminy
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <p class="list-group-item-heading">Cras justo odio</p>
-
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="list-group-item-heading">Dapibus ac facilisis in</p>
-
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="list-group-item-heading">Morbi leo risus</p>
-
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="list-group-item-heading">Porta ac consectetur ac</p>
-
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-                    </li>
-                    <li class="list-group-item">
-                        <p class="list-group-item-heading">Vestibulum at eros</p>
-
-                        <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-                    </li>
-                </ul>
+    </div>
+    <div class="row">
+        <% @courses.each do |c| %>
+            <%#= render 'course', course: c %>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <%= render 'courses/course_card', course: c %>
             </div>
-        </div>
+        <% end %>
+        <div class="col-xs-12 text-center"><%= will_paginate @courses, class: 'pagination-sm' %></div>
     </div>
 </div>
 
