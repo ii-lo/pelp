@@ -7,4 +7,15 @@ class ExamPolicy < Struct.new(:user, :exam, :course)
   def create?
     new?
   end
+
+  #class Scope
+    #attr_reader :user, :scope
+    #def initialize(user, scope)
+      #@user, @scope
+    #end
+
+    #def resolve
+    #end
+  #end
+
 end

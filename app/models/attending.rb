@@ -8,9 +8,12 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  last_visit :datetime
+#  role       :integer          default(0)
 #
 
 class Attending < ActiveRecord::Base
+  enum role: [:member, :admin, :owner]
+
   belongs_to :course
   belongs_to :user
 

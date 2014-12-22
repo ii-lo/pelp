@@ -8,6 +8,7 @@ class CoursesController < ApplicationController
 
   def show
     @lesson_categories = @course.lesson_categories.includes :lessons, :exams
+    @role = Attending.where(course_id: @course, user_id: current_user).first.role
   end
 
   def grades

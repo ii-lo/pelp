@@ -20,8 +20,8 @@ namespace :db do
           lc.lessons.create!(name: "Lekcja ##{x}")
         end
       end
-      c.attendings.create!(user_id: 1, role_id: 1)
-      c.attendings.create!(user_id: 2, role_id: 2) if n < 5
+      c.attendings.create!(user_id: 1, role: 0)
+      c.attendings.create!(user_id: 2, role: 2) if n < 5
     end
     puts "Tworzę egzamin"
     Exam.create(lesson_category_id: 1, duration: 2700, name: "Przykładowy sprawdzian")

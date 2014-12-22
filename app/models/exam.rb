@@ -29,6 +29,8 @@ class Exam < ActiveRecord::Base
   validates :duration, presence: true
   validates :course_id, presence: true
 
+  scope :published, -> { where(published: true) }
+
   def update_max_points
     update_attribute(:max_points, questions.sum(:value))
   end
