@@ -34,8 +34,10 @@ Rails.application.routes.draw do
   end
 
   get '/help' => 'static_pages#help', as: :help
-  get '/privacy' => 'static_pages#privacy', as: :privacy
-  get '/rules' => 'static_pages#rules', as: :rules
+  scope '/help' do
+    get '/privacy' => 'static_pages#privacy', as: :privacy
+    get '/rules' => 'static_pages#rules', as: :rules
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
