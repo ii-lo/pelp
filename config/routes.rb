@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         get :settings
       end
       resources :exams, except: [:show]
+      resources :lessons
     end
     # resource for path names; actual exams resource in courses resource
     resources :exams, only: [] do
