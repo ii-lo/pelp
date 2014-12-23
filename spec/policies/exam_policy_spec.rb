@@ -11,7 +11,7 @@ describe ExamPolicy do
     it "it permits when course member(gonna change this)" do
       exam = double Exam
       course = double Course
-      allow(course).to receive(:users) { [user] }
+      allow(course).to receive(:admins) { [user] }
       allow(exam).to receive(:course) { course }
       expect(subject).to permit(user, exam)
     end
@@ -19,7 +19,7 @@ describe ExamPolicy do
     it "does not permit when user is not course memeber" do
       exam = double :exam
       course = double Course
-      allow(course).to receive(:users) { [] }
+      allow(course).to receive(:admins) { [] }
       allow(exam).to receive(:course) { course }
       expect(subject).not_to permit(user, exam)
     end

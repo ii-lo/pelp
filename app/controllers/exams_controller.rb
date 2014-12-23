@@ -8,6 +8,7 @@ class ExamsController < ApplicationController
   def create
     @course = Course.find params[:course_id]
     @exam = @course.exams.build(exam_params)
+    authorize(@exam)
     if @exam.save
       redirect_to edit_course_exam_path(@course, @exam)
     else

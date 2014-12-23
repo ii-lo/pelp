@@ -1,6 +1,11 @@
 class LessonsController < ApplicationController
   before_action :load_course
   def new
+    @lesson = @course.lessons.build
+    authorize(@lesson)
+  end
+
+  def create
     
   end
 
