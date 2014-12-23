@@ -15,6 +15,7 @@ class LessonCategory < ActiveRecord::Base
 
   has_many :lessons
   has_many :exams
+  has_many :published_exams, -> { where published: true }, class_name: "Exam"
 
   validates :course_id, presence: true
 end

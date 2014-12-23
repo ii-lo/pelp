@@ -7,8 +7,8 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @lesson_categories = @course.lesson_categories.includes :lessons, :exams
-    @role = Attending.where(course_id: @course, user_id: current_user).first.role
+    @lesson_categories = @course.lesson_categories.includes :lessons
+    (@exams = policy_scope(@course.exams).group_by(&:lesson_category_id)).default = []
   end
 
   def grades

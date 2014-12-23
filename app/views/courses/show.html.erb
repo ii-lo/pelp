@@ -34,25 +34,13 @@
                                 <a href="#"><i class="glyphicon glyphicon-book"></i> <%= l.name %></a>
                             </li>
                         <% end %>
-                        <% if lc.exams.any? %>
-                          <% if @role == 'member' %>
-                            <% lc.exams.published.each do |e| %>
-                                <li class="list-group-item">
-                                    <%= link_to new_user_exam_path(e) do %>
-                                        <i class="glyphicon glyphicon-check"></i> <%= e.name %>
-                                    <% end %>
-                                </li>
+                             <% @exams[lc.id].each do |e| %>
+                                  <li class="list-group-item">
+                                      <%= link_to new_user_exam_path(e) do %>
+                                          <i class="glyphicon glyphicon-check"></i> <%= e.name %>
+                                      <% end %>
+                                  </li>
                             <% end %>
-                          <% else %>
-                            <% lc.exams.each do |e| %>
-                                <li class="list-group-item">
-                                    <%= link_to new_user_exam_path(e) do %>
-                                        <i class="glyphicon glyphicon-check"></i> <%= e.name %>
-                                    <% end %>
-                                </li>
-                            <% end %>
-                          <% end %>
-                        <% end %>
                     </ul>
                 </div>
             </div>

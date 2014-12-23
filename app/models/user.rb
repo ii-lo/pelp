@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
+  has_many :admin_courses, -> { where(attendings: { role: [1 ,2] }) },
+    through: :attendings, source: :course
+  has_many :owned_courses, -> { where attendings: { role: 2 }},
+    through: :attendings, source: :course
   #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)
