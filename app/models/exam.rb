@@ -27,7 +27,6 @@ class Exam < ActiveRecord::Base
   validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
   validates :duration, presence: true
-  validates :course_id, presence: true
 
   scope :published, -> { where(published: true) }
 

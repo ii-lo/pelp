@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222205809) do
+ActiveRecord::Schema.define(version: 20141224181604) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -119,8 +119,11 @@ ActiveRecord::Schema.define(version: 20141222205809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lesson_category_id"
+    t.integer  "course_id"
+    t.text     "content"
   end
 
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
   add_index "lessons", ["lesson_category_id"], name: "index_lessons_on_lesson_category_id"
 
   create_table "question_categories", force: true do |t|

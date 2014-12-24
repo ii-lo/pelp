@@ -7,6 +7,8 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  lesson_category_id :integer
+#  course_id          :integer
+#  content            :text
 #
 
 require 'rails_helper'

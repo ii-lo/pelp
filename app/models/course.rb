@@ -16,7 +16,8 @@ class Course < ActiveRecord::Base
   has_many :attendings, dependent: :destroy
   has_many :users, through: :attendings
   has_many :lesson_categories, dependent: :destroy
-  has_many :lessons, through: :lesson_categories, dependent: :destroy
+  #has_many :lessons, through: :lesson_categories, dependent: :destroy
+  has_many :lessons, dependent: :destroy
   has_many :exams, dependent: :destroy
   has_many :admins, -> { where attendings: { role: [1, 2] } }, through: :attendings, source: :user
   has_many :owners, -> { where attendings: { role: 2 } }, through: :attendings, source: :user

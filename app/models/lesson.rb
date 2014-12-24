@@ -7,12 +7,22 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  lesson_category_id :integer
+#  course_id          :integer
+#  content            :text
 #
 
 class Lesson < ActiveRecord::Base
+  before_validation :set_course_id
+
   belongs_to :course
   belongs_to :lesson_category
 
   validates :name, presence: true
   validates :lesson_category_id, presence: true
+
+  private
+
+  def set_course_id
+    self.course_id = lesson_category.try(:course_id)
+  end
 end
