@@ -17,10 +17,12 @@ class ExamPolicy < Struct.new(:user, :exam)
     end
 
     def resolve
-      scope.where("('exams'.'published' = ? AND 'exams'.'course_id' IN(?)) OR
-                 ('exams'.'published' = ? AND 'exams'.'course_id' IN(?))",
-                 false, user.admin_courses.pluck(:id),
-                 true, user.courses.pluck(:id))
+      scope.where(
+        "('exams'.'published' = ? AND 'exams'.'course_id' IN(?)) OR
+         ('exams'.'published' = ? AND 'exams'.'course_id' IN(?))",
+         false, user.admin_courses.pluck(:id),
+         true, user.courses.pluck(:id)
+      )
     end
   end
 
