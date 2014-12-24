@@ -34,4 +34,8 @@ class Course < ActiveRecord::Base
   scope :open, -> { where(private: false) }
 
   alias_method :students, :users
+
+  def to_s
+    name
+  end
 end

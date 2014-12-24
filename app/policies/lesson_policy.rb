@@ -1,7 +1,22 @@
 class LessonPolicy < Struct.new(:user, :lesson)
   def new?
-    true
-    #lesson.course.admins.include? user
+    lesson.course.admins.include? user
+  end
+
+  def show?
+    lesson.course.users.include? user
+  end
+
+  def create?
+    new?
+  end
+
+  def edit?
+    new?
+  end
+
+  def update?
+    new?
   end
   #class Scope
   #end

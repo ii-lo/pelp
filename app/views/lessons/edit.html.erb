@@ -1,4 +1,4 @@
-<% content_for :title, "#{@course} | Nowa lekcja" %>
+<% content_for :title, "#{@course} | #{@lesson.name}" %>
 <% breadcrumb :course, @lesson %>
 
 <% content_for :styles do %>
@@ -14,6 +14,6 @@
 <div class="container">
     <%= bootstrap_flash %>
     <div>
-      <%= render 'form', submit: "Stwórz" %>
+      <%= render 'form', submit: "Aktualizuj" %>
     </div>
 </div>

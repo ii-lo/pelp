@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 20141224181604) do
     t.datetime "updated_at"
     t.integer  "lesson_category_id"
     t.integer  "course_id"
-    t.text     "content"
+    t.text     "content",            default: ""
   end
 
   add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"

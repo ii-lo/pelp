@@ -17,7 +17,8 @@ class Lesson < ActiveRecord::Base
   belongs_to :course
   belongs_to :lesson_category
 
-  validates :name, presence: true
+  validates :name, presence: true,
+    length: { maximum: 250 }
   validates :lesson_category_id, presence: true
 
   private

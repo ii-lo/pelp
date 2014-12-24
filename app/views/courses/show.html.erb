@@ -31,7 +31,9 @@
                     <ul class="list-group">
                         <% lc.lessons.each do |l| %>
                             <li class="list-group-item">
-                                <a href="#"><i class="glyphicon glyphicon-book"></i> <%= l.name %></a>
+                              <%= link_to course_lesson_path(@course, l) do %>
+                                  <i class="glyphicon glyphicon-book"></i> <%= l.name %>
+                              <% end %>
                             </li>
                         <% end %>
                              <% @exams[lc.id].each do |e| %>
