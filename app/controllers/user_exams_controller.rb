@@ -32,7 +32,7 @@ class UserExamsController < ApplicationController
   def question
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
-    markdown_renderer.call(@question.name)[:output].to_s
+    @markdown = markdown_renderer.call(@question.name)[:output].to_s
     session[:current_question_id] = @question.id
   end
 
