@@ -20,11 +20,7 @@ class ExamsController < ApplicationController
     @course ||= Course.find params[:course_id]
     @exam ||= Exam.find params[:id]
     @q_cs ||= @exam.question_categories.includes :questions, :answers
-    @markdown = HTML::Pipeline.new([
-      HTML::Pipeline::MarkdownFilter,
-      HTML::Pipeline::SanitizationFilter,
-      HTML::Pipeline::SyntaxHighlightFilter
-    ], gfm: true)
+    @markdown = markdown_renderer
   end
 
   def update
