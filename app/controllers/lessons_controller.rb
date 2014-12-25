@@ -3,11 +3,7 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = @course.lessons.find params[:id]
-    @markdown = HTML::Pipeline.new([
-      HTML::Pipeline::MarkdownFilter,
-      HTML::Pipeline::SanitizationFilter,
-      HTML::Pipeline::SyntaxHighlightFilter
-    ], gfm: true).call(@lesson.content)[:output].to_s
+    @markdown = markdown_renderer.call(@lesson.content)[:output].to_s
     authorize(@lesson)
   end
 
