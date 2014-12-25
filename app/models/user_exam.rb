@@ -39,6 +39,7 @@ class UserExam < ActiveRecord::Base
     end
     update_attribute(:result, sum)
     update_category_results(q_c)
+    sum
   end
 
   def open?
@@ -75,8 +76,12 @@ class UserExam < ActiveRecord::Base
   def update_category_results(categories)
     categories = categories.to_hash
     categories.each do |c, v|
-      CategoryResult.create(user_exam_id: id, question_category_id: c,
-                           value: v)
+      if cr = CategoryResult.where(user_exam_id: id, question_category_id: c).first
+        cr.update_attribute(:value, v)
+      else
+        CategoryResult.create(user_exam_id: id, question_category_id: c,
+                             value: v)
+      end
     end
   end
 
