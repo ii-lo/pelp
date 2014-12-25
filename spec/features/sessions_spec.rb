@@ -16,6 +16,6 @@ feature "Sessions", :type => :feature do
     fill_in :user_email, with: "robert@robert.com"
     fill_in :user_password, with: "asdf1234"
     click_button "Zaloguj"
-    expect(page).to have_content "Mój profil"
+    expect(page).to have_content "Robert Bias"
   end
 end
