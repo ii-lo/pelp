@@ -15,21 +15,6 @@ crumb :course do |course|
   parent :courses
 end
 
-crumb :course_grades do |course|
-  link 'Oceny', grades_course_path(course)
-  parent course
-end
-
-crumb :course_activity do |course|
-  link 'Aktywność', activity_course_path(course)
-  parent course
-end
-
-crumb :course_info do |course|
-  link 'Informacje', info_course_path(course)
-  parent course
-end
-
 crumb :course_settings do |course|
   link 'Ustawienia', settings_course_path(course)
   parent course

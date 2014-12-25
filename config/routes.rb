@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :courses do
       member do
-        get :grades
-        get :activity
-        get :info
         get :settings
       end
     end
@@ -25,8 +22,6 @@ Rails.application.routes.draw do
       get '/summary/:id' => 'user_exams#show', as: :user_exam
       post '/answer' => 'user_exams#answer', as: :answer_user_exam
     end
-
-    get 'calendar' => 'calendar#show', as: :calendar
   end
 
   unauthenticated do

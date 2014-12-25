@@ -10,15 +10,6 @@ class CoursesController < ApplicationController
     @lesson_categories = @course.lesson_categories.includes :lessons, :exams
   end
 
-  def grades
-  end
-
-  def activity
-  end
-
-  def info
-  end
-
   def settings
   end
 

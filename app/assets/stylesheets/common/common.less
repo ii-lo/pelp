@@ -1,10 +1,11 @@
-//
-// Common styles
-//
 @import 'lesshat';
 @import 'variables';
 
-// Utilities
+//
+// Common styles
+//
+
+// Common classes
 
 .row-separator {
   height: @grid-gutter-width / 2;
@@ -35,9 +36,19 @@
   }
 }
 
-// Import component-related styles
+.panel-document {
+  h1 {
+    margin-top: 0;
+  }
 
+  .panel-body {
+    padding: @padding-large-vertical * 3;
+  }
+}
+
+// Import styles for common components/widgets
+
+@import 'animations';
 @import 'navbar';
 @import 'footer';
 @import 'course-link';
-@import 'animations';
