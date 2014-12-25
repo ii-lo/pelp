@@ -32,7 +32,7 @@ class UserExamsController < ApplicationController
   def question
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, escape_html: true)
     session[:current_question_id] = @question.id
   end
 

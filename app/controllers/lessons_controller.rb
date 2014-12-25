@@ -3,7 +3,7 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = @course.lessons.find params[:id]
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, escape_html: true)
     authorize(@lesson)
   end
 
