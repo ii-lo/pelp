@@ -21,7 +21,7 @@ class LessonsController < ApplicationController
     authorize(@lesson)
     if @lesson.save
       respond_to do |format|
-        format.html { redirect_to course_path(@course), notice: "Stworzon lekcję" }
+        format.html { redirect_to course_lesson_path(@course, @lesson), notice: "Stworzon lekcję" }
       end
     else
       respond_to do |format|
@@ -40,7 +40,7 @@ class LessonsController < ApplicationController
     authorize @lesson
     if @lesson.update_attributes(lesson_params)
       respond_to do |format|
-        format.html { redirect_to course_path(@course), notice: "Zaaktualizowano lekcję" }
+        format.html { redirect_to course_lesson_path(@course, @lesson), notice: "Zaaktualizowano lekcję" }
       end
     else
       respond_to do |format|

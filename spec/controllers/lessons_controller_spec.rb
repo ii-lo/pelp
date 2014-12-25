@@ -35,7 +35,7 @@ RSpec.describe LessonsController, :type => :controller do
           post :create, course_id: 1,
             lesson: { name: "t", lesson_category_id: 1, content: "a" }
         end.to change(Lesson, :count).by(1)
-        expect(response).to redirect_to course_path 1
+        expect(response).to redirect_to course_lesson_path 1, 1
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe LessonsController, :type => :controller do
         patch :update, course_id: 1, id: 1,
         lesson: { lesson_category_id: 1, content: "rt", name: "RIP" }
         expect(Lesson.first.name).to eq "RIP"
-        expect(response).to redirect_to course_path 1
+        expect(response).to redirect_to course_lesson_path 1, 1
       end
     end
 
