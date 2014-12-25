@@ -20,7 +20,11 @@ class ExamsController < ApplicationController
     @course ||= Course.find params[:course_id]
     @exam ||= Exam.find params[:id]
     @q_cs ||= @exam.question_categories.includes :questions, :answers
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, escape_html: true)
+    @markdown = HTML::Pipeline.new([
+      HTML::Pipeline::MarkdownFilter,
+      HTML::Pipeline::SanitizationFilter,
+      HTML::Pipeline::SyntaxHighlightFilter
+    ], gfm: true)
   end
 
   def update

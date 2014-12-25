@@ -4,6 +4,7 @@
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'github-highlight', 'data-turbolinks-track' => true %>
 <% end %>
 
 <% content_for :scripts do %>
@@ -17,7 +18,7 @@
     <div>
       <h3><%= @lesson.name %></h3>
       <div>
-        <%= @markdown.render(@lesson.content).html_safe %>
+        <%= @markdown.html_safe %>
       </div>
     </div>
 </div>

@@ -32,7 +32,11 @@ class UserExamsController < ApplicationController
   def question
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, escape_html: true)
+    @markdown = HTML::Pipeline.new([
+      HTML::Pipeline::MarkdownFilter,
+      HTML::Pipeline::SanitizationFilter,
+      HTML::Pipeline::SyntaxHighlightFilter
+    ], gfm: true).call(@question.name)[:output].to_s
     session[:current_question_id] = @question.id
   end
 

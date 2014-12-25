@@ -75,7 +75,13 @@ gem 'daemons'
 gem 'fast_blank'
 
 # rendering markdown
-gem 'redcarpet'
+#gem 'redcarpet'
+gem 'html-pipeline'
+gem 'github-linguist'
+gem 'github-markdown'
+gem 'escape_utils'
+gem 'sanitize'
+gem 'pygments.rb'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'

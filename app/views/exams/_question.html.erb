@@ -1,6 +1,6 @@
 <div style="border: 2px solid green">
   <div style="border: 2pt solid pink">
-    <%= @markdown.render(question.name).html_safe %>
+    <%= @markdown.call(question.name)[:output].to_s.html_safe %>
   </div>
   <p><%= link_to "Usuń pytanie", exam_question_category_question_path(@exam, question.question_category_id, question), method: :delete %></p>
   <p><%= question.string_form %></p>
