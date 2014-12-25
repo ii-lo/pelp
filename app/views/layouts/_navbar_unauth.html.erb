@@ -1,4 +1,10 @@
 <ul class="nav navbar-nav navbar-right">
-    <%= active_link_to 'Logowanie', new_user_session_path, wrap_tag: :li %>
-    <%= active_link_to 'Rejestracja', new_user_path, wrap_tag: :li %>
+    <%= active_link_to new_user_session_path, wrap_tag: :li, class: 'iconized', title: 'Zaloguj się' do %>
+        <i class="glyphicon glyphicon-log-in"></i>
+        <span class="text">Zaloguj się</span>
+    <% end %>
+    <%= active_link_to new_user_path, wrap_tag: :li, class: 'iconized', title: 'Zarejestruj się' do %>
+        <i class="glyphicon glyphicon-check"></i>
+        <span class="text">Zarejestruj się</span>
+    <% end %>
 </ul>
