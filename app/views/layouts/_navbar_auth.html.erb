@@ -1,5 +1,5 @@
 <ul class="nav navbar-nav navbar-left">
-    <%= active_link_to 'Kursy', courses_path, wrap_tag: :li, active: :exclusive %>
+    <%= active_link_to 'Kursy', courses_path, wrap_tag: :li %>
     <li class="dropdown">
         <%= link_to courses_path, class: 'dropdown-toggle iconized', data: {toggle: :dropdown}, title: 'Ostatnie' do %>
             <i class="glyphicon glyphicon-time"></i>
@@ -7,12 +7,7 @@
         <% end %>
         <ul class="dropdown-menu" role="menu">
             <% current_user.last_visited_courses(6).each do |c| %>
-                <li class="<%= active_link_to_class course_path(c) %>">
-                    <%= link_to course_path(c) do %>
-                        <span class="glyphicon glyphicon-asterisk pull-right" style="color: <%= string_to_pastel("#{c.name}#{c.id}") %>"></span>
-                        <%= c.name %>
-                    <% end %>
-                </li>
+                <%= active_link_to c.name, course_path(c), wrap_tag: :li %>
             <% end %>
         </ul>
     </li>
