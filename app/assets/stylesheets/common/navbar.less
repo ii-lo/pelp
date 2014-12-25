@@ -8,6 +8,24 @@ body.with-navbar-fixed {
   padding-top: @navbar-height + @grid-gutter-width / 2;
 }
 
+@media (min-width: @screen-sm-min) {
+  @width: 128px;
+
+  .navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: @width;
+    text-align: center;
+    //    background-color: yellow;
+  }
+
+  .navbar > .container .navbar-brand-centered,
+  .navbar > .container-fluid .navbar-brand-centered {
+    margin-left: -(@width / 2);
+  }
+}
+
 .navbar.shrinkable {
   font-size: ceil((@font-size-base * 1.05));
   text-transform: uppercase;
@@ -18,14 +36,20 @@ body.with-navbar-fixed {
     text-transform: none;
   }
 
-  .navbar-brand.icon-pelp-logo {
-    font-size: 32pt;
-    position: relative;
-    top: -9pt;
-    z-index: 999;
-    outline: none;
+  .navbar-brand {
+    .icon {
+      font-size: 32pt;
+      position: relative;
+      top: -9pt;
+      z-index: 999;
+      outline: none;
 
-    .transition(all 0.3s);
+      .transition(all 0.3s);
+    }
+  }
+
+  .navbar-header, .navbar-brand {
+    .transition(height 0.3s);
   }
 
   .navbar-nav > li > a {
@@ -33,33 +57,19 @@ body.with-navbar-fixed {
     .transition(all 0.3s);
   }
 
-  .navbar-header {
-    .transition(all 0.3s);
-  }
-
-  //  .navbar-avatar {
-  //    @avatar-size: 28px;
-  //    @padding: ((@navbar-height - @avatar-size) / 2);
-  //
-  //    position: relative;
-  //    width: @avatar-size;
-  //    height: @avatar-size;
-  //    margin-left: @padding-small-horizontal / 2;
-  //    margin-top: -8px;
-  //    margin-bottom: -6px;
-  //  }
-
   @media (min-width: @screen-sm-min) {
     &.tiny {
       min-height: @navbar-tiny-height;
       .box-shadow(0 0 8px @gray-lighter);
 
-      .navbar-header {
+      .navbar-header, .navbar-brand {
         height: @navbar-tiny-height;
       }
 
-      .navbar-brand.icon-pelp-logo {
-        font-size: 18pt;
+      .navbar-brand {
+        .icon {
+          font-size: 18pt;
+        }
       }
 
       .navbar-nav > li > a {
