@@ -8,6 +8,21 @@ body.with-navbar-fixed {
   padding-top: @navbar-height + @grid-gutter-width / 2;
 }
 
+.navbar {
+  .iconized {
+    @media (max-width: @screen-xs-max) {
+      .icon, .glyphicon {
+        display: none;
+      }
+    }
+    @media (min-width: @screen-sm-min) {
+      .text {
+        display: none;
+      }
+    }
+  }
+}
+
 @media (min-width: @screen-sm-min) {
   @width: 128px;
 
