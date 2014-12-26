@@ -1,4 +1,4 @@
-en:
+pl:
   simple_form:
     "yes": 'Tak'
     "no": 'Nie'
@@ -10,6 +10,12 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Proszę napraw błędy poniżej"
+    options:
+      question:
+        form:
+          single: "Jednokrotnego wybory"
+          multiple: "Wielokrotnego wyboru"
+          open: "Otwarte"
     # Examples
     # labels:
     #   defaults:

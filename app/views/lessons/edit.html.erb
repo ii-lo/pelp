@@ -1,0 +1,19 @@
+<% content_for :title, "#{@course} | #{@lesson.name}" %>
+<% breadcrumb :course, @lesson %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <div>
+      <%= render 'form', submit: "Aktualizuj" %>
+    </div>
+</div>

@@ -4,7 +4,7 @@
 #
 #  id                    :integer          not null, primary key
 #  exam_id               :integer
-#  name                  :string(255)
+#  name                  :text(255)
 #  value                 :integer
 #  created_at            :datetime
 #  updated_at            :datetime
@@ -14,10 +14,11 @@
 #
 
 class Question < ActiveRecord::Base
-  enum form: %w(single multiple open)
+  FORMS = [:single, :multiple, :open]
+  enum form: FORMS
 
   before_save :update_exam_max
-  before_destroy :update_exam_max
+  after_destroy :update_exam_max
 
 
   belongs_to :exam
@@ -33,6 +34,18 @@ class Question < ActiveRecord::Base
   validates :value, presence: true,
             inclusion: 0..200
   validates :question_category_id, presence: true
+  validates :form, presence: true
+
+  def string_form
+    case form
+    when 'single'
+      "Pojedynczego wyboru"
+    when 'multiple'
+      "Wielokrotnego wyboru"
+    else
+      "Otwarte"
+    end
+  end
 
   private
 

@@ -12,7 +12,7 @@
 
 class Answer < ActiveRecord::Base
   after_save :update_correct_answers_count
-  before_destroy :update_correct_answers_count
+  after_destroy :update_correct_answers_count
 
   belongs_to :question
 
@@ -22,6 +22,7 @@ class Answer < ActiveRecord::Base
   validates :question_id, presence: true
   validates :name, presence: true,
             uniqueness: {scope: [:question_id]}
+  validate :only_one_correct_if_single
 
   scope :correct, -> { where(correct: true) }
   scope :wrong, -> { where(correct: false) }
@@ -32,6 +33,15 @@ class Answer < ActiveRecord::Base
     if question.multiple?
       question.update_attribute(:correct_answers_count,
                                 question.correct_answers.count)
+    end
+  end
+
+  def only_one_correct_if_single
+    return true unless correct
+    return true unless question.try(:single)
+    ans = question.answers.correct.first
+    if ans && ans != self
+      errors[:correct] << "Już istnieje prawidłowa odpowiedź"
     end
   end
 end

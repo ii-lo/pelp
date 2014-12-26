@@ -12,6 +12,18 @@ Rails.application.routes.draw do
       member do
         get :settings
       end
+      resources :exams, except: [:show]
+      resources :lessons
+    end
+    # resource for path names; actual exams resource in courses resource
+    resources :exams, only: [] do
+      resources :question_categories, only: [:create, :destroy, :update], path: 'q_cs/' do
+        resources :questions, only: [:create, :update, :destroy]
+      end
+    end
+
+    resources :questions, only: [] do
+      resources :answers, only: [:create, :update, :destroy]
     end
 
     scope '/exam' do

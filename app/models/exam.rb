@@ -10,6 +10,7 @@
 #  lesson_category_id :integer
 #  duration           :integer
 #  max_points         :integer          default(0)
+#  published          :boolean          default(FALSE)
 #
 
 class Exam < ActiveRecord::Base
@@ -22,11 +23,12 @@ class Exam < ActiveRecord::Base
   has_many :user_exams, dependent: :destroy
   has_many :question_categories, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 250 }
   validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
   validates :duration, presence: true
-  validates :course_id, presence: true
+
+  scope :published, -> { where(published: true) }
 
   def update_max_points
     update_attribute(:max_points, questions.sum(:value))

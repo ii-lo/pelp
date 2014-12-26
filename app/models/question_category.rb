@@ -14,6 +14,7 @@ class QuestionCategory < ActiveRecord::Base
 
   has_many :questions, dependent: :destroy
   has_many :category_results, dependent: :destroy
+  has_many :answers, through: :questions
 
   validates :exam_id, presence: true
   validates :name, presence: true,

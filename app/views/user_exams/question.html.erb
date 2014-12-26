@@ -2,6 +2,7 @@
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'github-highlight', 'data-turbolinks-track' => true %>
 <% end %>
 
 <% content_for :scripts do %>
@@ -9,7 +10,7 @@
 <% end %>
 
 <div class="exam-question-text text-justify">
-    <p><%= @question.name %></p>
+    <%= @markdown.html_safe %>
 </div>
 
 <div class="exam-answer-wrapper">

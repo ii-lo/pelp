@@ -32,6 +32,7 @@ class UserExamsController < ApplicationController
   def question
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
+    @markdown = markdown_renderer.call(@question.name)[:output].to_s
     session[:current_question_id] = @question.id
   end
 
@@ -77,7 +78,7 @@ class UserExamsController < ApplicationController
     ids.each do |i|
       u = UserAnswer.create(user_exam_id: session[:user_exam_id],
                             answer_id: i, question_id: @question.id)
-      next if i.blank?
+      next if i.to_i.zero?
       u.correct ? correct += 1 : wrong += 1
     end
     diff = correct > wrong ? correct - wrong : 0

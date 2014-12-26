@@ -23,10 +23,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true,
-            length: {maximum: 240}
+            length: { maximum: 240 }
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
+  has_many :admin_courses, -> { where(attendings: { role: [1 ,2] }) },
+    through: :attendings, source: :course
+  has_many :owned_courses, -> { where attendings: { role: 2 }},
+    through: :attendings, source: :course
   #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)

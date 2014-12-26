@@ -9,7 +9,7 @@ RSpec.describe UserExamsController, :type => :controller do
     FactoryGirl.create :exam
     FactoryGirl.create :question
     QuestionCategory.create(name: 'a', exam_id: 1)
-    Attending.create(user_id: 1, course_id: 1, role_id: 0)
+    FactoryGirl.create :attending
   end
 
   describe "GET new" do
@@ -120,6 +120,46 @@ RSpec.describe UserExamsController, :type => :controller do
         end.to change{UserAnswer.count}.by(2)
         expect(:response).to redirect_to user_exam_path(1)
       end
+    end
+  end
+
+  describe "GET exit" do
+    before do
+      Question.destroy_all
+      FactoryGirl.create(:question,
+                         name: "Czy ziemia jest płaska?",
+                         value: 2)
+      Answer.create(name: "Tak", correct: false, question_id: 2)
+      Answer.create(name: "Nie", correct: true, question_id: 2)
+      FactoryGirl.create(:question,
+                         name: "Jakie programy domyślnie ma Łubuntu?",
+                         value: 2, form: 1)
+      Answer.create(name: "Firefox", correct: true, question_id: 3)
+      Answer.create(name: "Google Chrome", correct: false, question_id: 3)
+      Answer.create(name: "LibreOffice Writer", correct: true, question_id: 3)
+      Answer.create(name: "Microsoft Office Word", correct: false, question_id: 3)
+      FactoryGirl.create(:question,
+                         name: "Jakiego koloru jest krew ludzka?", form: 2, value: 2)
+      Answer.create(name: "Czerwonego", question_id: 4)
+      Answer.create(name: "Czerwony", question_id: 4)
+      get :start, id: 1
+      2.times do
+        get :question
+        case session[:current_question_id].to_i
+        when 2
+          post :answer, answer: { id: '2' }
+        when 3
+          post :answer, answer: { id: ['3', '', '', ''] }
+        else
+          post :answer, answer: { text: 'czerwony' }
+        end
+      end
+      get :exit, id: 1
+    end
+
+    it "ends exam" do
+      expect(UserExam.first.closed).to eq true
+      expect(UserExam.first.result).to be > 1
     end
   end
 end

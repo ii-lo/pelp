@@ -31,18 +31,23 @@
                     <ul class="list-group">
                         <% lc.lessons.each do |l| %>
                             <li class="list-group-item">
-                                <a href="#"><i class="glyphicon glyphicon-book"></i> <%= l.name %></a>
+                              <%= link_to course_lesson_path(@course, l) do %>
+                                  <i class="glyphicon glyphicon-book"></i> <%= l.name %>
+                              <% end %>
                             </li>
-                        <% end %>
-                        <% if lc.exams.any? %>
-                            <% lc.exams.each do |e| %>
-                                <li class="list-group-item">
-                                    <%= link_to new_user_exam_path(e) do %>
-                                        <i class="glyphicon glyphicon-check"></i> <%= e.name %>
-                                    <% end %>
-                                </li>
+                            <% if @admin %>
+                              <li class="list-group-item">
+                                <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
+                              </li>
                             <% end %>
                         <% end %>
+                             <% @exams[lc.id].each do |e| %>
+                                  <li class="list-group-item">
+                                      <%= link_to new_user_exam_path(e) do %>
+                                          <i class="glyphicon glyphicon-check"></i> <%= e.name %>
+                                      <% end %>
+                                  </li>
+                            <% end %>
                     </ul>
                 </div>
             </div>

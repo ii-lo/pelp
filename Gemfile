@@ -74,6 +74,15 @@ gem 'daemons'
 # faster string blank? method
 gem 'fast_blank'
 
+# rendering markdown
+#gem 'redcarpet'
+gem 'html-pipeline'
+gem 'github-linguist'
+gem 'github-markdown'
+gem 'escape_utils'
+gem 'sanitize'
+gem 'pygments.rb'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
   gem "factory_girl_rails", "~> 4.4.1"
@@ -96,7 +105,6 @@ group :development do
   gem 'pry-doc'
   gem 'rack-mini-profiler', require: false
   gem 'annotate'
-  gem 'foreman'
 end
 
 gem 'unicorn'

@@ -10,6 +10,7 @@
 #  lesson_category_id :integer
 #  duration           :integer
 #  max_points         :integer          default(0)
+#  published          :boolean          default(FALSE)
 #
 
 require 'rails_helper'

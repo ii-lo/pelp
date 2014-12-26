@@ -1,0 +1,7 @@
+<div>
+  <%= simple_form_for [question, Answer.new] do |f| %>
+    <%= f.input :name, label: "Wartość" %>
+    <%= f.input :correct, as: :boolean, label: "Prawidłowe?" %>
+    <%= f.button :submit, "Stwórz" %>
+  <% end %>
+</div>

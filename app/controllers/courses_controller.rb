@@ -7,7 +7,9 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @lesson_categories = @course.lesson_categories.includes :lessons, :exams
+    @lesson_categories = @course.lesson_categories.includes :lessons
+    (@exams = policy_scope(@course.exams).group_by(&:lesson_category_id)).default = []
+    @admin = @course.admins.include? current_user
   end
 
   def settings

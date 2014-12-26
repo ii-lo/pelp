@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213134958) do
+ActiveRecord::Schema.define(version: 20141224181604) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -47,11 +47,10 @@ ActiveRecord::Schema.define(version: 20141213134958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_visit"
-    t.integer  "role_id"
+    t.integer  "role",       default: 0
   end
 
   add_index "attendings", ["course_id"], name: "index_attendings_on_course_id"
-  add_index "attendings", ["role_id"], name: "index_attendings_on_role_id"
   add_index "attendings", ["user_id"], name: "index_attendings_on_user_id"
 
   create_table "category_results", force: true do |t|
@@ -99,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141213134958) do
     t.integer  "lesson_category_id"
     t.integer  "duration"
     t.integer  "max_points",         default: 0
+    t.boolean  "published",          default: false
   end
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
@@ -119,8 +119,11 @@ ActiveRecord::Schema.define(version: 20141213134958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lesson_category_id"
+    t.integer  "course_id"
+    t.text     "content",            default: ""
   end
 
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id"
   add_index "lessons", ["lesson_category_id"], name: "index_lessons_on_lesson_category_id"
 
   create_table "question_categories", force: true do |t|
@@ -134,23 +137,17 @@ ActiveRecord::Schema.define(version: 20141213134958) do
 
   create_table "questions", force: true do |t|
     t.integer  "exam_id"
-    t.string   "name"
+    t.text     "name",                  limit: 255
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "form",                  default: 0
+    t.integer  "form",                              default: 0
     t.integer  "question_category_id"
-    t.integer  "correct_answers_count", default: 0
+    t.integer  "correct_answers_count",             default: 0
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"
   add_index "questions", ["question_category_id"], name: "index_questions_on_question_category_id"
-
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "user_answers", force: true do |t|
     t.integer  "answer_id"
