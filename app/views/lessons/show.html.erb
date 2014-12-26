@@ -21,4 +21,9 @@
         <%= @markdown.html_safe %>
       </div>
     </div>
+    <div>
+      <% if policy(@lesson).edit? %>
+        <%= link_to "Edytuj", edit_course_lesson_path(@course, @lesson) %>
+      <% end %>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 class LessonsController < ApplicationController
   before_action :load_course
+  before_action :load_lesson_category, except: [:show]
 
   def show
     @lesson = @course.lessons.find params[:id]
@@ -53,6 +54,14 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.require(:lesson).permit(:name, :lesson_category_id, :content)
+  end
+
+  def load_lesson_category
+    if params[:lesson_category_id]
+      @l_c = @course.lesson_categories.find(params[:lesson_category_id])
+    else
+      @l_c = nil
+    end
   end
 
 end

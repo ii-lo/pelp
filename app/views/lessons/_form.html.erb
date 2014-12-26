@@ -1,6 +1,11 @@
 <%= simple_form_for [@course, @lesson] do |f| %>
   <%= f.input :name, label: "Nazwa" %>
-  <%= f.input :lesson_category_id, label: "Kategoria", collection: @course.lesson_categories %>
+  <% if @l_c %>
+    <%= f.input :lesson_category_id, as: :hidden, input_html: { value: @l_c.id } %>
+  <% else %>
+    <%= f.input :lesson_category_id, label: "Kategoria", collection: @course.lesson_categories %>
+  <% end %>
   <%= f.input :content, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+  <p>Wszystkie tagi html nie wstawione w specjalny tag zostaną usunięte</p>
   <%= f.button :submit, submit || "Zatwierdź" %>
 <% end %>
