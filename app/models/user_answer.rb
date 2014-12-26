@@ -31,10 +31,10 @@ class UserAnswer < ActiveRecord::Base
   private
 
   def check_if_correct
-    unless question.open?
-      self.correct = answer.try :correct
-    else
+    if question.open?
       self.correct = !!question.answers.where('lower(name) = ?', text.downcase).first
+    else
+      self.correct = answer.try :correct
     end
     true
   end

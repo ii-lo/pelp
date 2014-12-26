@@ -40,14 +40,14 @@ class UserExamsController < ApplicationController
     @question = Question.find session[:current_question_id]
     params[:answer] ||= {}
     case @question.form
-      when 'single'
-        single_answer
-      when 'multiple'
-        multiple_answer
-      when 'open'
-        open_answer
-      else
-        raise ArgumentError, 'invalid question type'
+    when 'single'
+      single_answer
+    when 'multiple'
+      multiple_answer
+    when 'open'
+      open_answer
+    else
+      fail ArgumentError, 'invalid question type'
     end
     session[:user_exam_questions].shift
     if session[:user_exam_questions].any?

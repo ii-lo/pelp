@@ -27,16 +27,16 @@ class User < ActiveRecord::Base
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
-  has_many :admin_courses, -> { where(attendings: { role: [1 ,2] }) },
+  has_many :admin_courses, -> { where(attendings: { role: [1 ,2] } ) },
     through: :attendings, source: :course
-  has_many :owned_courses, -> { where attendings: { role: 2 }},
+  has_many :owned_courses, -> { where attendings: { role: 2 } },
     through: :attendings, source: :course
   #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)
     return last_visited_courses.limit(number) if number
-    courses.joins(:attendings).
-        order('"attendings"."last_visit" DESC').uniq
+    courses.joins(:attendings)
+      .order('"attendings"."last_visit" DESC').uniq
   end
 
   def existing_since
