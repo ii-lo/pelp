@@ -25,17 +25,12 @@ class UserExam < ActiveRecord::Base
   def update_result
     sum = 0
     q_c = exam.question_categories.pluck(:id)
-      .each_with_object({}) { |q, m| m[q] = 0 }
+      .each_with_object({}) { |question, h| h[question] = 0 }
     user_answers.includes(:question)
-      .group_by(&:question).each do |k, v|
-      case k.form
-      when 'multiple'
-        res = mark_multiple(k, v)
-      else
-        res = v.first.correct ? k.value : 0
-      end
-      sum += res
-      q_c[k.question_category_id] += res
+      .group_by(&:question).each do |question, user_answers|
+      result = mark_answer(question, user_answers)
+      sum += result
+      q_c[question.question_category_id] += result
     end
     update_attribute(:result, sum)
     update_category_results(q_c)
@@ -61,6 +56,15 @@ class UserExam < ActiveRecord::Base
     priority: 20
 
   private
+
+  def mark_answer(question, user_answers)
+    case question.form
+    when 'multiple'
+      mark_multiple(question, user_answers)
+    else
+      user_answers.first.correct ? question.value : 0
+    end
+  end
 
   def mark_multiple(question, user_answers)
     return 0 if question.correct_answers_count == 0
