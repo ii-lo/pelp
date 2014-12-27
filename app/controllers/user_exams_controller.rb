@@ -109,13 +109,14 @@ class UserExamsController < ApplicationController
   def check_if_closed
     @user_exam = UserExam.find_by_id session[:user_exam_id]
     return redirect_to root_path unless @user_exam
-    @exam = @user_exam.exam
-    if Time.now > @user_exam.created_at + @exam.duration
-      @user_exam.close!
-    end
     if @user_exam.closed
+      clear_session
+      return show_result
+    elsif Time.now > @user_exam.created_at + @user_exam.exam_duration
+      @user_exam.close!
       clear_session
       return show_result
     end
   end
+
 end
