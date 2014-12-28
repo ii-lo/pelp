@@ -93,4 +93,86 @@ RSpec.describe UserExam, :type => :model do
       end
     end
   end
+
+  describe '#mark_multiple' do
+    before do
+      @u_e = UserExam.new
+    end
+
+    context "half of correct answers" do
+      before do
+        @question = double Question, correct_answers_count: 2,
+          value: 2, form: 1
+        @u_a = [
+          double(UserAnswer, correct: true, answer_id: 1),
+          double(UserAnswer, answer_id: nil),
+          double(UserAnswer, answer_id: nil),
+          double(UserAnswer, answer_id: nil)
+        ]
+      end
+
+      it "returns half of qestion value" do
+        expect(
+          @u_e.send(:mark_multiple, @question, @u_a)
+        ).to eq 1.0
+      end
+    end
+
+    context "one incorrect answer" do
+      before do
+        @question = double Question, correct_answers_count: 3,
+          value: 2, form: 1
+        @u_a = [
+          double(UserAnswer, correct: true, answer_id: 1),
+          double(UserAnswer, answer_id: 2, correct: false),
+          double(UserAnswer, answer_id: 3, correct: true),
+          double(UserAnswer, answer_id: nil)
+        ]
+      end
+
+      it "part of total value" do
+        expect(
+          @u_e.send(:mark_multiple, @question, @u_a)
+        ).to eq @question.value * 1.0/3
+      end
+    end
+
+    context "as many correct as incorrect answers" do
+      before do
+        @question = double Question, correct_answers_count: 2,
+          value: 2, form: 1
+        @u_a = [
+          double(UserAnswer, correct: true, answer_id: 1),
+          double(UserAnswer, answer_id: 2, correct: false),
+          double(UserAnswer, answer_id: nil),
+          double(UserAnswer, answer_id: nil)
+        ]
+      end
+
+      it "returns 0" do
+        expect(
+          @u_e.send(:mark_multiple, @question, @u_a)
+        ).to eq 0
+      end
+    end
+
+    context "more incorrect than correct answers" do
+      before do
+        @question = double Question, correct_answers_count: 2,
+          value: 2, form: 1
+        @u_a = [
+          double(UserAnswer, correct: true, answer_id: 1),
+          double(UserAnswer, answer_id: 2, correct: false),
+          double(UserAnswer, answer_id: 3, correct: false),
+          double(UserAnswer, answer_id: nil)
+        ]
+      end
+
+      it "returns 0" do
+        expect(
+          @u_e.send(:mark_multiple, @question, @u_a)
+        ).to eq 0
+      end
+    end
+  end
 end
