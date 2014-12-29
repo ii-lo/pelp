@@ -92,7 +92,7 @@ GEM
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
     escape_utils (1.0.1)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     execjs (2.2.1)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
@@ -322,6 +322,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (~> 3.4.0)
   escape_utils
+  eventmachine (= 1.0.4)
   factory_girl_rails (~> 4.4.1)
   fast_blank
   fuubar (~> 2.0.0)

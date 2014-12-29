@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.2.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -82,6 +82,8 @@ gem 'github-markdown'
 gem 'escape_utils'
 gem 'sanitize'
 gem 'pygments.rb'
+
+gem 'eventmachine', '1.0.4'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
