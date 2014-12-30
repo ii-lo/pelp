@@ -1,5 +1,4 @@
 class ExamPolicy < Struct.new(:user, :exam)
-  #TODO: Real courses policies
   def new?
     #binding.pry
     exam && exam.course.admins.include?(user)
