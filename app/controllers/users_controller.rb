@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    # yeah...
     authorize(:user)
     params[:user][:password_confirmation] ||= params[:user][:password]
     @user = User.new user_params
@@ -21,8 +20,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find params[:id]
     authorize(@user)
-
-    @courses = Course.open.paginate(page: params[:page], per_page: 8) # TODO Meh. Return all courses which owner I am.
+    @courses = @user.admin_courses.paginate(page: params[:page], per_page: 8)
   end
 
   def edit

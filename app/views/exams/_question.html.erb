@@ -10,11 +10,13 @@
       <%= render 'answer', answer: a %>
     <% end %>
   </ul>
-  <strong>Nowa odpowiedź</strong>
-  <% case question.form %>
-  <% when 'open' %>
-    <%= render 'open_answer_form', question: question %>
-  <% else %>
-    <%= render 'single_answer_form', question: question %>
-  <% end %>
+  <div class="hidden">
+      <strong>Nowa odpowiedź</strong>
+      <% case question.form %>
+      <% when 'open' %>
+        <%= render 'open_answer_form', question: question %>
+      <% else %>
+        <%= render 'single_answer_form', question: question %>
+      <% end %>
+  </div>
 </div>
