@@ -30,9 +30,11 @@ class UserExamsController < ApplicationController
   end
 
   def question
+    @user_exam = UserExam.find session[:user_exam_id]
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
     @markdown = markdown_renderer.call(@question.name)[:output].to_s
+    @end_time = @user_exam.created_at + @exam.duration
     session[:current_question_id] = @question.id
   end
 

@@ -44,7 +44,7 @@
             <li data-toggle="tooltip" title="Pozostały czas">
                 <a>
                     <i class="glyphicon glyphicon-time"></i>
-                    <span data-cclock="window.location.reload()">5:00</span> <%# TODO Ekhmmm %>
+                    <span data-cclock="window.location.replace('/exam/exit')"><%= time_from_seconds(@end_time.to_i - Time.now.to_i) %></span>
                 </a>
             </li>
 
