@@ -13,37 +13,64 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <%= bootstrap_flash %>
-    <div>
-        <h3>Edytuj</h3>
-        <%= simple_form_for [@course, @exam] do |f| %>
-            <%= f.input :name, label: "Nazwa" %>
-            <%= f.input :duration, as: :integer, label: "Długość w sekundach" %>
-            <%= f.input :published, as: :boolean, label: "Dostępny" %>
-            <%= f.button :submit, "Zaaktualizuj" %>
-        <% end %>
+    <div class="row">
+      <%= bootstrap_flash %>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+          <h3>Edytuj</h3>
+          <%= simple_form_for [@course, @exam] do |f| %>
+              <%= f.input :name, label: "Nazwa" %>
+              <%= f.input :duration, as: :integer, label: "Długość w sekundach" %>
+              <%= f.input :published, as: :boolean, label: "Dostępny" %>
+              <%= f.button :submit, "Zaaktualizuj" %>
+          <% end %>
+          <div class="row-separator">
+          </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Kategorie</h3>
+          <div class="hide_all">
+            <a href="#" class="compress">Zwiń wszystko</a>
+          </div>
+          <div class="row-separator">
+          </div>
+        </div>
+      </div>
+      <% @q_cs.each do |qc| %>
+          <div style="border: 4px solid orange" class="row">
+              <div class="col-xs-12">
+                  <div class="show_more">
+                    <a href="#" data-closed="Rozwiń" data-open="Zwiń" data-expand="questions">Rozwiń</a>
+                  </div>
+                  <h4><%= qc.name %></h4>
+                  <div class="questions hidden to_expand">
+                    <p><%= link_to "Usuń kategorię", exam_question_category_path(@exam, qc), method: :delete %></p>
+                    <% qc.questions.each do |q| %>
+                        <%= render 'question', question: q %>
+                    <% end %>
+                    <div class="hidden">
+                        <b>Nowe pytanie</b>
+                        <%= simple_form_for [@exam, qc, Question.new] do |f| %>
+                            <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+                            <%= f.input :value, as: :integer, label: "Wartość" %>
+                            <%= f.input :form, collection: {"Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open'}, label: "Forma" %>
+                            <%= f.button :submit, "Stwórz" %>
+                        <% end %>
+                    </div>
+                  </div>
+                  <div class="row-separator">
+                  </div>
+              </div>
+          </div>
+      <% end %>
     </div>
     <h3>Nowa kategoria</h3>
     <%= simple_form_for [@exam, QuestionCategory.new] do |f| %>
         <%= f.input :name, label: "Nazwa" %>
-    <% end %>
-    <% @q_cs.each do |qc| %>
-        <div style="border: 4px solid orange">
-            <h4><%= qc.name %></h4>
-
-            <p><%= link_to "Usuń kategorię", exam_question_category_path(@exam, qc), method: :delete %></p>
-            <% qc.questions.each do |q| %>
-                <%= render 'question', question: q %>
-            <% end %>
-            <div class="hidden">
-                <b>Nowe pytanie</b>
-                <%= simple_form_for [@exam, qc, Question.new] do |f| %>
-                    <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
-                    <%= f.input :value, as: :integer, label: "Wartość" %>
-                    <%= f.input :form, collection: {"Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open'}, label: "Forma" %>
-                    <%= f.button :submit, "Stwórz" %>
-                <% end %>
-            </div>
-        </div>
+        <%= f.button :submit, 'Stwórz' %>
     <% end %>
 </div>

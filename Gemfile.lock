@@ -323,7 +323,7 @@ DEPENDENCIES
   capybara (~> 2.4)
   capybara-webkit (~> 1.3.0)
   carrierwave!
-  coffee-rails
+  coffee-rails (~> 4.0)
   color
   daemons
   database_cleaner (~> 1.3.0)
