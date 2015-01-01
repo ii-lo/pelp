@@ -24,5 +24,23 @@ RSpec.describe UserAnswer, :type => :model do
     it { is_expected.to validate_presence_of :user_exam_id }
 
     it { is_expected.to validate_presence_of :question_id }
+
+    describe '#open_user_exam' do
+      context "exam is open" do
+        it "is valid" do
+          expect(FactoryGirl.build :user_answer).to be_valid
+        end
+      end
+
+      context "exam is closed" do
+        before do
+          UserExam.first.update_attribute(:closed, true)
+        end
+
+        it "is invalid" do
+          expect(FactoryGirl.build :user_answer).to be_invalid
+        end
+      end
+    end
   end
 end

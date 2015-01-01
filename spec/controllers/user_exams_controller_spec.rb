@@ -14,6 +14,13 @@ RSpec.describe UserExamsController, :type => :controller do
 
   describe "GET new" do
     it "returns http success" do
+      get :new, id: 1
+      expect(response).to have_http_status 200
+    end
+  end
+
+  describe "GET start" do
+    it "creates new user exam" do
       expect do
         get :start, id: 1
       end.to change{UserExam.count}.by 1
@@ -26,9 +33,20 @@ RSpec.describe UserExamsController, :type => :controller do
     before do
       get :start, id: 1
     end
+
     it "returns http success" do
       get :question
       expect(response).to have_http_status(:success)
+    end
+
+    context "exam closed" do
+      it "ends exam" do
+        Exam.first.update_attribute(:duration, 1)
+        allow(Time).to receive(:now) { Time.new + 5.minutes }
+        get :question
+        expect(UserExam.first.open?).to eq false
+        expect(response).to redirect_to user_exam_path(1)
+      end
     end
   end
 

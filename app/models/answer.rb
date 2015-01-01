@@ -38,7 +38,7 @@ class Answer < ActiveRecord::Base
 
   def only_one_correct_if_single
     return true unless correct
-    return true unless question.try(:single)
+    return true unless question.try(:single?)
     ans = question.answers.correct.first
     if ans && ans != self
       errors[:correct] << "Już istnieje prawidłowa odpowiedź"

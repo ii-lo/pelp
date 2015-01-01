@@ -26,6 +26,13 @@ RSpec.describe LessonsController, :type => :controller do
       get :new, course_id: 1
       expect(response).to have_http_status(:success)
     end
+
+    context "params[:lesson_category_id]" do
+      it "renders new template and assings lesson category" do
+        get :new, course_id: 1, lesson_category_id: 1
+        expect(assigns(:l_c)).to eq LessonCategory.first
+      end
+    end
   end
 
   describe "POST create" do
