@@ -17,6 +17,22 @@ class QuestionCategoriesController < ApplicationController
     end
   end
 
+  def update
+    @exam = Exam.find params[:exam_id]
+    @q_c = @exam.question_categories.find params[:id]
+    if @q_c.update_attributes(q_c_params)
+      respond_to do |format|
+        format.html { redirect_to :back, notice: "Zaaktualizowano" }
+        format.json { render json: @q_c }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, error: @q_c.errors.full_messages }
+        format.json { render json: { errors: @q_c.errors.full_messages }, status: 422 }
+      end
+    end
+  end
+
   def destroy
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.find params[:id]

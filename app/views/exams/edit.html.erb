@@ -46,8 +46,16 @@
                   <div class="show_more">
                     <a href="#" data-closed="Rozwiń" data-open="Zwiń" data-expand="questions">Rozwiń</a>
                   </div>
-                  <h4><%= qc.name %></h4>
+                  <h4 class="q_c" data-id=<%= qc.id %>><%= qc.name %></h4>
                   <div class="questions hidden to_expand">
+                    <a href="#" title="Edytuj" class="edit_qc_link">
+                      Zmień nazwę
+                    </a>
+                    <div class="qc_edit_form hidden">
+                      <%= simple_form_for([@exam, qc], remote: true) do |f| %>
+                        <%= f.input :name, label: "Nowa nazwa" %>
+                      <% end %>
+                    </div>
                     <p><%= link_to "Usuń kategorię", exam_question_category_path(@exam, qc), method: :delete %></p>
                     <% qc.questions.each do |q| %>
                         <%= render 'question', question: q %>

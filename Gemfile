@@ -61,7 +61,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'
 
 # serialization
-gem 'active_model_serializers', '~> 0.9'
+gem 'active_model_serializers', '~> 0.8'
 
 # knockout
 gem 'knockoutjs-rails'

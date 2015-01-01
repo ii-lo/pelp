@@ -18,5 +18,6 @@ class QuestionCategory < ActiveRecord::Base
 
   validates :exam_id, presence: true
   validates :name, presence: true,
-    uniqueness: { scope: [:exam_id] }
+    uniqueness: { scope: [:exam_id] },
+    length: { maximum: 255 }
 end

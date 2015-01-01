@@ -42,4 +42,32 @@ RSpec.describe QuestionCategoriesController, :type => :controller do
     end
   end
 
+  describe "PUT update" do
+    before do
+      FactoryGirl.create :question_category
+    end
+
+    context "valid params" do
+      it "updates question category" do
+        xhr :put, :update, exam_id: 1, id: 1,
+          question_category: { name: "Takowe" }, format: :json
+        expect(QuestionCategory.first.name).to eq "Takowe"
+        expect(JSON.parse(response.body).deep_symbolize_keys)
+          .to(eq({ :question_category => { name: "Takowe", id: 1 } }))
+      end
+    end
+
+    context "invalid params" do
+      it "renders json with error" do
+        xhr :put, :update, exam_id: 1, id: 1,
+          question_category: { name: "a" * 444 }, format: :json
+        expect(response).to have_http_status 422
+        expect(JSON.parse response.body).not_to be_nil
+        expect(JSON.parse(response.body)['errors'].first).to(
+          include 'długie'
+        )
+      end
+    end
+  end
+
 end

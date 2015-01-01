@@ -316,7 +316,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
-  active_model_serializers (~> 0.9)
+  active_model_serializers (~> 0.8)
   annotate
   better_errors
   binding_of_caller
