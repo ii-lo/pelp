@@ -19,8 +19,8 @@ class ExamPolicy < Struct.new(:user, :exam)
       scope.where(
         "('exams'.'published' = ? AND 'exams'.'course_id' IN(?)) OR
          ('exams'.'published' = ? AND 'exams'.'course_id' IN(?))",
-         false, user.admin_courses.pluck(:id),
-         true, user.courses.pluck(:id)
+         false, user.admin_courses.select(:id),
+         true, user.courses.select(:id)
       )
     end
   end
