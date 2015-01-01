@@ -2,6 +2,7 @@ class QuestionCategoriesController < ApplicationController
   def create
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.build(q_c_params)
+    authorize(@q_c)
     respond_to do |format|
       if @q_c.save
         format.html do
@@ -20,6 +21,7 @@ class QuestionCategoriesController < ApplicationController
   def update
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.find params[:id]
+    authorize(@q_c)
     if @q_c.update_attributes(q_c_params)
       respond_to do |format|
         format.html { redirect_to :back, notice: "Zaaktualizowano" }
@@ -36,6 +38,7 @@ class QuestionCategoriesController < ApplicationController
   def destroy
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.find params[:id]
+    authorize(@q_c)
     @q_c.destroy
     respond_to do |format|
       format.html do
