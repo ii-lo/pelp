@@ -50,7 +50,7 @@ $ ->
     $(form_class).off("ajax:success").on("ajax:success", (e, data, status, xhr) ->
       $(form_class).parent().addClass 'hidden'
       data = data[object_class]
-      $('.' + to_edit + '[data-id=' + data.id + ']').text(data.name)
+      $(".#{to_edit}[data-id=#{data.id}]").text(data.name)
       custom(to_edit, data) if custom
     ).off("ajax:error").on("ajax:error", (e, data, status, xhr) ->
       alert data.responseJSON.errors[0]
@@ -60,7 +60,7 @@ $ ->
     edit_form('.edit_question_category', 'q_c', 'question_category')
     edit_form '.edit_question', 'question', 'question', (to_edit, data) ->
       $.get '/question_markdown/' + data.id, (response) ->
-        $('.' + to_edit + '[data-id=' + data.id + ']').html(response)
+        $(".#{to_edit}[data-id=#{data.id}]").html(response)
   prepare_forms()
 
   $(".new_question").on("ajax:success", (e, data, status, xhr) ->
