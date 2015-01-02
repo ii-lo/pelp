@@ -53,7 +53,10 @@ $ ->
       $(".#{to_edit}[data-id=#{data.id}]").text(data.name)
       custom(to_edit, data) if custom
     ).off("ajax:error").on("ajax:error", (e, data, status, xhr) ->
-      alert data.responseJSON.errors[0]
+      if data.responseJSON
+        alert data.responseJSON.errors[0]
+      else
+        alert "Błąd połączenia"
     )
 
   prepare_forms = ->

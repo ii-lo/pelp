@@ -1,4 +1,3 @@
-/// <reference path="../../../tsd/tsd.d.ts" />
 
 //= require cclock
 
