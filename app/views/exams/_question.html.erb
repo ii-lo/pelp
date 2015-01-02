@@ -2,8 +2,18 @@
   <div class="show_more">
     <a href="#" data-closed="Rozwiń" data-open="Zwiń" data-expand="answers">Rozwiń</a>
   </div>
-  <div style="border: 2pt solid pink">
+  <div style="border: 2pt solid pink" class="question" data-id=<%= question.id %>>
     <%= @markdown.call(question.name)[:output].to_s.html_safe %>
+  </div>
+  <a href="#" title="Edytuj" class="edit_question_link">
+    Zmień treść
+  </a>
+  <div class="question_edit_form hidden">
+    <%= simple_form_for([@exam, question.question_category, question], remote: true, data: { type: 'json' }) do |f| %>
+      <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+      <%= f.input :value, label: "Wartość", as: :integer %>
+      <%= f.button :submit, "Zaaktualizuj" %>
+    <% end %>
   </div>
   <p><%= link_to "Usuń pytanie", exam_question_category_question_path(@exam, question.question_category_id, question), method: :delete %></p>
   <p><%= question.string_form %></p>
