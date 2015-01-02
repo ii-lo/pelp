@@ -49,6 +49,9 @@ class QuestionsController < ApplicationController
     authorize(@question)
     @question.destroy
     respond_to do |format|
+      format.json do
+        render json: { destroyed: true }
+      end
       format.html do
         redirect_to edit_course_exam_path(@exam.course, @exam),
           notice: "Usunięto"

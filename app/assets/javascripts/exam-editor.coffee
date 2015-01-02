@@ -4,14 +4,17 @@
 
 
 $ ->
-  $(".show_more > a").on 'click', (e) ->
-    e.preventDefault()
-    $(this).parent().parent()
-      .find('.' + $(this).data('expand')).toggleClass('hidden')
-    if $(this).text() == $(this).data('closed')
-      $(this).text($(this).data('open'))
-    else
-      $(this).text($(this).data('closed'))
+  prepare_show_more = ->
+    $(".show_more > a").off('click').on 'click', (e) ->
+      e.preventDefault()
+      $(this).parent().parent()
+        .find('.' + $(this).data('expand')).toggleClass('hidden')
+      if $(this).text() == $(this).data('closed')
+        $(this).text($(this).data('open'))
+      else
+        $(this).text($(this).data('closed'))
+
+  prepare_show_more()
 
   $('.hide_all > a').on 'click', (e) ->
     e.preventDefault()
@@ -20,9 +23,22 @@ $ ->
       $(this).text($(this).data('closed'))
 
   toggle_link = (link, to_toggle) ->
-    $(link).on 'click', (e) ->
+    $(link).off('click').on 'click', (e) ->
       e.preventDefault()
       $(this).parent().find(to_toggle).toggleClass('hidden')
+
+  destroy_link = (link) ->
+    $(link).off('ajax:success').on('ajax:success', (e, data, status, xhr) ->
+      $(this).parent().parent().remove()
+    ).on "ajax:error", (e, xhr, status, error) ->
+      alert "Coś poszło nie tak; prawodopodobnie nie masz uprawnień do tej akcji"
+
+  destroy_links = ->
+    for l_c in ['.destroy_answer', '.destroy-question']
+      destroy_link(l_c)
+    return
+
+  destroy_links()
 
   prepare_links = ->
     toggle_link('.edit_qc_link', '.qc_edit_form')
@@ -31,12 +47,12 @@ $ ->
   prepare_links()
 
   edit_form = (form_class, to_edit, object_class, custom) ->
-    $(form_class).on("ajax:success", (e, data, status, xhr) ->
+    $(form_class).off("ajax:success").on("ajax:success", (e, data, status, xhr) ->
       $(form_class).parent().addClass 'hidden'
       data = data[object_class]
       $('.' + to_edit + '[data-id=' + data.id + ']').text(data.name)
       custom(to_edit, data) if custom
-    ).on("ajax:error", (e, data, status, xhr) ->
+    ).off("ajax:error").on("ajax:error", (e, data, status, xhr) ->
       alert data.responseJSON.errors[0]
     )
 
@@ -50,6 +66,8 @@ $ ->
   $(".new_question").on("ajax:success", (e, data, status, xhr) ->
     prepare_links()
     prepare_forms()
+    prepare_show_more()
+    destroy_links()
   ).on "ajax:error", (e, xhr, status, error) ->
     alert(xhr.responseJSON.errors[0])
 

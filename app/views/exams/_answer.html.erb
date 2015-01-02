@@ -3,5 +3,8 @@
   <% unless answer.question.open? %>
     <p><%= answer.correct ? "P" : "F" %></p>
   <% end %>
-  <%= link_to "Usuń odpowiedź", question_answer_path(answer.question_id, answer), method: :delete %>
+  <p>
+    <%= link_to "Usuń odpowiedź", question_answer_path(answer.question_id, answer), method: :delete,
+        remote: true, data: { type: 'json' }, class: 'destroy-answer'%>
+  </p>
 </div>
