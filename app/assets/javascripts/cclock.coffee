@@ -14,11 +14,7 @@ $ ->
   $.fn.cclock = (onExhausted) ->
     return this.each ->
       elem = $(this)
-<<<<<<< HEAD
-      elem.data cclockInternalData, $.extend(parseTimeStr(elem.text()), {
-=======
       elem.data cclockInternalData, $.extend parseTimeStr(elem.text()), {
->>>>>>> eb1daec... Minor improvements
         exhausted: false,
         fn: onExhausted || (if elem.data(cclockData) then -> eval(elem.data(cclockData)) else $.noop),
         interv: setInterval ->
@@ -38,10 +34,6 @@ $ ->
                 elem.removeData(cclockInternalData)
           elem.text(mkTimeStr(data))
         , 1000
-<<<<<<< HEAD
-      })
-=======
       }
->>>>>>> eb1daec... Minor improvements
   $('[data-cclock]').cclock()
 
