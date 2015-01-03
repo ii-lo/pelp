@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
         format.js do
           @markdown = markdown_renderer
         end
-        format.json { render json:  { valid: true } }
+        format.json { render json: @question }
       else
         format.json { render json: { errors: @question.errors.full_messages }, status: 422  }
         format.html do

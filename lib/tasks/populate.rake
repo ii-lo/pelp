@@ -29,8 +29,8 @@ namespace :db do
     QuestionCategory.create(name: "Szczegółowe", exam_id: 1)
     Question.create(name: "Czy ziemia jest płaska?",
                     value: 2, exam_id: 1, question_category_id: 1)
-    Answer.create(name: "Tak", correct: false, question_id: 1)
     Answer.create(name: "Nie", correct: true, question_id: 1)
+    Answer.create(name: "Tak", correct: false, question_id: 1)
     Question.create(name: "Jakie programy domyślnie ma Łubuntu?",
                     value: 2, form: 1, exam_id: 1, question_category_id: 2)
     Answer.create(name: "Firefox", correct: true, question_id: 2)

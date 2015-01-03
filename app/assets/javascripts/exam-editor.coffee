@@ -11,8 +11,10 @@ $ ->
         .find('.' + $(this).data('expand')).toggleClass('hidden')
       if $(this).text() == $(this).data('closed')
         $(this).text($(this).data('open'))
-      else
+      else if $(this).text() == $(this).data('open')
         $(this).text($(this).data('closed'))
+      else
+        return
 
   prepare_show_more()
 
@@ -30,28 +32,30 @@ $ ->
   destroy_link = (link) ->
     $(link).off('ajax:success').on('ajax:success', (e, data, status, xhr) ->
       $(this).parent().parent().remove()
-    ).on "ajax:error", (e, xhr, status, error) ->
+    ).off("ajax:error").on "ajax:error", (e, xhr, status, error) ->
       alert "Coś poszło nie tak; prawodopodobnie nie masz uprawnień do tej akcji"
 
   destroy_links = ->
-    for l_c in ['.destroy_answer', '.destroy-question']
+    for l_c in ['.destroy_answer', '.destroy_question']
       destroy_link(l_c)
     return
 
   destroy_links()
 
-  prepare_links = ->
+  prepare_toggle_links = ->
     toggle_link('.edit_qc_link', '.qc_edit_form')
     toggle_link('.edit_question_link', '.question_edit_form')
     toggle_link('.new_question_link', '.new_question_form')
-  prepare_links()
+    toggle_link('.edit_answer_link', '.answer_edit_form')
+
+  prepare_toggle_links()
 
   edit_form = (form_class, to_edit, object_class, custom) ->
     $(form_class).off("ajax:success").on("ajax:success", (e, data, status, xhr) ->
       $(form_class).parent().addClass 'hidden'
       data = data[object_class]
       $(".#{to_edit}[data-id=#{data.id}]").text(data.name)
-      custom(to_edit, data) if custom
+      custom(data) if custom
     ).off("ajax:error").on("ajax:error", (e, data, status, xhr) ->
       if data.responseJSON
         alert data.responseJSON.errors[0]
@@ -59,19 +63,34 @@ $ ->
         alert "Błąd połączenia"
     )
 
-  prepare_forms = ->
+  prepare_edit_forms = ->
     edit_form('.edit_question_category', 'q_c', 'question_category')
-    edit_form '.edit_question', 'question', 'question', (to_edit, data) ->
+    edit_form '.edit_question', 'question_body', 'question', (data) ->
       $.get '/question_markdown/' + data.id, (response) ->
-        $(".#{to_edit}[data-id=#{data.id}]").html(response)
-  prepare_forms()
+        $(".question_body[data-id=#{data.id}]").html(response)
+    edit_form '.edit_answer', 'answer_name', 'answer', (data) ->
+      correct = $(".answer[data-id=#{data.id}]").find('.correct_answer')
+      if data.correct
+        $(correct).text $(correct).data('correct')
+      else
+        $(correct).text $(correct).data('false')
 
-  $(".new_question").on("ajax:success", (e, data, status, xhr) ->
-    prepare_links()
-    prepare_forms()
-    prepare_show_more()
-    destroy_links()
-  ).on "ajax:error", (e, xhr, status, error) ->
-    alert(xhr.responseJSON.errors[0])
+  prepare_edit_forms()
+
+  create_form = (form) ->
+    $(form).off("ajax:success").on("ajax:success", (e, data, status, xhr) ->
+      prepare_toggle_links()
+      prepare_edit_forms()
+      prepare_show_more()
+      destroy_links()
+      prepare_create_forms()
+    ).off("ajax:error").on "ajax:error", (e, xhr, status, error) ->
+      alert(xhr.responseJSON.errors[0])
+
+  prepare_create_forms = ->
+    create_form('.new_question')
+    create_form('.new_answer')
+
+  prepare_create_forms()
 
 

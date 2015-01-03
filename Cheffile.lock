@@ -14,13 +14,6 @@ SITE
       yum (~> 3.0)
 
 GIT
-  remote: https://github.com/fnichol/chef-rbenv
-  ref: master
-  sha: 0a3018634bafe58ad21c6ee271af015220e444b9
-  specs:
-    rbenv (0.7.3)
-
-GIT
   remote: https://github.com/mdxp/nodejs-cookbook
   ref: master
   sha: e2415cd8c4e03dccf21d7ef6ca31e1c5c81467ca
@@ -36,7 +29,6 @@ DEPENDENCIES
   imagemagick (>= 0)
   libqt4 (>= 0)
   nodejs (>= 0)
-  rbenv (>= 0)
   ruby_build (>= 0)
   vim (>= 0)
 
