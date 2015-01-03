@@ -34,6 +34,33 @@ RSpec.describe QuestionsController, :type => :controller do
     end
   end
 
+  describe "PATCH update" do
+    before do
+      FactoryGirl.create :question
+    end
+    context "valid params" do
+      it "updates answer" do
+        xhr :patch, :update, exam_id: 1, question_category_id: 1, id: 1,
+          question: { name: "Takowe", value: 2 }, format: :json
+        expect(Question.first.name).to eq "Takowe"
+        expect(JSON.parse(response.body).deep_symbolize_keys)
+          .to(eq({ :question => { name: "Takowe", id: 1, value: 2 } }))
+      end
+    end
+
+    context "invalid params" do
+      it "renders json with error" do
+        xhr :patch, :update, exam_id: 1, question_category_id: 1, id: 1,
+          question: { value: 444 }, format: :json
+        expect(response).to have_http_status 422
+        expect(JSON.parse response.body).not_to be_nil
+        expect(JSON.parse(response.body)['errors'].first).to(
+          include 'znajduje'
+        )
+      end
+    end
+  end
+
   describe 'DELETE destroy' do
     before do
       FactoryGirl.create :question

@@ -42,7 +42,7 @@ RSpec.describe QuestionCategoriesController, :type => :controller do
     end
   end
 
-  describe "PUT update" do
+  describe "PATCH update" do
     before do
       FactoryGirl.create :question_category
     end

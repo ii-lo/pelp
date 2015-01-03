@@ -18,10 +18,12 @@ class Answer < ActiveRecord::Base
 
   has_many :user_answers
   has_one :question_category, through: :question
+  has_one :exam, through: :question
 
   validates :question_id, presence: true
   validates :name, presence: true,
-            uniqueness: {scope: [:question_id]}
+            uniqueness: {scope: [:question_id]},
+            length: { maximum: 255 }
   validate :only_one_correct_if_single
 
   scope :correct, -> { where(correct: true) }

@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = @question.answers.build(answer_params)
     @exam = @question.exam
+    authorize(@answer)
     if @answer.save
       respond_to do |format|
         format.html do
@@ -27,6 +28,7 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = @question.answers.find(params[:id])
     @exam = @question.exam
+    authorize(@answer)
     @answer.destroy
     respond_to do |format|
       format.json do
@@ -42,6 +44,7 @@ class AnswersController < ApplicationController
   def update
     @question = Question.find params[:question_id]
     @answer = @question.answers.find params[:id]
+    authorize(@answer)
     if @answer.update_attributes(answer_params)
       respond_to do |format|
         format.html { redirect_to :back, notice: "Zaaktualizowano" }

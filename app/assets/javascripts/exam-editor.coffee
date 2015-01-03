@@ -66,6 +66,7 @@ $ ->
   prepare_edit_forms = ->
     edit_form('.edit_question_category', 'q_c', 'question_category')
     edit_form '.edit_question', 'question_body', 'question', (data) ->
+      $(".question_value[data-id=#{data.id}]").text(data.value)
       $.get '/question_markdown/' + data.id, (response) ->
         $(".question_body[data-id=#{data.id}]").html(response)
     edit_form '.edit_answer', 'answer_name', 'answer', (data) ->
