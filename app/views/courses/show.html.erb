@@ -24,34 +24,56 @@
     </div>
     <div class="row">
         <%# TODO Better category layout if possible. %>
+        <% n = 0 %>
         <% @lesson_categories.each do |lc| %>
-            <div class="col-xs-12 col-md-6 col-lg-4">
-                <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
-                    <div class="panel-heading"><%= lc.name %></div>
-                    <ul class="list-group">
-                        <% lc.lessons.each do |l| %>
-                            <li class="list-group-item">
-                              <%= link_to course_lesson_path(@course, l) do %>
-                                  <i class="glyphicon glyphicon-book"></i> <%= l.name %>
-                              <% end %>
-                            </li>
-                            <% if @admin %>
+            <% if n == 0 %>
+              <div class="lg">
+              <div class="md">
+            <% else %>
+              <% if n % 2 == 1 %>
+              </div> <!-- md -->
+              <% end %>
+              <% if n % 3 == 0 %>
+              </div> <!-- lg -->
+              <div class="lg">
+              <% end %>
+              <% if n % 2 == 1 %>
+                <div class="md">
+              <% end %>
+            <% end %>
+
+            <div class="xs">
+              <div class="col-xs-12 col-md-6 col-lg-4">
+                  <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
+                      <div class="panel-heading"><%= lc.name %></div>
+                      <ul class="list-group">
+                          <% lc.lessons.each do |l| %>
                               <li class="list-group-item">
-                                <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
+                                <%= link_to course_lesson_path(@course, l) do %>
+                                    <i class="glyphicon glyphicon-book"></i> <%= l.name %>
+                                <% end %>
                               </li>
-                            <% end %>
-                        <% end %>
-                             <% @exams[lc.id].each do |e| %>
-                                  <li class="list-group-item">
-                                      <%= link_to new_user_exam_path(e) do %>
-                                          <i class="glyphicon glyphicon-check"></i> <%= e.name %>
-                                      <% end %>
-                                  </li>
-                            <% end %>
-                    </ul>
-                </div>
+                              <% if @admin %>
+                                <li class="list-group-item">
+                                  <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
+                                </li>
+                              <% end %>
+                          <% end %>
+                               <% @exams[lc.id].each do |e| %>
+                                    <li class="list-group-item">
+                                        <%= link_to new_user_exam_path(e) do %>
+                                            <i class="glyphicon glyphicon-check"></i> <%= e.name %>
+                                        <% end %>
+                                    </li>
+                              <% end %>
+                      </ul>
+                  </div>
+              </div>
             </div>
+            <% n += 1 %>
         <% end %>
+      </div> <!-- md -->
+      </div> <!-- lg -->
     </div>
 </div>
 

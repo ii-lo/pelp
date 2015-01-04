@@ -13,3 +13,74 @@
     margin-right: @padding-small-horizontal;
   }
 }
+
+.xs {
+  @media(max-width: @screen-xs-max){
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    display: table;
+    float: left;
+  }
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md){}
+  @media(min-width: @screen-lg){}
+}
+.xs:before {
+  @media(max-width: @screen-xs-max){
+    content: " ";
+    display: table;
+  }
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md){}
+  @media(min-width: @screen-lg){}
+}
+
+.md {
+  @media(max-width: @screen-xs-max){}
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md) and (max-width: @screen-lg){
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    display: table;
+    float: left;
+  }
+  @media(min-width: @screen-lg){}
+}
+
+.md:before {
+  @media(max-width: @screen-xs-max){}
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md) and (max-width: @screen-lg){
+    content: " ";
+    display: table;
+  }
+  @media(min-width: @screen-lg){}
+}
+
+.lg {
+  @media(max-width: @screen-xs-max){}
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md){}
+  @media(min-width: @screen-lg){
+    display: table;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    float: left;
+  }
+}
+
+.lg:before {
+  @media(max-width: @screen-xs-max){}
+  @media(min-width: @screen-sm){}
+  @media(min-width: @screen-md){}
+  @media(min-width: @screen-lg){
+    display: table;
+    content: " "
+  }
+}
