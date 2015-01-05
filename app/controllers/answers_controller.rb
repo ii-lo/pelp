@@ -3,13 +3,19 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = @question.answers.build(answer_params)
     @exam = @question.exam
-    respond_to do |format|
-      if @answer.save
+    authorize(@answer)
+    if @answer.save
+      respond_to do |format|
         format.html do
           redirect_to edit_course_exam_path(@exam.course, @exam),
             notice: "Stworzono"
         end
-      else
+        format.js {  }
+        format.json { render json: @answer }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @answer.errors.full_messages }, status: 422 }
         format.html do
           redirect_to edit_course_exam_path(@exam.course, @exam),
             notice: "Jakiś błąd"
@@ -22,11 +28,32 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = @question.answers.find(params[:id])
     @exam = @question.exam
+    authorize(@answer)
     @answer.destroy
     respond_to do |format|
+      format.json do
+        render json: { destroyed: true }
+      end
       format.html do
         redirect_to edit_course_exam_path(@exam.course, @exam),
           notice: "Usunięto"
+      end
+    end
+  end
+
+  def update
+    @question = Question.find params[:question_id]
+    @answer = @question.answers.find params[:id]
+    authorize(@answer)
+    if @answer.update_attributes(answer_params)
+      respond_to do |format|
+        format.html { redirect_to :back, notice: "Zaaktualizowano" }
+        format.json { render json: @answer }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, error: @answer.errors.full_messages }
+        format.json { render json: { errors: @answer.errors.full_messages }, status: 422 }
       end
     end
   end

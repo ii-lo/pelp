@@ -25,4 +25,11 @@ RSpec.describe Course, :type => :model do
       expect(c).to be_invalid
     end
   end
+
+  describe "#to_s" do
+    it "returns name" do
+      course = FactoryGirl.build :course
+      expect(course.to_s).to eq course.name
+    end
+  end
 end

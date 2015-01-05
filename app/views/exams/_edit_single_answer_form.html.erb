@@ -1,0 +1,5 @@
+<%= simple_form_for [question, answer], html: { remote: true, class: "edit_answer", data: { type: 'json' } } do |f| %>
+  <%= f.input :name, label: "Wartość" %>
+  <%= f.input :correct, as: :boolean, label: "Prawidłowe?" %>
+  <%= f.button :submit, "Aktualizuj" %>
+<% end %>

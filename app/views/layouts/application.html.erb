@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title><%= content_for?(:title) ? "#{yield(:title)} - pelp.net".html_safe : "pelp.net" %></title>
+    <%= favicon_link_tag 'favicon.ico' %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= yield :styles %>

@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get '/summary/:id' => 'user_exams#show', as: :user_exam
       post '/answer' => 'user_exams#answer', as: :answer_user_exam
     end
+
+    get 'question_markdown/:id' => 'questions#get_markdown'
   end
 
   unauthenticated do

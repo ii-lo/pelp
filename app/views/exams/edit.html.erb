@@ -13,37 +13,86 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <%= bootstrap_flash %>
-    <div>
-        <h3>Edytuj</h3>
-        <%= simple_form_for [@course, @exam] do |f| %>
-            <%= f.input :name, label: "Nazwa" %>
-            <%= f.input :duration, as: :integer, label: "Długość w sekundach" %>
-            <%= f.input :published, as: :boolean, label: "Dostępny" %>
-            <%= f.button :submit, "Zaaktualizuj" %>
-        <% end %>
+    <div class="row">
+      <%= bootstrap_flash %>
+    </div>
+    <%= render 'layouts/breadcrumb' %>
+    <div class="row">
+        <div class="col-xs-12">
+          <h3>Edytuj</h3>
+          <%= simple_form_for [@course, @exam] do |f| %>
+              <%= f.input :name, label: "Nazwa" %>
+              <%= f.input :duration, as: :integer, label: "DĹugoĹÄ w sekundach", input_html: { min: 0 } %>
+              <div class="form-group">
+                <label for="minutes_helper">Minuty</label>
+                <input type="number" id="minutes_helper" min="0" name="minutes" value="<%= @exam.duration / 60 %>">
+              </div>
+              <div class="form-group">
+                <label for="seconds_helper">Sekundy</label>
+                <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="<%= @exam.duration % 60 %>">
+              </div>
+              <%= f.input :published, as: :boolean, label: "DostÄpny" %>
+              <%= f.button :submit, "Zaaktualizuj" %>
+          <% end %>
+          <div class="row-separator">
+          </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Kategorie</h3>
+          <div class="hide_all">
+            <a href="#" class="compress">ZwiĹ wszystko</a>
+          </div>
+          <div class="row-separator">
+          </div>
+        </div>
+      </div>
+      <% @q_cs.each do |qc| %>
+          <div class="row question_category" data-id=<%= qc.id %>>
+              <div class="col-xs-12">
+                  <div class="show_more">
+                    <a href="#" data-closed="RozwiĹ" data-open="ZwiĹ" data-expand="q_c_details">RozwiĹ</a>
+                  </div>
+                  <h4 class="q_c" data-id=<%= qc.id %>><%= qc.name %></h4>
+                  <div class="hidden to_expand q_c_details">
+                    <a href="#" title="Edytuj" class="edit_qc_link">
+                      ZmieĹ nazwÄ
+                    </a>
+                    <div class="qc_edit_form hidden">
+                      <%= simple_form_for([@exam, qc], remote: true, data: { type: 'json' }) do |f| %>
+                        <%= f.input :name, label: "Nowa nazwa" %>
+                      <% end %>
+                    </div>
+                    <p><%= link_to "UsuĹ kategoriÄ", exam_question_category_path(@exam, qc), method: :delete %></p>
+                    <a href="#" title="Nowe pytanie" class="new_question_link">
+                      Nowe pytanie
+                    </a>
+                    <div class="hidden to_expand new_question_form">
+                        <b>Nowe pytanie</b>
+                        <%= simple_form_for [@exam, qc, Question.new], html: { remote: true, class: 'new_question' } do |f| %>
+                            <%= f.input :name, label: "TreĹÄ", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+                            <%= f.input :value, as: :integer, label: "WartoĹÄ" %>
+                            <%= f.input :form, collection: {"Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open'}, label: "Forma" %>
+                            <%= f.button :submit, "StwĂłrz" %>
+                        <% end %>
+                    </div>
+                    <div class="questions">
+                      <% qc.questions.each do |q| %>
+                          <%= render 'question', question: q %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="row-separator">
+                  </div>
+              </div>
+          </div>
+      <% end %>
     </div>
     <h3>Nowa kategoria</h3>
     <%= simple_form_for [@exam, QuestionCategory.new] do |f| %>
         <%= f.input :name, label: "Nazwa" %>
-    <% end %>
-    <% @q_cs.each do |qc| %>
-        <div style="border: 4px solid orange">
-            <h4><%= qc.name %></h4>
-
-            <p><%= link_to "Usuń kategorię", exam_question_category_path(@exam, qc), method: :delete %></p>
-            <% qc.questions.each do |q| %>
-                <%= render 'question', question: q %>
-            <% end %>
-            <div class="hidden">
-                <b>Nowe pytanie</b>
-                <%= simple_form_for [@exam, qc, Question.new] do |f| %>
-                    <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
-                    <%= f.input :value, as: :integer, label: "Wartość" %>
-                    <%= f.input :form, collection: {"Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open'}, label: "Forma" %>
-                    <%= f.button :submit, "Stwórz" %>
-                <% end %>
-            </div>
-        </div>
+        <%= f.button :submit, 'StwĂłrz' %>
     <% end %>
 </div>

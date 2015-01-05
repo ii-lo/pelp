@@ -1,0 +1,5 @@
+var question = $('.question[data-id=<%= @answer.question_id %>]');
+$(question).find('.answers')
+.append("<%= j render 'exams/answer', answer: @answer, open: @answer.question.open? %>");
+$(question).find('#new_answer')[0].reset()
+

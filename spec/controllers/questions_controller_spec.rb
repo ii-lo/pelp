@@ -7,7 +7,7 @@ RSpec.describe QuestionsController, :type => :controller do
     FactoryGirl.create :course
     FactoryGirl.create :lesson_category
     QuestionCategory.create(name: 'a', exam_id: 1)
-    FactoryGirl.create :attending
+    FactoryGirl.create :attending, role: 1
     FactoryGirl.create :exam
     FactoryGirl.create :question_category
   end
@@ -30,6 +30,33 @@ RSpec.describe QuestionsController, :type => :controller do
             question: { name: "", value: 1, form: :single }
         end.not_to change(Question, :count)
         expect(response).to redirect_to edit_course_exam_path(1, 1)
+      end
+    end
+  end
+
+  describe "PATCH update" do
+    before do
+      FactoryGirl.create :question
+    end
+    context "valid params" do
+      it "updates answer" do
+        xhr :patch, :update, exam_id: 1, question_category_id: 1, id: 1,
+          question: { name: "Takowe", value: 2 }, format: :json
+        expect(Question.first.name).to eq "Takowe"
+        expect(JSON.parse(response.body).deep_symbolize_keys)
+          .to(eq({ :question => { name: "Takowe", id: 1, value: 2 } }))
+      end
+    end
+
+    context "invalid params" do
+      it "renders json with error" do
+        xhr :patch, :update, exam_id: 1, question_category_id: 1, id: 1,
+          question: { value: 444 }, format: :json
+        expect(response).to have_http_status 422
+        expect(JSON.parse response.body).not_to be_nil
+        expect(JSON.parse(response.body)['errors'].first).to(
+          include 'znajduje'
+        )
       end
     end
   end

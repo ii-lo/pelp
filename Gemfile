@@ -13,6 +13,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
+#
+gem 'coffee-rails', '~> 4.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -59,7 +61,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
 gem 'rmagick'
 
 # serialization
-gem 'active_model_serializers', '~> 0.9'
+gem 'active_model_serializers', '~> 0.8.0'
 
 # knockout
 gem 'knockoutjs-rails'

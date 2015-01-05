@@ -1,5 +1,5 @@
 <div>
-  <%= simple_form_for [question, Answer.new] do |f| %>
+  <%= simple_form_for [question, Answer.new], html: { remote: true, class: "new_answer" } do |f| %>
     <%= f.input :name, label: "Wartość" %>
     <%= f.input :correct, as: :boolean, label: "Prawidłowe?" %>
     <%= f.button :submit, "Stwórz" %>

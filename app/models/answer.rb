@@ -18,10 +18,12 @@ class Answer < ActiveRecord::Base
 
   has_many :user_answers
   has_one :question_category, through: :question
+  has_one :exam, through: :question
 
   validates :question_id, presence: true
   validates :name, presence: true,
-            uniqueness: {scope: [:question_id]}
+            uniqueness: {scope: [:question_id]},
+            length: { maximum: 255 }
   validate :only_one_correct_if_single
 
   scope :correct, -> { where(correct: true) }
@@ -38,10 +40,11 @@ class Answer < ActiveRecord::Base
 
   def only_one_correct_if_single
     return true unless correct
-    return true unless question.try(:single)
-    ans = question.answers.correct.first
+    return true unless question.try(:single?)
+    ans = question.correct_answers.first
     if ans && ans != self
-      errors[:correct] << "Już istnieje prawidłowa odpowiedź"
+      errors[:base] << "Już istnieje prawidłowa odpowiedź"
     end
   end
+
 end
