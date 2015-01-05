@@ -16,12 +16,21 @@
     <div class="row">
       <%= bootstrap_flash %>
     </div>
+    <%= render 'layouts/breadcrumb' %>
     <div class="row">
         <div class="col-xs-12">
           <h3>Edytuj</h3>
           <%= simple_form_for [@course, @exam] do |f| %>
               <%= f.input :name, label: "Nazwa" %>
-              <%= f.input :duration, as: :integer, label: "Długość w sekundach" %>
+              <%= f.input :duration, as: :integer, label: "Długość w sekundach", input_html: { min: 0 } %>
+              <div class="form-group">
+                <label for="minutes_helper">Minuty</label>
+                <input type="number" id="minutes_helper" min="0" name="minutes" value="<%= @exam.duration / 60 %>">
+              </div>
+              <div class="form-group">
+                <label for="seconds_helper">Sekundy</label>
+                <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="<%= @exam.duration % 60 %>">
+              </div>
               <%= f.input :published, as: :boolean, label: "Dostępny" %>
               <%= f.button :submit, "Zaaktualizuj" %>
           <% end %>
@@ -41,7 +50,7 @@
         </div>
       </div>
       <% @q_cs.each do |qc| %>
-          <div style="border: 4px solid orange" class="row question_category" data-id=<%= qc.id %>>
+          <div class="row question_category" data-id=<%= qc.id %>>
               <div class="col-xs-12">
                   <div class="show_more">
                     <a href="#" data-closed="Rozwiń" data-open="Zwiń" data-expand="q_c_details">Rozwiń</a>

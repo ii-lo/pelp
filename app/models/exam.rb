@@ -26,7 +26,8 @@ class Exam < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 250 }
   validates :lesson_category_id, presence: true,
             uniqueness: {scope: [:name]}
-  validates :duration, presence: true
+  validates :duration, presence: true,
+    inclusion: { in: 0..3124202400 } # one year
 
   scope :published, -> { where(published: true) }
 

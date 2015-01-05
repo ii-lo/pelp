@@ -1,8 +1,8 @@
-<div style="border: 2px solid green" class="question" data-id=<%= question.id %>>
+<div class="question" data-id=<%= question.id %>>
   <div class="show_more">
     <a href="#" data-closed="Pokaż odpowiedzi" data-open="Schowaj odpowiedzi" data-expand="answers-rel">Pokaż odpowiedzi</a>
   </div>
-  <div style="border: 2pt solid pink" class="question_body" data-id=<%= question.id %>>
+  <div class="question_body" data-id=<%= question.id %>>
     <%= @markdown.call(question.name)[:output].to_s.html_safe %>
   </div>
   <a href="#" title="Edytuj" class="edit_question_link">
