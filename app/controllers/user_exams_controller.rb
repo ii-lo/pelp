@@ -1,5 +1,6 @@
 class UserExamsController < ApplicationController
   before_action :check_if_closed, only: [:answer, :question]
+  # also loads @user_exam
 
   def show
     @user_exam = UserExam.find params[:id]
@@ -24,13 +25,14 @@ class UserExamsController < ApplicationController
 
   def exit
     @user_exam = UserExam.find session[:user_exam_id]
+    authorize @user_exam
     @user_exam.close!
     clear_session
     show_result
   end
 
   def question
-    @user_exam = UserExam.find session[:user_exam_id]
+    authorize @user_exam
     @question = Question.find session[:user_exam_questions].first
     @exam = @question.exam
     @markdown = markdown_renderer.call(@question.name)[:output].to_s
@@ -39,6 +41,7 @@ class UserExamsController < ApplicationController
   end
 
   def answer
+    authorize @user_exam
     @question = Question.find session[:current_question_id]
     params[:answer] ||= {}
     case @question.form

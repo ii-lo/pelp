@@ -11,6 +11,7 @@
 #  duration           :integer
 #  max_points         :integer          default(0)
 #  published          :boolean          default(FALSE)
+#  one_run            :boolean          default(FALSE)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

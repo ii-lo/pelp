@@ -38,11 +38,11 @@ class ExamsController < ApplicationController
   private
 
   def exam_params
-    params.require(:exam).permit(:name, :lesson_category_id, :duration)
+    params.require(:exam).permit(:name, :lesson_category_id, :duration, :one_run)
   end
 
   def update_params
-    params.require(:exam).permit(:name, :duration, :published)
+    params.require(:exam).permit(:name, :duration, :published, :one_run)
   end
 
 end

@@ -44,14 +44,13 @@ class UserExam < ActiveRecord::Base
   end
 
   def close!
+    return :already_closed if closed
     update_attribute(:closed, true)
     update_result
   end
 
   def wait_for_close!
-    unless closed
-      close!
-    end
+    close!
   end
 
   handle_asynchronously :wait_for_close!, run_at: proc { |ue| ue.exam.duration.seconds.from_now },

@@ -14,6 +14,7 @@
       <%= f.input :name, label: "Nazwa" %>
       <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
       <%= f.input :duration, label: "Czas trwania w sekundach" %>
+      <%= f.input :one_run, label: "Umożliwić tylko jedno podejście?", as: :boolean %>
       <%= f.button :submit, "Utwórz" %>
     <% end %>
 </div>

@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
     through: :attendings, source: :course
   has_many :owned_courses, -> { where attendings: { role: 2 } },
     through: :attendings, source: :course
+  has_many :user_exams
   #has_many :owned_courses, through: :attendings, source: :course
 
   def last_visited_courses(number = nil)

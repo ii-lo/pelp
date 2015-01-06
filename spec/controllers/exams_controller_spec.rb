@@ -22,7 +22,8 @@ RSpec.describe ExamsController, :type => :controller do
       it "creates exam" do
         expect do
           post :create, course_id: 1, exam: {
-            name: "Nazwa", lesson_category_id: 1, duration: 4444
+            name: "Nazwa", lesson_category_id: 1, duration: 4444,
+            one_run: true
           }
         end.to change(Exam, :count).by(1)
         expect(response).to redirect_to edit_course_exam_path(1, 1)

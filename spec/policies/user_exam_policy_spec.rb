@@ -6,35 +6,100 @@ describe UserExamPolicy do
 
   subject { UserExamPolicy }
 
-  permissions :new? do
-    before do
-      @course = double(Course, users: [])
-      @user_exam = double(UserExam, course: @course)
-    end
-
-    context "user does not attend to course" do
-      it "denies when not attending to course" do
-        expect(subject).not_to permit(User.new, @user_exam)
-      end
-    end
-
-    context "user attends to couese" do
+  [:new?, :start?].each do |sym|
+    permissions sym do
       before do
-        @user = double User
-        allow(@course).to receive(:users).and_return([@user])
+        FactoryGirl.create :user
+        FactoryGirl.create :course
+        FactoryGirl.create :attending
+        FactoryGirl.create :lesson_category
+        FactoryGirl.create :exam
+        @user_exam = FactoryGirl.build :user_exam
       end
-      it "grants access" do
-        expect(subject).to permit(@user, @user_exam)
+
+      context "user does not attend to course" do
+        it "denies when not attending to course" do
+          expect(subject).not_to permit(User.new, @user_exam)
+        end
+      end
+
+      context "user attends to course" do
+        it "grants access" do
+          expect(subject).to permit(User.first, @user_exam)
+        end
+      end
+
+      context "one_run" do
+        before do
+          Exam.first.update_attribute(:one_run, true)
+        end
+        context "first user_exam" do
+          it "grants access" do
+            expect(subject).to permit(User.first, @user_exam)
+          end
+        end
+
+        context "nth exam" do
+          before do
+            FactoryGirl.create :user_exam
+          end
+
+          it "denies access" do
+            expect(subject).not_to permit(User.first, @user_exam)
+          end
+        end
       end
     end
+  end
 
+  [:question?, :answer?].each do |sym|
+    permissions sym do
+      before do
+        FactoryGirl.create :user
+        FactoryGirl.create :course
+        FactoryGirl.create :attending
+        FactoryGirl.create :lesson_category
+        FactoryGirl.create :exam
+        @user_exam = FactoryGirl.create :user_exam
+      end
 
+      context "one run" do
+        before do
+          Exam.first.update_attribute(:one_run, true)
+        end
+
+        context "first run" do
+          context "same user" do
+            it "grants access" do
+              expect(subject).to permit(User.first, @user_exam)
+            end
+          end
+
+          context "not the same user" do
+            it "denies access" do
+              expect(subject).not_to permit(User.new, @user_exam)
+            end
+          end
+        end
+
+        context "nth run" do
+          before do
+            FactoryGirl.create :user_exam
+          end
+
+          it "denies access" do
+            expect(subject).not_to permit(User.first, @user_exam)
+          end
+        end
+      end
+    end
   end
 
   permissions :show? do
     before do
       @user = double User
-      @user_exam = double UserExam, user: @user, closed: true
+      @exam = double Exam, one_run: false
+      @user_exam = double UserExam, user: @user, closed: true, exam: @exam
     end
 
     context "user's exam" do
@@ -56,6 +121,30 @@ describe UserExamPolicy do
     context "open exam" do
       before do
         allow(@user_exam).to receive(:closed).and_return false
+      end
+
+      it "does not grant access" do
+        expect(subject).not_to permit(@user, @user_exam)
+      end
+    end
+  end
+
+  permissions :exit? do
+    before do
+      @user = double User
+      @exam = double Exam, one_run: false
+      @user_exam = double UserExam, user: @user, closed: true, exam: @exam
+    end
+
+    context "user's exam" do
+      it "grants access" do
+        expect(subject).to permit(@user, @user_exam)
+      end
+    end
+
+    context "not user's exam" do
+      before do
+        allow(@user_exam).to receive(:user).and_return(User.new)
       end
 
       it "does not grant access" do

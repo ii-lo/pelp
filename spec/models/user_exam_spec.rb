@@ -175,4 +175,27 @@ RSpec.describe UserExam, :type => :model do
       end
     end
   end
+
+  describe '#close!' do
+    before do
+      FactoryGirl.create :exam
+      FactoryGirl.create :user_exam
+    end
+    context "closed" do
+      before do
+        UserExam.first.update_attribute(:closed, true)
+      end
+
+      it "returns :already_closed" do
+        expect(UserExam.first.close!).to eq :already_closed
+      end
+    end
+
+    context "open" do
+      it "updates self" do
+        expect(UserExam.first.close!).to eq 0 # result returned
+        expect(UserExam.first.open?).to eq false
+      end
+    end
+  end
 end

@@ -31,6 +31,7 @@
                 <label for="seconds_helper">Sekundy</label>
                 <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="<%= @exam.duration % 60 %>">
               </div>
+              <%= f.input :one_run, label: "Umożliwić tylko jedno podejście?", as: :boolean %>
               <%= f.input :published, as: :boolean, label: "Dostępny" %>
               <%= f.button :submit, "Zaaktualizuj" %>
           <% end %>

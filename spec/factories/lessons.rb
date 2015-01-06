@@ -8,7 +8,7 @@
 #  updated_at         :datetime
 #  lesson_category_id :integer
 #  course_id          :integer
-#  content            :text
+#  content            :text             default("")
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

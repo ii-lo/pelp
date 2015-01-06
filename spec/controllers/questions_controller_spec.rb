@@ -72,4 +72,19 @@ RSpec.describe QuestionsController, :type => :controller do
     end
   end
 
+  describe 'GET get_markdown' do
+
+    render_views
+
+    before do
+      FactoryGirl.create :question
+    end
+
+    it "renders question markdown" do
+      get :get_markdown, id: 1
+      expect(response).to have_http_status 200
+      expect(response.body).to include Question.first.name
+    end
+  end
+
 end
