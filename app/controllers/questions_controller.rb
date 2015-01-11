@@ -69,10 +69,10 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:name, :value, :form)
+    params.require(:question).permit(:name, :value, :form, :picture)
   end
 
   def update_params
-    params.require(:question).permit(:name, :value)
+    params.require(:question).permit(:name, :value, :picture, :delete_picture)
   end
 end

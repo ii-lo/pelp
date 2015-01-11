@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106174505) do
+ActiveRecord::Schema.define(version: 20150111170304) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -145,6 +145,10 @@ ActiveRecord::Schema.define(version: 20150106174505) do
     t.integer  "form",                              default: 0
     t.integer  "question_category_id"
     t.integer  "correct_answers_count",             default: 0
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "questions", ["exam_id"], name: "index_questions_on_exam_id"

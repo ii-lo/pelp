@@ -3,14 +3,17 @@
     <a href="#" data-closed="Pokaż odpowiedzi" data-open="Schowaj odpowiedzi" data-expand="answers-rel">Pokaż odpowiedzi</a>
   </div>
   <div class="question_body" data-id=<%= question.id %>>
+    <%= image_tag(question.picture.url(:large)) if question.picture.url.present? %>
     <%= @markdown.call(question.name)[:output].to_s.html_safe %>
   </div>
   <a href="#" title="Edytuj" class="edit_question_link">
     Zmień treść
   </a>
   <div class="question_edit_form hidden">
-    <%= simple_form_for([@exam, question.question_category, question], remote: true, data: { type: 'json' }) do |f| %>
+    <%= simple_form_for([@exam, question.question_category, question], remote: true, data: { type: 'json' }, multipart: true) do |f| %>
       <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+      <%= f.input :picture, as: :file, label: "Obraz" %>
+      <%= f.input :delete_picture, as: :boolean, label: "Usuń obraz" %>
       <%= f.input :value, label: "Wartość", as: :integer %>
       <%= f.button :submit, "Zaaktualizuj" %>
     <% end %>

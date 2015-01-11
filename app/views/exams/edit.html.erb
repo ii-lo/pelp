@@ -72,9 +72,10 @@
                     </a>
                     <div class="hidden to_expand new_question_form">
                         <b>Nowe pytanie</b>
-                        <%= simple_form_for [@exam, qc, Question.new], html: { remote: true, class: 'new_question' } do |f| %>
+                        <%= simple_form_for [@exam, qc, Question.new], html: { remote: true, class: 'new_question', multipart: true } do |f| %>
                             <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
-                            <%= f.input :value, as: :integer, label: "WartoĹÄ" %>
+                            <%= f.input :picture, as: :file, label: "Obraz" %>
+                            <%= f.input :value, as: :integer, label: "Wartość" %>
                             <%= f.input :form, collection: {"Jednokrotnego wyboru" => 'single', "Wielokrotnego wyboru" => 'multiple', "Otwarte" => 'open'}, label: "Forma" %>
                             <%= f.button :submit, "Stwórz" %>
                         <% end %>
@@ -94,6 +95,6 @@
     <h3>Nowa kategoria</h3>
     <%= simple_form_for [@exam, QuestionCategory.new] do |f| %>
         <%= f.input :name, label: "Nazwa" %>
-        <%= f.button :submit, 'StwĂłrz' %>
+        <%= f.button :submit, 'Stwórz' %>
     <% end %>
 </div>

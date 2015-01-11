@@ -57,8 +57,8 @@ gem 'will_paginate-bootstrap'
 gem 'gretel'
 
 # pictures
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave', ref: 'c2ee2e8'
-gem 'rmagick'
+gem "paperclip", "~> 4.2"
+gem 'remotipart', '~> 1.2'
 
 # serialization
 gem 'active_model_serializers', '~> 0.8.0'
