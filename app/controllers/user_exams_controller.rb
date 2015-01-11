@@ -42,18 +42,7 @@ class UserExamsController < ApplicationController
 
   def answer
     authorize @user_exam
-    @question = Question.find session[:current_question_id]
-    params[:answer] ||= {}
-    case @question.form
-    when 'single'
-      single_answer
-    when 'multiple'
-      multiple_answer
-    when 'open'
-      open_answer
-    #else
-      #fail ArgumentError, 'invalid question type'
-    end
+    UserExamAnswerFacade.new(params, session).rate!
     session[:user_exam_questions].shift
     if session[:user_exam_questions].any?
       redirect_to question_user_exam_path
@@ -68,33 +57,6 @@ class UserExamsController < ApplicationController
 
   def show_result
     redirect_to user_exam_path(@user_exam)
-  end
-
-  def single_answer
-    id = params[:answer][:id]
-    u = UserAnswer.create(user_exam_id: session[:user_exam_id],
-                          answer_id: id, question_id: @question.id)
-    session[:result] += @question.value if u.correct
-  end
-
-  def multiple_answer
-    ids = params[:answer][:id] || [nil]
-    correct, wrong = 0, 0
-    ids.each do |i|
-      u = UserAnswer.create(user_exam_id: session[:user_exam_id],
-                            answer_id: i, question_id: @question.id)
-      next if i.to_i.zero?
-      u.correct ? correct += 1 : wrong += 1
-    end
-    diff = correct > wrong ? correct - wrong : 0
-    session[:result] += (diff.to_f) * @question.value / @question.correct_answers.size
-  end
-
-  def open_answer
-    text = params[:answer][:text] || ''
-    u = UserAnswer.create(user_exam_id: session[:user_exam_id],
-                          text: text, question_id: @question.id)
-    session[:result] += @question.value if u.correct
   end
 
   def prepare_session
