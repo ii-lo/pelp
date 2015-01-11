@@ -53,12 +53,12 @@
                                     <i class="glyphicon glyphicon-book"></i> <%= l.name %>
                                 <% end %>
                               </li>
-                              <% if @admin %>
-                                <li class="list-group-item">
-                                  <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
-                                </li>
-                              <% end %>
                           <% end %>
+                            <% if @admin %>
+                              <li class="list-group-item">
+                                <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
+                              </li>
+                            <% end %>
                                <% @exams[lc.id].each do |e| %>
                                     <li class="list-group-item">
                                         <%= link_to new_user_exam_path(e) do %>

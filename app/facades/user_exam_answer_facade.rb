@@ -30,7 +30,7 @@ class UserExamAnswerFacade
   end
 
   def multiple_answer
-    ids = params[:answer][:id] || [nil]
+    ids = params[:answer].fetch(:id) { [nil] }
     correct, wrong = 0, 0
     ids.each do |i|
       u = UserAnswer.create(user_exam_id: session[:user_exam_id],
@@ -43,7 +43,7 @@ class UserExamAnswerFacade
   end
 
   def open_answer
-    text = params[:answer][:text] || ''
+    text = params[:answer].fetch(:text) { ' ' }
     u = UserAnswer.create(user_exam_id: session[:user_exam_id],
                           text: text, question_id: @question.id)
     session[:result] += @question.value if u.correct
