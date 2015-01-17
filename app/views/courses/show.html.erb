@@ -66,6 +66,12 @@
                                         <% end %>
                                     </li>
                               <% end %>
+                              <% if @admin %>
+                                <li class="list-group-item">
+                                  <%= link_to "Nowy egzamin w kategorii",
+                                    new_course_exam_path(@course) %>
+                                </li>
+                              <% end %>
                       </ul>
                   </div>
               </div>

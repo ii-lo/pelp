@@ -4,6 +4,9 @@
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
 <% end %>
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'new_exam', 'data-turbolinks-track' => true %>
+<% end %>
 
 <%= render 'layouts/navbar' %>
 
@@ -13,7 +16,15 @@
     <%= simple_form_for([@course, @exam]) do |f| %>
       <%= f.input :name, label: "Nazwa" %>
       <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
-      <%= f.input :duration, label: "Czas trwania w sekundach" %>
+      <%= f.input :duration, label: "Czas trwania w sekundach", as: :integer, input_html: { min: 0 } %>
+      <div class="form-group">
+        <label for="minutes_helper">Minuty</label>
+        <input type="number" id="minutes_helper" min="0" name="minutes" value="0">
+      </div>
+      <div class="form-group">
+        <label for="seconds_helper">Sekundy</label>
+        <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="0">
+      </div>
       <%= f.input :one_run, label: "Umożliwić tylko jedno podejście?", as: :boolean %>
       <%= f.button :submit, "Utwórz" %>
     <% end %>
