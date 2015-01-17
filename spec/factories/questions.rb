@@ -8,9 +8,9 @@
 #  value                 :integer
 #  created_at            :datetime
 #  updated_at            :datetime
-#  form                  :integer          default(0)
+#  form                  :integer          default("0")
 #  question_category_id  :integer
-#  correct_answers_count :integer          default(0)
+#  correct_answers_count :integer          default("0")
 #  picture_file_name     :string(255)
 #  picture_content_type  :string(255)
 #  picture_file_size     :integer

@@ -13,8 +13,9 @@
     <div class="row">
         <div class="col-xs-12">
             <div id="course-jumbo" class="jumbotron" style="border-color: <%= string_to_pastel "#{@course.name}#{@course.id}" %>">
-                <%# TODO Show this button only if current user is an owner of this course. %>
-                <%= link_to 'Ustawienia', settings_course_path(@course), class: 'btn btn-default btn-xs pull-right' %>
+                <% if @admin %>
+                  <%= link_to 'Ustawienia', settings_course_path(@course), class: 'btn btn-default btn-xs pull-right' %>
+                <% end %>
                 <h1><%= @course.name %></h1>
                 <% if @course.description %>
                     <p><%= @course.description %></p>
@@ -72,6 +73,17 @@
                                     new_course_exam_path(@course) %>
                                 </li>
                               <% end %>
+                              <% @course.material_categories.each do |mc| %>
+                                <li class="list-group-item">
+                                  <%= link_to course_material_category_path(mc) do %>
+                                    <i class="glyphicon glyphicon-file"></i>
+                                  <% end %>
+                                </li>
+                              <% end %>
+                              <li class="list-group-item">
+                                <%= link_to "Nowy zestaw materiałów",
+                                  new_course_material_category_path(@course, lesson_category_id: lc.id) %>
+                              </li>
                       </ul>
                   </div>
               </div>

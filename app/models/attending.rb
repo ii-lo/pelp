@@ -8,7 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  last_visit :datetime
-#  role       :integer          default(0)
+#  role       :integer          default("0")
 #
 
 class Attending < ActiveRecord::Base

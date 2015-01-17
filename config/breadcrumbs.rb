@@ -17,7 +17,7 @@ end
 
 crumb :course_settings do |course|
   link 'Ustawienia', settings_course_path(course)
-  parent course
+  parent :course
 end
 
 #

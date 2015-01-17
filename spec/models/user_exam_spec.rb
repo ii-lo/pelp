@@ -7,8 +7,8 @@
 #  exam_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  result     :decimal(, )      default(0.0)
-#  closed     :boolean          default(FALSE)
+#  result     :decimal(, )      default("0.0")
+#  closed     :boolean          default("f")
 #
 
 require 'rails_helper'

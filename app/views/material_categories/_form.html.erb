@@ -1,0 +1,9 @@
+<%= simple_form_for [@course, @m_c] do |f| %>
+  <%= f.input :name, label: "Nazwa" %>
+  <% if @l_c %>
+    <%= f.input :lesson_category_id, as: :hidden, input_html: { value: @l_c.id } %>
+  <% else %>
+    <%= f.input :lesson_category_id, label: "Kategoria", collection: @course.lesson_categories %>
+  <% end %>
+  <%= f.button :submit, submit || "Zatwierdź" %>
+<% end %>

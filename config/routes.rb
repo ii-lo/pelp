@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       end
       resources :exams, except: [:show]
       resources :lessons
+      resources :material_categories, except: [:index, :edit] do
+        resources :materials, only: [:create, :destroy]
+      end
     end
     # resource for path names; actual exams resource in courses resource
     resources :exams, only: [] do

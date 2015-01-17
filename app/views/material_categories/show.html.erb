@@ -1,0 +1,58 @@
+<% content_for :title, "#{@course} | #{@m_c.name}" %>
+<% breadcrumb :course, @lesson %>
+
+<% content_for :styles do %>
+  <%= stylesheet_link_tag 'material_categories', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'material_categories', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div class="row">
+    <%= bootstrap_flash %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% if policy(@m_c).update? %>
+        <div>
+          <h3>Aktualizuj</h3>
+          <%= simple_form_for [@course, @m_c] do |f| %>
+            <%= f.input :name %>
+            <%= f.input :lesson_category_id, collection: @course.lesson_categories %>
+            <%= f.button :submit, "Aktualizuj" %>
+          <% end %>
+        </div>
+      <% end %>
+      <% if policy(@m_c).destroy? %>
+        <hr>
+        <%= button_to "Usuń", [@course, @m_c], method: :delete, class: 'btn btn-danger', id: "delete_material_category" %>
+      <% end %>
+      <div>
+        <h2><%= @m_c.name %></h2>
+      </div>
+      <div>
+        <ul class='materials'>
+          <% @m_c.materials.each do |m| %>
+            <%= link_to m.file.url do  %>
+              <li>
+                <%= m.name %>
+                <% end %>, <%= link_to "Usuń",
+                  course_material_category_material_path(@course, @m_c, m),
+                method: :delete %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <h3>Nowy materiał</h3>
+      <%= simple_form_for [@course, @m_c, @m_c.materials.build], multipart: true do |f| %>
+        <%= f.input :name %>
+        <%= f.input :file %>
+        <%= f.button :submit, "Stwórz" %>
+      <% end %>
+    </div>
+  </div>
+</div>

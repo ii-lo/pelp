@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
-#  correct     :boolean          default(FALSE)
+#  correct     :boolean          default("f")
 #  question_id :integer
 #  created_at  :datetime
 #  updated_at  :datetime

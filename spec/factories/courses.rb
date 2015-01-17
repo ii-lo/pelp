@@ -7,7 +7,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  description :string(255)
-#  private     :boolean          default(FALSE)
+#  private     :boolean          default("f")
 #  header      :string(255)
 #  thumb       :string(255)
 #

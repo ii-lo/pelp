@@ -5,7 +5,7 @@
 #  id                   :integer          not null, primary key
 #  user_exam_id         :integer
 #  question_category_id :integer
-#  value                :decimal(, )      default(0.0)
+#  value                :decimal(, )      default("0.0")
 #  created_at           :datetime
 #  updated_at           :datetime
 #

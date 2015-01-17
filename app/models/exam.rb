@@ -9,9 +9,9 @@
 #  updated_at         :datetime
 #  lesson_category_id :integer
 #  duration           :integer
-#  max_points         :integer          default(0)
-#  published          :boolean          default(FALSE)
-#  one_run            :boolean          default(FALSE)
+#  max_points         :integer          default("0")
+#  published          :boolean          default("f")
+#  one_run            :boolean          default("f")
 #
 
 class Exam < ActiveRecord::Base
