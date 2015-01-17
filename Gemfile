@@ -4,7 +4,7 @@ ruby '2.2.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '~> 4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Uglifier as compressor for JavaScript assets
@@ -69,10 +69,6 @@ gem 'knockoutjs-rails'
 # time
 gem 'time_diff'
 
-# delayed_jobs
-gem 'delayed_job_active_record'
-gem 'daemons'
-
 # faster string blank? method
 gem 'fast_blank'
 
@@ -84,6 +80,11 @@ gem 'github-markdown'
 gem 'escape_utils'
 gem 'sanitize'
 gem 'pygments.rb'
+
+# delayed_jobs
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 
 gem 'eventmachine', '1.0.4'
 

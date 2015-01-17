@@ -20,5 +20,7 @@ module Pelp
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.app_generators.stylesheet_engine :less
     config.i18n.default_locale = :pl
+    config.active_job.queue_adapter = :delayed_job
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

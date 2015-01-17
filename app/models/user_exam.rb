@@ -50,11 +50,12 @@ class UserExam < ActiveRecord::Base
   end
 
   def wait_for_close!
-    close!
+    UserExamWaitForCloseJob.set(wait_until: exam_duration.seconds.from_now)
+      .perform_later(self)
   end
 
-  handle_asynchronously :wait_for_close!, run_at: proc { |ue| ue.exam.duration.seconds.from_now },
-    priority: 20
+  #handle_asynchronously :wait_for_close!, run_at: proc { |ue| ue.exam.duration.seconds.from_now },
+    #priority: 20
 
   private
 
