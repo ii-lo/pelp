@@ -47,11 +47,13 @@
           <% end %>
         </ul>
       </div>
-      <h3>Nowy materiał</h3>
-      <%= simple_form_for [@course, @m_c, @m_c.materials.build], multipart: true do |f| %>
-        <%= f.input :name %>
-        <%= f.input :file %>
-        <%= f.button :submit, "Stwórz" %>
+      <% if policy(@m_c.materials.build).create? %>
+        <h3>Nowy materiał</h3>
+        <%= simple_form_for [@course, @m_c, @m_c.materials.build], multipart: true do |f| %>
+          <%= f.input :name %>
+          <%= f.input :file %>
+          <%= f.button :submit, "Stwórz" %>
+        <% end %>
       <% end %>
     </div>
   </div>
