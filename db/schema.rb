@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117121209) do
+ActiveRecord::Schema.define(version: 20150118194031) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -148,6 +148,20 @@ ActiveRecord::Schema.define(version: 20150117121209) do
   end
 
   add_index "materials", ["material_category_id"], name: "index_materials_on_material_category_id"
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "description",       default: ""
+    t.integer  "lesson_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "pictures", ["lesson_id"], name: "index_pictures_on_lesson_id"
 
   create_table "question_categories", force: :cascade do |t|
     t.string   "name",       limit: 255

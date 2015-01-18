@@ -40,7 +40,11 @@ class Question < ActiveRecord::Base
   validates :question_category_id, presence: true
   validates :form, presence: true
 
-  has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>", :large => "800x800" }, default_url: ''
+  has_attached_file :picture, styles: {
+    medium: "300x300>",
+    thumb: "100x100>",
+    large: "800x800"
+  }, default_url: ''
   validates_attachment_content_type :picture,
     content_type: /\Aimage\/.*\Z/,
     size: { in: 0..5.megabytes }

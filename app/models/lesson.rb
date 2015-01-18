@@ -16,6 +16,7 @@ class Lesson < ActiveRecord::Base
 
   belongs_to :course
   belongs_to :lesson_category
+  has_many :pictures
 
   validates :name, presence: true,
     length: { maximum: 250 }
