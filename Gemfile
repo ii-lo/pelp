@@ -40,7 +40,7 @@ gem 'typescript-rails'
 gem 'thin'
 
 # forms
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0'
 
 # view utils
 gem 'color'

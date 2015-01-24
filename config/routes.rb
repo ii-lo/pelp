@@ -13,7 +13,9 @@ Rails.application.routes.draw do
         get :settings
       end
       resources :exams, except: [:show]
-      resources :lessons
+      resources :lessons do
+        resources :pictures, only: [:create, :destroy]
+      end
       resources :material_categories, except: [:index, :edit] do
         resources :materials, only: [:create, :destroy]
       end

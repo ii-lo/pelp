@@ -40,6 +40,7 @@ class Question < ActiveRecord::Base
   validates :question_category_id, presence: true
   validates :form, presence: true
 
+  # todo add uri obfuscation
   has_attached_file :picture, styles: {
     medium: "300x300>",
     thumb: "100x100>",

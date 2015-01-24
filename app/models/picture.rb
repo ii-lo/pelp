@@ -19,7 +19,15 @@ class Picture < ActiveRecord::Base
   belongs_to :lesson
 
   validates :lesson_id, presence: true
-  has_attached_file :file
+  validates :description, length: { maximum: 250 }
+  has_attached_file :file, {
+    url: "/system/pictures/files/:hash.:extension",
+    hash_secret: "S68_uA3aUVX5SXFBn7UCaL1L-O89uoi2ASzkY3XdVZHQ-1-r85pH0888Vk-3",
+    styles: {
+        large: '1200x1200>', big: '800x800>', medium: '600x600>',
+        small: '200x200>'
+    }
+  }
   validates_attachment :file, presence: true, content_type:{
     content_type: /\Aimage\/.*\Z/
   }

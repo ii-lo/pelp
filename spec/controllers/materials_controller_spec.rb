@@ -11,6 +11,7 @@ RSpec.describe MaterialsController, :type => :controller do
     FactoryGirl.create :material_category
     @file = Rack::Test::UploadedFile.new File.join(Rails.root, "/spec/factories/paperclip", "pelp.png"), 'image/png'
   end
+
   describe "POST new" do
     context "valid" do
       it "creates material" do
