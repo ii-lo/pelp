@@ -16,7 +16,7 @@ class Lesson < ActiveRecord::Base
 
   belongs_to :course
   belongs_to :lesson_category
-  has_many :pictures
+  has_many :pictures, dependent: :destroy
 
   validates :name, presence: true,
     length: { maximum: 250 }

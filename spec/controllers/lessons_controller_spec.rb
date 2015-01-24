@@ -92,4 +92,16 @@ RSpec.describe LessonsController, :type => :controller do
     end
   end
 
+  describe "DELETE destroy" do
+    before do
+      FactoryGirl.create :lesson
+    end
+
+    it "destroys lesson" do
+      expect do
+        delete :destroy, course_id: 1, id: 1
+      end.to change(Lesson, :count).by(-1)
+    end
+  end
+
 end

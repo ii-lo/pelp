@@ -46,6 +46,13 @@ class LessonsController < ApplicationController
     end
   end
 
+  def destroy
+    @lesson = @course.lessons.find(params[:id])
+    authorize(@lesson)
+    @lesson.destroy
+    redirect_to course_path(@course), notice: "Usunięto"
+  end
+
   private
 
   def load_course

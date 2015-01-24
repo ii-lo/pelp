@@ -18,6 +18,10 @@ class LessonPolicy < Struct.new(:user, :lesson)
   def update?
     new?
   end
+
+  def destroy?
+    new?
+  end
   #class Scope
   #end
 end

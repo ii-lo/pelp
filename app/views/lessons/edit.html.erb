@@ -45,6 +45,8 @@
         <%= f.input :description %>
         <%= f.button :submit, "Stwórz" %>
       <% end %>
+      <%= link_to "Usuń", course_lesson_path(course_id: @course, lesson_id: @lesson), method: :delete %>
     </div>
   </div>
 </div>
+<%= render 'layouts/footer' %>
