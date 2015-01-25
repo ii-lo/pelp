@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :courses do
       member do
-        get :settings
+        get :settings, as: :settings
+        post :update_attending
       end
       resources :exams, except: [:show]
       resources :lessons do

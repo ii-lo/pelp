@@ -45,4 +45,8 @@ class Picture < ActiveRecord::Base
   rescue
     super
   end
+
+  def respond_to_missing?(method, include_private=false)
+    file.respond_to?(method, include_private) || super
+  end
 end

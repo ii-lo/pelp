@@ -10,6 +10,70 @@
 <div class="container">
     <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= simple_form_for @course do |f| %>
+          <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Właściciele</h3>
+        <ul class="users">
+        <% @course.owners.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner %>
+              <br>
+              <%= render 'attending_link', u: u, value: 0, submit: "Zabierz prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 1, submit: "Mianuj administratorem" %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Administratorzy</h3>
+        <ul class="users">
+        <% @course.admins_only.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner %>
+              <br>
+              <%= render 'attending_link', u: u, value: 2, submit: "Nadaj prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 0, submit: "Zabierz prawa administratora" %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Pozostali członkowie</h3>
+        <ul class="users">
+        <% @users.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner %>
+              <br>
+              <%= render 'attending_link', u: u, value: 2, submit: "Nadaj prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 1, submit: "Nadaj prawa administratora" %>
+            <% end %>
+          </li>
+        <% end %>
+        <%= will_paginate @users %>
+        </ul>
+      </div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>

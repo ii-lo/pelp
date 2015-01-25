@@ -6,90 +6,86 @@ describe UserExamPolicy do
 
   subject { UserExamPolicy }
 
-  [:new?, :start?].each do |sym|
-    permissions sym do
+  permissions :new?, :start? do
+    before do
+      FactoryGirl.create :user
+      FactoryGirl.create :course
+      FactoryGirl.create :attending
+      FactoryGirl.create :lesson_category
+      FactoryGirl.create :exam
+      @user_exam = FactoryGirl.build :user_exam
+    end
+
+    context "user does not attend to course" do
+      it "denies when not attending to course" do
+        expect(subject).not_to permit(User.new, @user_exam)
+      end
+    end
+
+    context "user attends to course" do
+      it "grants access" do
+        expect(subject).to permit(User.first, @user_exam)
+      end
+    end
+
+    context "one_run" do
       before do
-        FactoryGirl.create :user
-        FactoryGirl.create :course
-        FactoryGirl.create :attending
-        FactoryGirl.create :lesson_category
-        FactoryGirl.create :exam
-        @user_exam = FactoryGirl.build :user_exam
+        Exam.first.update_attribute(:one_run, true)
       end
-
-      context "user does not attend to course" do
-        it "denies when not attending to course" do
-          expect(subject).not_to permit(User.new, @user_exam)
-        end
-      end
-
-      context "user attends to course" do
+      context "first user_exam" do
         it "grants access" do
           expect(subject).to permit(User.first, @user_exam)
         end
       end
 
-      context "one_run" do
+      context "nth exam" do
         before do
-          Exam.first.update_attribute(:one_run, true)
-        end
-        context "first user_exam" do
-          it "grants access" do
-            expect(subject).to permit(User.first, @user_exam)
-          end
+          FactoryGirl.create :user_exam
         end
 
-        context "nth exam" do
-          before do
-            FactoryGirl.create :user_exam
-          end
-
-          it "denies access" do
-            expect(subject).not_to permit(User.first, @user_exam)
-          end
+        it "denies access" do
+          expect(subject).not_to permit(User.first, @user_exam)
         end
       end
     end
   end
 
-  [:question?, :answer?].each do |sym|
-    permissions sym do
+  permissions :question?, :answer? do
+    before do
+      FactoryGirl.create :user
+      FactoryGirl.create :course
+      FactoryGirl.create :attending
+      FactoryGirl.create :lesson_category
+      FactoryGirl.create :exam
+      @user_exam = FactoryGirl.create :user_exam
+    end
+
+    context "one run" do
       before do
-        FactoryGirl.create :user
-        FactoryGirl.create :course
-        FactoryGirl.create :attending
-        FactoryGirl.create :lesson_category
-        FactoryGirl.create :exam
-        @user_exam = FactoryGirl.create :user_exam
+        Exam.first.update_attribute(:one_run, true)
       end
 
-      context "one run" do
-        before do
-          Exam.first.update_attribute(:one_run, true)
-        end
-
-        context "first run" do
-          context "same user" do
-            it "grants access" do
-              expect(subject).to permit(User.first, @user_exam)
-            end
-          end
-
-          context "not the same user" do
-            it "denies access" do
-              expect(subject).not_to permit(User.new, @user_exam)
-            end
+      context "first run" do
+        context "same user" do
+          it "grants access" do
+            expect(subject).to permit(User.first, @user_exam)
           end
         end
 
-        context "nth run" do
-          before do
-            FactoryGirl.create :user_exam
-          end
-
+        context "not the same user" do
           it "denies access" do
-            expect(subject).not_to permit(User.first, @user_exam)
+            expect(subject).not_to permit(User.new, @user_exam)
           end
+        end
+      end
+
+      context "nth run" do
+        before do
+          FactoryGirl.create :user_exam
+        end
+
+        it "denies access" do
+          expect(subject).not_to permit(User.first, @user_exam)
         end
       end
     end

@@ -35,11 +35,37 @@ RSpec.describe CoursesController, :type => :controller do
   describe 'GET settings' do
     before do
       FactoryGirl.create :course
-      Attending.create(course_id: 1, user_id: 1)
+      Attending.create(course_id: 1, user_id: 1, role: 2)
     end
     it "returns http success" do
       get :settings, id: 1
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'POST update' do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1, role: 2)
+    end
+
+    it "updates course" do
+      post :update, id: 1, course: { name: "Just a name", description: "Kta" }
+      expect(Course.first.name).to eq "Just a name"
+      expect(Course.first.description).to eq "Kta"
+    end
+  end
+
+  describe "POST update_attending" do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1, role: 2)
+      FactoryGirl.create :user, email: "p@p.com"
+      Attending.create(course_id: 1, user_id: 2, role: 1)
+    end
+    it "updates_attending" do
+      post :update_attending, id: 1, attending: { role: 0, user_id: 2 }
+      expect(Attending.second.role.to_i).to eq 0
     end
   end
 

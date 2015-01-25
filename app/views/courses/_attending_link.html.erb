@@ -1,0 +1,5 @@
+<%= form_for :attending, url: update_attending_course_path(@course), html: { style: "margin: 0; padding: 0", class: "attending_link" } do |f| %>
+  <%= f.hidden_field :user_id, value: u.id %>
+  <%= f.hidden_field :role, value: value %>
+  <%= f.submit submit, class: "btn btn-link" %>
+<% end %>
