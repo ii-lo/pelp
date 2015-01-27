@@ -22,7 +22,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <% if @user == current_user %>
-                        <a href="#" class="btn btn-default btn-xs pull-right">Edytuj profil</a>
+                        <%= link_to "Edytuj profil", edit_user_path(@user), class: 'btn btn-default btn-xs pull-right' %>
                     <% end %>
                     O mnie
                 </div>

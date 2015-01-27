@@ -1,2 +1,34 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% content_for :title, @user.name %>
+<% breadcrumb :edit_user, @user %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'profile', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+<div class="container">
+  <%= render 'layouts/breadcrumb' %>
+  <%= bootstrap_flash %>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Edytuj profil</h2>
+      <%= simple_form_for @user do |f| %>
+        <%= f.input :name %>
+        <%= f.input :current_password, required: true %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Zmień hasło</h2>
+      <%= simple_form_for @user, url: change_password_user_path do |f| %>
+        <%= f.input :password, required: true %>
+        <%= f.input :password_confirmation, required: true %>
+        <%= f.input :current_password, required: true %>
+        <%= f.button :submit, "Zmień hasło" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>

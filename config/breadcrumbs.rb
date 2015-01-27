@@ -34,6 +34,11 @@ crumb :user do |user|
   parent :users
 end
 
+crumb :edit_user do |user|
+  link "Edycja profilu", edit_user_path(user)
+  parent :user, user
+end
+
 #
 # Miscellaneous
 #

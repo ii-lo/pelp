@@ -32,4 +32,19 @@ RSpec.describe UserPolicy do
       expect(subject).to permit(nil, User.new)
     end
   end
+
+  permissions :edit?, :update?, :change_password? do
+    context "same user" do
+      it "grants access" do
+        user = User.new
+        expect(subject).to permit(user, user)
+      end
+    end
+
+    context "other user" do
+      it "denies access" do
+        expect(subject).not_to permit(User.new, User.new)
+      end
+    end
+  end
 end

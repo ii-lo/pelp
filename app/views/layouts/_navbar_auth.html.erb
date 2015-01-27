@@ -14,9 +14,11 @@
 </ul>
 <ul class="nav navbar-nav navbar-right">
     <%= active_link_to current_user.name, user_path(current_user), wrap_tag: :li %>
-    <%= active_link_to root_path, wrap_tag: :li, class: 'iconized', title: 'Ustawienia' do %> <%# TODO Link %>
-        <i class="glyphicon glyphicon-cog"></i>
-        <span class="text">Ustawienia</span>
+    <% if false %>
+      <%= active_link_to root_path, wrap_tag: :li, class: 'iconized', title: 'Ustawienia' do %> <%# TODO Link %>
+          <i class="glyphicon glyphicon-cog"></i>
+          <span class="text">Ustawienia</span>
+      <% end %>
     <% end %>
     <!-- TODO <%= active_link_to root_path, wrap_tag: :li, class: 'iconized', title: 'Społeczność' do %>
         <i class="glyphicon glyphicon-user"></i>

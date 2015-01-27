@@ -24,9 +24,38 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find params[:id]
+    authorize(@user)
   end
 
   def update
+    @user = User.find params[:id]
+    authorize(@user)
+    unless @user.valid_password?(params[:user][:current_password])
+      flash.now[:error] = "Nieprawidłowe hasło"
+      return render :edit
+    end
+    if @user.update_attributes(update_params)
+      sign_in @user, bypass: true
+      redirect_to edit_user_path(@user), notice: "Zaaktualizowano"
+    else
+      render :edit
+    end
+  end
+
+  def change_password
+    @user = User.find params[:id]
+    authorize(@user)
+    unless @user.valid_password?(params[:user][:current_password])
+      flash.now[:error] = "Nieprawidłowe hasło"
+      return render :edit
+    end
+    if @user.update_attributes(password_params)
+      sign_in @user, bypass: true
+      redirect_to edit_user_path(@user), notice: "Zmieniono hasło"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -42,5 +71,13 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :name, :password,
                                  :password_confirmation)
+  end
+
+  def update_params
+    params.require(:user).permit(:name)
+  end
+
+  def password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

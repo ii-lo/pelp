@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
       plural("roku", "lat", "lat", l)
     elsif (l = diff[:month]) >= 1
       plural("miesiąca", "miesięcy", "miesięcy", l)
+    elsif (l = diff[:week]) >= 1
+      plural("tygodnia", "tygodni", "tygodni", l)
     elsif (l = diff[:day]) >= 1
       plural("dnia", "dni", "dni", l)
     else

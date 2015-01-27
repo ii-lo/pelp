@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  #devise_for :admins
   devise_for :users, path: ''
-  resources :users
+  resources :users, only: [:new, :create]
 
   authenticated :user do
     root 'users#dashboard', as: :dashboard
   end
 
   authenticate :user do
+    resources :users, only: [:show, :edit, :update] do
+      member do
+        patch :change_password
+      end
+    end
     resources :courses do
       member do
         get :settings, as: :settings
