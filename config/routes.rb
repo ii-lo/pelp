@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       member do
         patch :change_password
+        post :destroy
       end
     end
     resources :courses do

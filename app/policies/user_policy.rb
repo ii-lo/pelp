@@ -22,4 +22,8 @@ class UserPolicy < Struct.new(:current_user, :user)
   def change_password?
     edit?
   end
+
+  def destroy?
+    edit?
+  end
 end

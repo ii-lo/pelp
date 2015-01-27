@@ -33,7 +33,7 @@ RSpec.describe UserPolicy do
     end
   end
 
-  permissions :edit?, :update?, :change_password? do
+  permissions :edit?, :update?, :change_password?, :destroy? do
     context "same user" do
       it "grants access" do
         user = User.new

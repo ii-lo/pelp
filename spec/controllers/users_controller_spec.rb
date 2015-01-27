@@ -127,11 +127,32 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  #describe "GET destroy" do
-  #it "returns http success" do
-  #get :destroy
-  #expect(response).to have_http_status(:success)
-  #end
-  #end
+  describe "POST destroy" do
+    before do
+      @user = FactoryGirl.create :user
+      sign_in @user
+    end
+    context "correct current password" do
+      it "removes user" do
+        expect do
+          post :destroy, id: 1, user: {
+            current_password: FactoryGirl.build(:user).password
+          }
+        end.to change(User, :count).by(-1)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "incorrect current password" do
+      it "does not remove user" do
+        expect do
+          post :destroy, id: 1, user: {
+            current_password: '1'
+          }
+        end.not_to change(User, :count)
+        expect(response).to render_template :edit
+      end
+    end
+  end
 
 end

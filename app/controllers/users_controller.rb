@@ -59,6 +59,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find params[:id]
+    authorize(@user)
+    unless @user.valid_password?(params[:user][:current_password])
+      flash.now[:error] = "Nieprawidłowe hasło"
+      return render :edit
+    end
+    @user.destroy
+    redirect_to root_path, notice: "Usunięto konto"
   end
 
   def dashboard
