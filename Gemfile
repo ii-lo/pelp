@@ -100,6 +100,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'guard-livereload', require: false
   gem 'database_cleaner', '~> 1.3.0'
+  gem 'capybara-screenshot', '~> 1.0.4'
   # gem 'did_you_mean'
 end
 
