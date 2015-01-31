@@ -13,6 +13,7 @@
     <div class="col-md-12">
       <h2>Edytuj profil</h2>
       <%= simple_form_for @user do |f| %>
+        <%= f.input :email, required: true %>
         <%= f.input :name %>
         <%= f.input :current_password, required: true %>
         <%= f.button :submit %>

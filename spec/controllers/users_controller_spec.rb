@@ -64,9 +64,11 @@ RSpec.describe UsersController, :type => :controller do
       it "updates user" do
         patch :update, id: 1, user: {
           current_password: FactoryGirl.build(:user).password,
+          email: 'rob@rob.com',
           name: "Testo"
         }
         expect(User.first.name).to eq "Testo"
+        expect(User.first.email).to eq "rob@rob.com"
         expect(response).to redirect_to edit_user_path(User.first)
       end
     end
