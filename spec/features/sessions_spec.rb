@@ -12,6 +12,8 @@ feature "Sessions", :type => :feature do
     expect do
       click_button "Zarejestruj się"
     end.to change { User.count }.by(1)
+    expect(page).to have_content "Wyloguj"
+    click_link "Wyloguj"
     click_link "Zaloguj"
     fill_in :user_email, with: "robert@robert.com"
     fill_in :user_password, with: "asdf1234"
