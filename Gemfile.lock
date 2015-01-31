@@ -171,6 +171,8 @@ GEM
     less-rails (2.5.0)
       actionpack (>= 3.1)
       less (~> 2.5.0)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.7)
     listen (2.7.11)
       celluloid (>= 0.15.2)
@@ -377,6 +379,7 @@ DEPENDENCIES
   jquery-rails
   knockoutjs-rails
   less-rails
+  letter_opener
   paperclip (~> 4.2)
   pry-doc
   pry-rails

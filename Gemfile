@@ -113,6 +113,7 @@ group :development do
   gem 'rack-mini-profiler', require: false
   gem 'annotate'
   gem 'guard-ctags-bundler'
+  gem 'letter_opener'
 end
 
 gem 'unicorn'

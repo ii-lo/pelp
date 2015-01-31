@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
     respond_to do |format|
       if @user.save
+        sign_in @user, bypass: true
         format.html { redirect_to root_path, notice: "Zarejestrowano" }
       else
         format.html { render 'new' }
