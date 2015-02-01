@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admins
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :admins
   devise_for :users, path: ''
-  devise_for :admins
   resources :users, only: [:new, :create]
 
   authenticated :user do
