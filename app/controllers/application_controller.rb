@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
     ], gfm: true)
   end
 
+  def after_sign_in_path_for(resource)
+    return '/admin' if Admin === resource
+    super
+  end
+
   private
 
   def user_not_authorized

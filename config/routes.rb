@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     get 'question_markdown/:id' => 'questions#get_markdown'
   end
 
-  unauthenticated do
+  unauthenticated :user do
     root 'static_pages#home'
   end
 
