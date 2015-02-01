@@ -18,7 +18,7 @@
                     <%= simple_form_for(:user, url: session_path(:user)) do |f| %>
                         <%= f.input :email, required: true %>
                         <%= f.input :password, label: "Hasło", required: true %>
-                        <%= f.input :remember_me, as: :boolean, label: false, inline_label: "Zapamiętaj mnie" %>
+                        <%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Zapamiętaj mnie' %>
                         <%= f.submit "Zaloguj się", class: "btn btn-primary" %>
                         <%= link_to "Nie pamiętam hasła", new_user_password_path, class: "btn btn-default" %>
                     <% end %>

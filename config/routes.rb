@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   #devise_for :admins
   devise_for :users, path: ''
   resources :users, only: [:new, :create]
@@ -50,7 +52,7 @@ Rails.application.routes.draw do
     get 'question_markdown/:id' => 'questions#get_markdown'
   end
 
-  unauthenticated do
+  unauthenticated :user do
     root 'static_pages#home'
   end
 
