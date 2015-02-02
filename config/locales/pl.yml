@@ -230,54 +230,114 @@ pl:
     models:
       user:
         one: "Użytkownik"
-        other: "Użytkowników"
+        other: "Użytkownicy"
       admin:
         one: "Administrator"
-        other: "Administratorów"
+        other: "Administratorzy"
       attending:
         one: "Uczęszczanie"
-        other: "Uczęszczań"
+        other: "Uczęszczania"
+      answer:
+        one: "Odpowiedź"
+        other: "Odpowiedzi"
       category_result:
         one: "Wynik kategorii"
-        other: "Wyników kategorii"
+        other: "Wyniki kategorii"
       course:
         one: "Kurs"
-        other: "Kursów"
+        other: "Kursy"
       exam:
         one: "Egzamin"
-        other: "Egzaminów"
+        other: "Egzaminy"
       lesson:
         one: "Lekcja"
-        other: "Lekcji"
+        other: "Lekcje"
       lesson_category:
         one: "Kategoria lekcji"
-        other: "Kategorii lekcji"
+        other: "Kategorie lekcji"
       material:
         one: "Materiał"
-        other: "Materiałów"
+        other: "Materiały"
       material_category:
         one: "Kategoria materiałów"
-        other: "Kategorii materiałów"
+        other: "Kategorie materiałów"
       picture:
         one: "Obrazy"
-        other: "Obrazów"
+        other: "Obrazy"
       question:
         one: "Pytanie"
-        other: "Pytań"
+        other: "Pytania"
       question_category:
         one: "Kategoria pytań"
-        other: "Kategorii pytań"
+        other: "Kategorie pytań"
       user_answer:
         one: "Odpowiedź użytkownika"
-        other: "Odpowiedzi użytkownika"
+        other: "Odpowiedzi użytkowników"
       user_exam:
         one: "Egzamin użytkownika"
-        other: "Egzaminów użytkownika"
+        other: "Egzaminy użytkowników"
     attributes:
       user:
         remember_me: "Zapamiętaj mnie"
       admin:
         remember_me: "Zapamiętaj mnie"
+      answer:
+        name: "Treść"
+        correct: "Poprawne"
+        question: "Pytanie"
+        user_ansers: "Odpowiedzi użytkowników"
+        question_category: "Kategoria pytania"
+        exam: "Egzamin"
+      attending:
+        course_id: "Id kursu"
+        user_id: "Id użytkownika"
+        user: "Użytkownik"
+        course: "Kurs"
+        role: "Rola(0: członek, 1: administrator, 2: właściciel)"
+      category_result:
+        user_exam: "Egzamin użytkownika"
+        question_category: "Kategoria pytań"
+        value: "Wartość"
+      course:
+        attendings: "Uczęszczania"
+        users: "Użytkownicy"
+        lesson_categories: "Kategorie lekcji"
+        lessons: "Lekcje"
+        exams: "Egzaminy"
+        material_categories: "Egzaminy"
+        materials: "Materiały"
+        admins: "Administratorzy"
+        admins_only: "Tylko administratorzy"
+        ordinary_users: "Zwykli członkowie"
+        owners: "Właściciele"
+        name: "Nazwa"
+        description: "Opis"
+      exam:
+        name: "Nazwa"
+        course: "Kurs"
+        lesson_category: "Kategoria lekcji"
+        questions: "Pytania"
+        answers: "Odpowiedzi"
+        user_exams: "Egzaminy użytkowników"
+        question_categories: "Kategorie pytań"
+        duration: "Czas trwania(w sekundach)"
+        one_run: "Jedno podejście"
+        published: "Opublikowany"
+        max_points: "Maksymalna liczba punktów"
+      lesson:
+        name: "Nazwa"
+        content: "Treść"
+        course: "Kurs"
+        lesson_category: "Kategoria lekcji"
+        pictures: "Obrazy"
+      lesson_category:
+        name: "Nazwa"
+        course: "Kurs"
+        lessons: "Lekcje"
+        exams: "Egzaminy"
+        material_categories: "Kategorie materiałów"
+        published_exams: "Opublikowane egzaminy"
+        flagged: "Wyróżniony"
   admin:
     actions:
       bulk_delete:
