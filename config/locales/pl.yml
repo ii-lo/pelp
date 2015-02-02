@@ -230,7 +230,49 @@ pl:
     models:
       user:
         one: "Użytkownik"
-        other: "Użytkownicy"
+        other: "Użytkowników"
+      admin:
+        one: "Administrator"
+        other: "Administratorów"
+      attending:
+        one: "Uczęszczanie"
+        other: "Uczęszczań"
+      category_result:
+        one: "Wynik kategorii"
+        other: "Wyników kategorii"
+      course:
+        one: "Kurs"
+        other: "Kursów"
+      exam:
+        one: "Egzamin"
+        other: "Egzaminów"
+      lesson:
+        one: "Lekcja"
+        other: "Lekcji"
+      lesson_category:
+        one: "Kategoria lekcji"
+        other: "Kategorii lekcji"
+      material:
+        one: "Materiał"
+        other: "Materiałów"
+      material_category:
+        one: "Kategoria materiałów"
+        other: "Kategorii materiałów"
+      picture:
+        one: "Obrazy"
+        other: "Obrazów"
+      question:
+        one: "Pytanie"
+        other: "Pytań"
+      question_category:
+        one: "Kategoria pytań"
+        other: "Kategorii pytań"
+      user_answer:
+        one: "Odpowiedź użytkownika"
+        other: "Odpowiedzi użytkownika"
+      user_exam:
+        one: "Egzamin użytkownika"
+        other: "Egzaminów użytkownika"
     attributes:
       user:
         remember_me: "Zapamiętaj mnie"
