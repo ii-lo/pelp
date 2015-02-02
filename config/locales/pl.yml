@@ -278,6 +278,12 @@ pl:
         other: "Egzaminy użytkowników"
     attributes:
       user:
+        name: "Imię i nazwisko"
+        attendings: "Uczęszczania"
+        courses: "Kursy"
+        admin_course: "Administrator kursów"
+        owned_courses: "Właściciel kursów"
+        user_exams: "Egzaminy użytkownika"
         remember_me: "Zapamiętaj mnie"
       admin:
         remember_me: "Zapamiętaj mnie"
@@ -338,6 +344,53 @@ pl:
         material_categories: "Kategorie materiałów"
         published_exams: "Opublikowane egzaminy"
         flagged: "Wyróżniony"
+      material:
+        name: "Nazwa"
+        file: "Plik"
+        course: "Kurs"
+        material_category: "Kategoria materiałów"
+      material_category:
+        name: "Nazwa"
+        lesson_category: "Kategoria lekcji"
+        materials: "Materiały"
+        course: "Kurs"
+      picture:
+        slug: "Slug"
+        lesson: "Lekcja"
+        description: "Opis"
+        file: "PLik"
+      question:
+        form: "Forma(0: jednokrotnej odpowiedzi, 1: wielokrotnej, 2: otwarte)"
+        exam: "Egzamin"
+        question_category: "Kategoria pytań"
+        answers: "Odpowiedzi"
+        correct_answers: "Prawidłowe odpowiedzi"
+        wrong_answers: "Nieprawidłowe odpowiedzi"
+        user_answers: "Odpowiedzi użytkowników"
+        value: "Wartość"
+        picture: "Obraz"
+        correct_answers_count: "Liczba prawidłowych odpowiedzi"
+      question_category:
+        exam: "Egzamin"
+        questions: "Pytania"
+        category_results: "Wyniki dla kategorii"
+        answers: "Odpowiedzi"
+        name: "Nazwa"
+      user_answer:
+        answer: "Odpowiedź"
+        user_exam: "Egzamin użytkownika"
+        question: "Pytanie"
+        correct: "Prawidłowe"
+        text: "Treść odpowiedzi"
+        question_category: "Kategoria pytania"
+      user_exam:
+        user: "Użytkownik"
+        exam: "Egzamin"
+        user_answers: "Odpowiedzi użytkownika"
+        category_results: "Wyniki dla kategorii"
+        course: "Kurs"
+        closed: "Zakończony"
+        result: "Wynik"
   admin:
     actions:
       bulk_delete:
