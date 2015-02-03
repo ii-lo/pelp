@@ -116,6 +116,7 @@ group :development do
   gem 'annotate'
   gem 'guard-ctags-bundler'
   gem 'letter_opener'
+  gem 'derailed_benchmarks'
 end
 
 gem 'unicorn'
