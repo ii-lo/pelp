@@ -15,7 +15,7 @@
 #
 
 class Picture < ActiveRecord::Base
-  before_create :set_slug
+  include Sluggable
   belongs_to :lesson
 
   validates :lesson_id, presence: true
@@ -31,12 +31,6 @@ class Picture < ActiveRecord::Base
   validates_attachment :file, presence: true, content_type:{
     content_type: /\Aimage\/.*\Z/
   }
-
-  def set_slug
-    begin
-      self.slug = SecureRandom.urlsafe_base64
-    end while Picture.exists?(slug: self.slug)
-  end
 
   private
 

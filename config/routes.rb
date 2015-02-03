@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  #devise_for :admins
   devise_for :users, path: ''
   resources :users, only: [:new, :create]
 
   authenticated :user do
     root 'users#dashboard', as: :dashboard
   end
+
+  get 'invitations/accept', as: :invitation
 
   authenticate :user do
     resources :users, only: [:show, :edit, :update] do

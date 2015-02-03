@@ -25,6 +25,7 @@ class Course < ActiveRecord::Base
   has_many :admins_only, -> { where attendings: { role: 1 } }, through: :attendings, source: :user
   has_many :ordinary_users, -> { where attendings: { role: 0 } }, through: :attendings, source: :user
   has_many :owners, -> { where attendings: { role: 2 } }, through: :attendings, source: :user
+  has_many :invitations, dependent: :destroy
 
   validates :name, presence: true
   validates :description, length: {
