@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118194031) do
+ActiveRecord::Schema.define(version: 20150203110543) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -104,6 +104,19 @@ ActiveRecord::Schema.define(version: 20150118194031) do
 
   add_index "exams", ["course_id"], name: "index_exams_on_course_id"
   add_index "exams", ["lesson_category_id"], name: "index_exams_on_lesson_category_id"
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.string   "email"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "slug"
+    t.boolean  "accepted",   default: false
+  end
+
+  add_index "invitations", ["course_id"], name: "index_invitations_on_course_id"
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id"
 
   create_table "lesson_categories", force: :cascade do |t|
     t.string   "name",       limit: 255

@@ -41,6 +41,38 @@ class CoursesController < ApplicationController
     redirect_to settings_course_path(@course)
   end
 
+  def send_invitation
+    authorize(@course)
+    @invitation = Invitation.new(
+      course_id: @course.id,
+      email: params[:invitation][:email],
+      user_id: current_user.id
+    )
+
+    if @invitation.save
+      InvitationMailer.invite(@invitation, request).deliver_later
+      respond_to do |format|
+        format.html do
+          redirect_to settings_course_path(@course),
+          notice: "Wysłano mail"
+        end
+        format.js {  }
+        format.json { render json: { valid: true } }
+      end
+    else
+      respond_to do |format|
+        format.json do
+          render json: { errors: @invitation.errors.full_messages.join("\n") },
+            status: 422
+        end
+        format.html do
+          flash[:error] =  @invitation.errors.full_messages
+          redirect_to settings_course_path(@course)
+        end
+      end
+    end
+  end
+
   private
 
   def load_course

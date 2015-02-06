@@ -135,4 +135,22 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+
+  describe "#check_for_accepted_invitations" do
+    context 'accepted invitations' do
+      before do
+        FactoryGirl.create :user
+        FactoryGirl.create :course
+        FactoryGirl.create :course
+        Attending.destroy_all
+        Invitation.create!(course_id: 1, user_id: 1, email: "tt@tt.com").accept!
+        Invitation.create!(course_id: 2, user_id: 1, email: "tt@tt.com").accept!
+      end
+      it 'Adds courses on create' do
+        User.create!(email:"tt@tt.com", password: "123456",
+                    password_confirmation: '123456', name: "Name")
+        expect(User.second.courses.count).to eq 2
+      end
+    end
+  end
 end

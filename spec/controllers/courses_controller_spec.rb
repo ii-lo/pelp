@@ -69,6 +69,28 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe 'POST send_invitation' do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1, role: 1)
+    end
+    context 'new email' do
+      it 'sends invitation' do
+        message = spy
+        expect(InvitationMailer).to receive(:invite) { message }
+        expect(message).to receive :deliver_later
+        post :send_invitation, id: 1, invitation: { email: 'bronislaw@gmail.com' }
+      end
+    end
+
+    context 'existing email' do
+      it 'does not send invitation' do
+        post :send_invitation, id: 1, invitation: { email: User.first.email }
+        expect(InvitationMailer).not_to receive(:invite)
+      end
+    end
+  end
+
   #describe 'GET exam' do
     #before do
       #FactoryGirl.create :course

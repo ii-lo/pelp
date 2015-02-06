@@ -18,4 +18,8 @@ class CoursePolicy < Struct.new(:user, :course)
   def update_attending?
     course.owners.include? user
   end
+
+  def send_invitation?
+    settings?
+  end
 end
