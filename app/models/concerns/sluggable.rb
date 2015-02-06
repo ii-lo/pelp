@@ -6,7 +6,7 @@ module Sluggable
 
   def set_slug
     begin
-      self.slug = SecureRandom.urlsafe_base64
+      self.slug = SecureRandom.urlsafe_base64(50)
     end while self.class.exists?(slug: self.slug)
   end
 end

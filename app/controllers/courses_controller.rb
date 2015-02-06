@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
     )
 
     if @invitation.save
-      InvitationMailer.invite(@invitation).deliver_later
+      InvitationMailer.invite(@invitation, request).deliver_later
       respond_to do |format|
         format.html do
           redirect_to settings_course_path(@course),

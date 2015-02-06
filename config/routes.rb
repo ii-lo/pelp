@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     root 'users#dashboard', as: :dashboard
   end
 
-  get 'invitations/accept', as: :invitation
+  get 'invitations/accept', as: :invitation, to: 'invitations#accept'
 
   authenticate :user do
     resources :users, only: [:show, :edit, :update] do

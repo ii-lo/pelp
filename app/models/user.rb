@@ -19,6 +19,8 @@
 #
 
 class User < ActiveRecord::Base
+  after_create :check_for_accepted_invitations
+
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -69,5 +71,11 @@ class User < ActiveRecord::Base
            else
              many.to_str
            end
+  end
+
+  def check_for_accepted_invitations
+    Invitation.where('LOWER("email") = ?', email.downcase).accepted.uniq.each do |i|
+      attendings.create(course_id: i.course_id)
+    end
   end
 end

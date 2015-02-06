@@ -15,6 +15,8 @@
 class Invitation < ActiveRecord::Base
   include Sluggable
 
+  after_create { RemoveInvitationJob.set(wait: 1.week).perform_later(self) }
+
   belongs_to :course
   belongs_to :user
 
@@ -24,6 +26,8 @@ class Invitation < ActiveRecord::Base
                     presence: true
   validate :already_sent
   validate :already_member
+
+  scope :accepted, -> { where accepted: true }
 
   def accept!
     update_attribute(:accepted, true)
