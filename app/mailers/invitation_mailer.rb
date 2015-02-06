@@ -1,10 +1,6 @@
 class InvitationMailer < ApplicationMailer
-  def invite(email, course, user, invitation)
-    @email = email
-    @course = course
-    @user = user
+  def invite(invitation)
     @invitation = invitation
-
-    mail to: @email, subject: "PELP: zaproszono do kursu"
+    mail to: @invitation.email, subject: "PELP: zaproszono do kursu"
   end
 end

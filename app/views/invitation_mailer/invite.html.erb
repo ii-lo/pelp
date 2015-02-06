@@ -1,8 +1,8 @@
 <p>
-  Witaj <%= @email.to_s %>
+  Witaj <%= @invitation.email.to_s %>
 </p>
 <p>
-  Uzytkownik <%= @user.email %> zaprosił Cię do kursu <%= @course.name %>
+  Uzytkownik <%= @invitation.user.email %> zaprosił Cię do kursu <%= @invitation.course.name %>
 </p>
 <p>
   Aby przyjąć zaproszenie przejdź na stronę: bla

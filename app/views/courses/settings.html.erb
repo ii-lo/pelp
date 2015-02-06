@@ -5,10 +5,16 @@
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
 <% end %>
 
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
+<% end %>
+
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <%= bootstrap_flash %>
+    <div id="settings-flash">
+      <%= bootstrap_flash %>
+    </div>
     <%= render 'layouts/breadcrumb' %>
     <div class="row">
       <div class="col-md-12">
@@ -16,6 +22,15 @@
           <%= f.input :name %>
           <%= f.input :description %>
           <%= f.button :submit %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Zaproś do kursu</h3>
+        <%= simple_form_for :invitation, url: send_invitation_course_path(@course), remote: true, html: { id: 'send_invitation' } do |f| %>
+          <%= f.input :email %>
+          <%= f.button :submit, "Zaproś" %>
         <% end %>
       </div>
     </div>

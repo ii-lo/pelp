@@ -22,8 +22,24 @@ class Invitation < ActiveRecord::Base
   validates :user_id, presence: true
   validates :email, format: /@/,
                     presence: true
+  validate :already_sent
+  validate :already_member
 
   def accept!
     update_attribute(:accepted, true)
+  end
+
+  private
+
+  def already_sent
+    if course && course.invitations.where('LOWER("invitations"."email") = ?', email.downcase).any?
+      errors[:email] << "Już wysłano"
+    end
+  end
+
+  def already_member
+    if course && course.users.where('LOWER("users"."email") = ?', email.downcase).any?
+      errors[:email] << "#{email} jest już uczestnikiem kursu"
+    end
   end
 end

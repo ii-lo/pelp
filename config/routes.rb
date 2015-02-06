@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       member do
         get :settings, as: :settings
         post :update_attending
+        post :send_invitation
       end
       resources :exams, except: [:show]
       resources :lessons do
