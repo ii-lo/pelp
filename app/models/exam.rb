@@ -36,6 +36,10 @@ class Exam < ActiveRecord::Base
     update_attribute(:max_points, questions.sum(:value))
   end
 
+  def to_s
+    name
+  end
+
   private
 
   def set_course_id

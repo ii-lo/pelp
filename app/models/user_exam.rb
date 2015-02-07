@@ -24,6 +24,8 @@ class UserExam < ActiveRecord::Base
 
   delegate :duration, to: :exam, prefix: true
 
+  scope :closed, -> { where(closed: true) }
+
   def update_result
     sum = 0
     q_c = exam.question_categories.pluck(:id)
@@ -53,9 +55,6 @@ class UserExam < ActiveRecord::Base
     UserExamWaitForCloseJob.set(wait_until: exam_duration.seconds.from_now)
       .perform_later(self)
   end
-
-  #handle_asynchronously :wait_for_close!, run_at: proc { |ue| ue.exam.duration.seconds.from_now },
-    #priority: 20
 
   private
 

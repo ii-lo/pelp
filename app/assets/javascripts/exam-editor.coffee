@@ -14,12 +14,18 @@ $ ->
         $(this).text($(this).data('open'))
       else if $(this).text() == $(this).data('open')
         $(this).text($(this).data('closed'))
+  prepare_show_more()
 
   new TimeHelper($('#exam_duration'), $('#minutes_helper'),
   $('#seconds_helper'))
 
-
-  prepare_show_more()
+  $('#user_exams > a').on 'click', (e) ->
+    e.preventDefault()
+    if $(this).text() == $(this).data('closed')
+      $(this).text($(this).data('open'))
+    else if $(this).text() == $(this).data('open')
+      $(this).text($(this).data('closed'))
+    $('#user_exams_list').toggleClass('hidden')
 
   $('.hide_all > a').on 'click', (e) ->
     e.preventDefault()

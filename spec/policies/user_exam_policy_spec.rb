@@ -94,8 +94,10 @@ describe UserExamPolicy do
   permissions :show? do
     before do
       @user = double User
+      @course = double Course, admins: []
       @exam = double Exam, one_run: false
-      @user_exam = double UserExam, user: @user, closed: true, exam: @exam
+      @user_exam = double UserExam, user: @user, closed: true, exam: @exam,
+        course: @course
     end
 
     context "user's exam" do
@@ -121,6 +123,16 @@ describe UserExamPolicy do
 
       it "does not grant access" do
         expect(subject).not_to permit(@user, @user_exam)
+      end
+    end
+
+    context 'admin' do
+      before do
+        allow(@course).to receive(:admins).and_return([@user])
+      end
+
+      it 'grants access' do
+        expect(subject).to permit(@user, @user_exam)
       end
     end
   end
