@@ -1,0 +1,33 @@
+<% content_for :title, "#{@user_exam.exam.name} | #{@user_exam.user.name}" %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div class="row">
+    <%= bootstrap_flash %>
+  </div>
+  <div class="row">
+    <% @q_cs.each do |qc| %>
+      <div>
+        <%= qc.name %>
+        <br>
+        <% qc.questions.each do |q| %>
+          <b><%= q.name %></b>
+          <% q.answers.each do |a| %>
+            <br>
+            <%= a.name %>
+            <%= a.id %>
+            <%= 'To' if @u_e_f.data.fetch(qc.id, {})[q.id].any? { |ua| ua.answer_id == a.id } %>
+          <% end %>
+          <% if q.open? %>
+            <br>
+            Odpowiedź użytkownika: <%= @u_e_f.data.fetch(qc.id, {})[q.id].first.text %>
+          <% end %>
+          <br>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</div>
+<%= render 'layouts/footer' %>

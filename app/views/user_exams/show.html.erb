@@ -72,6 +72,13 @@
             </div>
         </div>
     </div>
+    <% if policy(@user_exam).edit? %>
+        <div class="row" style="margin-bottom: 13pt">
+              <div class="col-xs-12 col-sm-4 col-sm-push-4">
+                  <%= link_to 'Popraw egzamin', edit_user_exam_path(@user_exam), class: 'btn btn-primary btn-block btn-lg' %>
+              </div>
+        </div>
+    <% end %>
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-sm-push-4">
             <%= link_to 'Wróć do kursu', course_path(@exam.course), class: 'btn btn-primary btn-block btn-lg' %>

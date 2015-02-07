@@ -53,6 +53,14 @@ class UserExamsController < ApplicationController
     end
   end
 
+  def edit
+    @user_exam = UserExam.find params[:id]
+    authorize @user_exam
+    @exam = @user_exam.exam
+    @u_e_f = UserExamFacade.new(@user_exam)
+    @q_cs = @exam.question_categories.includes(:questions, :answers)
+  end
+
   private
 
   def show_result

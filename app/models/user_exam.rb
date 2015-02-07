@@ -45,6 +45,10 @@ class UserExam < ActiveRecord::Base
     !closed
   end
 
+  def closed?
+    closed
+  end
+
   def close!
     return :already_closed if closed
     update_attribute(:closed, true)
