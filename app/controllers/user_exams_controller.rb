@@ -62,6 +62,13 @@ class UserExamsController < ApplicationController
     @q_cs = @exam.question_categories.includes(:questions, :answers)
   end
 
+  def correct_answer
+    @user_exam = UserExam.find(params[:id])
+    authorize(@user_exam)
+    @user_answer = @user_exam.user_answers.find(params[:user_answers_id])
+    redirect_to edit_user_exam_path(@user_exam), notice: "Poprawiono"
+  end
+
   private
 
   def show_result

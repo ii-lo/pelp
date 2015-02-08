@@ -30,6 +30,10 @@ class UserExamPolicy < Struct.new(:user, :user_exam)
     user_exam.closed? && user_exam.course.admins.include?(user)
   end
 
+  def correct_answer?
+    edit?
+  end
+
   private
 
   def check_if_one_run(max_length = 0)
