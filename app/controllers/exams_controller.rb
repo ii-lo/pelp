@@ -20,7 +20,8 @@ class ExamsController < ApplicationController
     @course ||= Course.find params[:course_id]
     @exam ||= Exam.find params[:id]
     @q_cs ||= @exam.question_categories.includes :questions, :answers
-    @u_exams = @exam.user_exams.includes(:user).paginate(page: params[:page], per_page: 15)
+    @u_exams = @exam.user_exams.includes(:user).order(updated_at: :asc)
+      .paginate(page: params[:page], per_page: 15)
     @markdown = markdown_renderer
   end
 

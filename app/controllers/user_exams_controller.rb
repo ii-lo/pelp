@@ -57,6 +57,7 @@ class UserExamsController < ApplicationController
     @user_exam = UserExam.find params[:id]
     authorize @user_exam
     @exam = @user_exam.exam
+    @markdown = markdown_renderer
     @u_e_f = UserExamFacade.new(@user_exam)
     @q_cs = @exam.question_categories.includes(:questions, :answers)
   end
