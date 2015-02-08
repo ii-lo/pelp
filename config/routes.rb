@@ -50,7 +50,7 @@ Rails.application.routes.draw do
       get '/:id/summary' => 'user_exams#show', as: :user_exam
       post '/answer' => 'user_exams#answer', as: :answer_user_exam
       get '/:id/edit' => 'user_exams#edit', as: :edit_user_exam
-      get '/:id/edit/:user_asnwer_id/correct' => 'user_exams#correct_answer', as: :correct_user_answer
+      get '/:id/edit/:user_answer_id/correct' => 'user_exams#correct_answer', as: :correct_user_answer
     end
 
     get 'question_markdown/:id' => 'questions#get_markdown'

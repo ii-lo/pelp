@@ -65,7 +65,9 @@ class UserExamsController < ApplicationController
   def correct_answer
     @user_exam = UserExam.find(params[:id])
     authorize(@user_exam)
-    @user_answer = @user_exam.user_answers.find(params[:user_answers_id])
+    @user_answer = @user_exam.user_answers.find(params[:user_answer_id])
+    @user_answer.update_attribute(:correct, !@user_answer.correct)
+    @user_exam.update_result
     redirect_to edit_user_exam_path(@user_exam), notice: "Poprawiono"
   end
 

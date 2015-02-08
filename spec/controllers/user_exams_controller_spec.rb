@@ -180,4 +180,37 @@ RSpec.describe UserExamsController, :type => :controller do
       expect(UserExam.first.result).to be > 1
     end
   end
+
+  describe 'GET edit' do
+    before do
+      FactoryGirl.create :user_exam
+      UserExam.first.close!
+      Attending.first.update_attribute(:role, 1)
+    end
+
+    it 'renders page' do
+      get :edit, id: 1
+      expect(response).to have_http_status :success
+    end
+  end
+
+  describe 'GET correct_answer' do
+    before do
+      Attending.first.update_attribute(:role, 1)
+      FactoryGirl.create :question, form: 2
+      Answer.create(name: "Czerw", question_id: 2)
+      FactoryGirl.create :user_exam
+      UserAnswer.create(question_id: 2, text: "Foo", user_exam_id: 1)
+      UserExam.first.close!
+    end
+
+    it 'makes user answer correct' do
+      expect(UserAnswer.first.correct).to be false
+      expect(UserExam.first.result).to eq 0
+      get :correct_answer, id: 1, user_answer_id: 1
+      expect(UserAnswer.first.correct).to be true
+      expect(UserExam.first.result).not_to eq 0
+      expect(response).to redirect_to edit_user_exam_path(1)
+    end
+  end
 end

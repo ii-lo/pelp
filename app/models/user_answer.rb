@@ -32,7 +32,7 @@ class UserAnswer < ActiveRecord::Base
 
   def check_if_correct
     if question.open?
-      self.correct = !!question.answers.where('lower(name) = ?', text.downcase).first
+      self.correct = question.answers.where('lower(name) = ?', text.downcase).any?
     else
       self.correct = answer.try :correct
     end
