@@ -15,17 +15,19 @@
     <%= bootstrap_flash %>
   </div>
   <div class="row">
-    <% @q_cs.each do |qc| %>
-      <div class="row">
-        <div class="col-md-12 question_category">
-          <h4><%= qc.name %></h4>
-          <% qc.questions.each do |q| %>
-            <%= render 'question', q: q, qc: qc %>
-          <% end %>
+    <div class="col-md-12">
+      <% @q_cs.each do |qc| %>
+        <div class="row">
+          <div class="col-md-12 question_category">
+            <h4><%= qc.name %></h4>
+            <% qc.questions.each do |q| %>
+              <%= render 'question', q: q, qc: qc %>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <br>
-    <% end %>
+      <% end %>
+      <%= link_to "Wróć do statystyk", user_exam_path(@user_exam) %>
+    </div>
   </div>
 </div>
 <%= render 'layouts/footer' %>
