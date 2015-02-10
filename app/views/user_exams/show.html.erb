@@ -56,7 +56,7 @@
                     <tbody>
                     <% @category_results.each do |s| %>
                         <tr>
-                            <% procent = "#{(100 * s.value.to_f / s.question_category.questions.sum(:value)).round}%" %>
+                            <% procent = number_to_percentage((100 * s.value.to_f / s.question_category.questions.sum(:value)).round, precision: 0)%>
                             <td><%= s.question_category.name %></td>
                             <td><%= s.value %>&nbsp;/&nbsp;<%= s.question_category.questions.sum(:value) %></td>
                             <td>

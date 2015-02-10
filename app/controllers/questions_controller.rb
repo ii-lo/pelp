@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  after_action :update_user_exams, except: :get_markdown
+
   def create
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.find params[:question_category_id]
@@ -74,5 +76,10 @@ class QuestionsController < ApplicationController
 
   def update_params
     params.require(:question).permit(:name, :value, :picture, :delete_picture)
+  end
+
+  def update_user_exams
+    @exam ||= Exam.find params[:exam_id]
+    UpdateUserExamsJob.perform_later(@exam)
   end
 end
