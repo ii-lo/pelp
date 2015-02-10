@@ -63,9 +63,19 @@ RSpec.describe CoursesController, :type => :controller do
       FactoryGirl.create :user, email: "p@p.com"
       Attending.create(course_id: 1, user_id: 2, role: 1)
     end
-    it "updates_attending" do
-      post :update_attending, id: 1, attending: { role: 0, user_id: 2 }
-      expect(Attending.second.role.to_i).to eq 0
+
+    context 'own attending' do
+      it 'does not update_attending' do
+        post :update_attending, id: 1, attending: { role: 0, user_id: 1 }
+        expect(Attending.first.role).not_to eq "member"
+      end
+    end
+
+    context 'updating of other user' do
+      it "updates_attending" do
+        post :update_attending, id: 1, attending: { role: 0, user_id: 2 }
+        expect(Attending.second.role).to eq "member"
+      end
     end
   end
 

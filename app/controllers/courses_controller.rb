@@ -32,8 +32,8 @@ class CoursesController < ApplicationController
   def update_attending
     authorize(@course)
     p = params[:attending]
-    if p[:user_id] == current_user.id
-      return redirect_to :back,
+    if p[:user_id].to_i == current_user.id
+      return redirect_to settings_course_path(@course),
         notice: "Nie możesz zmienić sobie uprawnień"
     end
     @attending = @course.attendings.where(user_id: p[:user_id]).take
