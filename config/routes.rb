@@ -47,8 +47,10 @@ Rails.application.routes.draw do
       get '/new/:id' => 'user_exams#new', as: :new_user_exam
       get '/exit' => 'user_exams#exit', as: :exit_user_exam
       get '/question' => 'user_exams#question', as: :question_user_exam
-      get '/summary/:id' => 'user_exams#show', as: :user_exam
+      get '/:id/summary' => 'user_exams#show', as: :user_exam
       post '/answer' => 'user_exams#answer', as: :answer_user_exam
+      get '/:id/edit' => 'user_exams#edit', as: :edit_user_exam
+      get '/:id/edit/:user_answer_id/correct' => 'user_exams#correct_answer', as: :correct_user_answer
     end
 
     get 'question_markdown/:id' => 'questions#get_markdown'

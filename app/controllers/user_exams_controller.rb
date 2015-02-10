@@ -53,6 +53,24 @@ class UserExamsController < ApplicationController
     end
   end
 
+  def edit
+    @user_exam = UserExam.find params[:id]
+    authorize @user_exam
+    @exam = @user_exam.exam
+    @markdown = markdown_renderer
+    @u_e_f = UserExamFacade.new(@user_exam)
+    @q_cs = @exam.question_categories.includes(:questions, :answers)
+  end
+
+  def correct_answer
+    @user_exam = UserExam.find(params[:id])
+    authorize(@user_exam)
+    @user_answer = @user_exam.user_answers.find(params[:user_answer_id])
+    @user_answer.update_attribute(:correct, !@user_answer.correct)
+    @user_exam.update_result
+    redirect_to edit_user_exam_path(@user_exam), notice: "Poprawiono"
+  end
+
   private
 
   def show_result

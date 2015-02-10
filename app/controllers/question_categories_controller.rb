@@ -1,4 +1,6 @@
 class QuestionCategoriesController < ApplicationController
+  after_action :update_user_exams, except: :create
+
   def create
     @exam = Exam.find params[:exam_id]
     @q_c = @exam.question_categories.build(q_c_params)
@@ -49,6 +51,11 @@ class QuestionCategoriesController < ApplicationController
   end
 
   private
+
+  def update_user_exams
+    @exam ||= Exam.find params[:exam_id]
+    UpdateUserExamsJob.perform_later(@exam)
+  end
 
   def q_c_params
     params.require(:question_category).permit(:name)

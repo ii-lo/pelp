@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12 question">
+    <div class="question_body">
+      <%= @markdown.call(q.name)[:output].to_s.html_safe %>
+      <%= image_tag q.picture.url(:medium) if q.picture.url.present? %>
+      <p>
+        Wartość: <%= q.value %> pkt
+      </p>
+    </div>
+    <% if q.open? %>
+      <p>Możliwe odpowiedzi:</p>
+      <% q.answers.each do |a| %>
+        <p class="answer correct">
+          <%= a.name %>
+        </p>
+      <% end %>
+      <% answer =  @u_e_f.data.fetch(qc.id, {}).fetch(q.id, []).first %>
+      <p class="answer">
+        Odpowiedź użytkownika:
+        <span class="selected <%= answer.try(:correct) ? 'correct' : 'incorrect' %>">
+          <% if answer %>
+            <%= answer.text %>
+          <% else %>
+            (Brak odpowiedzi)
+          <% end %>
+        </span>
+        <% if answer %>
+          (<%= link_to "#{answer.correct ? 'Nie zalicz' : 'Zalicz'}", correct_user_answer_path(@user_exam, answer.id) %>)
+        <% end %>
+      </p>
+    <% else %>
+      <p>Odpowiedzi</p>
+      <% q.answers.each do |a| %>
+        <p class="answer <%= 'selected' if @u_e_f.data.fetch(qc.id, {}).fetch(q.id, []).any? { |ua| ua.answer_id == a.id } %> <%= a.correct ? 'correct' : 'incorrect' %>">
+          <%= a.name %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

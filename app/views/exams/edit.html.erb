@@ -1,5 +1,5 @@
 <% content_for :title, @exam.name %>
-<% breadcrumb :course, @exam %>
+<% breadcrumb :edit_exam, @exam, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
@@ -13,10 +13,29 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
+    <%= render 'layouts/breadcrumb' %>
     <div class="row">
       <%= bootstrap_flash %>
     </div>
-    <%= render 'layouts/breadcrumb' %>
+    <div id="user_exams">
+      <% if params[:page] %>
+        <a href="#" data-open="Pokaż wyniki" data-closed="Schowaj wyniki">Schowaj wyniki</a>
+        <div id="user_exams_list">
+          <% @u_exams.each do |u_e| %>
+            <%= render 'user_exam', e: u_e %>
+          <% end %>
+          <%= will_paginate @u_exams %>
+        </div>
+      <% else %>
+        <a href="#" data-open="Pokaż wyniki" data-closed="Schowaj wyniki">Pokaż wyniki</a>
+        <div id="user_exams_list" class="hidden">
+          <% @u_exams.each do |u_e| %>
+            <%= render 'user_exam', e: u_e %>
+          <% end %>
+          <%= will_paginate @u_exams %>
+        </div>
+      <% end %>
+    </div>
     <div class="row">
         <div class="col-xs-12">
           <h3>Edytuj</h3>
@@ -98,3 +117,4 @@
         <%= f.button :submit, 'Stwórz' %>
     <% end %>
 </div>
+<%= render 'layouts/footer' %>

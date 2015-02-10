@@ -20,6 +20,14 @@ crumb :course_settings do |course|
   parent :course, course
 end
 
+#
+# Exams
+#
+
+crumb :edit_exam do |exam, course|
+  link "Edytuj egzamin #{exam}", edit_course_exam_path(course, exam)
+  parent :course, course
+end
 
 #
 # Users

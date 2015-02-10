@@ -1,6 +1,7 @@
 class UserExamPolicy < Struct.new(:user, :user_exam)
   def show?
-    user_exam.user == user && user_exam.closed
+    user_exam.closed && (user_exam.user == user ||
+    user_exam.course.admins.include?(user))
   end
 
   def new?
@@ -23,6 +24,14 @@ class UserExamPolicy < Struct.new(:user, :user_exam)
 
   def answer?
     question?
+  end
+
+  def edit?
+    user_exam.closed? && user_exam.course.admins.include?(user)
+  end
+
+  def correct_answer?
+    edit?
   end
 
   private

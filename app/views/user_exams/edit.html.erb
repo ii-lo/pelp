@@ -1,0 +1,33 @@
+<% content_for :title, "#{@user_exam.exam.name} | #{@user_exam.user.name}" %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'user_exams', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%# javascript_include_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div class="row">
+    <%= bootstrap_flash %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% @q_cs.each do |qc| %>
+        <div class="row">
+          <div class="col-md-12 question_category">
+            <h4><%= qc.name %></h4>
+            <% qc.questions.each do |q| %>
+              <%= render 'question', q: q, qc: qc %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to "Wróć do statystyk", user_exam_path(@user_exam) %>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
