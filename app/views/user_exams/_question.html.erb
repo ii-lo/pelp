@@ -14,18 +14,24 @@
           <%= a.name %>
         </p>
       <% end %>
-      <% answer =  @u_e_f.data.fetch(qc.id, {})[q.id].first%>
+      <% answer =  @u_e_f.data.fetch(qc.id, {}).fetch(q.id, []).first %>
       <p class="answer">
         Odpowiedź użytkownika:
-        <span class="selected <%= answer.correct ? 'correct' : 'incorrect' %>">
-          <%= answer.text %>
+        <span class="selected <%= answer.try(:correct) ? 'correct' : 'incorrect' %>">
+          <% if answer %>
+            <%= answer.text %>
+          <% else %>
+            (Brak odpowiedzi)
+          <% end %>
         </span>
-        (<%= link_to "#{answer.correct ? 'Nie zalicz' : 'Zalicz'}", correct_user_answer_path(@user_exam, answer.id) %>)
+        <% if answer %>
+          (<%= link_to "#{answer.correct ? 'Nie zalicz' : 'Zalicz'}", correct_user_answer_path(@user_exam, answer.id) %>)
+        <% end %>
       </p>
     <% else %>
       <p>Odpowiedzi</p>
       <% q.answers.each do |a| %>
-        <p class="answer <%= 'selected' if @u_e_f.data.fetch(qc.id, {})[q.id].any? { |ua| ua.answer_id == a.id }%> <%= a.correct ? 'correct' : 'incorrect' %>">
+        <p class="answer <%= 'selected' if @u_e_f.data.fetch(qc.id, {}).fetch(q.id, []).any? { |ua| ua.answer_id == a.id } %> <%= a.correct ? 'correct' : 'incorrect' %>">
           <%= a.name %>
         </p>
       <% end %>
