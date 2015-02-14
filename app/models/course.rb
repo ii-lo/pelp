@@ -10,6 +10,7 @@
 #  private     :boolean          default("f")
 #  header      :string(255)
 #  thumb       :string(255)
+#  password    :string           default("")
 #
 
 class Course < ActiveRecord::Base
@@ -32,6 +33,7 @@ class Course < ActiveRecord::Base
                             maximum: 240,
                             allow_blank: true
                         }
+  validates :password, length: { maximum: 400 }
 
   scope :open, -> { where(private: false) }
 

@@ -22,4 +22,8 @@ class CoursePolicy < Struct.new(:user, :course)
   def send_invitation?
     settings?
   end
+
+  def add_user?
+    !course.private && user
+  end
 end

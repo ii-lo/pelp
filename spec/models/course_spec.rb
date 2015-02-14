@@ -10,6 +10,7 @@
 #  private     :boolean          default("f")
 #  header      :string(255)
 #  thumb       :string(255)
+#  password    :string           default("")
 #
 
 require 'rails_helper'

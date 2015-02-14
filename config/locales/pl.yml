@@ -318,6 +318,7 @@ pl:
         owners: "Właściciele"
         name: "Nazwa"
         description: "Opis"
+        password: "Hasło"
       exam:
         name: "Nazwa"
         course: "Kurs"

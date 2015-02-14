@@ -73,6 +73,17 @@ class CoursesController < ApplicationController
     end
   end
 
+  def add_user
+    authorize(@course)
+    if @course.users.include? current_user
+      return redirect_to course_path(@course)
+    end
+    if @course.password.blank?
+      @course.attendings.create(user_id: current_user.id)
+      return redirect_to course_path(@course)
+    end
+  end
+
   private
 
   def load_course
