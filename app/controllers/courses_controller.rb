@@ -84,6 +84,17 @@ class CoursesController < ApplicationController
     end
   end
 
+  def check_password
+    authorize(@course)
+    if params[:course][:password] == @course.password
+      @course.attendings.create(user_id: current_user.id)
+      redirect_to course_path(@course), notice: "Dodano do kursu"
+    else
+      flash.now[:error] = "Nieprawidłowe hasło"
+      render :add_user
+    end
+  end
+
   private
 
   def load_course

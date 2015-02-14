@@ -72,7 +72,7 @@ describe CoursePolicy do
     end
   end
 
-  permissions :add_user? do
+  permissions :add_user?, :check_password? do
     context 'private course' do
       it 'denies access' do
         course = double Course, private: true
