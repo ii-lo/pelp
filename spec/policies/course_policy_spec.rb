@@ -54,7 +54,7 @@ describe CoursePolicy do
     end
   end
 
-  permissions :update_attending? do
+  permissions :update_attending?, :remove_user? do
     context "owner" do
       it "grants access" do
         user = double User

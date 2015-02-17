@@ -24,6 +24,8 @@ Rails.application.routes.draw do
         get :settings, as: :settings
         post :update_attending
         post :send_invitation
+        get 'remove_user/:user_id', action: :remove_user,
+          as: :remove_user
       end
       resources :exams, except: [:show]
       resources :lessons do

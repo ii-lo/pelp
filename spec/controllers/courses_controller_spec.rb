@@ -159,6 +159,33 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe "GET remove_user" do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, role: 2, user_id: 1)
+      FactoryGirl.create :user, email: "kk@kk.com"
+      Attending.create(user_id: 2, course_id: 1)
+    end
+
+    context 'other user' do
+      it 'removes user from course' do
+        expect do
+          get :remove_user, id: 1, user_id: 2
+        end.to change(Attending, :count).by(-1)
+        expect(response).to redirect_to edit_course_path(1)
+      end
+    end
+
+    context 'same user' do
+      it 'does not remove user from course' do
+        expect do
+          get :remove_user, id: 1, user_id: 1
+        end.not_to change(Attending, :count)
+        expect(response).to redirect_to edit_course_path(1)
+      end
+    end
+  end
+
   #describe 'GET exam' do
     #before do
       #FactoryGirl.create :course

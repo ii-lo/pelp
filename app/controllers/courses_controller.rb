@@ -95,6 +95,17 @@ class CoursesController < ApplicationController
     end
   end
 
+  def remove_user
+    authorize(@course)
+    @user = User.find params[:user_id]
+    if @user == current_user
+      return redirect_to edit_course_path(@course),
+        notice: "Tylko inny właściciel może usunąć cię z kursu"
+    end
+    Attending.where(course_id: @course, user_id: @user).destroy_all
+    redirect_to edit_course_path(@course)
+  end
+
   private
 
   def load_course

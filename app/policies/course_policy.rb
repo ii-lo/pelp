@@ -30,4 +30,8 @@ class CoursePolicy < Struct.new(:user, :course)
   def check_password?
     add_user?
   end
+
+  def remove_user?
+    update_attending?
+  end
 end
