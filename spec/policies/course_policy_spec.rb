@@ -71,4 +71,20 @@ describe CoursePolicy do
       end
     end
   end
+
+  permissions :add_user?, :check_password? do
+    context 'private course' do
+      it 'denies access' do
+        course = double Course, private: true
+        expect(subject).not_to permit(double(User), course)
+      end
+    end
+
+    context 'open course' do
+        it 'grants access' do
+          course = double Course, private: false
+          expect(subject).to permit(double(User), course)
+        end
+      end
+  end
 end

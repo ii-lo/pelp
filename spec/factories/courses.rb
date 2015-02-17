@@ -10,6 +10,7 @@
 #  private     :boolean          default("f")
 #  header      :string(255)
 #  thumb       :string(255)
+#  password    :string           default("")
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl

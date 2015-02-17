@@ -101,6 +101,64 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe "GET add_user" do
+    before do
+      FactoryGirl.create(:course)
+    end
+
+    context 'already course member' do
+      before do
+        Attending.create(user_id: 1, course_id: 1)
+      end
+
+      it 'redirects to show' do
+        get :add_user, id: 1
+        expect(response).to redirect_to course_path(1)
+      end
+    end
+
+    context 'blank password' do
+      it 'adds user to course' do
+        expect do
+          get :add_user, id: 1
+        end.to change(Attending, :count).by(1)
+        expect(response).to redirect_to course_path(1)
+      end
+    end
+
+    context 'password' do
+      before do
+        Course.first.update_attribute(:password, "123456")
+      end
+
+      it 'renders form' do
+        get :add_user, id: 1
+        expect(response).to have_http_status 200
+      end
+    end
+  end
+
+  describe "POST check_password" do
+    before do
+      FactoryGirl.create(:course, password: "123456")
+    end
+    context 'correct password' do
+      it 'adds user to course' do
+        expect do
+          post :check_password, id: 1, course: { password: "123456" }
+        end.to change(Attending, :count).by(1)
+        expect(response).to redirect_to course_path(1)
+      end
+    end
+
+    context 'incorrect passowrd' do
+      it 'renders form' do
+        post :check_password, id: 1, course: { password: "1" }
+        expect(response).to render_template :add_user
+      end
+    end
+  end
+
   #describe 'GET exam' do
     #before do
       #FactoryGirl.create :course

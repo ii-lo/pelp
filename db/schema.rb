@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203110543) do
+ActiveRecord::Schema.define(version: 20150214201905) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150203110543) do
     t.boolean  "private",                 default: false
     t.string   "header",      limit: 255
     t.string   "thumb",       limit: 255
+    t.string   "password",                default: ""
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

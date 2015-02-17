@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     end
     resources :courses do
       member do
+        get :add_user
+        post :check_password
         get :settings, as: :settings
         post :update_attending
         post :send_invitation
