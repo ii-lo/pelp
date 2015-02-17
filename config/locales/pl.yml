@@ -285,6 +285,12 @@ pl:
         owned_courses: "Właściciel kursów"
         user_exams: "Egzaminy użytkownika"
         remember_me: "Zapamiętaj mnie"
+        location: "Miejsce zamieszkania"
+        company: "Organizacja"
+        home_url: "Strona domowa"
+        contact_mail: "Mail kontaktowy"
+        note: "Notka"
+        current_password: "Aktualne hasło"
       admin:
         remember_me: "Zapamiętaj mnie"
       answer:

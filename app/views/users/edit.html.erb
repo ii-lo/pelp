@@ -15,6 +15,11 @@
       <%= simple_form_for @user do |f| %>
         <%= f.input :email, required: true %>
         <%= f.input :name %>
+        <%= f.input :location %>
+        <%= f.input :company %>
+        <%= f.input :contact_mail %>
+        <%= f.input :home_url, as: :url, input_html: { pattern: "^https?://.+" } %>
+        <%= f.input :note %>
         <%= f.input :current_password, required: true %>
         <%= f.button :submit %>
       <% end %>

@@ -16,6 +16,11 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
+#  location               :string
+#  company                :string
+#  contact_mail           :string
+#  home_url               :string
+#  note                   :string
 #
 
 require 'rails_helper'

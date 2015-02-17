@@ -16,6 +16,11 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
+#  location               :string
+#  company                :string
+#  contact_mail           :string
+#  home_url               :string
+#  note                   :string
 #
 
 class User < ActiveRecord::Base
@@ -24,8 +29,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, presence: true,
-            length: { maximum: 240 }
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
@@ -36,6 +39,17 @@ class User < ActiveRecord::Base
   has_many :user_exams
   has_many :invitations
   #has_many :owned_courses, through: :attendings, source: :course
+
+  validates :name, presence: true,
+            length: { maximum: 240 }
+
+  validates :location, length: { maximum: 240 }
+  validates :company, length: { maximum: 240 }
+  validates :contact_mail, length: { maximum: 240 },
+    format: /@/, allow_blank: true
+  validates :home_url, length: { maximum: 240 },
+    format: /\Ahttp/i, allow_blank: true
+  validates :note, length: { maximum: 240 }
 
   def last_visited_courses(number = nil)
     return last_visited_courses.limit(number) if number

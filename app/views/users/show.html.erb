@@ -27,26 +27,36 @@
                     O mnie
                 </div>
                 <table class="table">
+                  <% if @user.location.present?  %>
                     <tr>
-                        <td>Lorem.</td>
-                        <td>Lorem ipsum.</td>
+                        <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-map-marker"></span></td>
+                        <td><%= @user.location %></td>
                     </tr>
+                  <% end %>
+                  <% if @user.company.present?  %>
                     <tr>
-                        <td>Aperiam!</td>
-                        <td>Perspiciatis, accusamus.</td>
+                        <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-briefcase"></span></td>
+                        <td><%= @user.company %></td>
                     </tr>
+                  <% end %>
+                  <% if @user.contact_mail.present?  %>
                     <tr>
-                        <td>Eius.</td>
-                        <td>Mollitia, eligendi.</td>
+                        <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-envelope"></span></td>
+                        <td><%= mail_to @user.contact_mail, @user.contact_mail  %></td>
                     </tr>
+                  <% end %>
+                  <% if @user.home_url.present?  %>
                     <tr>
-                        <td>Officiis.</td>
-                        <td>Laborum, eum?</td>
+                        <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-link"></span></td>
+                        <td><a href="<%= @user.home_url %>"><%= @user.home_url %></a></td>
                     </tr>
+                  <% end %>
+                  <% if @user.note.present?  %>
                     <tr>
-                        <td>Eum.</td>
-                        <td>Ullam, illum.</td>
+                        <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-bullhorn"></span></td>
+                        <td><%= @user.note %></td>
                     </tr>
+                  <% end %>
                 </table>
             </div>
         </div>
