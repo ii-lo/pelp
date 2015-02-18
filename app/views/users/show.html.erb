@@ -48,7 +48,7 @@
                   <% if @user.home_url.present?  %>
                     <tr>
                         <td class="text-center"><span aria-hidden="true" class="glyphicon glyphicon-link"></span></td>
-                        <td><a href="<%= @user.home_url %>"><%= @user.home_url %></a></td>
+                        <td><a href="<%= @user.home_url %>"><%= pretty_url @user.home_url %></a></td>
                     </tr>
                   <% end %>
                   <% if @user.note.present?  %>
