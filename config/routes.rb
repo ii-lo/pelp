@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       end
     end
     resources :courses do
+      resources :lesson_categories, except: [:new, :edit]
       member do
         get :add_user
         post :check_password

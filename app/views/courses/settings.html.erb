@@ -28,6 +28,26 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        <h3>Kategorie</h3>
+      </div>
+      <% @course.lesson_categories.each do |lc| %>
+        <div class="col-md-12">
+          <span class="<%= 'underline' if lc.flagged %>"><%= lc.name %></span>
+          , <%= link_to "Zmień nazwę", '' %>
+          <%= link_to "Usuń", course_lesson_category_path(@course, lc), method: :delete %>
+        </div>
+      <% end %>
+      <div class="col-md-12">
+        <h4>Dodaj kategorię</h4>
+        <%= simple_form_for [@course, @course.lesson_categories.new] do |f| %>
+          <%= f.input :name %>
+          <%= f.input :flagged, as: :boolean %>
+          <%= f.button :submit, "Stwórz" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <h3>Zaproś do kursu</h3>
         <%= simple_form_for :invitation, url: send_invitation_course_path(@course), html: { id: 'send_invitation' } do |f| %>
           <%= f.input :email %>
