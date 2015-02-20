@@ -16,7 +16,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= simple_form_for :course, url: check_password_course_path(@course) do |f| %>
+      <%= simple_form_for @course, url: check_password_course_path(@course), method: :post do |f| %>
         <%= f.input :password, as: :string, input_html: { value: '' } %>
         <%= f.button :submit, "Zapisz się" %>
       <% end %>

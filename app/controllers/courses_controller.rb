@@ -106,6 +106,16 @@ class CoursesController < ApplicationController
     redirect_to edit_course_path(@course)
   end
 
+  def toggle_flag
+    authorize(@course)
+    @l_c = @course.lesson_categories.find params[:lesson_category_id]
+    @l_c.update_attribute(:flagged, !@l_c.flagged)
+    respond_to do |format|
+      format.html { redirect_to course_path(@course) }
+      format.json { render json: { id: @l_c.id, flagged: @l_c.flagged } }
+    end
+  end
+
   private
 
   def load_course

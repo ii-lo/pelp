@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         post :send_invitation
         get 'remove_user/:user_id', action: :remove_user,
           as: :remove_user
+        get 'toggle_flag/:lesson_category_id', action: :toggle_flag,
+          as: :toggle_flag
       end
       resources :exams, except: [:show]
       resources :lessons do

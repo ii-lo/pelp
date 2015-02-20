@@ -186,6 +186,20 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe 'GET toggle_flag' do
+    before do
+      FactoryGirl.create :course
+      FactoryGirl.create :lesson_category
+      Attending.create(course_id: 1, role: 1, user_id: 1)
+    end
+
+    it 'toggles lesson category flag' do
+      flag = LessonCategory.first.flagged
+      get :toggle_flag, id: 1, lesson_category_id: 1
+      expect(LessonCategory.first.flagged).to eq !flag
+    end
+  end
+
   #describe 'GET exam' do
     #before do
       #FactoryGirl.create :course

@@ -34,4 +34,8 @@ class CoursePolicy < Struct.new(:user, :course)
   def remove_user?
     update_attending?
   end
+
+  def toggle_flag?
+    settings?
+  end
 end

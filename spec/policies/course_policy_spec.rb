@@ -36,7 +36,7 @@ describe CoursePolicy do
     end
   end
 
-  permissions :settings?, :update?, :send_invitation? do
+  permissions :settings?, :update?, :send_invitation?, :toggle_flag? do
     context "admin" do
       it "grants access" do
         user = double User

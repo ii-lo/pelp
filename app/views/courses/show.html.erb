@@ -2,7 +2,11 @@
 <% breadcrumb :course, @course %>
 
 <% content_for :styles do %>
-    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= render 'layouts/navbar' %>
@@ -24,29 +28,21 @@
         </div>
     </div>
     <div class="row">
-        <%# TODO Better category layout if possible. %>
-        <% n = 0 %>
         <% @lesson_categories.each do |lc| %>
-            <% if n == 0 %>
-              <div class="lg">
-              <div class="md">
-            <% else %>
-              <% if n % 2 == 1 %>
-              </div> <!-- md -->
-              <% end %>
-              <% if n % 3 == 0 %>
-              </div> <!-- lg -->
-              <div class="lg">
-              <% end %>
-              <% if n % 2 == 1 %>
-                <div class="md">
-              <% end %>
-            <% end %>
-
-            <div class="xs">
-              <div class="col-xs-12 col-md-6 col-lg-4">
+              <div class="col-xs-12 col-md-6 col-lg-6">
                   <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
-                      <div class="panel-heading"><%= lc.name %></div>
+                    <div class="panel-heading">
+                      <%= lc.name %>
+                      <% if lc.flagged %>
+                      <span class="flag_link flagged">
+                        <%= link_to "Zabierz flagę", toggle_flag_course_path(@course, lc), data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                      </span>
+                      <% else %>
+                      <span class="flag_link">
+                        <%= link_to "Oflaguj", toggle_flag_course_path(@course, lc) , data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                      </span>
+                      <% end %>
+                    </div>
                       <ul class="list-group">
                           <% lc.lessons.each do |l| %>
                               <li class="list-group-item">
@@ -92,12 +88,8 @@
                               <% end %>
                       </ul>
                   </div>
-              </div>
             </div>
-            <% n += 1 %>
         <% end %>
-      </div> <!-- md -->
-      </div> <!-- lg -->
     </div>
 </div>
 
