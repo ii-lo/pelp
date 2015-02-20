@@ -1,9 +1,11 @@
-<% content_for :title, @course.name %>
-<% breadcrumb :course, @course %>
+<% content_for :title, "#{ @course.name } | Nowy egzamin" %>
+<% breadcrumb :new_exam, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
 <% end %>
+
 <% content_for :scripts do %>
     <%= javascript_include_tag 'new_exam', 'data-turbolinks-track' => true %>
 <% end %>
@@ -25,7 +27,7 @@
         <label for="seconds_helper">Sekundy</label>
         <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="0">
       </div>
-      <%= f.input :one_run, label: "Umożliwić tylko jedno podejście?", as: :boolean %>
+      <%= f.input :one_run, label: "Umożliwić tylko jedno podejście", as: :boolean %>
       <%= f.button :submit, "Utwórz" %>
     <% end %>
 </div>

@@ -1,5 +1,5 @@
 <% content_for :title, "#{@course} | #{@lesson.name}" %>
-<% breadcrumb :course, @lesson %>
+<% breadcrumb :edit_lesson, @lesson, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
@@ -13,6 +13,7 @@
 
 <div class="container">
   <%= bootstrap_flash %>
+  <%= render 'layouts/breadcrumb' %>
   <div class="row">
     <div class="col-md-12">
       <%= render 'form', submit: "Aktualizuj" %>

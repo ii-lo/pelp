@@ -1,5 +1,5 @@
 <% content_for :title, "#{@course} | Nowa lekcja" %>
-<% breadcrumb :course, @lesson %>
+<% breadcrumb :new_lesson, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
@@ -13,6 +13,7 @@
 
 <div class="container">
     <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
     <div>
       <%= render 'form', submit: "Stwórz" %>
       <hr>

@@ -21,11 +21,50 @@ crumb :course_settings do |course|
 end
 
 #
+# Lessons
+#
+
+crumb :new_lesson do |course|
+  link 'Nowa lekcja', new_course_lesson_path(course)
+  parent :course, course
+end
+
+crumb :lesson do |lesson, course|
+  link lesson.name, course_lesson_path(course, lesson)
+  parent :course, course
+end
+
+crumb :edit_lesson do |lesson, course|
+  link "Edytuj #{ lesson.name }", edit_course_lesson_path(course, lesson)
+  parent :course, course
+end
+
+
+#
+# Material Categories
+#
+
+crumb :new_material_category do |course|
+  link 'Nowy zestaw materiałów', new_course_lesson_path(course)
+  parent :course, course
+end
+
+crumb :material_category do |m_c, course|
+  link m_c.name, course_material_category_path(course, m_c)
+  parent :course, course
+end
+
+#
 # Exams
 #
 
+crumb :new_exam do |course|
+  link "Nowy egzamin", new_course_exam_path(course)
+  parent :course, course
+end
+
 crumb :edit_exam do |exam, course|
-  link "Edytuj egzamin #{exam}", edit_course_exam_path(course, exam)
+  link "Edytuj #{exam}", edit_course_exam_path(course, exam)
   parent :course, course
 end
 
