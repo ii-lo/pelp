@@ -28,19 +28,25 @@
         </div>
     </div>
     <div class="row">
+      <% n = 0 %>
         <% @lesson_categories.each do |lc| %>
+            <% if n % 2 == 0  %>
+              <div class="row">
+            <% end %>
               <div class="col-xs-12 col-md-6 col-lg-6">
                   <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
                     <div class="panel-heading">
                       <%= lc.name %>
-                      <% if lc.flagged %>
-                      <span class="flag_link flagged">
-                        <%= link_to "Zabierz flagę", toggle_flag_course_path(@course, lc), data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
-                      </span>
-                      <% else %>
-                      <span class="flag_link">
-                        <%= link_to "Oflaguj", toggle_flag_course_path(@course, lc) , data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
-                      </span>
+                      <% if @admin %>
+                        <% if lc.flagged %>
+                        <span class="flag_link flagged">
+                          <%= link_to "Zabierz flagę", toggle_flag_course_path(@course, lc), data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                        </span>
+                        <% else %>
+                        <span class="flag_link">
+                          <%= link_to "Oflaguj", toggle_flag_course_path(@course, lc) , data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                        </span>
+                        <% end %>
                       <% end %>
                     </div>
                       <ul class="list-group">
@@ -88,7 +94,14 @@
                               <% end %>
                       </ul>
                   </div>
+              <% if n % 2 == 1  %>
+              </div>
+              <% end %>
             </div>
+            <% n += 1 %>
+        <% end %>
+        <% if n % 2 == 0 %>
+          </div>
         <% end %>
     </div>
 </div>
