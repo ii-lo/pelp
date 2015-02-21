@@ -1,0 +1,2 @@
+module LessonCategoriesHelper
+end

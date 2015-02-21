@@ -18,5 +18,6 @@ class LessonCategory < ActiveRecord::Base
   has_many :material_categories
   has_many :published_exams, -> { where published: true }, class_name: "Exam"
 
+  validates :name, presence: true, uniqueness: { scope: [:course_id] }
   validates :course_id, presence: true
 end

@@ -32,9 +32,13 @@
       </div>
       <% @course.lesson_categories.each do |lc| %>
         <div class="col-md-12">
-          <span class="<%= 'underline' if lc.flagged %>"><%= lc.name %></span>
-          , <%= link_to "Zmień nazwę", '' %>
+          <span class="<%= 'underline' if lc.flagged %>" data-lc-id="<%= lc.id %>"><%= lc.name %></span>
+          | <%= link_to "Zmień nazwę", '', class: "lc_change_name" %> |
           <%= link_to "Usuń", course_lesson_category_path(@course, lc), method: :delete %>
+          <%= simple_form_for [@course, lc], html: { remote: true, data: { type: "json" }, class: 'edit_lc hidden' } do |f| %>
+            <%= f.input :name %>
+            <%= f.button :submit, "Aktualizuj" %>
+          <% end %>
         </div>
       <% end %>
       <div class="col-md-12">

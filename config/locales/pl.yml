@@ -348,6 +348,7 @@ pl:
         course: "Kurs"
         lessons: "Lekcje"
         exams: "Egzaminy"
+        course_id: "Id kursu"
         material_categories: "Kategorie materiałów"
         published_exams: "Opublikowane egzaminy"
         flagged: "Wyróżniony"
