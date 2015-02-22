@@ -21,7 +21,7 @@ class LessonCategoriesController < ApplicationController
 
   def update
     authorize(@lesson_category)
-    if @lesson_category.update_attributes(create_params)
+    if @lesson_category.update_attributes(update_params)
       respond_to do |format|
         format.html do
           redirect_to settings_course_path(@course),
