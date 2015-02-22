@@ -14,7 +14,7 @@ RSpec.describe LessonCategoriesController, :type => :controller do
           post :create, course_id: 1,
             lesson_category: { name: "t", flagged: '0' }
         end.to change(LessonCategory, :count).by(1)
-        expect(response).to redirect_to edit_course_path(1)
+        expect(response).to redirect_to settings_course_path(1)
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe LessonCategoriesController, :type => :controller do
           post :create, course_id: 1,
             lesson_category: { name: "", flagged: '0' }
         end.not_to change(LessonCategory, :count)
-        expect(response).to redirect_to edit_course_path(1)
+        expect(response).to redirect_to settings_course_path(1)
       end
     end
   end
@@ -38,7 +38,7 @@ RSpec.describe LessonCategoriesController, :type => :controller do
       expect do
         delete :destroy, id: 1, course_id: 1
       end.to change(LessonCategory, :count).by(-1)
-      expect(response).to redirect_to edit_course_path(1)
+      expect(response).to redirect_to settings_course_path(1)
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe LessonCategoriesController, :type => :controller do
         patch :update, id: 1, course_id: 1,
           lesson_category: { name: "Nazwa" }
         expect(LessonCategory.first.name).to eq "Nazwa"
-      expect(response).to redirect_to edit_course_path(1)
+      expect(response).to redirect_to settings_course_path(1)
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe LessonCategoriesController, :type => :controller do
         patch :update, id: 1, course_id: 1,
           lesson_category: { name: "" }
         expect(LessonCategory.first.name).not_to eq ""
-        expect(response).to redirect_to edit_course_path(1)
+        expect(response).to redirect_to settings_course_path(1)
       end
     end
   end

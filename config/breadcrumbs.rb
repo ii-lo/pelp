@@ -10,6 +10,11 @@ crumb :courses do
   link 'Kursy', courses_path
 end
 
+crumb :new_course do
+  link "Nowy kurs", new_course_path
+  parent :courses
+end
+
 crumb :course do |course|
   link course.name, course_path(course)
   parent :courses

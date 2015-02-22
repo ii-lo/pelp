@@ -1,6 +1,5 @@
 class ExamPolicy < Struct.new(:user, :exam)
   def new?
-    #binding.pry
     exam && exam.course.admins.include?(user)
   end
 

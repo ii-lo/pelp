@@ -1,10 +1,24 @@
 class CoursesController < ApplicationController
 
-  before_action :load_course, except: [:index]
+  before_action :load_course, except: [:index, :new, :create]
 
   def index
     @courses = Course.open.paginate(page: params[:page], per_page: 16)
     authorize(@courses)
+  end
+
+  def new
+    @course = Course.new
+  end
+
+  def create
+    @course = Course.new(course_params)
+    if @course.save
+      @course.attendings.create(user_id: current_user.id, role: 2)
+      redirect_to course_path(@course), notice: "Stworzono kurs"
+    else
+      render :new
+    end
   end
 
   def show
@@ -99,11 +113,11 @@ class CoursesController < ApplicationController
     authorize(@course)
     @user = User.find params[:user_id]
     if @user == current_user
-      return redirect_to edit_course_path(@course),
+      return redirect_to settings_course_path(@course),
         notice: "Tylko inny właściciel może usunąć cię z kursu"
     end
     Attending.where(course_id: @course, user_id: @user).destroy_all
-    redirect_to edit_course_path(@course)
+    redirect_to settings_course_path(@course)
   end
 
   def toggle_flag
@@ -126,7 +140,9 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:name, :description)
+    params.require(:course).permit(
+      :name, :description, :password, :private
+    )
   end
 
 end

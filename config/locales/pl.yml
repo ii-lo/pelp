@@ -325,6 +325,7 @@ pl:
         name: "Nazwa"
         description: "Opis"
         password: "Hasło"
+        private: "Prywatny"
       exam:
         name: "Nazwa"
         course: "Kurs"

@@ -14,6 +14,43 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe "GET new" do
+    it 'have success response' do
+      get :new
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "POST create" do
+    context 'valid' do
+      it 'creates course' do
+        expect do
+          post :create, course: {
+            name: "12345", description: "aa", password: "123456a"
+          }
+        end.to change(Course, :count).by(1).and(
+          change(Attending, :count).by(1)
+        )
+        c = Course.first
+        expect(c.private).to eq false
+        expect(c.password).to eq '123456a'
+        expect(c.description).to eq 'aa'
+        expect(response).to redirect_to course_path(1)
+      end
+    end
+
+    context 'invalid' do
+      it 'renders new' do
+        expect do
+          post :create, course: {
+            name: "", description: "aaa", password: "123456"
+          }
+        end.not_to change(Course, :count)
+        expect(response).to render_template :new
+      end
+    end
+  end
+
   describe "GET show" do
     before do
       FactoryGirl.create :course
@@ -172,7 +209,7 @@ RSpec.describe CoursesController, :type => :controller do
         expect do
           get :remove_user, id: 1, user_id: 2
         end.to change(Attending, :count).by(-1)
-        expect(response).to redirect_to edit_course_path(1)
+        expect(response).to redirect_to settings_course_path(1)
       end
     end
 
@@ -181,7 +218,7 @@ RSpec.describe CoursesController, :type => :controller do
         expect do
           get :remove_user, id: 1, user_id: 1
         end.not_to change(Attending, :count)
-        expect(response).to redirect_to edit_course_path(1)
+        expect(response).to redirect_to settings_course_path(1)
       end
     end
   end

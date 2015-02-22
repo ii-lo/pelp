@@ -6,16 +6,16 @@ class LessonCategoriesController < ApplicationController
     @lesson_category = @course.lesson_categories.build(create_params)
     authorize(@lesson_category)
     if @lesson_category.save
-      redirect_to edit_course_path(@course), notice: "Stworzono"
+      redirect_to settings_course_path(@course), notice: "Stworzono"
     else
-      redirect_to edit_course_path(@course), notice: "Błąd"
+      redirect_to settings_course_path(@course), notice: "Błąd"
     end
   end
 
   def destroy
     authorize(@lesson_category)
     @lesson_category.destroy
-    redirect_to edit_course_path(@course),
+    redirect_to settings_course_path(@course),
       notice: "Usunięto kategorię"
   end
 
@@ -24,7 +24,7 @@ class LessonCategoriesController < ApplicationController
     if @lesson_category.update_attributes(create_params)
       respond_to do |format|
         format.html do
-          redirect_to edit_course_path(@course),
+          redirect_to settings_course_path(@course),
             notice: "Zaaktualizowano"
         end
         format.json do
@@ -39,7 +39,7 @@ class LessonCategoriesController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          redirect_to edit_course_path(@course),
+          redirect_to settings_course_path(@course),
             error: @lesson_category.errors.full_messages
         end
         format.json do

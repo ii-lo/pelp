@@ -22,6 +22,7 @@
           <%= f.input :name %>
           <%= f.input :description %>
           <%= f.input :password %>
+          <%= f.input :private %>
           <%= f.button :submit %>
         <% end %>
       </div>
@@ -69,15 +70,13 @@
         <% @course.owners.each do |u| %>
           <li>
             <%= render 'user', u: u %>
-            <% if @owner %>
+            <% if @owner && u != current_user %>
               <br>
               <%= render 'attending_link', u: u, value: 0, submit: "Zabierz prawa właściciela" %>
               |
               <%= render 'attending_link', u: u, value: 1, submit: "Mianuj administratorem" %>
-              <% if u != current_user %>
-                |
-                <%= link_to "Usuń z kursu", remove_user_course_path(@course, u) %>
-              <% end %>
+              |
+              <%= link_to "Usuń z kursu", remove_user_course_path(@course, u) %>
             <% end %>
           </li>
         <% end %>

@@ -28,7 +28,15 @@
         </div>
     </div>
     <div class="row">
-      <% n = 0 %>
+        <% unless @lesson_categories.any? %>
+          <div class="col-xs-12 col-md-12">
+            <p>
+              Aby dodać katogorię przejdź do
+              <%= link_to "ustawień kursu", settings_course_path(@course) %>.
+            </p>
+          </div>
+        <% end %>
+        <% n = 0 %>
         <% @lesson_categories.each do |lc| %>
             <% if n % 2 == 0  %>
               <div class="no-margin row">

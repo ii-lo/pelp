@@ -8,7 +8,7 @@ describe ExamPolicy do
 
 
   permissions :new? do
-    it "it permits when course member(gonna change this)" do
+    it "it permits when course admin" do
       exam = double Exam
       course = double Course
       allow(course).to receive(:admins) { [user] }
