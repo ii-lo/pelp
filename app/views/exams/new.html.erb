@@ -17,7 +17,11 @@
     <%= render 'layouts/breadcrumb' %>
     <%= simple_form_for([@course, @exam]) do |f| %>
       <%= f.input :name, label: "Nazwa" %>
-      <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
+      <% if @l_c %>
+        <%= f.input :lesson_category_id, as: :hidden, input_html: { value: @l_c.id } %>
+      <% else %>
+        <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
+      <% end %>
       <%= f.input :duration, label: "Czas trwania w sekundach", as: :integer, input_html: { min: 0 } %>
       <div class="form-group">
         <label for="minutes_helper">Minuty</label>
@@ -28,7 +32,7 @@
         <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="0">
       </div>
       <%= f.input :one_run, label: "Umożliwić tylko jedno podejście", as: :boolean %>
-      <%= f.button :submit, "Utwórz" %>
+      <%= f.button :submit, "Stwórz" %>
     <% end %>
 </div>
 

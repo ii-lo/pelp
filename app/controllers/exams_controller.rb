@@ -1,6 +1,11 @@
 class ExamsController < ApplicationController
   def new
     @course = Course.find params[:course_id]
+    if params[:lesson_category_id]
+      @l_c = @course.lesson_categories.find(params[:lesson_category_id])
+    else
+      @l_c = nil
+    end
     @exam = Exam.new(course: @course)
     authorize(@exam)
   end

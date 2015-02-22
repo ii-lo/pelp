@@ -83,7 +83,7 @@
                               <% if @admin %>
                                 <li class="list-group-item">
                                   <%= link_to "Nowy egzamin w kategorii",
-                                    new_course_exam_path(@course) %>
+                                    new_course_exam_path(@course, lesson_category_id: lc.id) %>
                                 </li>
                               <% end %>
                               <% lc.material_categories.each do |mc| %>
