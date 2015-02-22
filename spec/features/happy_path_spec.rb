@@ -50,6 +50,18 @@ feature "Happy path", :type => :feature do
     fill_in :exam_name, with: "Pierwszy egzamin"
     fill_in :exam_duration, with: 2000
     expect(&@create_proc).to change(Exam, :count).by(1)
+    FactoryGirl.create(:question_category)
+    FactoryGirl.create(:question,
+                       name: "Czy ziemia jest płaska?",
+                       value: 2)
+    Answer.create(name: "Tak", correct: false, question_id: 1)
+    Answer.create(name: "Nie", correct: true, question_id: 1)
+    click_link "Mój kurs", match: :first
+    click_link "Pierwszy egzamin"
+    expect do
+      click_link "Rozpocznij"
+    end.to change(UserExam, :count).by(1)
+    visit root_path
     click_link "Wyloguj się"
     expect(page).to have_content "wylogowany"
   end
