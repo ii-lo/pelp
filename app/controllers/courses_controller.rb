@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 
   def show
     authorize(@course)
-    @lesson_categories = @course.lesson_categories.includes :lessons
+    @lesson_categories = @course.lesson_categories.includes :lessons, :material_categories
     (@exams = policy_scope(@course.exams).group_by(&:lesson_category_id)).default = []
     @admin = @course.admins.include? current_user
   end
