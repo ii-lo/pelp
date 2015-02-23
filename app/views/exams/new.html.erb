@@ -1,0 +1,39 @@
+<% content_for :title, "#{ @course.name } | Nowy egzamin" %>
+<% breadcrumb :new_exam, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'new_exam', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
+    <%= simple_form_for([@course, @exam]) do |f| %>
+      <%= f.input :name, label: "Nazwa" %>
+      <% if @l_c %>
+        <%= f.input :lesson_category_id, as: :hidden, input_html: { value: @l_c.id } %>
+      <% else %>
+        <%= f.input :lesson_category_id, collection: @course.lesson_categories, label: "Kategoria" %>
+      <% end %>
+      <%= f.input :duration, label: "Czas trwania w sekundach", as: :integer, input_html: { min: 0 } %>
+      <div class="form-group">
+        <label for="minutes_helper">Minuty</label>
+        <input type="number" id="minutes_helper" min="0" name="minutes" value="0">
+      </div>
+      <div class="form-group">
+        <label for="seconds_helper">Sekundy</label>
+        <input type="number" id="seconds_helper" min="0" max="59" name="seconds" value="0">
+      </div>
+      <%= f.input :one_run, label: "Umożliwić tylko jedno podejście", as: :boolean %>
+      <%= f.button :submit, "Stwórz" %>
+    <% end %>
+</div>
+
+

@@ -8,7 +8,7 @@
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
+#  sign_in_count          :integer          default("0"), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
@@ -16,6 +16,11 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  name                   :string(255)
+#  location               :string
+#  company                :string
+#  contact_mail           :string
+#  home_url               :string
+#  note                   :string
 #
 
 require 'rails_helper'
@@ -34,9 +39,9 @@ RSpec.describe User, :type => :model do
     before do
       FactoryGirl.create :user
       FactoryGirl.create :course
-      Attending.create(course_id: 1, user_id: 1, role_id: 1)
+      FactoryGirl.create :attending
       FactoryGirl.create :course
-      Attending.create(course_id: 2, user_id: 1, role_id: 1)
+      FactoryGirl.create :attending, course_id: 2
     end
 
     it "is equal to last visited courses" do
@@ -61,7 +66,7 @@ RSpec.describe User, :type => :model do
       before do
         3.upto(5) do |n|
           FactoryGirl.create :course
-          Attending.create(course_id: n, user_id: 1, role_id: 1)
+          FactoryGirl.create :attending, course_id: n
         end
       end
 
@@ -81,13 +86,13 @@ RSpec.describe User, :type => :model do
     context "years" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.years }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 4.years }
           expect(@user.existing_since).to eq "4 lat"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.year }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.year }
           expect(@user.existing_since).to eq "1 roku"
         end
       end
@@ -95,13 +100,13 @@ RSpec.describe User, :type => :model do
     context "months" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.month }
+          allow(Time).to receive(:now) { Time.new + 4.1 * 1.month }
           expect(@user.existing_since).to eq "4 miesięcy"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.month }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.month }
           expect(@user.existing_since).to eq "1 miesiąca"
         end
       end
@@ -109,13 +114,13 @@ RSpec.describe User, :type => :model do
     context "days" do
       context "many" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 4.days }
+          allow(Time).to receive(:now) { Time.new +  1.1 * 4.days }
           expect(@user.existing_since).to eq "4 dni"
         end
       end
       context "one" do
         it "returns correct string" do
-          allow(Time).to receive(:now) { Time.new + 1.day }
+          allow(Time).to receive(:now) { Time.new + 1.1 * 1.day }
           expect(@user.existing_since).to eq "1 dnia"
         end
       end
@@ -132,6 +137,24 @@ RSpec.describe User, :type => :model do
           allow(Time).to receive(:now) { Time.new + 1.hour }
           expect(@user.existing_since).to eq "1 godziny"
         end
+      end
+    end
+  end
+
+  describe "#check_for_accepted_invitations" do
+    context 'accepted invitations' do
+      before do
+        FactoryGirl.create :user
+        FactoryGirl.create :course
+        FactoryGirl.create :course
+        Attending.destroy_all
+        Invitation.create!(course_id: 1, user_id: 1, email: "tt@tt.com").accept!
+        Invitation.create!(course_id: 2, user_id: 1, email: "tt@tt.com").accept!
+      end
+      it 'Adds courses on create' do
+        User.create!(email:"tt@tt.com", password: "123456",
+                    password_confirmation: '123456', name: "Name")
+        expect(User.second.courses.count).to eq 2
       end
     end
   end

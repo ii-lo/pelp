@@ -1,0 +1,25 @@
+<% content_for :title, "#{@course.name}: Hasło" %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div id="settings-flash">
+    <%= bootstrap_flash %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= simple_form_for @course, url: check_password_course_path(@course), method: :post do |f| %>
+        <%= f.input :password, as: :string, input_html: { value: '' } %>
+        <%= f.button :submit, "Zapisz się" %>
+      <% end %>
+    </div>
+  </div>
+</div>

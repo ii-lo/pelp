@@ -8,6 +8,9 @@ require 'factory_girl'
 require 'capybara/rspec'
 require "pundit/rspec"
 require 'simplecov'
+require 'capybara-screenshot/rspec'
+Capybara.javascript_driver = :webkit
+Capybara::Screenshot.prune_strategy = :keep_last_run
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -33,25 +36,24 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # TODO: Uncomment lines below when integration tests added
   #config.before(:suite) do
-  #DatabaseCleaner.clean_with :truncation
+    #DatabaseCleaner.clean_with(:truncation)
   #end
 
   #config.before(:each) do
-  #DatabaseCleaner.strategy = :transaction
+    #DatabaseCleaner.strategy = :transaction
   #end
 
-  #config.before(:each, js: true) do
-  #DatabaseCleaner.strategy = :truncation
+  #config.before(:each, :js => true) do
+    #DatabaseCleaner.strategy = :truncation
   #end
 
   #config.before(:each) do
-  #DatabaseCleaner.start
+    #DatabaseCleaner.start
   #end
 
   #config.after(:each) do
-  #DatabaseCleaner.clean
+    #DatabaseCleaner.clean
   #end
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and

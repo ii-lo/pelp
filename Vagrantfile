@@ -5,6 +5,7 @@ $script = <<SCRIPT
   bundle install
   rake db:create
   rake db:migrate
+  rake db:populate
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -21,29 +22,15 @@ Vagrant.configure("2") do |config|
 
     chef.add_recipe "apt"
     chef.add_recipe "nodejs"
-    chef.add_recipe "ruby_build"
-    chef.add_recipe "rbenv::user"
-    chef.add_recipe "rbenv::vagrant"
+    #chef.add_recipe "rbenv::vagrant"
     chef.add_recipe "vim"
     chef.add_recipe "libqt4::dev"
     chef.add_recipe "imagemagick"
     chef.add_recipe "imagemagick::devel"
 
-    chef.json = {
-        rbenv: {
-            user_installs: [{
-                                user: "vagrant",
-                                rubies: ["2.1.4"],
-                                global: "2.1.4",
-                                gems: {
-                                    "2.1.4" => [
-                                        {name: "bundler"}
-                                    ]
-                                }
-                            }]
-        }
-    }
   end
 
+   config.vm.provision :shell, :path => "install-rvm.sh",  :args => "stable", privileged: false
+   config.vm.provision :shell, :path => "install-ruby.sh", :args => "2.2.0", privileged: false
   config.vm.provision :shell, run: :always, privileged: false, inline: $script
 end

@@ -1,0 +1,27 @@
+<% content_for :title, "Nowy kurs" %>
+<% breadcrumb :new_course, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
+<% end %>
+<%= render 'layouts/navbar' %>
+<div class="container">
+  <%= bootstrap_flash %>
+  <%= render 'layouts/breadcrumb' %>
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <%= simple_form_for @course do |f| %>
+          <%= f.input :name %>
+          <%= f.input :password, as: :string %>
+          <%= f.input :description %>
+          <%= f.input :private %>
+          <%= f.button :submit, "Stwórz" %>
+        <% end %>
+      </div>
+    </div>
+</div>
+<%= render 'layouts/footer' %>

@@ -1,0 +1,6 @@
+var q_c = $('.question_category[data-id=<%= @question.question_category_id %>]');
+$(q_c).find('.questions').append(
+  '<%= j render('exams/question', question: @question) %>'
+);
+$(q_c).find('.new_question_form').addClass('hidden');
+$(q_c).find('#new_question')[0].reset();

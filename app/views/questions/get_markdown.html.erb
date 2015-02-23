@@ -1,0 +1,2 @@
+<%= image_tag @question.picture.url(:large) if @question.picture.url.present? %>
+<%= @markdown.html_safe %>

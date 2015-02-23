@@ -1,0 +1,31 @@
+
+<% content_for :title, "#{@course} | #{@lesson.name}" %>
+<% breadcrumb :lesson, @lesson, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'github-highlight', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
+    <div>
+      <h3><%= @lesson.name %></h3>
+      <div>
+        <%= @markdown.html_safe %>
+      </div>
+    </div>
+    <div>
+      <% if policy(@lesson).edit? %>
+        <%= link_to "Edytuj", edit_course_lesson_path(@course, @lesson) %>
+      <% end %>
+    </div>
+</div>
+<%= render 'layouts/footer' %>

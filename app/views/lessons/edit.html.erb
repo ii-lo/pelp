@@ -1,0 +1,53 @@
+<% content_for :title, "#{@course} | #{@lesson.name}" %>
+<% breadcrumb :edit_lesson, @lesson, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <%= bootstrap_flash %>
+  <%= render 'layouts/breadcrumb' %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'form', submit: "Aktualizuj" %>
+    </div>
+  </div>
+  <div class="row">
+    <h3>Obrazy</h3>
+    <% @lesson.pictures.each do |p| %>
+      <div class="col-md-12">
+        <%= image_tag p.file.url(:small) %>
+        <p>
+          <%= p.description %>
+        </p>
+        <p>Linki:</p>
+        <ul>
+          <li>Oryginał: <%= link_to full_from_relative_path(p.file.url), p.file.url %></li>
+          <li>1200x1200: <%= link_to full_from_relative_path(p.file.url(:large)), p.file.url(:large) %></li>
+          <li>800x800: <%= link_to full_from_relative_path(p.file.url(:big)), p.file.url(:big) %></li>
+          <li>600x600: <%= link_to full_from_relative_path(p.file.url(:medium)), p.file.url(:medium) %></li>
+          <li>200x200: <%= link_to full_from_relative_path(p.file.url(:small)), p.file.url(:small) %></li>
+        </ul>
+        <%= link_to "Usuń", course_lesson_picture_path(course_id: @course, lesson_id: @lesson, id: p), method: :delete %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= simple_form_for [@course, @lesson, @lesson.pictures.build], multipart: true do |f|  %>
+        <%= f.input :file, as: :file, required: true %>
+        <%= f.input :description %>
+        <%= f.button :submit, "Stwórz" %>
+      <% end %>
+      <%= link_to "Usuń", course_lesson_path(course_id: @course, lesson_id: @lesson), method: :delete %>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>

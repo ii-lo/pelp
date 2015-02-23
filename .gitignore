@@ -12,6 +12,10 @@
 /test/version_tmp/
 /tmp/
 
+## tags
+tags
+gems.tags
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history

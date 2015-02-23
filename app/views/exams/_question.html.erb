@@ -1,0 +1,40 @@
+<div class="question" data-id=<%= question.id %>>
+  <div class="show_more">
+    <a href="#" data-closed="Pokaż odpowiedzi" data-open="Schowaj odpowiedzi" data-expand="answers-rel">Pokaż odpowiedzi</a>
+  </div>
+  <div class="question_body" data-id=<%= question.id %>>
+    <%= image_tag(question.picture.url(:large)) if question.picture.url.present? %>
+    <%= @markdown.call(question.name)[:output].to_s.html_safe %>
+  </div>
+  <a href="#" title="Edytuj" class="edit_question_link">
+    Zmień treść
+  </a>
+  <div class="question_edit_form hidden">
+    <%= simple_form_for([@exam, question.question_category, question], remote: true, data: { type: 'json' }, multipart: true) do |f| %>
+      <%= f.input :name, label: "Treść", as: :text, input_html: {rows: "10", data: {provide: :markdown, language: :pl}} %>
+      <%= f.input :picture, as: :file, label: "Obraz" %>
+      <%= f.input :delete_picture, as: :boolean, label: "Usuń obraz" %>
+      <%= f.input :value, label: "Wartość", as: :integer %>
+      <%= f.button :submit, "Zaaktualizuj" %>
+    <% end %>
+  </div>
+  <p><%= link_to "Usuń pytanie", exam_question_category_question_path(@exam, question.question_category_id, question), method: :delete,
+    remote: true, data: { type: 'json' }, class: 'destroy_question' %></p>
+  <p>Wartość: <span class="question_value" data-id=<%= question.id %>><%= question.value %></span> pkt.</p>
+  <p><%= question.string_form %></p>
+  <ul class="answers-rel hidden answers">
+    Odpowiedzi:
+    <% question.answers.each do |a| %>
+      <%= render 'answer', answer: a, open: question.open? %>
+    <% end %>
+  </ul>
+  <div class="answers-rel hidden">
+      <strong>Nowa odpowiedź</strong>
+      <% case question.form %>
+      <% when 'open' %>
+        <%= render 'open_answer_form', question: question %>
+      <% else %>
+        <%= render 'single_answer_form', question: question %>
+      <% end %>
+  </div>
+</div>

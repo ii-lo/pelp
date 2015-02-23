@@ -1,0 +1,45 @@
+<% content_for :title, @exam.name %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="container-fluid exam-container">
+    <div class="row row-separator"></div>
+    <%= bootstrap_flash %>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><%= @exam.name %></h1>
+
+            <p class="exam-description">Opis sprawdzianu. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                commodi cupiditate deserunt dolorem doloremque dolorum hic, ipsum laudantium, magni non, nostrum
+                quisquam repellat sit veritatis.</p>
+        <% if @exam.one_run %>
+          <h4>Masz tylko jedno podejście do tego egzaminu</h4>
+        <% end %>
+          <h4></h4>
+        </div>
+    </div>
+    <div class="row row-separator"></div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Szczegóły</div>
+                <table class="table table-responsive exam-details">
+                    <tr>
+                        <td>Czas trwania egzaminu</td>
+                        <td><%= Time.diff(Time.now, Time.now + @exam.duration, '%hh %mm')[:diff] %><%#TODO: Ładniejszy output czasu()%></td>
+                    </tr>
+                    <tr>
+                        <td>Liczba pytań</td>
+                        <td><%= @exam.questions.size %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <%= link_to 'Rozpocznij', start_user_exam_path(@exam), class: 'btn btn-primary btn-lg btn-block' %>
+            <%= link_to 'Wróć do kursu', course_path(@exam.course), class: 'btn btn-link btn-block' %>
+        </div>
+    </div>
+</div>

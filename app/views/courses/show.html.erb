@@ -1,136 +1,117 @@
 <% content_for :title, @course.name %>
+<% breadcrumb :course, @course %>
 
 <% content_for :styles do %>
-    <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
 <% end %>
 
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-  <%= bootstrap_flash %>
-  <div class="row">
-    <div class="col-xs-12">
-        <%= render 'course_nav' %>
+    <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="course-jumbo" class="jumbotron" style="border-color: <%= string_to_pastel "#{@course.name}#{@course.id}" %>">
+                <% if @admin %>
+                  <%= link_to 'Ustawienia', settings_course_path(@course), class: 'btn btn-default btn-xs pull-right' %>
+                <% end %>
+                <h1><%= @course.name %></h1>
+                <% if @course.description %>
+                    <p><%= @course.description %></p>
+                <% end %>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row row-separator"></div>
-  <div class="row">
-    <div class="col-xs-12 col-md-9 col-md-push-3">
-      <div id="course-jumbo" class="jumbotron" style="border-color: <%= string_to_pastel "#{@course.name}#{@course.id}" %>">
-        <h1><%= @course.name %></h1>
-        <% if @course.description %>
-            <p><%= @course.description %></p>
+    <div class="row">
+        <% unless @lesson_categories.any? %>
+          <div class="col-xs-12 col-md-12">
+            <p>
+              Aby dodać katogorię przejdź do
+              <%= link_to "ustawień kursu", settings_course_path(@course) %>.
+            </p>
+          </div>
         <% end %>
-      </div>
-
-      <% @lesson_categories.each do |lc| %>
-          <% if lc.flagged %>
-              <div class="panel panel-primary">
-          <% else %>
-              <div class="panel panel-default">
-          <% end %>
-          <div class="panel-heading"><%= lc.name %></div>
-          <ul class="list-group">
-            <%# Ikonkę pozycji można zmieniać %>
-            <% lc.lessons.each do |l| %>
-                <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-asterisk"></i> <%= l.name %></a>
-                </li>
+        <% n = 0 %>
+        <% @lesson_categories.each do |lc| %>
+            <% if n % 2 == 0  %>
+              <div class="no-margin row">
             <% end %>
-          </ul>
+              <div class="col-xs-12 col-md-6 col-lg-6">
+                  <div class="panel panel-<%= lc.flagged ? 'primary' : 'default' %> lesson-category-panel">
+                    <div class="panel-heading">
+                      <%= lc.name %>
+                      <% if @admin %>
+                        <% if lc.flagged %>
+                        <span class="flag_link flagged">
+                          <%= link_to "Zabierz flagę", toggle_flag_course_path(@course, lc), data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                        </span>
+                        <% else %>
+                        <span class="flag_link">
+                          <%= link_to "Oflaguj", toggle_flag_course_path(@course, lc) , data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                        </span>
+                        <% end %>
+                      <% end %>
+                    </div>
+                      <ul class="list-group">
+                          <% lc.lessons.each do |l| %>
+                              <li class="list-group-item">
+                                <%= link_to course_lesson_path(@course, l) do %>
+                                    <i class="glyphicon glyphicon-book"></i> <%= l.name %>
+                                <% end %>
+                              </li>
+                          <% end %>
+                            <% if @admin %>
+                              <li class="list-group-item">
+                                <%= link_to "Nowa lekcja w kategorii", new_course_lesson_path(@course, lesson_category_id: lc.id) %>
+                              </li>
+                            <% end %>
+                               <% @exams[lc.id].each do |e| %>
+                                    <li class="list-group-item">
+                                        <%= link_to new_user_exam_path(e) do %>
+                                            <i class="glyphicon glyphicon-check"></i> <%= e.name %>
+                                        <% end %>
+                                        <% if @admin %>
+                                          | <%= link_to "Edytuj", edit_course_exam_path(@course, e) %>
+                                        <% end %>
+                                    </li>
+                              <% end %>
+                              <% if @admin %>
+                                <li class="list-group-item">
+                                  <%= link_to "Nowy egzamin w kategorii",
+                                    new_course_exam_path(@course, lesson_category_id: lc.id) %>
+                                </li>
+                              <% end %>
+                              <% lc.material_categories.each do |mc| %>
+                                <li class="list-group-item">
+                                  <%= link_to course_material_category_path(@course, mc) do %>
+                                    <i class="glyphicon glyphicon-file"></i>
+                                    <%= mc.name %>
+                                  <% end %>
+                                </li>
+                              <% end %>
+                              <% if @admin %>
+                                <li class="list-group-item">
+                                  <%= link_to "Nowy zestaw materiałów",
+                                    new_course_material_category_path(@course, lesson_category_id: lc.id) %>
+                                </li>
+                              <% end %>
+                      </ul>
+                  </div>
+              <% if n % 2 == 1  %>
+              </div>
+              <% end %>
+            </div>
+            <% n += 1 %>
+        <% end %>
+        <% if n % 2 == 0 %>
           </div>
-      <% end %>
-      </div>
-      <div class="col-xs-12 col-md-3 col-md-pull-9">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
-            Terminy
-          </div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Cras justo odio</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Dapibus ac facilisis in</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Morbi leo risus</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Porta ac consectetur ac</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Vestibulum at eros</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10 / <a href="#">Kurs 1234</a></p>
-            </li>
-          </ul>
-        </div>
-
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <a href="#" class="btn btn-default btn-xs pull-right">Więcej</a>
-            Ostatnia aktywność
-          </div>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Lorem ipsum.</p>
-
-              <p class="list-group-item-text text-muted">31 paź, 11:03</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Tenetur, a!</p>
-
-              <p class="list-group-item-text text-muted">31 paź, 11:03</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Aut, quam.</p>
-
-              <p class="list-group-item-text text-muted">31 paź, 11:03</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Cum, reiciendis!</p>
-
-              <p class="list-group-item-text text-muted">31 paź, 11:03</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Cras justo odio</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Dapibus ac facilisis in</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Morbi leo risus</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Porta ac consectetur ac</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10</p>
-            </li>
-            <li class="list-group-item">
-              <p class="list-group-item-heading">Vestibulum at eros</p>
-
-              <p class="list-group-item-text text-muted">19 paź, 13:10</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+        <% end %>
     </div>
-  </div>
 </div>
 
 <%= render 'layouts/footer' %>

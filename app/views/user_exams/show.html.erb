@@ -1,0 +1,88 @@
+<% content_for :title, "#{@exam.name}: Podsumowanie" %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="container-fluid exam-container">
+    <div class="row row-separator"></div>
+    <%= bootstrap_flash %>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1><%= @exam.name %></h1>
+        </div>
+    </div>
+    <div class="row row-separator"></div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Podsumowanie</div>
+                <table class="table exam-summary-table">
+                    <tr>
+                        <td>Zdobyte punkty:</td>
+                        <td><%= @user_exam.result %></td>
+                    </tr>
+                    <tr>
+                        <td>Maksymalna ilość punktów:</td>
+                        <td><%= @exam.max_points %></td>
+                    </tr>
+                    <tr>
+                        <td>Średni wynik:</td>
+                        <td><%= @exam.user_exams.average(:result).round(2) %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <div class="panel panel-info exam-grade">
+                <div class="panel-heading">Wynik</div>
+                <div class="panel-body"><%= number_to_percentage @user_exam.result / @exam.max_points * 100, precision: 0 %></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Statystyki</div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Kategoria</th>
+                        <th style="width: 0">Odp.</th>
+                        <th colspan="2">% poprawnych</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @category_results.each do |s| %>
+                        <tr>
+                            <% procent = number_to_percentage((100 * s.value.to_f / s.question_category.questions.sum(:value)).round, precision: 0)%>
+                            <td><%= s.question_category.name %></td>
+                            <td><%= s.value %>&nbsp;/&nbsp;<%= s.question_category.questions.sum(:value) %></td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: <%= procent %>;"></div>
+                                </div>
+                            </td>
+                            <td style="width: 0"><%= procent %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <% if policy(@user_exam).edit? %>
+        <div class="row" style="margin-bottom: 13pt">
+              <div class="col-xs-12 col-sm-4 col-sm-push-4">
+                  <%= link_to 'Popraw egzamin', edit_user_exam_path(@user_exam), class: 'btn btn-primary btn-block btn-lg' %>
+              </div>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-push-4">
+            <%= link_to 'Wróć do kursu', course_path(@exam.course), class: 'btn btn-primary btn-block btn-lg' %>
+        </div>
+    </div>
+    <div class="row row-separator"></div>
+</div>

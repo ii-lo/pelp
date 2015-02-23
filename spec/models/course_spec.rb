@@ -7,9 +7,10 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  description :string(255)
-#  private     :boolean          default(FALSE)
+#  private     :boolean          default("f")
 #  header      :string(255)
 #  thumb       :string(255)
+#  password    :string           default("")
 #
 
 require 'rails_helper'
@@ -23,6 +24,13 @@ RSpec.describe Course, :type => :model do
       expect(c).to be_valid
       c.description = 'a' * 241
       expect(c).to be_invalid
+    end
+  end
+
+  describe "#to_s" do
+    it "returns name" do
+      course = FactoryGirl.build :course
+      expect(course.to_s).to eq course.name
     end
   end
 end

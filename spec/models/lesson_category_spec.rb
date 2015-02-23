@@ -7,7 +7,7 @@
 #  course_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  flagged    :boolean          default(FALSE)
+#  flagged    :boolean          default("f")
 #
 
 require 'rails_helper'

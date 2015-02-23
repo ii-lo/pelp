@@ -1,19 +1,129 @@
 <% content_for :title, "#{@course.name}: Ustawienia" %>
+<% breadcrumb :course_settings, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'course', 'data-turbolinks-track' => true %>
 <% end %>
 
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'courses', 'data-turbolinks-track' => true %>
+<% end %>
+
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-    <%= bootstrap_flash %>
-    <div class="row">
-        <div class="col-xs-12">
-            <%= render 'course_nav' %>
-        </div>
+    <div id="settings-flash">
+      <%= bootstrap_flash %>
     </div>
-    <div class="row row-separator"></div>
+    <%= render 'layouts/breadcrumb' %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= simple_form_for @course do |f| %>
+          <%= f.input :name %>
+          <%= f.input :description %>
+          <%= f.input :password %>
+          <%= f.input :private %>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Kategorie</h3>
+        <p>
+          <span class="underline">Podkreślone</span> kategorie są wyróżnione.
+        </p>
+      </div>
+      <% @course.lesson_categories.each do |lc| %>
+        <div class="col-md-12">
+          <span class="<%= 'underline' if lc.flagged %>" data-lc-id="<%= lc.id %>"><%= lc.name %></span>
+          | <%= link_to "Zmień nazwę", '', class: "lc_change_name" %> |
+          <%= link_to "Usuń", course_lesson_category_path(@course, lc), method: :delete %>
+          <%= simple_form_for [@course, lc], html: { remote: true, data: { type: "json" }, class: 'edit_lc hidden' } do |f| %>
+            <%= f.input :name %>
+            <%= f.button :submit, "Aktualizuj" %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="col-md-12">
+        <h4>Dodaj kategorię</h4>
+        <%= simple_form_for [@course, @course.lesson_categories.new] do |f| %>
+          <%= f.input :name %>
+          <%= f.input :flagged, as: :boolean %>
+          <%= f.button :submit, "Stwórz" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Zaproś do kursu</h3>
+        <%= simple_form_for :invitation, url: send_invitation_course_path(@course), html: { id: 'send_invitation' } do |f| %>
+          <%= f.input :email %>
+          <%= f.button :submit, "Zaproś" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Właściciele</h3>
+        <ul class="users">
+        <% @course.owners.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner && u != current_user %>
+              <br>
+              <%= render 'attending_link', u: u, value: 0, submit: "Zabierz prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 1, submit: "Mianuj administratorem" %>
+              |
+              <%= link_to "Usuń z kursu", remove_user_course_path(@course, u) %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Administratorzy</h3>
+        <ul class="users">
+        <% @course.admins_only.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner %>
+              <br>
+              <%= render 'attending_link', u: u, value: 2, submit: "Nadaj prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 0, submit: "Zabierz prawa administratora" %>
+              |
+              <%= link_to "Usuń z kursu", remove_user_course_path(@course, u.id) %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Pozostali członkowie</h3>
+        <ul class="users">
+        <% @users.each do |u| %>
+          <li>
+            <%= render 'user', u: u %>
+            <% if @owner %>
+              <br>
+              <%= render 'attending_link', u: u, value: 2, submit: "Nadaj prawa właściciela" %>
+              |
+              <%= render 'attending_link', u: u, value: 1, submit: "Nadaj prawa administratora" %>
+              |
+              <%= link_to "Usuń z kursu", remove_user_course_path(@course, u) %>
+            <% end %>
+          </li>
+        <% end %>
+        <%= will_paginate @users %>
+        </ul>
+      </div>
+    </div>
 </div>
 
 <%= render 'layouts/footer' %>

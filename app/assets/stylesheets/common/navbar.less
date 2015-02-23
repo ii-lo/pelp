@@ -8,37 +8,92 @@ body.with-navbar-fixed {
   padding-top: @navbar-height + @grid-gutter-width / 2;
 }
 
-.navbar-brand.icon-pelp-logo {
-  font-size: 24pt;
-  position: relative;
-  top: -8px;
-  z-index: 999;
-  outline: none;
-}
+.navbar {
+  //  font-size: ceil((@font-size-base * 1.05));
+  text-transform: uppercase;
 
-.navbar-avatar {
-  @avatar-size: 48px;
+  .dropdown-menu {
+    text-transform: none;
+  }
 
-  max-width: @avatar-size;
-  max-height: @avatar-size;
-  margin-bottom: 8px;
-}
+  .navbar-brand {
+    outline: none;
 
-.dropdown-colors li.colored {
-  @border-size: 6px;
+    .icon {
+      font-size: 32pt;
+      position: relative;
+      top: -9pt;
+      outline: none;
 
-  border-left: @border-size solid black;
+      .transition(all 0.3s);
+    }
+  }
 
-  & a {
-    padding-left: 20px - @border-size;
+  .navbar-nav > li > a {
+    white-space: nowrap;
+    .transition(all 0.3s);
+    outline: none;
+  }
+
+  .iconized {
+    @media (max-width: @screen-xs-max) {
+      .icon, .glyphicon {
+        display: none;
+      }
+    }
+    @media (min-width: @screen-sm-min) {
+      .text {
+        display: none;
+      }
+    }
+  }
+
+  &.shrinkable {
+    .transition(all 0.3s);
+
+    .navbar-header, .navbar-brand {
+      .transition(height 0.3s);
+    }
+
+    @media (min-width: @screen-sm-min) {
+      &.tiny {
+        min-height: @navbar-tiny-height;
+        .box-shadow(0 0 8px @gray-lighter);
+
+        .navbar-header, .navbar-brand {
+          height: @navbar-tiny-height;
+        }
+
+        .navbar-brand {
+          .icon {
+            font-size: 18pt;
+          }
+        }
+
+        .navbar-nav > li > a {
+          font-size: @font-size-base;
+          @padding: ((@navbar-tiny-height - @line-height-computed) / 2);
+          padding-top: @padding;
+          padding-bottom: @padding;
+        }
+      }
+    }
   }
 }
 
 @media (min-width: @screen-sm-min) {
-  .navbar {
-    .input-group.input-group-sm {
-      position: relative;
-      top: 2px;
-    }
+  @width: 128px;
+
+  .navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: @width;
+    text-align: center;
+  }
+
+  .navbar > .container .navbar-brand-centered,
+  .navbar > .container-fluid .navbar-brand-centered {
+    margin-left: -(@width / 2);
   }
 }

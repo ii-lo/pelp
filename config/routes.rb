@@ -1,33 +1,77 @@
 Rails.application.routes.draw do
   devise_for :admins
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, path: ''
-  resources :users
+  resources :users, only: [:new, :create]
+
   authenticated :user do
     root 'users#dashboard', as: :dashboard
   end
+
+  get 'invitations/accept', as: :invitation, to: 'invitations#accept'
+
   authenticate :user do
-    resources :courses do
+    resources :users, only: [:show, :edit, :update] do
       member do
-        get :grades
-        get :activity
-        get :info
-        get :settings
+        patch :change_password
+        post :destroy
       end
     end
-    resources :messages
+    resources :courses, except: [:edit] do
+      resources :lesson_categories, except: [:new, :edit]
+      member do
+        get :add_user
+        post :check_password
+        get :settings, as: :settings
+        post :update_attending
+        post :send_invitation
+        get 'remove_user/:user_id', action: :remove_user,
+          as: :remove_user
+        get 'toggle_flag/:lesson_category_id', action: :toggle_flag,
+          as: :toggle_flag
+      end
+      resources :exams, except: [:show]
+      resources :lessons do
+        resources :pictures, only: [:create, :destroy]
+      end
+      resources :material_categories, except: [:index, :edit] do
+        resources :materials, only: [:create, :destroy]
+      end
+    end
+    # resource for path names; actual exams resource in courses resource
+    resources :exams, only: [] do
+      resources :question_categories, only: [:create, :destroy, :update], path: 'q_cs/' do
+        resources :questions, only: [:create, :update, :destroy]
+      end
+    end
 
-    get 'calendar' => 'calendar#show', as: :calendar
-    #get 'messages' => 'messages#index', as: :messages
-    get 'messages/ajax/page' => 'messages#page'
-    get 'messages/ajax/test' => 'messages#test'
+    resources :questions, only: [] do
+      resources :answers, only: [:create, :update, :destroy]
+    end
+
+    scope '/exam' do
+      get '/start/:id' => 'user_exams#start', as: :start_user_exam
+      get '/new/:id' => 'user_exams#new', as: :new_user_exam
+      get '/exit' => 'user_exams#exit', as: :exit_user_exam
+      get '/question' => 'user_exams#question', as: :question_user_exam
+      get '/:id/summary' => 'user_exams#show', as: :user_exam
+      post '/answer' => 'user_exams#answer', as: :answer_user_exam
+      get '/:id/edit' => 'user_exams#edit', as: :edit_user_exam
+      get '/:id/edit/:user_answer_id/correct' => 'user_exams#correct_answer', as: :correct_user_answer
+    end
+
+    get 'question_markdown/:id' => 'questions#get_markdown'
   end
 
-  unauthenticated do
+  unauthenticated :user do
     root 'static_pages#home'
   end
+
   get '/help' => 'static_pages#help', as: :help
-  get '/privacy' => 'static_pages#privacy', as: :privacy
-  get '/rules' => 'static_pages#rules', as: :rules
+  scope '/help' do
+    get '/privacy' => 'static_pages#privacy', as: :privacy
+    get '/rules' => 'static_pages#rules', as: :rules
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

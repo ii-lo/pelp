@@ -1,0 +1,13 @@
+<p>
+  Witaj <%= @invitation.email.to_s %>
+</p>
+<p>
+  Uzytkownik <%= @invitation.user.email %> zaprosił Cię do kursu <%= @invitation.course.name %>
+</p>
+<p>
+  Aby przyjąć zaproszenie przejdź na stronę: <a href=<%= invitation_url(slug: @invitation.slug) %>><%= invitation_url(slug: @invitation.slug) %></a>
+</p>
+<p>
+  Zaproszenie zostanie unieważnione w ciągu 7 dni
+</p>
+

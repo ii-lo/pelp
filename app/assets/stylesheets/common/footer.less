@@ -7,7 +7,8 @@
 footer {
   border-top: 1px solid @gray-lighter;
   color: @gray-light;
-  padding-top: 8px;
+  padding-top: @padding-large-vertical;
+  font-size: @font-size-small;
 
   &.no-border {
     border: none;
@@ -23,7 +24,7 @@ footer {
   }
 
   .icon-pelp-logo {
-    font-size: 14pt;
+    font-size: @font-size-base;
   }
 
   .footer-links {
@@ -32,7 +33,7 @@ footer {
 
     li {
       display: inline-block;
-      margin-left: 8px;
+      margin-left: @padding-base-horizontal;
 
       &:first-child {
         margin: 0;

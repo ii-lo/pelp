@@ -1,0 +1,15 @@
+<div class="col-md-12 user-exam-result">
+  <p>
+    Użytkownik: <%= link_to "#{e.user.name} (#{e.user.email})", user_path(e.user) %>
+  </p>
+  <% if e.closed %>
+    <p>
+      Wynik: <%= e.result %> / <%= @exam.max_points %> (<%= (e.result/@exam.max_points * 100).round(2) %>%)
+    </p>
+    <p>
+      <%= link_to "Pokaż szczegóły", user_exam_path(e.id) %>
+    </p>
+  <% else %>
+    <p><b>W trakcie</b></p>
+  <% end %>
+</div>

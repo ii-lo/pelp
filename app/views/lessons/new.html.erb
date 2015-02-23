@@ -1,0 +1,22 @@
+<% content_for :title, "#{@course} | Nowa lekcja" %>
+<% breadcrumb :new_lesson, @course %>
+
+<% content_for :styles do %>
+    <%= stylesheet_link_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<% content_for :scripts do %>
+    <%= javascript_include_tag 'exam-editor', 'data-turbolinks-track' => true %>
+<% end %>
+
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+    <%= bootstrap_flash %>
+    <%= render 'layouts/breadcrumb' %>
+    <div>
+      <%= render 'form', submit: "Stwórz" %>
+      <hr>
+      <p>Upload własnych obrazów jest możliwy przy edycji lekcji</p>
+    </div>
+</div>

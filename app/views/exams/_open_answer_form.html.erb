@@ -1,0 +1,7 @@
+<div>
+  <%= simple_form_for [question, Answer.new], html: { remote: true, class: 'new_answer' } do |f| %>
+    <%= f.input :name, label: "Wartość" %>
+    <%= f.button :submit, "Stwórz" %>
+  <% end %>
+  <p>Pytania otwarte są sprawdzana poprzez samą obecność odpowiedzi</p>
+</div>

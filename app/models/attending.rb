@@ -8,18 +8,18 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  last_visit :datetime
-#  role_id    :integer
+#  role       :integer          default("0")
 #
 
 class Attending < ActiveRecord::Base
+  enum role: [:member, :admin, :owner]
+
   belongs_to :course
   belongs_to :user
-  belongs_to :role
 
   validates :course_id, presence: true
   validates :user_id, presence: true,
-            uniqueness: {scope: [:course_id]}
-  validates :role_id, presence: true
+            uniqueness: { scope: [:course_id] }
 
   before_create :set_last_visit
 
