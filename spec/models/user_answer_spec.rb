@@ -43,4 +43,59 @@ RSpec.describe UserAnswer, :type => :model do
       end
     end
   end
+
+  describe '#check_if_correct' do
+    context 'open' do
+      before do
+        FactoryGirl.create :exam
+        FactoryGirl.create :question_category
+        FactoryGirl.create :question, form: 2
+      end
+      context 'answer exists' do
+        before do
+          Answer.create name: "TaK", question_id: 1
+        end
+
+        it 'is correct' do
+          u_a = UserAnswer.create!(user_exam_id: 1, text: "tAK", question_id: 1)
+          expect(u_a.correct).to eq true
+        end
+      end
+
+      context 'answer does not exist' do
+        before do
+          Answer.create name: "nie", question_id: 1
+        end
+
+        it 'is incorrect' do
+          u_a = UserAnswer.create!(user_exam_id: 1, text: "tAK", question_id: 1)
+          expect(u_a.correct).to eq false
+        end
+      end
+    end
+
+    context 'multiple or single' do
+      before do
+        FactoryGirl.create :exam
+        FactoryGirl.create :question_category
+        FactoryGirl.create :question, form: 0
+        Answer.create name: "nie", question_id: 1, correct: true
+        Answer.create name: "tak", question_id: 1, correct: false
+      end
+
+      context 'answer is correct' do
+        it 'is correct' do
+          u_a = UserAnswer.create!(user_exam_id: 1, answer_id: 1, question_id: 1)
+          expect(u_a.correct).to eq true
+        end
+      end
+
+      context 'answer is incorrect' do
+        it 'is incorrect' do
+          u_a = UserAnswer.create!(user_exam_id: 1, answer_id: 2, question_id: 1)
+          expect(u_a.correct).to eq false
+        end
+      end
+    end
+  end
 end
