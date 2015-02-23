@@ -41,11 +41,16 @@ class Question < ActiveRecord::Base
   validates :form, presence: true
 
   # todo add uri obfuscation
-  has_attached_file :picture, styles: {
-    medium: "300x300>",
-    thumb: "100x100>",
-    large: "800x800"
-  }, default_url: ''
+  has_attached_file :picture, {
+    url: "/system/question/pictures/:hash.:extension",
+    hash_secret: "S68_uA3aUVX5SXFBn7UCaL1L-O89uoi2ASzkY3XdVZHQ-1-r85pH0888Vk-3",
+    styles: {
+      medium: "300x300>",
+      thumb: "100x100>",
+      large: "800x800"
+    },
+    default_url: ''
+  }
   validates_attachment_content_type :picture,
     content_type: /\Aimage\/.*\Z/,
     size: { in: 0..5.megabytes }
