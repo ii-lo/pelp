@@ -40,7 +40,6 @@ class Question < ActiveRecord::Base
   validates :question_category_id, presence: true
   validates :form, presence: true
 
-  # todo add uri obfuscation
   has_attached_file :picture, {
     url: "/system/question/pictures/:hash.:extension",
     hash_secret: "S68_uA3aUVX5SXFBn7UCaL1L-O89uoi2ASzkY3XdVZHQ-1-r85pH0888Vk-3",
