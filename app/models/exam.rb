@@ -25,7 +25,8 @@ class Exam < ActiveRecord::Base
   has_many :question_categories, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }
-  validates :lesson_category_id, presence: true,
+  validates :lesson_category, presence: true
+  validates :lesson_category_id,
             uniqueness: {scope: [:name]}
   validates :duration, presence: true,
     inclusion: { in: 0..3124202400 } # one year

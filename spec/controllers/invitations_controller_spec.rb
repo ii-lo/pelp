@@ -13,14 +13,11 @@ RSpec.describe InvitationsController, :type => :controller do
     context 'params slug' do
       before do
         FactoryGirl.create :course
+        FactoryGirl.create :user
         @inv = FactoryGirl.create :invitation, email: 'example@ss.com'
       end
 
       context 'user with mail exists' do
-        before do
-          FactoryGirl.create :user
-        end
-
         it 'adds course to users courses' do
           expect do
             get :accept, slug: @inv.slug
@@ -31,6 +28,9 @@ RSpec.describe InvitationsController, :type => :controller do
       end
 
       context 'user does not exist' do
+        before do
+          User.first.destroy
+        end
         it 'accept invitation' do
           get :accept, slug: @inv.slug
           expect(Invitation.first.accepted).to eq true

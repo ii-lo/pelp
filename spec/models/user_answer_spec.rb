@@ -15,20 +15,30 @@
 require 'rails_helper'
 
 RSpec.describe UserAnswer, :type => :model do
-  before do
-    FactoryGirl.create :user_exam
-  end
   describe 'validation' do
     subject { UserAnswer.new(user_exam_id: 1) }
 
-    it { is_expected.to validate_presence_of :user_exam_id }
+    it { is_expected.to validate_presence_of :user_exam }
 
-    it { is_expected.to validate_presence_of :question_id }
+    it { is_expected.to validate_presence_of :question }
 
     describe '#open_user_exam' do
+      before do
+        FactoryGirl.create :course
+        FactoryGirl.create :lesson_category
+        FactoryGirl.create :exam
+        FactoryGirl.create :user
+        FactoryGirl.create :user_exam
+      end
+
+      before do
+        @u_a = FactoryGirl.build :user_answer
+        allow(@u_a).to receive(:question) { FactoryGirl.build :question }
+      end
+
       context "exam is open" do
         it "is valid" do
-          expect(FactoryGirl.build :user_answer).to be_valid
+          expect(@u_a).to be_valid
         end
       end
 
@@ -38,7 +48,7 @@ RSpec.describe UserAnswer, :type => :model do
         end
 
         it "is invalid" do
-          expect(FactoryGirl.build :user_answer).to be_invalid
+          expect(@u_a).to be_invalid
         end
       end
     end
@@ -47,9 +57,13 @@ RSpec.describe UserAnswer, :type => :model do
   describe '#check_if_correct' do
     context 'open' do
       before do
+        FactoryGirl.create :course
+        FactoryGirl.create :lesson_category
         FactoryGirl.create :exam
         FactoryGirl.create :question_category
         FactoryGirl.create :question, form: 2
+        FactoryGirl.create :user
+        FactoryGirl.create :user_exam
       end
       context 'answer exists' do
         before do
@@ -76,11 +90,15 @@ RSpec.describe UserAnswer, :type => :model do
 
     context 'multiple or single' do
       before do
+        FactoryGirl.create :course
+        FactoryGirl.create :lesson_category
         FactoryGirl.create :exam
         FactoryGirl.create :question_category
         FactoryGirl.create :question, form: 0
         Answer.create name: "nie", question_id: 1, correct: true
         Answer.create name: "tak", question_id: 1, correct: false
+        FactoryGirl.create :user
+        FactoryGirl.create :user_exam
       end
 
       context 'answer is correct' do

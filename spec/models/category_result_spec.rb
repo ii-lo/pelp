@@ -14,9 +14,9 @@ require 'rails_helper'
 
 RSpec.describe CategoryResult, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :user_exam_id }
+    it { is_expected.to validate_presence_of :user_exam }
 
-    it { is_expected.to validate_presence_of :question_category_id }
+    it { is_expected.to validate_presence_of :question_category }
 
     #it { is_expected.to validate_uniqueness_of(:question_category_id).
          #scoped_to [:user_exam_id] }

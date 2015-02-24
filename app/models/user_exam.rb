@@ -19,8 +19,8 @@ class UserExam < ActiveRecord::Base
   has_many :category_results, dependent: :destroy
   has_one :course, through: :exam
 
-  validates :user_id, presence: true
-  validates :exam_id, presence: true
+  validates :user, presence: true
+  validates :exam, presence: true
 
   delegate :duration, to: :exam, prefix: true
 

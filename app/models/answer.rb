@@ -20,7 +20,7 @@ class Answer < ActiveRecord::Base
   has_one :question_category, through: :question
   has_one :exam, through: :question
 
-  validates :question_id, presence: true
+  validates :question, presence: true
   validates :name, presence: true,
             uniqueness: {scope: [:question_id]},
             length: { maximum: 255 }

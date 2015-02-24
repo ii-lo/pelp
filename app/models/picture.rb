@@ -18,7 +18,7 @@ class Picture < ActiveRecord::Base
   include Sluggable
   belongs_to :lesson
 
-  validates :lesson_id, presence: true
+  validates :lesson, presence: true
   validates :description, length: { maximum: 250 }
   has_attached_file :file, {
     url: "/system/pictures/files/:hash.:extension",

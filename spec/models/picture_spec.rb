@@ -18,12 +18,13 @@ require 'rails_helper'
 
 RSpec.describe Picture, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :lesson_id }
+    it { is_expected.to validate_presence_of :lesson }
   end
 
   describe '#set_slug' do
     it "sets slug" do
       pic = FactoryGirl.build :picture
+      allow(pic).to receive(:lesson) { Lesson.new }
       expect(pic.slug).to be_blank
       pic.save
       expect(pic.slug).to be_present

@@ -14,7 +14,7 @@ class CategoryResult < ActiveRecord::Base
   belongs_to :user_exam
   belongs_to :question_category
 
-  validates :user_exam_id, presence: true
-  validates :question_category_id, presence: true
+  validates :user_exam, presence: true
+  validates :question_category, presence: true
             #uniqueness: { scope: [:user_exam_id] }
 end

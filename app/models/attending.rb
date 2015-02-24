@@ -17,9 +17,9 @@ class Attending < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
-  validates :course_id, presence: true
-  validates :user_id, presence: true,
-            uniqueness: { scope: [:course_id] }
+  validates :course, presence: true
+  validates :user, presence: true
+  validates :user_id, uniqueness: { scope: [:course_id] }
 
   before_create :set_last_visit
 

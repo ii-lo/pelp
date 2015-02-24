@@ -16,11 +16,14 @@ RSpec.describe Answer, :type => :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of :name }
 
-    it { is_expected.to validate_presence_of :question_id }
+    it { is_expected.to validate_presence_of :question }
 
     describe '#only_one_correct_if_single' do
       before do
+        FactoryGirl.create :course
+        FactoryGirl.create :lesson_category
         FactoryGirl.create :exam
+        FactoryGirl.create :question_category
         FactoryGirl.create :question
       end
 

@@ -17,7 +17,7 @@ class QuestionCategory < ActiveRecord::Base
   has_many :answers, through: :questions
   has_many :user_answers, through: :questions
 
-  validates :exam_id, presence: true
+  validates :exam, presence: true
   validates :name, presence: true,
     uniqueness: { scope: [:exam_id] },
     length: { maximum: 255 }

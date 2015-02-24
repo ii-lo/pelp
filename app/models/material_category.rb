@@ -15,6 +15,6 @@ class MaterialCategory < ActiveRecord::Base
   has_many :materials, dependent: :destroy
   has_one :course, through: :lesson_category
 
-  validates :lesson_category_id, presence: true
+  validates :lesson_category, presence: true
   validates :name, presence: true
 end

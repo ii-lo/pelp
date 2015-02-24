@@ -7,6 +7,7 @@ RSpec.describe UserExamsController, :type => :controller do
     FactoryGirl.create :course
     FactoryGirl.create :lesson_category
     FactoryGirl.create :exam
+    FactoryGirl.create :question_category
     FactoryGirl.create :question
     QuestionCategory.create(name: 'a', exam_id: 1)
     FactoryGirl.create :attending

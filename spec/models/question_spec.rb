@@ -23,16 +23,24 @@ RSpec.describe Question, :type => :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of :name }
 
-    it { is_expected.to validate_presence_of :exam_id }
+    it { is_expected.to validate_presence_of :exam }
 
     it { is_expected.to validate_presence_of :value }
 
     it "is valid when valid" do
-      expect(FactoryGirl.build(:question)).to be_valid
+      e = Exam.new
+      q = FactoryGirl.build :question
+      allow(q).to receive(:exam) { e }
+      allow(q).to receive(:question_category) { FactoryGirl.build(:question_category) }
+      expect(q).to be_valid
     end
 
     it "is invalid when value too big" do
-      expect(FactoryGirl.build(:question, value: 201)).to be_invalid
+      e = Exam.new
+      q = FactoryGirl.build :question, value: 201
+      allow(q).to receive(:exam) { e }
+      allow(q).to receive(:question_category) { FactoryGirl.build(:question_category) }
+      expect(q).to be_invalid
     end
   end
 end

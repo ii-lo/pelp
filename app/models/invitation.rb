@@ -20,8 +20,8 @@ class Invitation < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
-  validates :course_id, presence: true
-  validates :user_id, presence: true
+  validates :course, presence: true
+  validates :user, presence: true
   validates :email, format: /@/,
                     presence: true
   validate :already_sent

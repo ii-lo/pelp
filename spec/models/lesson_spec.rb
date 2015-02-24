@@ -17,6 +17,6 @@ RSpec.describe Lesson, :type => :model do
   describe 'validation' do
     it { is_expected.to validate_presence_of :name }
 
-    it { is_expected.to validate_presence_of :lesson_category_id }
+    it { is_expected.to validate_presence_of :lesson_category }
   end
 end

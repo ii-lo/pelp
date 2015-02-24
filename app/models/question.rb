@@ -33,11 +33,11 @@ class Question < ActiveRecord::Base
   has_many :wrong_answers, -> { wrong }, class_name: 'Answer'
   has_many :user_answers, dependent: :destroy
 
-  validates :exam_id, presence: true
+  validates :exam, presence: true
   validates :name, presence: true
   validates :value, presence: true,
             inclusion: 0..200
-  validates :question_category_id, presence: true
+  validates :question_category, presence: true
   validates :form, presence: true
 
   has_attached_file :picture, {
