@@ -21,8 +21,8 @@ class UserAnswer < ActiveRecord::Base
 
   has_one :question_category, through: :question
 
-  validates :user_exam_id, presence: true
-  validates :question_id, presence: true
+  validates :user_exam, presence: true
+  validates :question, presence: true
   validates :answer_id, uniqueness: {allow_blank: true,
                                      scope: [:user_exam_id]}
   validate :open_user_exam

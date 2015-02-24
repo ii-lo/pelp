@@ -18,16 +18,9 @@ require 'rails_helper'
 
 RSpec.describe Exam, :type => :model do
   describe 'validation' do
-
-    before do
-      FactoryGirl.create :lesson_category
-    end
-
-    subject { FactoryGirl.build :exam }
-
     it { is_expected.to validate_presence_of :name }
 
-    it { is_expected.to validate_presence_of :lesson_category_id }
+    it { is_expected.to validate_presence_of :lesson_category }
 
     it { is_expected.to validate_presence_of :duration }
 

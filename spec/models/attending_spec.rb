@@ -15,14 +15,19 @@ require 'rails_helper'
 
 RSpec.describe Attending, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :user_id }
+    it { is_expected.to validate_presence_of :user }
 
-    it { is_expected.to validate_presence_of :course_id }
+    it { is_expected.to validate_presence_of :course }
 
     it { is_expected.to validate_uniqueness_of(:user_id).scoped_to [:course_id] }
   end
 
   describe 'after_create' do
+    before do
+      FactoryGirl.create :course
+      FactoryGirl.create :user
+    end
+
     it "sets last visit" do
       att = FactoryGirl.create :attending
       expect(Time.now.all_day).to cover att.last_visit

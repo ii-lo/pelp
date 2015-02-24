@@ -15,16 +15,21 @@ require 'rails_helper'
 
 RSpec.describe UserExam, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :user_id }
+    it { is_expected.to validate_presence_of :user }
 
-    it { is_expected.to validate_presence_of :exam_id }
+    it { is_expected.to validate_presence_of :exam }
   end
 
   describe '#update_result' do
     before do
+      FactoryGirl.create :course
+      FactoryGirl.create :lesson_category
+      FactoryGirl.create :exam
+      FactoryGirl.create :user
       QuestionCategory.create(name: 'a', exam_id: 1)
       QuestionCategory.create(name: 'b', exam_id: 1)
     end
+
     context "no user_answers" do
       before do
         @ue = FactoryGirl.create :user_exam
@@ -36,10 +41,6 @@ RSpec.describe UserExam, :type => :model do
 
     context "many user_answers" do
       before do
-        FactoryGirl.create :course
-        FactoryGirl.create :lesson_category
-        FactoryGirl.create :exam
-        FactoryGirl.create :user
         @ue = FactoryGirl.create :user_exam
         FactoryGirl.create(:question,
                           name: "Czy ziemia jest płaska?",
@@ -178,7 +179,10 @@ RSpec.describe UserExam, :type => :model do
 
   describe '#close!' do
     before do
+      FactoryGirl.create :course
+      FactoryGirl.create :lesson_category
       FactoryGirl.create :exam
+      FactoryGirl.create :user
       FactoryGirl.create :user_exam
     end
     context "closed" do

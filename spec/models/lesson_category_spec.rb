@@ -14,6 +14,14 @@ require 'rails_helper'
 
 RSpec.describe LessonCategory, :type => :model do
   describe 'validation' do
-    it { is_expected.to validate_presence_of :course_id }
+    it { is_expected.to validate_presence_of :course }
+
+    it { is_expected.to validate_presence_of :name }
+
+    it do
+      is_expected.to validate_uniqueness_of(:name).scoped_to(
+        :course_id
+      )
+    end
   end
 end

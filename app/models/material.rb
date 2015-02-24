@@ -17,6 +17,7 @@ class Material < ActiveRecord::Base
   belongs_to :material_category
 
   validates :name, presence: true
+  validates :material_category, presence: true
 
   has_one :course, through: :material_category
 

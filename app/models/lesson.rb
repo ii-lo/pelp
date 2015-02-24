@@ -20,7 +20,7 @@ class Lesson < ActiveRecord::Base
 
   validates :name, presence: true,
     length: { maximum: 250 }
-  validates :lesson_category_id, presence: true
+  validates :lesson_category, presence: true
 
   private
 

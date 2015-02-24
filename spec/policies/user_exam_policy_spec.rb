@@ -62,7 +62,7 @@ describe UserExamPolicy do
 
     context "one run" do
       before do
-        Exam.first.update_attribute(:one_run, true)
+        @user_exam.exam.update_attribute(:one_run, true)
       end
 
       context "first run" do
