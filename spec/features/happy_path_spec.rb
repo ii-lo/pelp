@@ -32,8 +32,6 @@ feature "Happy path", :type => :feature do
     click_button "Stwórz"
     click_link "Mój kurs", match: :first
     expect(page).to have_content "Moja kategoria"
-    click_link "Oflaguj"
-    expect(page).to have_content "Zabierz flagę"
     click_link "Nowa lekcja w kategorii"
     expect(page).to have_content "Nowa lekcja"
     fill_in :lesson_name, with: "Lekcja pierwsza"
