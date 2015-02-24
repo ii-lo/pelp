@@ -3,7 +3,15 @@ class CoursesController < ApplicationController
   before_action :load_course, except: [:index, :new, :create]
 
   def index
-    @courses = Course.open.paginate(page: params[:page], per_page: 16)
+    if params[:query].present?
+      p = "%#{params[:query].downcase}%"
+      @found_courses = Course.where("LOWER(name) LIKE ? OR
+                                    LOWER(description) LIKE ?",
+                                    p, p)
+      @courses = policy_scope(@found_courses).paginate(page: params[:page], per_page: 16)
+    else
+      @courses = policy_scope(Course.all).paginate(page: params[:page], per_page: 16)
+    end
     authorize(@courses)
   end
 

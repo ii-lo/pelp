@@ -291,6 +291,8 @@ pl:
         contact_mail: "Mail kontaktowy"
         note: "Notka"
         current_password: "Aktualne hasło"
+        password: "Hasło"
+        password_confirmation: "Potwierdzenie hasła"
       admin:
         remember_me: "Zapamiętaj mnie"
       answer:

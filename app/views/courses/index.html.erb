@@ -12,17 +12,30 @@
     <%= render 'layouts/breadcrumb' %>
     <div class="row">
         <div class="col-xs-12">
+          <%= link_to new_course_path, class: "btn btn-primary btn-sm pull-right" do %>
+            <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+            Dodaj kurs
+          <% end %>
           <h1>
             Wszystkie kursy
           </h1>
-            <p>
-              <%= link_to new_course_path do %>
-                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                Dodaj kurs
-              <% end %>
-            </p>
             <div class="row-separator"></div>
         </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= form_tag courses_path, method: :get, role: 'search', id: "search_courses" do %>
+          <div class="input-group">
+            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Szukaj kursu"%>
+            <div class="input-group-btn">
+              <%= button_tag class: "btn btn-default", name: nil do %>
+                <i class="glyphicon glyphicon-search"></i>
+                Szukaj
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
     <div class="row">
         <% @courses.each do |c| %>

@@ -48,11 +48,15 @@
                       <% if @admin %>
                         <% if lc.flagged %>
                         <span class="flag_link flagged">
-                          <%= link_to "Zabierz flagę", toggle_flag_course_path(@course, lc), data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                          <%= link_to toggle_flag_course_path(@course, lc) , data: { flagged: '<span aria-hidden="true" class="glyphicon glyphicon-star"></span>', not_flagged: '<span aria-hidden="true" class="glyphicon glyphicon-star-empty"></span>' } do %>
+                            <span aria-hidden="true" class="glyphicon glyphicon-star"></span>
+                          <% end %>
                         </span>
                         <% else %>
                         <span class="flag_link">
-                          <%= link_to "Oflaguj", toggle_flag_course_path(@course, lc) , data: { flagged: "Zabierz flagę", not_flagged: "Oflaguj" } %>
+                          <%= link_to toggle_flag_course_path(@course, lc) , data: { flagged: '<span aria-hidden="true" class="glyphicon glyphicon-star"></span>', not_flagged: '<span aria-hidden="true" class="glyphicon glyphicon-star-empty"></span>' } do %>
+                            <span aria-hidden="true" class="glyphicon glyphicon-star-empty"></span>
+                          <% end %>
                         </span>
                         <% end %>
                       <% end %>

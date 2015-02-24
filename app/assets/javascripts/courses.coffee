@@ -19,9 +19,9 @@ $ ->
         .toggleClass('panel-primary').toggleClass('panel-default')
       link.parent().toggleClass 'flagged'
       if data.flagged
-        link.text(link.data('flagged'))
+        link.html(unescape(link.data('flagged')))
       else
-        link.text(link.data('not-flagged'))
+        link.html(unescape(link.data('not-flagged')))
     ).fail ->
       alert("Błąd połączenia")
 

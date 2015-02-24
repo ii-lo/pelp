@@ -39,8 +39,8 @@ describe ExamPolicy do
       FactoryGirl.create :exam, lesson_category_id: 2, published: true
     end
     it "returns correct exams" do
-      expect(ExamPolicy::Scope.new(@user, Exam).resolve).to(
-        eq [Exam.first, Exam.last]
+      expect(ExamPolicy::Scope.new(@user, Exam).resolve.sort).to(
+        eq [Exam.first, Exam.last].sort
       )
     end
   end

@@ -8,9 +8,17 @@ RSpec.describe CoursesController, :type => :controller do
   end
 
   describe "GET index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
+    context 'params search' do
+      it 'return http success' do
+        get :index, search: "Hehe"
+        expect(response).to have_http_status(:success)
+      end
+    end
+    context 'no params search' do
+      it "returns http success" do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 

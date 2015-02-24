@@ -24,7 +24,7 @@ class CoursePolicy < Struct.new(:user, :course)
   end
 
   def add_user?
-    !course.private && user
+    course.users.include?(user) || (!course.private && user)
   end
 
   def check_password?
@@ -37,5 +37,18 @@ class CoursePolicy < Struct.new(:user, :course)
 
   def toggle_flag?
     settings?
+  end
+
+  class Scope
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      scope.where('courses.private = ? OR courses.id IN (?)',
+                  false, user.courses.select(:id)).uniq
+    end
   end
 end

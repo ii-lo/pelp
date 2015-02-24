@@ -16,16 +16,20 @@
 <div class="container">
     <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
-    <div>
-      <h3><%= @lesson.name %></h3>
-      <div>
-        <%= @markdown.html_safe %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default panel-document">
+          <div class="panel-body">
+            <h1><%= @lesson.name %></h1>
+            <%= @markdown.html_safe %>
+          </div>
+        </div>
+        <div>
+          <% if policy(@lesson).edit? %>
+            <%= link_to "Edytuj", edit_course_lesson_path(@course, @lesson) %>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div>
-      <% if policy(@lesson).edit? %>
-        <%= link_to "Edytuj", edit_course_lesson_path(@course, @lesson) %>
-      <% end %>
     </div>
 </div>
 <%= render 'layouts/footer' %>

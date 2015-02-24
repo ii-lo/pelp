@@ -75,16 +75,41 @@ describe CoursePolicy do
   permissions :add_user?, :check_password? do
     context 'private course' do
       it 'denies access' do
-        course = double Course, private: true
+        course = double Course, private: true, users: []
         expect(subject).not_to permit(double(User), course)
       end
     end
 
     context 'open course' do
-        it 'grants access' do
-          course = double Course, private: false
-          expect(subject).to permit(double(User), course)
-        end
+      it 'grants access' do
+        course = double Course, private: false, users: []
+        expect(subject).to permit(double(User), course)
       end
+    end
+
+    context 'already a member' do
+      it 'grants access' do
+        user = double User
+        course = double Course, private: true, users: [user]
+        expect(subject).to permit(user, course)
+      end
+    end
+  end
+
+  describe '.Scope' do
+    before do
+      FactoryGirl.create :course
+      FactoryGirl.create :course, name: "foo"
+      FactoryGirl.create :course, name: "12", private: true
+      FactoryGirl.create :course, name: "34", private: true
+      @user = FactoryGirl.create :user
+      Attending.create(course_id: 1, user_id: 1)
+      Attending.create(course_id: 3, user_id: 1)
+    end
+    it 'includes right courses' do
+      expect(CoursePolicy::Scope.new(@user, Course).resolve.sort).to(
+        eq [Course.first, Course.second, Course.find(3)].sort
+      )
+    end
   end
 end
