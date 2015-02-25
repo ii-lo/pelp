@@ -58,7 +58,7 @@ class CoursesController < ApplicationController
       @course.destroy
       redirect_to root_path, notice: "Usunięto kurs"
     else
-      redirect_to settings_course_path(@course), notice: "Nieprawidłowa nazwa"
+      redirect_to settings_course_path(@course), error: "Nieprawidłowa nazwa"
     end
   end
 
