@@ -124,6 +124,17 @@
         </ul>
       </div>
     </div>
+    <% if @owner %>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 style="color: red">Usuń kurs</h3>
+          <%= simple_form_for @course, method: :delete do |f| %>
+            <%= f.input :name, label: "Wpisz nazwę kursu", input_html: { value: '' } %>
+            <%= f.button :submit, "Usuń", class: 'btn-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 </div>
 
 <%= render 'layouts/footer' %>

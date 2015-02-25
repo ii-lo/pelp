@@ -34,6 +34,7 @@ class CoursesController < ApplicationController
     @lesson_categories = @course.lesson_categories.includes :lessons, :material_categories
     (@exams = policy_scope(@course.exams).group_by(&:lesson_category_id)).default = []
     @admin = @course.admins.include? current_user
+    @owner = @course.owners.include? current_user
   end
 
   def settings
@@ -48,6 +49,16 @@ class CoursesController < ApplicationController
       redirect_to settings_course_path(@course), notice: "Zaakutalizowano"
     else
       render 'settings'
+    end
+  end
+
+  def destroy
+    authorize(@course)
+    if params[:course][:name] == @course.name
+      @course.destroy
+      redirect_to root_path, notice: "Usunięto kurs"
+    else
+      redirect_to settings_course_path(@course), notice: "Nieprawidłowa nazwa"
     end
   end
 
@@ -126,6 +137,13 @@ class CoursesController < ApplicationController
     end
     Attending.where(course_id: @course, user_id: @user).destroy_all
     redirect_to settings_course_path(@course)
+  end
+
+  def remove_self
+    authorize(@course)
+    Attending.where(course_id: @course, user_id: current_user).
+      destroy_all
+    redirect_to root_path, notice: "Usunięto z kursu"
   end
 
   def toggle_flag

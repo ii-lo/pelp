@@ -29,6 +29,7 @@ Rails.application.routes.draw do
           as: :remove_user
         get 'toggle_flag/:lesson_category_id', action: :toggle_flag,
           as: :toggle_flag
+        get :remove_self
       end
       resources :exams, except: [:show]
       resources :lessons do

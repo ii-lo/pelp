@@ -39,6 +39,14 @@ class CoursePolicy < Struct.new(:user, :course)
     settings?
   end
 
+  def remove_self?
+    course.users.include?(user) && !course.owners.include?(user)
+  end
+
+  def destroy?
+    update_attending?
+  end
+
   class Scope
     attr_reader :user, :scope
     def initialize(user, scope)

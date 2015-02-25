@@ -54,7 +54,7 @@ describe CoursePolicy do
     end
   end
 
-  permissions :update_attending?, :remove_user? do
+  permissions :update_attending?, :remove_user?, :destroy? do
     context "owner" do
       it "grants access" do
         user = double User
@@ -92,6 +92,28 @@ describe CoursePolicy do
         user = double User
         course = double Course, private: true, users: [user]
         expect(subject).to permit(user, course)
+      end
+    end
+  end
+
+  permissions :remove_self? do
+    before do
+      @user = double User
+      @course = double Course, users: [@user], owners: []
+    end
+    context 'course memmber' do
+      it 'grants access' do
+        expect(subject).to permit(@user, @course)
+      end
+    end
+
+    context 'course owner' do
+      before do
+        allow(@course).to receive(:owners).and_return([@user])
+      end
+
+      it 'does not grant access' do
+        expect(subject).not_to permit(@user, @course)
       end
     end
   end

@@ -101,6 +101,31 @@ RSpec.describe CoursesController, :type => :controller do
     end
   end
 
+  describe "DELETE destroy" do
+    before do
+      FactoryGirl.create :course
+      Attending.create(course_id: 1, user_id: 1, role: 2)
+    end
+
+    context 'correct name' do
+      it 'removes course' do
+        expect do
+          delete :destroy, id: 1, course: { name: Course.first.name }
+        end.to change(Course, :count).by(-1)
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'incorrect name' do
+      it 'does not remove course' do
+        expect do
+          delete :destroy, id: 1, course: { name: Course.first.name + "1" }
+        end.not_to change(Course, :count)
+        expect(response).to redirect_to settings_course_path(1)
+      end
+    end
+  end
+
   describe "POST update_attending" do
     before do
       FactoryGirl.create :course
@@ -242,6 +267,21 @@ RSpec.describe CoursesController, :type => :controller do
       flag = LessonCategory.first.flagged
       get :toggle_flag, id: 1, lesson_category_id: 1
       expect(LessonCategory.first.flagged).to eq !flag
+    end
+  end
+
+  describe 'GET remove_self' do
+    before do
+      FactoryGirl.create :course
+      FactoryGirl.create :lesson_category
+      Attending.create(course_id: 1, role: 0, user_id: 1)
+    end
+
+    it 'removes user from course' do
+      expect do
+        get :remove_self, id: 1
+      end.to change(Attending, :count).by(-1)
+      expect(response).to redirect_to root_path
     end
   end
 

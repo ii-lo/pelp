@@ -24,6 +24,9 @@
                 <% if @course.description %>
                     <p><%= @course.description %></p>
                 <% end %>
+                <% unless @owner %>
+                  <%= link_to 'Odejdź z kursu', remove_self_course_path(@course), data: { confirm: "Na pewno?" }, class: 'btn remove-self-from-course btn-xs pull-right' %>
+                <% end %>
             </div>
         </div>
     </div>
