@@ -83,6 +83,17 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to render_template :edit
       end
     end
+
+    context 'invalid params' do
+      it 'renders edit template' do
+        patch :update, id: 1, user: {
+          current_password: FactoryGirl.build(:user).password,
+          email: 'rob@rob.com',
+          name: ""
+        }
+        expect(response).to render_template :edit
+      end
+    end
   end
 
   describe "PATCH change_password" do

@@ -185,8 +185,14 @@ RSpec.describe UserExamsController, :type => :controller do
   describe 'GET edit' do
     before do
       FactoryGirl.create :user_exam
-      UserExam.first.close!
       Attending.first.update_attribute(:role, 1)
+      FactoryGirl.create(:question,
+                         name: "Czy ziemia jest płaska?",
+                         value: 2)
+      Answer.create(name: "Tak", correct: false, question_id: 2)
+      Answer.create(name: "Nie", correct: true, question_id: 2)
+      UserAnswer.create(question_id: 1, user_exam_id: 1, answer_id: 1)
+      UserExam.first.close!
     end
 
     it 'renders page' do

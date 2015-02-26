@@ -56,7 +56,7 @@ class Question < ActiveRecord::Base
   attr_accessor :delete_picture
   before_validation { picture.clear if delete_picture == '1' }
 
-  def string_form
+  def form_string
     case form
     when 'single'
       "Pojedynczego wyboru"
