@@ -1,4 +1,5 @@
 class LessonsController < ApplicationController
+  invisible_captcha only: [:create, :update]
   before_action :load_course
   before_action :load_lesson_category, except: [:show]
 

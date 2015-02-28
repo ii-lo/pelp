@@ -13,6 +13,7 @@
     <div class="col-md-12">
       <h2>Edytuj profil</h2>
       <%= simple_form_for @user do |f| %>
+        <%= invisible_captcha %>
         <%= f.input :email, required: true %>
         <%= f.input :name %>
         <%= f.input :location %>
@@ -29,6 +30,7 @@
     <div class="col-md-12">
       <h2>Zmień hasło</h2>
       <%= simple_form_for @user, url: change_password_user_path do |f| %>
+        <%= invisible_captcha %>
         <%= f.input :password, required: true %>
         <%= f.input :password_confirmation, required: true %>
         <%= f.input :current_password, required: true %>

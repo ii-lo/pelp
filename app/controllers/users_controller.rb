@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  invisible_captcha only: [:create, :update, :change_password]
   def new
     @user ||= User.new
     authorize(@user)

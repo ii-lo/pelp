@@ -40,6 +40,7 @@
         <div class="col-xs-12">
           <h3>Edytuj</h3>
           <%= simple_form_for [@course, @exam] do |f| %>
+              <%= invisible_captcha %>
               <%= f.input :name, label: "Nazwa" %>
               <%= f.input :duration, as: :integer, label: "Długość w sekundach", input_html: { min: 0 } %>
               <div class="form-group">

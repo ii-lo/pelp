@@ -1,4 +1,5 @@
 class ExamsController < ApplicationController
+  invisible_captcha only: [:create, :update]
   def new
     @course = Course.find params[:course_id]
     if params[:lesson_category_id]

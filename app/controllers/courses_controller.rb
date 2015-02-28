@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
 
+  invisible_captcha only: [:create, :update, :destroy, :send_invitation]
   before_action :load_course, except: [:index, :new, :create]
 
   def index

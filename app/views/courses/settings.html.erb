@@ -19,6 +19,7 @@
     <div class="row">
       <div class="col-md-12">
         <%= simple_form_for @course do |f| %>
+          <%= invisible_captcha %>
           <%= f.input :name %>
           <%= f.input :description %>
           <%= f.input :password %>
@@ -40,6 +41,7 @@
           | <%= link_to "Zmień nazwę", '', class: "lc_change_name" %> |
           <%= link_to "Usuń", course_lesson_category_path(@course, lc), method: :delete %>
           <%= simple_form_for [@course, lc], html: { remote: true, data: { type: "json" }, class: 'edit_lc hidden' } do |f| %>
+            <%= invisible_captcha %>
             <%= f.input :name %>
             <%= f.button :submit, "Aktualizuj" %>
           <% end %>
@@ -48,6 +50,7 @@
       <div class="col-md-12">
         <h4>Dodaj kategorię</h4>
         <%= simple_form_for [@course, @course.lesson_categories.new] do |f| %>
+          <%= invisible_captcha %>
           <%= f.input :name %>
           <%= f.input :flagged, as: :boolean %>
           <%= f.button :submit, "Stwórz" %>
@@ -58,6 +61,7 @@
       <div class="col-md-12">
         <h3>Zaproś do kursu</h3>
         <%= simple_form_for :invitation, url: send_invitation_course_path(@course), html: { id: 'send_invitation' } do |f| %>
+          <%= invisible_captcha %>
           <%= f.input :email %>
           <%= f.button :submit, "Zaproś" %>
         <% end %>
@@ -129,6 +133,7 @@
         <div class="col-md-12">
           <h3 style="color: red">Usuń kurs</h3>
           <%= simple_form_for @course, method: :delete do |f| %>
+            <%= invisible_captcha %>
             <%= f.input :name, label: "Wpisz nazwę kursu", input_html: { value: '' } %>
             <%= f.button :submit, "Usuń", class: 'btn-danger' %>
           <% end %>
