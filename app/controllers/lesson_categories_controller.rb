@@ -1,5 +1,6 @@
 class LessonCategoriesController < ApplicationController
   before_action :load_lesson_category, except: :create
+  invisible_captcha only: [:create, :update]
 
   def create
     @course = Course.find params[:course_id]

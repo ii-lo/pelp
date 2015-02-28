@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
 
+  invisible_captcha only: [:create, :update, :destroy, :send_invitation]
   before_action :load_course, except: [:index, :new, :create]
 
   def index
@@ -58,7 +59,7 @@ class CoursesController < ApplicationController
       @course.destroy
       redirect_to root_path, notice: "Usunięto kurs"
     else
-      redirect_to settings_course_path(@course), notice: "Nieprawidłowa nazwa"
+      redirect_to settings_course_path(@course), error: "Nieprawidłowa nazwa"
     end
   end
 

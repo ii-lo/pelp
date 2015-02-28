@@ -8,9 +8,9 @@ RSpec.describe CoursesController, :type => :controller do
   end
 
   describe "GET index" do
-    context 'params search' do
+    context 'params query' do
       it 'return http success' do
-        get :index, search: "Hehe"
+        get :index, query: "Hehe"
         expect(response).to have_http_status(:success)
       end
     end
@@ -94,10 +94,19 @@ RSpec.describe CoursesController, :type => :controller do
       Attending.create(course_id: 1, user_id: 1, role: 2)
     end
 
-    it "updates course" do
-      post :update, id: 1, course: { name: "Just a name", description: "Kta" }
-      expect(Course.first.name).to eq "Just a name"
-      expect(Course.first.description).to eq "Kta"
+    context 'valid params' do
+      it "updates course" do
+        post :update, id: 1, course: { name: "Just a name", description: "Kta" }
+        expect(Course.first.name).to eq "Just a name"
+        expect(Course.first.description).to eq "Kta"
+      end
+    end
+
+    context 'valid params' do
+      it "renders edit" do
+        post :update, id: 1, course: { name: "", description: "Kta" }
+        expect(response).to render_template :settings
+      end
     end
   end
 

@@ -43,6 +43,7 @@ gem 'thin'
 
 # forms
 gem 'simple_form', '~> 3.1.0'
+gem 'invisible_captcha', '~> 0.7.0'
 
 # view utils
 gem 'color'
@@ -64,9 +65,6 @@ gem 'remotipart', '~> 1.2'
 
 # serialization
 gem 'active_model_serializers', '~> 0.8.0'
-
-# knockout
-gem 'knockoutjs-rails'
 
 # time
 gem 'time_diff'

@@ -16,6 +16,7 @@
     <%= bootstrap_flash %>
     <%= render 'layouts/breadcrumb' %>
     <%= simple_form_for([@course, @exam]) do |f| %>
+      <%= invisible_captcha %>
       <%= f.input :name, label: "Nazwa" %>
       <% if @l_c %>
         <%= f.input :lesson_category_id, as: :hidden, input_html: { value: @l_c.id } %>

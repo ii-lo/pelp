@@ -30,4 +30,13 @@ RSpec.describe Picture, :type => :model do
       expect(pic.slug).to be_present
     end
   end
+
+  describe '#method missing' do
+    it 'reponds to files methods' do
+      pic = FactoryGirl.build :picture
+      expect(pic).to respond_to :url
+      expect(pic.url).to eq pic.file.url
+      expect { pic.asdfff }.to raise_error
+    end
+  end
 end

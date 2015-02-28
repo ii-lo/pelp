@@ -1,4 +1,5 @@
 class UserExamsController < ApplicationController
+  invisible_captcha only: [:answer]
   before_action :check_if_closed, only: [:answer, :question]
   # also loads @user_exam
 

@@ -43,4 +43,15 @@ RSpec.describe Question, :type => :model do
       expect(q).to be_invalid
     end
   end
+
+  describe '#form_string' do
+    it 'returns correct string' do
+      q = Question.new(form: 0)
+      expect(q.form_string).to match %r{pojedyn}i
+      q.form = 1
+      expect(q.form_string).to match %r{wielo}i
+      q.form = 2
+      expect(q.form_string).to match %r{otwa}i
+    end
+  end
 end

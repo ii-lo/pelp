@@ -18,8 +18,7 @@ module BootstrapFlashHelper
                  :info
              end
       if message
-        messages = (message.is_a? Array) ? message : [message]
-        messages.each do |msg|
+        Array.wrap(message).each do |msg|
           divs << content_tag(:div, CLOSE_BUTTON_HTML + msg,
                               class: "alert alert-#{type} alert-dismissible", role: 'alert')
         end
