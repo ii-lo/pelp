@@ -10,9 +10,4 @@ class QuestionCategoryPolicy < Struct.new(:user, :question_category)
   def destroy?
     create?
   end
-  #class Scope < Scope
-    #def resolve
-      #scope
-    #end
-  #end
 end

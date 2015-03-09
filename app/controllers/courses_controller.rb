@@ -90,7 +90,7 @@ class CoursesController < ApplicationController
           redirect_to settings_course_path(@course),
           notice: "Wysłano mail"
         end
-        format.js {  }
+        format.js {}
         format.json { render json: { valid: true } }
       end
     else

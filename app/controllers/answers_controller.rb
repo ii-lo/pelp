@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
           redirect_to edit_course_exam_path(@exam.course, @exam),
             notice: "Stworzono"
         end
-        format.js {  }
+        format.js {}
         format.json { render json: @answer }
       end
     else

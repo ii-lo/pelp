@@ -32,13 +32,12 @@ class User < ActiveRecord::Base
 
   has_many :attendings, dependent: :destroy
   has_many :courses, through: :attendings
-  has_many :admin_courses, -> { where(attendings: { role: [1 ,2] } ) },
+  has_many :admin_courses, -> { where attendings: { role: [1, 2] } },
     through: :attendings, source: :course
   has_many :owned_courses, -> { where attendings: { role: 2 } },
     through: :attendings, source: :course
   has_many :user_exams
   has_many :invitations
-  #has_many :owned_courses, through: :attendings, source: :course
 
   validates :name, presence: true,
             length: { maximum: 240 }
@@ -78,9 +77,10 @@ class User < ActiveRecord::Base
   def plural(one, few, many, count)
     count = count.to_int
     str = "#{count} "
-    str << if count == 1
+    str << case count
+           when 1
              one.to_str
-           elsif (2..4).cover? count
+           when 2..4
              few.to_str
            else
              many.to_str

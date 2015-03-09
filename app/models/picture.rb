@@ -28,7 +28,7 @@ class Picture < ActiveRecord::Base
         small: '200x200>'
     }
   }
-  validates_attachment :file, presence: true, content_type:{
+  validates_attachment :file, presence: true, content_type: {
     content_type: /\Aimage\/.*\Z/
   }
 

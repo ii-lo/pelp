@@ -8,7 +8,7 @@ class UserExamFacade
   private
 
   def prepare_data
-    @data = Hash.new
+    @data = {}
     @user_exam.user_answers.includes(:question_category, :question).each do |ua|
       @data[ua.question_category.id] ||= {}
       @data[ua.question_category.id][ua.question_id] ||= []

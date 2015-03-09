@@ -22,6 +22,4 @@ class LessonPolicy < Struct.new(:user, :lesson)
   def destroy?
     new?
   end
-  #class Scope
-  #end
 end

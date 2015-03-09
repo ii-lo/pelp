@@ -5,23 +5,22 @@ module BootstrapFlashHelper
     divs = []
 
     flash.each do |type, message|
+      next unless message
       type = case type.to_sym
-               when :notice
-                 :success
-               when :alert
-                 :warning
-               when :info
-                 :info
-               when :error
-                 :danger
-               else
-                 :info
+             when :notice
+               :success
+             when :alert
+               :warning
+             when :info
+               :info
+             when :error
+               :danger
+             else
+               :info
              end
-      if message
-        Array.wrap(message).each do |msg|
-          divs << content_tag(:div, CLOSE_BUTTON_HTML + msg,
-                              class: "alert alert-#{type} alert-dismissible", role: 'alert')
-        end
+      Array.wrap(message).each do |msg|
+        divs << content_tag(:div, CLOSE_BUTTON_HTML + msg,
+                            class: "alert alert-#{type} alert-dismissible", role: 'alert')
       end
     end
 

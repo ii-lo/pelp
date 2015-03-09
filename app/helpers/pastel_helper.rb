@@ -1,28 +1,29 @@
 module PastelHelper
+  MODE_L = {
+    darker: 35,
+    dark: 45,
+    light: 80,
+    lighter: 96,
+    normal: 60
+  }
+
+  MODE_L.default = 60
+
   def string_to_pastel(str, mode = :normal)
     h = hash(str) % 360
     s = 95
 
-    case mode
-    when :darker
-      l = 35
-    when :dark
-      l = 45
-    when :light
-      l = 80
-    when :lighter
-      l = 96
-    else
-      l = 60
-    end
+    l = MODE_L[mode]
 
     Color::HSL.new(h, s, l).html
   end
 
-  private def hash(str)
+  private
+
+  def hash(str)
     h = 0
     str.each_byte do |b|
-      h += (b << 6) + (b << 16) - b;
+      h += (b << 6) + (b << 16) - b
     end
     h
   end
