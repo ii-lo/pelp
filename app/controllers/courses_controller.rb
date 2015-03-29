@@ -70,7 +70,7 @@ class CoursesController < ApplicationController
       return redirect_to settings_course_path(@course),
         notice: "Nie możesz zmienić sobie uprawnień"
     end
-    @attending = @course.attendings.where(user_id: p[:user_id]).take
+    @attending = @course.attendings.find_by_user_id(p[:user_id])
     @attending.update_attribute(:role, p[:role].to_i)
     redirect_to settings_course_path(@course)
   end
