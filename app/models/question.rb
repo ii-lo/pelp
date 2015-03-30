@@ -18,7 +18,7 @@
 #
 
 class Question < ActiveRecord::Base
-  FORMS = [:single, :multiple, :open]
+  FORMS = [:single, :multiple, :open].freeze
   enum form: FORMS
 
   before_save :update_exam_max
