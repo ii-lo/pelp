@@ -94,7 +94,8 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.4.1"
   gem 'pry-rails'
   gem 'capybara', '~> 2.4'
-  gem 'capybara-webkit', '~> 1.3.0'
+  #gem 'capybara-webkit', '~> 1.3.0'
+  gem 'poltergeist', '~> 1.6.0'
   gem 'guard-rspec'
   gem 'fuubar', '~> 2.0.0'
   gem 'shoulda-matchers'
