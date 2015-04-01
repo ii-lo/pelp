@@ -1,4 +1,5 @@
 <% content_for :title, "#{@user_exam.exam.name} | #{@user_exam.user.name}" %>
+<% breadcrumb :edit_user_exam, @user_exam, @exam, @course %>
 
 <% content_for :styles do %>
     <%= stylesheet_link_tag 'user_exams', 'data-turbolinks-track' => true %>
@@ -11,9 +12,8 @@
 <%= render 'layouts/navbar' %>
 
 <div class="container">
-  <div class="row">
-    <%= bootstrap_flash %>
-  </div>
+  <%= bootstrap_flash %>
+  <%= render 'layouts/breadcrumb' %>
   <div class="row">
     <div class="col-md-12">
       <% @q_cs.each do |qc| %>

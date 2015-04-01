@@ -73,6 +73,10 @@ crumb :edit_exam do |exam, course|
   parent :course, course
 end
 
+crumb :edit_user_exam do |u_e, exam, course|
+  link "Edytuj egzamin", edit_user_exam_path(u_e)
+  parent :edit_exam, exam, course
+end
 #
 # Users
 #
