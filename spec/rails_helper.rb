@@ -9,7 +9,13 @@ require 'capybara/rspec'
 require "pundit/rspec"
 require 'simplecov'
 require 'capybara-screenshot/rspec'
-Capybara.javascript_driver = :webkit
+require 'capybara/poltergeist'
+#Capybara.javascript_driver = :webkit
+#Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {js_errors: false})
+end
+Capybara.javascript_driver = :poltergeist
 Capybara::Screenshot.prune_strategy = :keep_last_run
 SimpleCov.start
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -34,27 +40,27 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  #config.use_transactional_fixtures = true
 
-  #config.before(:suite) do
-    #DatabaseCleaner.clean_with(:truncation)
-  #end
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  #config.before(:each) do
-    #DatabaseCleaner.strategy = :transaction
-  #end
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
 
-  #config.before(:each, :js => true) do
-    #DatabaseCleaner.strategy = :truncation
-  #end
+  config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
-  #config.before(:each) do
-    #DatabaseCleaner.start
-  #end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-  #config.after(:each) do
-    #DatabaseCleaner.clean
-  #end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.

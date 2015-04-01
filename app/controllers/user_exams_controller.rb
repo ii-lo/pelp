@@ -1,7 +1,11 @@
 class UserExamsController < ApplicationController
   invisible_captcha only: [:answer]
-  before_action :check_if_closed, only: [:answer, :question]
+
   # also loads @user_exam
+  before_action :check_if_closed, only: [:answer, :question]
+
+  # checks if exam have questions and sets @exam
+  before_action :check_if_questions_exists, only: [:new, :start]
 
   def show
     @user_exam = UserExam.find params[:id]
@@ -12,11 +16,9 @@ class UserExamsController < ApplicationController
   end
 
   def new
-    @exam = Exam.find params[:id]
   end
 
   def start
-    @exam = Exam.find params[:id]
     @user_exam = @exam.user_exams.create!(user_id: current_user.id)
     authorize @user_exam
     prepare_session
@@ -58,6 +60,7 @@ class UserExamsController < ApplicationController
     @user_exam = UserExam.find params[:id]
     authorize @user_exam
     @exam = @user_exam.exam
+    @course = @exam.course
     @markdown = markdown_renderer
     @u_e_f = UserExamFacade.new(@user_exam)
     @q_cs = @exam.question_categories.includes(:questions, :answers)
@@ -102,6 +105,14 @@ class UserExamsController < ApplicationController
       @user_exam.close!
       clear_session
       return show_result
+    end
+  end
+
+  def check_if_questions_exists
+    @exam = Exam.find params[:id]
+    unless @exam.questions.any?
+      flash[:error] = "Brak pytań w egzaminie"
+      return redirect_to course_path(@exam.course) unless @exam.questions.any?
     end
   end
 
