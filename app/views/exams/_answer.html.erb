@@ -7,9 +7,9 @@
   <a href="#" title="Edytuj" class="edit_answer_link">Edytuj odpowiedź</a>
   <div class="answer_edit_form hidden">
     <% if open %>
-      <%= render 'edit_open_answer_form', question: answer.question, answer: answer %>
+      <%= render 'exams/edit_open_answer_form', question: answer.question, answer: answer %>
     <% else %>
-      <%= render 'edit_single_answer_form', question: answer.question, answer: answer %>
+      <%= render 'exams/edit_single_answer_form', question: answer.question, answer: answer %>
     <% end %>
   </div>
   <p>
