@@ -32,9 +32,9 @@
       <strong>Nowa odpowiedź</strong>
       <% case question.form %>
       <% when 'open' %>
-        <%= render 'open_answer_form', question: question %>
+        <%= render 'exams/open_answer_form', question: question %>
       <% else %>
-        <%= render 'single_answer_form', question: question %>
+        <%= render 'exams/single_answer_form', question: question %>
       <% end %>
   </div>
 </div>
