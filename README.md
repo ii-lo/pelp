@@ -1,6 +1,4 @@
-# pelp (Public E-Learning Platform)
-[ ![Codeship Status for ii-lo/pelp](https://www.codeship.io/projects/6a541580-39c8-0132-a05a-4664fd0eaf1d/status)](https://www.codeship.io/projects/42253)
-
+# pelp (Public E-Learning Platform) [![Build Status](https://travis-ci.org/ii-lo/pelp.svg?branch=master)](https://travis-ci.org/ii-lo/pelp)
 ## Running development server using Vagrant
 
 On host:
@@ -29,7 +27,7 @@ voila!
 ### Configuring RubyMine to work with Vagrant
 
 > In rubymine:
-> 
+>
 > - go to options (command+`,`)
 > - search `SDK` in options,
 > - click `Add SDK` / `new remote`
